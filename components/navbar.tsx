@@ -23,7 +23,7 @@ function Item({ href, title }: { href: string; title: string }) {
 export default function Navbar() {
   const pathname = usePathname();
   const [showMenu, setShowMenu] = useState(false);
-  const [stick, setStick] = useState(window.scrollY >= 1);
+  const [stick, setStick] = useState(false);
 
   const changeNavBg = () => {
     window.scrollY >= 1 ? setStick(true) : setStick(false);
