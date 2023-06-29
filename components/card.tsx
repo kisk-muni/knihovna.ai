@@ -8,7 +8,7 @@ export default function Button({
   className?: string | null;
 }) {
   return (
-    <div className={classNames("rounded-2xl px-5 py-6", className)}>
+    <div className={classNames("rounded-2xl px-6 py-8", className)}>
       {children}
     </div>
   );

@@ -13,20 +13,14 @@ export default function Headline({
 }) {
   const props = {
     className: classNames(
-      "block",
+      "block text-text mb-6 font-bold tracking-tight",
       {
-        "md:text-4xl mb-6 font-bold tracking-tight text-gray-900 sm:text-2xl":
-          level === "1",
-        "md:text-3xl mb-6 font-bold tracking-tight text-gray-900 sm:text-xl":
-          level === "2",
-        "md:text-2xl mb-6 font-bold tracking-tight text-gray-900 sm:text-lg":
-          level === "3",
-        "md:text-xl mb-6 font-bold tracking-tight text-gray-900 sm:text-base":
-          level === "4",
-        "md:text-lg mb-6 font-bold tracking-tight text-gray-900 sm:text-sm":
-          level === "5",
-        "md:text-base mb-6 font-bold tracking-tight text-gray-900 sm:text-xs":
-          level === "6",
+        "md:text-4xl sm:text-2xl": level === "1",
+        "md:text-3xl sm:text-xl": level === "2",
+        "md:text-2xl sm:text-lg": level === "3",
+        "md:text-xl sm:text-base": level === "4",
+        "md:text-lg sm:text-sm": level === "5",
+        "md:text-base sm:text-xs": level === "6",
       },
       className
     ),

@@ -37,38 +37,32 @@ const siteConfig: SiteConfig = {
     {
       name: "Petr Škyřík",
       description: "proste petr",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      avatar: "/avatars/petr-skyrik.jpeg",
     },
     {
       name: "Natálie Káčová",
       description: "PM",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      avatar: "/avatars/natalie-kacova.jpeg",
     },
     {
       name: "Evgeniia Tokmakova",
       description: "project",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      avatar: "/avatars/evgeniia-tokmakova.jpg",
     },
     {
       name: "Matěj Pěnkava",
       description: "project",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      avatar: "/avatars/placeholder.jpg",
     },
     {
       name: "Jasmína Aldabaghová",
       description: "project",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      avatar: "/avatars/jasmina-aldabaghova.jpg",
     },
     {
       name: "Dalibor Černocký",
       description: "project",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      avatar: "/avatars/dalibor-cernocky.png",
     },
   ],
   navigation: [

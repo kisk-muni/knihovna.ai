@@ -9,19 +9,20 @@ export default function AboutPage() {
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
           <div className="max-w-2xl">
             <div className="mt-6">
-              <Headline
-                as="h1"
-                level="1"
-                className="leading-relaxed md:leading-relaxed"
-              >
-                Věříme, že knihovny hrají v době umělé inteligence důležitou
-                roli
-              </Headline>
-              <p className="text-lg text-gray-600">
-                Veřejné knihovny podle nás mají potenciál na to, aby podporovaly
-                dospělé při průchodu dalšími vlnami digitální transformace práce
-                – zejména pak ty pracující, které nástup nové technologie může
-                ohrozit či znevýhodnit oproti ostatním.
+              <h1 className="mt-6 text-text leading-normal text-5xl font-extrabold mb-6">
+                Věříme, že knihovny budou hrát v době{" "}
+                <span className="text-primary">umělé inteligence</span>{" "}
+                důležitou roli.
+              </h1>
+              <p className="text-lg text-text mb-6">
+                Hledáme potenciál knihoven v rozvoji a podpoře dospělých při
+                průchodu další vlnou digitální transformace.
+              </p>
+              <p className="text-lg text-text mb-6">
+                Jsme tým mladých lidí z katedry Informačních studií a
+                knihovnictví na Filozofické fakultě Masarykovy univerzity.
+                Spojuje nás zvídavost a zájem o technologické a sociální výzvy
+                současného světa.
               </p>
             </div>
           </div>

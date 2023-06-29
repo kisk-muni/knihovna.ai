@@ -11,7 +11,7 @@ function Item({ href, title }: { href: string; title: string }) {
     <li>
       <Link
         href={href}
-        className="block py-2 pl-3 pr-4 text-sm text-primary-800/80 font-semibold hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary-600 md:p-1"
+        className="block py-2 pl-3 pr-4 text-sm text-text font-semibold hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-1"
       >
         {title}
       </Link>
@@ -41,7 +41,7 @@ export default function Navbar() {
         "fixed h-[70px] w-full z-20 top-0 left-0 transition ease-out delay-50",
         {
           "bg-transparent": pathname === "/" && !stick,
-          "border-b border-primary-50 bg-white drop-shadow-sm": stick,
+          "border-b border-sheet/70 bg-white drop-shadow-sm": stick,
         }
       )}
     >
@@ -49,10 +49,7 @@ export default function Navbar() {
         <Link href="/" className="flex items-center">
           <span
             className={classNames(
-              "self-center whitespace-nowrap text-primary-950/90 transition ease-out delay-150",
-              {
-                "text-primary-800": stick,
-              }
+              "self-center whitespace-nowrap text-text transition ease-out delay-150"
             )}
           >
             {siteConfig.title}
