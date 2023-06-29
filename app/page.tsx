@@ -5,10 +5,7 @@ import { PopupButton } from "@typeform/embed-react";
 import Headline from "@/components/headline";
 import Card from "@/components/card";
 import {
-  AcademicCapIcon,
-  FaceSmileIcon,
   FunnelIcon,
-  LifebuoyIcon,
   MapIcon,
   SquaresPlusIcon,
   WrenchScrewdriverIcon,

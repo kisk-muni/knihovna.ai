@@ -14,11 +14,11 @@ export default function AboutPage() {
                 <span className="text-primary">umělé inteligence</span>{" "}
                 důležitou roli.
               </h1>
-              <p className="text-lg text-text mb-6">
+              <p className="text-xl text-text mb-6">
                 Hledáme potenciál knihoven v rozvoji a podpoře dospělých při
                 průchodu další vlnou digitální transformace.
               </p>
-              <p className="text-lg text-text mb-6">
+              <p className="text-xl text-text mb-6">
                 Jsme tým mladých lidí z katedry Informačních studií a
                 knihovnictví na Filozofické fakultě Masarykovy univerzity.
                 Spojuje nás zvídavost a zájem o technologické a sociální výzvy
