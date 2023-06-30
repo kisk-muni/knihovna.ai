@@ -11,7 +11,7 @@ function Item({ href, title }: { href: string; title: string }) {
     <li>
       <Link
         href={href}
-        className="block py-2 pl-3 pr-4 text-sm text-text font-semibold hover:bg-sheet md:hover:bg-transparent md:hover:text-primary md:p-1"
+        className="block py-2 pl-3 pr-4 text-base text-text font-semibold hover:bg-sheet md:hover:bg-transparent md:hover:text-primary md:p-1  transition duration-150 ease-out"
       >
         {title}
       </Link>
@@ -109,7 +109,7 @@ export default function Navbar() {
                   <button
                     type="button"
                     onClick={() => setShowMenu(!showMenu)}
-                    className="-m-2.5 -mr-3.5 rounded-lg p-2.5 text-text hover:bg-sheet"
+                    className="-m-2.5 -mr-3.5 rounded-lg p-2 text-text hover:bg-sheet"
                   >
                     <span className="sr-only">Close menu</span>
                     <svg

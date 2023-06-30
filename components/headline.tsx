@@ -15,12 +15,12 @@ export default function Headline({
     className: classNames(
       "block text-text mb-6 font-bold tracking-tight",
       {
-        "md:text-4xl sm:text-2xl": level === "1",
-        "md:text-3xl sm:text-xl": level === "2",
-        "md:text-2xl sm:text-lg": level === "3",
-        "md:text-xl sm:text-base": level === "4",
-        "md:text-lg sm:text-sm": level === "5",
-        "md:text-base sm:text-xs": level === "6",
+        "md:text-4xl text-3xl": level === "1",
+        "md:text-3xl text-2xl": level === "2",
+        "md:text-2xl text-xl": level === "3",
+        "md:text-xl text-lg": level === "4",
+        "md:text-lg text-base": level === "5",
+        "md:text-base text-sm": level === "6",
       },
       className
     ),

@@ -16,15 +16,15 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="flex flex-col">
-      <section className="bg-primary-50 pt-8">
-        <Container className="relative isolate">
+      <section className="relative">
+        <Container className="isolate">
           <div
-            className="absolute inset-x-20 -top-10 -right-10 -z-10 transform-gpu overflow-hidden blur-3xl"
+            className="absolute -inset-x-[calc(100%)] top-0 -bottom-[calc(50%)] -z-10 transform-gpu overflow-hidden hblur-3xl"
             aria-hidden="true"
           >
-            <div className="relative left-[calc(50%-4rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#d29b5b] to-[#fcbf89] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"></div>
+            <div className="absolute inset-x-0 inset-y-0 bg-gradient-to-b from-[#FCF2E8] to-[#ffffff]"></div>
           </div>
-          <div className="max-w-2xl mx-auto py-32 sm:py-32 lg:pt-24 pb-0">
+          <div className="max-w-2xl mx-auto py-32 sm:py-32 lg:pt-40 pb-0">
             <div className="text-left">
               <div
                 className={
@@ -55,7 +55,7 @@ export default function Home() {
           </div>
         </Container>
       </section>
-      <section className="bg-white pt-24 pb-0">
+      <section className="bg-white pt-12 lg:pt-20 pb-0">
         <Container>
           <div className="flex flex-col gap-x-6">
             <Headline level="2" as="h2" className="max-w-md mb-10">
@@ -202,29 +202,6 @@ export default function Home() {
           </div>
         </Container>
       </section>
-
-      {/*<section>
-        <Container>
-          <div className="pt-24 pb-0 sm:py-32">
-            <h1 className="text-2xl mb-6 font-bold tracking-tight text-gray-900 sm:text-2xl">
-              Náš výzkum
-            </h1>
-            {[{ title: "some", description: "else" }].map((item, i) => (
-              <div
-                className="mt-4 border border-white p-4 bg-primary-100/60 hover:bg-primary-100/80 rounded-xl"
-                key={i}
-              >
-                <h2 className="text-2xl font-bolder tracking-tight text-gray-900 sm:text-xl">
-                  {item.title}
-                </h2>
-                <p className="mt-2 text-lg leading-8 text-gray-600">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>*/}
     </main>
   );
 }

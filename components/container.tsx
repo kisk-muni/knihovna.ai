@@ -12,7 +12,7 @@ export default function Container({
   return (
     <div
       className={classNames(
-        "w-full mx-auto px-6 lg:px-8",
+        "w-full mx-auto px-6 lg:px-8 relative z-10",
         {
           "max-w-screen-2xl": fullWidth,
           "mx-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg": !fullWidth,
