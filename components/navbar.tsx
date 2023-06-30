@@ -11,7 +11,7 @@ function Item({ href, title }: { href: string; title: string }) {
     <li>
       <Link
         href={href}
-        className="block py-2 pl-3 pr-4 text-sm text-text font-semibold hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-1"
+        className="block py-2 pl-3 pr-4 text-sm text-text font-semibold hover:bg-sheet md:hover:bg-transparent md:hover:text-primary md:p-1"
       >
         {title}
       </Link>
@@ -45,26 +45,25 @@ export default function Navbar() {
         }
       )}
     >
-      <Container className="flex flex-wrap items-center justify-between mx-auto py-5">
-        <Link href="/" className="flex items-center">
-          <span
-            className={classNames(
-              "self-center whitespace-nowrap text-text transition ease-out delay-150"
-            )}
-          >
-            {siteConfig.title}
-          </span>
+      <Container className="flex flex-wrap items-center justify-between mx-auto py-3.5 md:py-5">
+        <Link
+          href="/"
+          className={classNames(
+            "self-center whitespace-nowrap text-text font-bold transition ease-out delay-150"
+          )}
+        >
+          {siteConfig.title}
         </Link>
         <div className="flex lg:hidden md:order-2">
           <button
             data-collapse-toggle="navbar-sticky"
             type="button"
             onClick={() => setShowMenu(!showMenu)}
-            className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-gray-200"
+            className="inline-flex items-center -mr-1.5 p-2 text-sm text-gray-500 rounded-lg hover:bg-sheet focus:outline-none focus:ring-2 focus:ring-gray-200"
             aria-controls="navbar-sticky"
             aria-expanded="false"
           >
-            <span className="sr-only">Open main menu</span>
+            <span className="sr-only">Otevřít navigaci</span>
             <svg
               className="w-6 h-6"
               aria-hidden="true"
@@ -87,7 +86,7 @@ export default function Navbar() {
           )}
           id="navbar-sticky"
         >
-          <ul className="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-primary-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent">
+          <ul className="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent">
             {siteConfig.navigation.map((item, i) => (
               <Item key={i} href={item.href} title={item.title} />
             ))}
@@ -97,8 +96,8 @@ export default function Navbar() {
         {showMenu && (
           <Fragment>
             <div className="lg:hidden " role="dialog" aria-modal="true">
-              <div className="fixed inset-0 z-50"></div>
-              <div className="fixed min-h-screen inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+              <div className="fixed inset-0 z-90"></div>
+              <div className="fixed min-h-screen inset-y-0 right-0 z-90 w-full overflow-y-auto bg-white px-8 py-6">
                 <div className="flex items-center justify-between">
                   <a href="#" className="-m-1.5 p-1.5">
                     <span className="sr-only">Your Company</span>
@@ -106,7 +105,7 @@ export default function Navbar() {
                   <button
                     type="button"
                     onClick={() => setShowMenu(!showMenu)}
-                    className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                    className="-m-2.5 -mr-3.5 rounded-lg p-2.5 text-text hover:bg-sheet"
                   >
                     <span className="sr-only">Close menu</span>
                     <svg
@@ -132,7 +131,7 @@ export default function Navbar() {
                         <Link
                           href={item.href}
                           key={i}
-                          className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                          className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-sheet"
                         >
                           {item.title}
                         </Link>

@@ -15,19 +15,22 @@ function Item({ href, title }: { href: string; title: string }) {
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   return (
-    <footer className="mt-auto z-50">
-      <Container className="py-12 md:flex md:items-center md:justify-between">
-        <span className="text-sm text-gray-500 sm:text-center">
+    <footer className="mt-auto z-40">
+      <Container className="py-12 grid md:flex md:items-center md:justify-between">
+        <span className="text-base text-text font-medium text-center md:text-left">
           ©{" "}
           {siteConfig.sinceYear == currentYear
             ? currentYear
             : `${siteConfig.sinceYear} - ${currentYear}`}{" "}
-          <a href={siteConfig.siteUrl} className="hover:underline">
+          <Link
+            href={siteConfig.siteUrl}
+            className="underline hover:text-primary"
+          >
             {siteConfig.title}
-          </a>
+          </Link>
           . Všechna práva vyhrazena.
         </span>
-        <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 sm:mt-0">
+        <ul className="flex flex-wrap justify-center md:justify-start items-center mt-6 lg:mt-0 text-base font-medium text-gray-500">
           {siteConfig.footerNavigation.map((item, i) => (
             <Item key={i} href={item.href} title={item.title} />
           ))}

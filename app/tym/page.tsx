@@ -7,47 +7,45 @@ export default function AboutPage() {
     <main>
       <div className="pt-24 sm:pt-32 pb-40">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <div className="mt-6">
-              <h1 className="mt-6 text-text leading-normal text-5xl font-extrabold mb-6">
-                Věříme, že knihovny budou hrát v době{" "}
-                <span className="text-primary">umělé inteligence</span>{" "}
-                důležitou roli.
-              </h1>
-              <p className="text-xl text-text mb-6">
-                Hledáme potenciál knihoven v rozvoji a podpoře dospělých při
-                průchodu další vlnou digitální transformace.
-              </p>
-              <p className="text-xl text-text mb-6">
-                Jsme tým mladých lidí z katedry Informačních studií a
-                knihovnictví na Filozofické fakultě Masarykovy univerzity.
-                Spojuje nás zvídavost a zájem o technologické a sociální výzvy
-                současného světa.
-              </p>
-            </div>
+          <div className="mt-6">
+            <h1 className="mt-6 text-text leading-normal text-5xl font-extrabold mb-6">
+              Věříme, že knihovny budou hrát v době{" "}
+              <span className="text-primary">umělé inteligence</span> důležitou
+              roli.
+            </h1>
+            <p className="text-xl text-text mb-6">
+              Hledáme potenciál knihoven v rozvoji a podpoře dospělých při
+              průchodu další vlnou digitální transformace.
+            </p>
+            <p className="text-xl text-text mb-6">
+              Jsme tým mladých lidí z katedry Informačních studií a knihovnictví
+              na Filozofické fakultě Masarykovy univerzity. Spojuje nás
+              zvídavost a zájem o technologické a sociální výzvy současného
+              světa.
+            </p>
           </div>
           <div className="mt-24 max-w-2xl">
-            <Headline as="h2" level="3">
+            <Headline as="h2" level="2">
               Poznejte náš tým
             </Headline>
           </div>
           <ul
             role="list"
-            className="mt-8 grid gap-x-6 gap-y-8 sm:grid-cols-3 sm:gap-y-10 xl:col-span-2"
+            className="mt-8 grid gap-x-8 gap-y-8 grid-cols-2 md:grid-cols-3 sm:gap-y-10"
           >
             {siteConfig.team.map((member, i) => (
               <li key={i}>
                 <div className="flex items-center gap-x-3">
                   <img
-                    className="h-20 w-20 rounded-full"
+                    className="h-16 w-16 rounded-full"
                     src={member.avatar}
                     alt=""
                   />
                   <div>
-                    <h3 className="text-base font-semibold leading-tight tracking-tight text-gray-900">
+                    <h3 className="text-base font-semibold leading-tight tracking-tight text-text">
                       {member.name}
                     </h3>
-                    <p className="text-sm leading-6 text-gray-600">
+                    <p className="text-base leading-6 text-text">
                       {member.description}
                     </p>
                   </div>
