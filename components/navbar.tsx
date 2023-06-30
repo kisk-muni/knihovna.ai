@@ -35,6 +35,10 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    setShowMenu(false);
+  }, [pathname]);
+
   return (
     <nav
       className={classNames(
