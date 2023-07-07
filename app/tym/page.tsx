@@ -1,9 +1,15 @@
-"use client";
 import Card from "@/components/card";
 import Button from "@/components/button";
 import Headline from "@/components/headline";
 import siteConfig from "@/site-config";
-import { PopupButton } from "@typeform/embed-react";
+import { createMetadata } from "@/lib/metadata";
+import TypeformButton from "../typeform-button";
+
+export const metadata = createMetadata({
+  title: "Náš tým",
+  description:
+    "Výzkumný projekt mapující potenciál knihoven v popularizaci umělé inteligence a pomoci ohroženým skupinám obyvatel.",
+});
 
 /* eslint-disable @next/next/no-img-element */
 export default function AboutPage() {
@@ -81,11 +87,11 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="flex justify-center">
-            <PopupButton id="UzBhUVqf">
+            <TypeformButton id="UzBhUVqf">
               <Button invert smaller>
                 Zanechat kontakt
               </Button>
-            </PopupButton>
+            </TypeformButton>
           </div>
         </Card>
       </div>

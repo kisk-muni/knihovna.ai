@@ -1,7 +1,5 @@
-"use client";
 import Container from "@/components/container";
 /* eslint-disable react/no-unescaped-entities */
-import { PopupButton } from "@typeform/embed-react";
 import Headline from "@/components/headline";
 import Card from "@/components/card";
 import {
@@ -12,6 +10,16 @@ import {
 } from "@heroicons/react/24/solid";
 import Button from "@/components/button";
 import Link from "next/link";
+import { Metadata } from "next";
+import TypeformButton from "./typeform-button";
+import Image from "next/image";
+
+export const metadata: Metadata = {
+  title:
+    "knihovna.ai od KISK MUNI - Mapujeme budoucnost knihoven v éře umělé inteligence",
+  description:
+    "Výzkumný projekt mapující potenciál knihoven v popularizaci umělé inteligence a pomoci ohroženým skupinám obyvatel.",
+};
 
 export default function Home() {
   return (
@@ -174,9 +182,9 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="flex justify-start">
-                  <PopupButton id="ZkIhUqLK">
+                  <TypeformButton id="ZkIhUqLK">
                     <Button smaller>Odebírat novinky</Button>
-                  </PopupButton>
+                  </TypeformButton>
                 </div>
               </Card>
               <Card className="md:col-span-3 bg-primary text-center flex py-10 px-10 flex-col items-center justify-center">
@@ -191,13 +199,59 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="flex justify-center">
-                  <PopupButton id="UzBhUVqf">
+                  <TypeformButton id="UzBhUVqf">
                     <Button invert smaller>
                       Vyplnit kontakt
                     </Button>
-                  </PopupButton>
+                  </TypeformButton>
                 </div>
               </Card>
+            </div>
+          </div>
+        </Container>
+      </section>
+      <section className="py-12">
+        <Container>
+          <div className="grid grid-cols-1 py-12">
+            <div className="flex flex-col items-center justify-center">
+              <Headline
+                level="2"
+                as="h2"
+                className="text-center max-w-md mb-12"
+              >
+                Za projektem stojí výzkumníci z Masarykovy univerzity
+              </Headline>
+              {/*<Link href="/tym">
+                <Button smaller>Více o našem týmu</Button>
+              </Link>*/}
+            </div>
+            <div className="grid grid-cols-2 gap-8">
+              <div className="flex items-center justify-end">
+                <div className="bg-white relative -right-4 rounded-full w-[168px] aspect-square flex justify-center items-center shadow-[0px_5px_20px_0px_rgba(0,0,0,0.05)] z-10">
+                  <Image
+                    src="/backers/eu.jpg"
+                    alt="Financováno Ervropskou Unií"
+                    className="mt-1"
+                    width={110}
+                    height={110}
+                  />
+                </div>
+                <div className="bg-[#0000DC] relative rounded-full w-[168px] aspect-square flex justify-center items-center shadow-[0px_5px_20px_0px_rgba(0,0,0,0.05)] z-20">
+                  <Image
+                    src="/backers/muni.png"
+                    alt="Jsme projekt Masarykovy Univerzity"
+                    width={150}
+                    height={150}
+                  />
+                </div>
+              </div>
+              <p className="flex items-center max-w-[380px] text-base">
+                Projekt Veřejné knihovny jako místa podpory zaměstnanosti byl
+                podpořen Evropskou unií v rámci Operačního programu
+                <br />
+                <br />
+                CZ.03.03.01/00/22_021/0001969
+              </p>
             </div>
           </div>
         </Container>

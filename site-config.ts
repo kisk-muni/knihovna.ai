@@ -28,7 +28,7 @@ interface SiteConfig {
 
 const siteConfig: SiteConfig = {
   title: "knihovna.ai",
-  description: "Knihovna pro strojové učení",
+  description: "",
   siteUrl: "https://knihovna.ai",
   siteLanguage: "cs",
   sinceYear: 2023,
@@ -36,7 +36,7 @@ const siteConfig: SiteConfig = {
   team: [
     {
       name: "Petr Škyřík",
-      description: "proste petr",
+      description: "",
       avatar: "/avatars/petr-skyrik.jpeg",
     },
     {
@@ -46,22 +46,22 @@ const siteConfig: SiteConfig = {
     },
     {
       name: "Evgeniia Tokmakova",
-      description: "project",
+      description: "Výzkum",
       avatar: "/avatars/evgeniia-tokmakova.jpg",
     },
     {
       name: "Matěj Pěnkava",
-      description: "project",
+      description: "Výzkum",
       avatar: "/avatars/placeholder.jpg",
     },
     {
       name: "Jasmína Aldabaghová",
-      description: "project",
+      description: "Výzkum",
       avatar: "/avatars/jasmina-aldabaghova.jpg",
     },
     {
       name: "Dalibor Černocký",
-      description: "project",
+      description: "Výzkum",
       avatar: "/avatars/dalibor-cernocky.png",
     },
   ],
