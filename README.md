@@ -1,3 +1,1 @@
-# knihovny.ai
-
-- [ ] update typeform forms
+# knihovna.ai
