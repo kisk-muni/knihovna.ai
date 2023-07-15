@@ -6,6 +6,13 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { locale } from "@/lib/date";
 import Head from "next/head";
+import { createMetadata } from "@/lib/metadata";
+import { Metadata, ResolvingMetadata } from "next";
+
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
 const getPageContent = async (slug: string) => {
   const { meta, content } = await getPostBySlug(slug);
@@ -18,18 +25,17 @@ export async function generateMetadata({
   params: { slug: string };
 }) {
   const { meta } = await getPageContent(params.slug);
-  return { title: meta.title };
+  return createMetadata({
+    title: meta.title,
+    description: meta.summary,
+  });
 }
 
-const Page = async ({ params }: { params: { slug: string } }) => {
+const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
   const { content, meta } = await getPageContent(params.slug);
 
   return (
     <Fragment>
-      <Head>
-        <title>{meta.title}</title>
-        <meta name="description" content={meta.summary} />
-      </Head>
       <nav className="mt-6">
         <Link href="/blog" className="text-base text-text/80 hover:text-text">
           ← Všechny příspěvky
@@ -76,4 +82,4 @@ const Page = async ({ params }: { params: { slug: string } }) => {
   );
 };
 
-export default Page;
+export default BlogPostPage;

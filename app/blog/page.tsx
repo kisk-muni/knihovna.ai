@@ -5,24 +5,29 @@ import Headline from "@/components/headline";
 import { getAllPostsMeta } from "@/lib/mdx";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createMetadata({
   title: "Blog",
   description:
     "Nové příspěvky v projektu knihovna.ai: Veřejné knihovny jako místa podpory zaměstnanosti",
-};
+});
 
 export default async function BlogPage() {
   const posts = await getAllPostsMeta();
   return (
-    <div className={"mt-12"}>
-      <div className="mb-12">
+    <div className={"mt-20"}>
+      <div className="mb-14">
         <Headline as="h1" level="ultra">
           Všechny příspěvky
         </Headline>
       </div>
       {posts?.map((post) => (
-        <Link href={`blog/${post.slug}`} key={post?.title} className="mt-16">
+        <Link
+          href={`blog/${post.slug}`}
+          key={post?.title}
+          className="block mt-12"
+        >
           <Headline as="h2" level="2" className="mb-0">
             {post?.title}
           </Headline>
