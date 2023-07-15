@@ -5,6 +5,7 @@ import { getPostBySlug } from "@/lib/mdx";
 import Link from "next/link";
 import { Fragment } from "react";
 import { locale } from "@/lib/date";
+import Head from "next/head";
 
 const getPageContent = async (slug: string) => {
   const { meta, content } = await getPostBySlug(slug);
@@ -25,6 +26,10 @@ const Page = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <Fragment>
+      <Head>
+        <title>{meta.title}</title>
+        <meta name="description" content={meta.summary} />
+      </Head>
       <nav className="mt-6">
         <Link href="/blog" className="text-base text-text/80 hover:text-text">
           ← Všechny příspěvky

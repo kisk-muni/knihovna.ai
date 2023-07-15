@@ -8,7 +8,8 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Read my thoughts on software development, design, and more.",
+  description:
+    "Nové příspěvky v projektu knihovna.ai: Veřejné knihovny jako místa podpory zaměstnanosti",
 };
 
 export default async function BlogPage() {

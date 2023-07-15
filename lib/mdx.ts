@@ -34,6 +34,7 @@ export const getPostBySlug = async (slug: string) => {
       publishedAt: Date;
       title: string;
       authors: TeamMember[];
+      summary: string;
     };
     content: any;
   };
