@@ -31,7 +31,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
         </Link>
       </nav>
       <article>
-        <header className="mt-16 mb-8">
+        <header className="mt-16 mb-6">
           <time className="block text-base text-text/80 mb-4">
             {formatRelative(meta.publishedAt, new Date(), {
               locale,
@@ -40,10 +40,10 @@ const Page = async ({ params }: { params: { slug: string } }) => {
           <Headline as="h1" level="ultra">
             {meta.title}
           </Headline>
-          <div className="flex -ml-px mr-4 items-center">
+          <div className="flex flex-wrap -ml-px mr-4 items-center">
             {meta?.authors.map((author, i) => (
               <div
-                className="flex -ml-2 mr-4 rounded-lg items-center py-1.5 px-2 hover:bg-sheet transition duration-150 ease-out"
+                className="flex -ml-2 mr-4 mb-1 rounded-lg items-center py-1.5 px-2 hover:bg-sheet transition duration-150 ease-out"
                 key={i}
               >
                 <img
