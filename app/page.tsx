@@ -25,14 +25,14 @@ export default function Home() {
   return (
     <main className="flex flex-col">
       <section className="relative">
-        <Container className="isolate">
+        <Container>
           <div
-            className="absolute -inset-x-[calc(100%)] top-0 -bottom-[calc(50%)] -z-10 transform-gpu overflow-hidden hblur-3xl"
+            className="md:block absolute inset-0 md:-inset-x-[calc(100%)] md:top-0 md:-bottom-0 md:-bottom-[calc(50%)] -z-10 transform-gpu hblur-3xl"
             aria-hidden="true"
           >
             <div className="absolute inset-x-0 inset-y-0 bg-gradient-to-b from-[#FCF2E8] to-[#ffffff]"></div>
           </div>
-          <div className="max-w-2xl mx-auto py-32 sm:py-32 lg:pt-40 pb-0">
+          <div className="relative max-w-2xl mx-auto pt-32 pb-20 md:pb-24 lg:pt-40">
             <div className="text-left">
               <div
                 className={
@@ -210,9 +210,9 @@ export default function Home() {
           </div>
         </Container>
       </section>
-      <section className="py-12">
+      <section className="pt-12 pb-24">
         <Container>
-          <div className="grid grid-cols-1 py-12">
+          <div className="grid grid-cols-1">
             <div className="flex flex-col items-center justify-center">
               <Headline
                 level="2"
@@ -225,9 +225,9 @@ export default function Home() {
                 <Button smaller>Více o našem týmu</Button>
               </Link>*/}
             </div>
-            <div className="grid grid-cols-2 gap-8">
-              <div className="flex items-center justify-end">
-                <div className="bg-white relative -right-4 rounded-full w-[168px] aspect-square flex justify-center items-center shadow-[0px_5px_20px_0px_rgba(0,0,0,0.05)] z-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="flex items-center justify-center md:justify-end">
+                <div className="bg-white p-3 md:p-0 relative md:-right-4 rounded-full w-[168px] aspect-square flex justify-center items-center shadow-[0px_5px_20px_0px_rgba(0,0,0,0.05)] z-10">
                   <Image
                     src="/backers/eu.jpg"
                     alt="Financováno Ervropskou Unií"
@@ -236,16 +236,17 @@ export default function Home() {
                     height={110}
                   />
                 </div>
-                <div className="bg-[#0000DC] relative rounded-full w-[168px] aspect-square flex justify-center items-center shadow-[0px_5px_20px_0px_rgba(0,0,0,0.05)] z-20">
+                <div className="bg-[#0000DC] p-1 md:p-0 relative rounded-full w-[168px] aspect-square flex justify-center items-center shadow-[0px_5px_20px_0px_rgba(0,0,0,0.05)] z-20">
                   <Image
                     src="/backers/muni.png"
                     alt="Jsme projekt Masarykovy Univerzity"
+                    className=""
                     width={150}
                     height={150}
                   />
                 </div>
               </div>
-              <p className="flex items-center max-w-[380px] text-base">
+              <p className="flex items-center w-full md:max-w-[380px] text-lg text-text">
                 Projekt Veřejné knihovny jako místa podpory zaměstnanosti byl
                 podpořen Evropskou unií v rámci Operačního programu
                 <br />

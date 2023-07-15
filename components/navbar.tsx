@@ -11,7 +11,7 @@ function Item({ href, title }: { href: string; title: string }) {
     <li>
       <Link
         href={href}
-        className="block py-2 pl-3 pr-4 text-base text-text font-semibold hover:bg-sheet md:hover:bg-transparent md:hover:text-primary md:p-1  transition duration-150 ease-out"
+        className="block py-2 pl-3 pr-4 text-base text-text font-semibold hover:bg-sheet md:hover:bg-transparent md:hover:text-primary md:p-1 transition duration-150 ease-out"
       >
         {title}
       </Link>
@@ -42,14 +42,14 @@ export default function Navbar() {
   return (
     <nav
       className={classNames(
-        "fixed h-[70px] w-full z-20 top-0 left-0 transition ease-out delay-50",
+        "fixed h-[72px] w-full flex items-center z-20 top-0 left-0 transition-[height,padding] ease-out delay-50",
         {
           "bg-transparent": pathname === "/" && !stick,
           "border-b border-sheet/70 bg-white drop-shadow-sm": stick,
         }
       )}
     >
-      <Container className="flex flex-wrap items-center justify-between mx-auto py-3.5 md:py-5">
+      <Container className="flex flex-wrap items-center justify-between mx-auto">
         <Link
           href="/"
           className={classNames(
@@ -63,7 +63,13 @@ export default function Navbar() {
             data-collapse-toggle="navbar-sticky"
             type="button"
             onClick={() => setShowMenu(!showMenu)}
-            className="inline-flex items-center -mr-1.5 p-2 text-sm text-gray-500 rounded-lg hover:bg-sheet focus:outline-none focus:ring-2 focus:ring-gray-200"
+            className={classNames(
+              "inline-flex items-center -mr-1.5 p-2 text-sm text-text rounded-lg focus:outline-none focus:ring-2",
+              {
+                "hover:bg-primary/20 focus:ring-primary/30": !stick,
+                "hover:bg-sheet focus:ring-sheet": stick,
+              }
+            )}
             aria-controls="navbar-sticky"
             aria-expanded="false"
           >
@@ -99,9 +105,8 @@ export default function Navbar() {
 
         {showMenu && (
           <Fragment>
-            <div className="lg:hidden " role="dialog" aria-modal="true">
-              <div className="fixed inset-0 z-90"></div>
-              <div className="fixed min-h-screen inset-y-0 right-0 z-90 w-full overflow-y-auto bg-white px-8 py-6">
+            <div className="lg:hidden" role="dialog" aria-modal="true">
+              <div className="fixed min-h-screen inset-0 z-90 w-full overflow-y-auto bg-white px-8 py-6">
                 <div className="flex items-center justify-between">
                   <a href="#" className="-m-1.5 p-1.5">
                     <span className="sr-only">Your Company</span>
@@ -109,7 +114,7 @@ export default function Navbar() {
                   <button
                     type="button"
                     onClick={() => setShowMenu(!showMenu)}
-                    className="-m-2.5 -mr-3.5 rounded-lg p-2 text-text hover:bg-sheet"
+                    className="-m-2.5 -mr-3.5 rounded-lg p-2 text-text hover:bg-sheet focus:outline-none focus:ring-2 focus:ring-gray-200"
                   >
                     <span className="sr-only">Close menu</span>
                     <svg
@@ -129,7 +134,7 @@ export default function Navbar() {
                   </button>
                 </div>
                 <div className="mt-6 flow-root">
-                  <div className="-my-6 divide-y divide-gray-500/10">
+                  <div className="-my-6 divide-y-2">
                     <div className="space-y-2 py-6">
                       {siteConfig.navigation.map((item, i) => (
                         <Link
