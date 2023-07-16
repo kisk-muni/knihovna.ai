@@ -70,7 +70,7 @@ export default async function Home() {
         </Container>
       </section>
       {recentPosts.length > 0 && (
-        <section>
+        <section className="pt-12 lg:pt-20">
           <Container>
             <h2 className="block uppercase text-base font-semibold text-text/60 mb-4">
               Aktuálně v projektu
@@ -85,7 +85,7 @@ export default async function Home() {
                   <Card
                     size="md"
                     key={i}
-                    className="border border-sheet hover:border-text/40 bg-white hover:bg-sheet py-4"
+                    className="hover:border-text/40 bg-[#FCF2E8] hover:bg-[#f3e6d9] py-4"
                   >
                     <Headline as="h3" level="2" className="mb-0 font-bold">
                       {post?.title}
@@ -96,7 +96,7 @@ export default async function Home() {
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
                             key={i}
-                            className="h-6 w-6 -ml-1 rounded-full ring-1 ring-sheet"
+                            className="h-6 w-6 -ml-1 rounded-full ring-1 ring-white"
                             src={author.avatar}
                             alt=""
                           />
@@ -118,7 +118,7 @@ export default async function Home() {
                 <Button
                   secondary
                   invert
-                  className="flex border border-sheet hover:border-text/40 justify-between items-center gap-x-4 w-full"
+                  className="flex justify-center md:justify-between items-center gap-x-4 w-full px-0 md:px-6"
                 >
                   <div className="text-left">
                     Další <br className="hidden md:inline-block" />
