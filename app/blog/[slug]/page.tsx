@@ -37,13 +37,16 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
   return (
     <Fragment>
       <nav className="mt-6">
-        <Link href="/blog" className="text-base text-text/80 hover:text-text">
+        <Link
+          href="/blog"
+          className="text-base font-bold text-text/70 hover:text-text"
+        >
           ← Všechny příspěvky
         </Link>
       </nav>
       <article>
         <header className="mt-16 mb-6">
-          <time className="block text-base text-text/80 mb-4">
+          <time className="block text-lg text-text/80 mb-4">
             {formatRelative(meta.publishedAt, new Date(), {
               locale,
             })}

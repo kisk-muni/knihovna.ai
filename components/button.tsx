@@ -19,8 +19,9 @@ export default function Button({
       className={classNames(
         "focus:ring-4 focus:outline-none focus:ring-primary-300 font-bold rounded-xl text-center mr-3 md:mr-0 transition duration-150 ease-out",
         {
-          "text-white bg-primary hover:bg-primarydarker": !invert,
-          "text-black bg-white hover:bg-sheet": invert,
+          "text-white bg-primary hover:bg-primarydarker": !invert && !secondary,
+          "text-text hover:text-black": !invert && secondary,
+          "text-black bg-white hover:bg-sheet": invert && !secondary,
           "text-base px-8 py-4": smaller,
           "text-lg px-12 py-4": !smaller,
         },
