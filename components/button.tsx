@@ -4,11 +4,13 @@ export default function Button({
   children,
   className,
   invert = false,
+  secondary = false,
   smaller = false,
 }: {
   children: React.ReactNode;
   className?: string | null;
   invert?: boolean;
+  secondary?: boolean;
   smaller?: boolean;
 }) {
   return (

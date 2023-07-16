@@ -13,6 +13,10 @@ import Link from "next/link";
 import { Metadata } from "next";
 import TypeformButton from "../components/typeform-button";
 import Image from "next/image";
+import { getAllPostsMeta } from "@/lib/mdx";
+import { locale } from "@/lib/date";
+import { formatRelative } from "date-fns";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   title:
@@ -21,7 +25,9 @@ export const metadata: Metadata = {
     "Výzkumný projekt mapující potenciál knihoven v popularizaci umělé inteligence a pomoci ohroženým skupinám obyvatel.",
 };
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getAllPostsMeta();
+  const recentPosts = posts.slice(0, 1);
   return (
     <main className="flex flex-col">
       <section className="relative">
@@ -63,6 +69,68 @@ export default function Home() {
           </div>
         </Container>
       </section>
+      {recentPosts.length > 0 && (
+        <section>
+          <Container>
+            <h2 className="block uppercase text-base font-semibold text-text/60 mb-4">
+              Aktuálně v projektu
+            </h2>
+            <div className="flex flex-col md:flex-row gap-y-3 gap-x-3">
+              {recentPosts.map((post, i) => (
+                <Link
+                  href={`blog/${post.slug}`}
+                  key={post?.title}
+                  className="block grow"
+                >
+                  <Card
+                    size="md"
+                    key={i}
+                    className="border border-sheet hover:border-text/40 bg-white hover:bg-sheet py-4"
+                  >
+                    <Headline as="h3" level="2" className="mb-0 font-bold">
+                      {post?.title}
+                    </Headline>
+                    <div className="flex -mt-1 text-base">
+                      <div className="flex ml-1 mr-3 items-center">
+                        {post?.authors.map((author, i) => (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            key={i}
+                            className="h-6 w-6 -ml-1 rounded-full ring-1 ring-sheet"
+                            src={author.avatar}
+                            alt=""
+                          />
+                        ))}
+                      </div>
+                      <time className="text-lg text-text/80">
+                        {formatRelative(post.publishedAt, new Date(), {
+                          locale,
+                        })}
+                      </time>
+                    </div>
+                  </Card>
+                </Link>
+              ))}
+              <Link
+                href="/blog"
+                className="block flex items-stretch text-text/80 hover:text-text"
+              >
+                <Button
+                  secondary
+                  invert
+                  className="flex border border-sheet hover:border-text/40 justify-between items-center gap-x-4 w-full"
+                >
+                  <div className="text-left">
+                    Další <br className="hidden md:inline-block" />
+                    příspěvky
+                  </div>
+                  <div>→</div>
+                </Button>
+              </Link>
+            </div>
+          </Container>
+        </section>
+      )}
       <section className="bg-white pt-12 lg:pt-20 pb-0">
         <Container>
           <div className="flex flex-col gap-x-6">

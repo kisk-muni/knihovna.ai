@@ -50,5 +50,7 @@ export const getAllPostsMeta = async () => {
     posts.push(meta);
   }
 
-  return posts;
+  return posts.sort(
+    (a, b) => b.publishedAt.getTime() - a.publishedAt.getTime()
+  );
 };

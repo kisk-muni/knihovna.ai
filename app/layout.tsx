@@ -6,12 +6,6 @@ import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "knihovny.ai",
-  description:
-    "Mapujeme roli a budoucnost knihoven v éře umělé inteligence (AI)",
-};
-
 export default function RootLayout({
   children,
 }: {
