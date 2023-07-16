@@ -22,7 +22,7 @@ export default async function BlogPage() {
           Všechny příspěvky
         </Headline>
       </div>
-      {posts?.map((post) => (
+      {posts.map((post) => (
         <Link
           href={`blog/${post.slug}`}
           key={post?.title}
@@ -42,7 +42,7 @@ export default async function BlogPage() {
                 />
               ))}
             </div>
-            <time className="text-base text-gray-500">
+            <time className="text-base text-text/80">
               {formatRelative(post.publishedAt, new Date(), {
                 locale,
               })}
