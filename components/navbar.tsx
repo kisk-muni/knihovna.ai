@@ -5,7 +5,6 @@ import classNames from "classnames";
 import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import Container from "./container";
-import path from "path";
 
 function Item({ href, title }: { href: string; title: string }) {
   return (
@@ -83,9 +82,9 @@ export default function Navbar() {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               ></path>
             </svg>
           </button>
