@@ -38,7 +38,7 @@ export default async function Home() {
           >
             <div className="absolute inset-x-0 inset-y-0 bg-gradient-to-b from-[#FCF2E8] to-[#ffffff]"></div>
           </div>
-          <div className="relative max-w-2xl mx-auto pt-32 pb-20 md:pb-24 lg:pt-40">
+          <div className="relative max-w-2xl mx-auto pt-32 pb-20 lg:pt-40">
             <div className="text-left">
               <div
                 className={
