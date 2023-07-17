@@ -2,7 +2,7 @@
 import { formatRelative, format } from "date-fns";
 import { locale } from "@/lib/date";
 
-export default function Time({
+export default function FormatedDate({
   date,
   relative = false,
   className,

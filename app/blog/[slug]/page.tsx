@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { formatRelative } from "date-fns";
 import Headline from "@/components/headline";
-import Time from "@/components/time";
+import FormatedDate from "@/components/formated-date";
 import { getPostBySlug } from "@/lib/mdx";
 import Link from "next/link";
 import { Fragment } from "react";
@@ -39,7 +38,7 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
       </nav>
       <article>
         <header className="mt-16 mb-6">
-          <Time
+          <FormatedDate
             date={meta.publishedAt}
             relative
             className="block text-lg text-text/80 mb-4"

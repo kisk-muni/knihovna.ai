@@ -9,12 +9,12 @@ import {
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/solid";
 import Button from "@/components/button";
-import Time from "@/components/time";
 import Link from "next/link";
 import { Metadata } from "next";
 import TypeformButton from "../components/typeform-button";
 import Image from "next/image";
 import { getAllPostsMeta } from "@/lib/mdx";
+import PostCard from "@/components/post/post-card";
 
 export const metadata: Metadata = {
   title:
@@ -75,39 +75,7 @@ export default async function Home() {
             </h2>
             <div className="flex flex-col md:flex-row gap-y-3 gap-x-3">
               {recentPosts.map((post, i) => (
-                <Link
-                  href={`blog/${post.slug}`}
-                  key={post?.title}
-                  className="block grow"
-                >
-                  <Card
-                    size="md"
-                    key={i}
-                    className="hover:border-text/40 bg-[#FCF2E8] hover:bg-[#f3e6d9] py-4 "
-                  >
-                    <Headline as="h3" level="2" className="mb-0 font-bold">
-                      {post?.title}
-                    </Headline>
-                    <div className="flex -mt-1 text-base">
-                      <div className="flex ml-1 mr-3 items-center">
-                        {post?.authors.map((author, i) => (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
-                            key={i}
-                            className="h-6 w-6 -ml-1 rounded-full ring-1 ring-white"
-                            src={author.avatar}
-                            alt=""
-                          />
-                        ))}
-                      </div>
-                      <Time
-                        date={post.publishedAt}
-                        relative
-                        className="text-lg text-text/80"
-                      />
-                    </div>
-                  </Card>
-                </Link>
+                <PostCard primary post={post} key={i} />
               ))}
               <Link
                 href="/blog"

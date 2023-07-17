@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import Headline from "@/components/headline";
-import Time from "@/components/time";
 import { getAllPostsMeta } from "@/lib/mdx";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
+import PostCard from "@/components/post/post-card";
 
 export const metadata: Metadata = createMetadata({
   title: "Blog",
@@ -21,34 +20,11 @@ export default async function BlogPage() {
           Všechny příspěvky
         </Headline>
       </div>
-      {posts.map((post) => (
-        <Link
-          href={`blog/${post.slug}`}
-          key={post?.title}
-          className="block mt-12"
-        >
-          <Headline as="h2" level="2" className="mb-0">
-            {post?.title}
-          </Headline>
-          <div className="flex mt-4 text-base">
-            <div className="flex ml-1 mr-4 items-center">
-              {post?.authors.map((author, i) => (
-                <img
-                  key={i}
-                  className="h-6 w-6 -ml-1 rounded-full ring-1 ring-sheet"
-                  src={author.avatar}
-                  alt=""
-                />
-              ))}
-            </div>
-            <Time
-              date={post.publishedAt}
-              relative
-              className="text-base text-text/80"
-            />
-          </div>
-        </Link>
-      ))}
+      <div className="flex flex-col">
+        {posts.map((post, i) => (
+          <PostCard post={post} key={i} className="-mx-6" />
+        ))}
+      </div>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import Container from "./container";
+import path from "path";
 
 function Item({ href, title }: { href: string; title: string }) {
   return (
@@ -97,9 +98,11 @@ export default function Navbar() {
           id="navbar-sticky"
         >
           <ul className="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent">
-            {siteConfig.navigation.map((item, i) => (
-              <Item key={i} href={item.href} title={item.title} />
-            ))}
+            {siteConfig.navigation
+              .filter((item) => item.href != pathname)
+              .map((item, i) => (
+                <Item key={i} href={item.href} title={item.title} />
+              ))}
           </ul>
         </div>
 
@@ -136,15 +139,17 @@ export default function Navbar() {
                 <div className="mt-6 flow-root">
                   <div className="-my-6 divide-y-2">
                     <div className="space-y-2 py-6">
-                      {siteConfig.navigation.map((item, i) => (
-                        <Link
-                          href={item.href}
-                          key={i}
-                          className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-sheet"
-                        >
-                          {item.title}
-                        </Link>
-                      ))}
+                      {siteConfig.navigation
+                        .filter((item) => item.href != pathname)
+                        .map((item, i) => (
+                          <Link
+                            href={item.href}
+                            key={i}
+                            className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-sheet"
+                          >
+                            {item.title}
+                          </Link>
+                        ))}
                     </div>
                   </div>
                 </div>

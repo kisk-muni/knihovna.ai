@@ -3,6 +3,19 @@ import path from "path";
 import { compileMDX } from "next-mdx-remote/rsc";
 import siteConfig, { TeamMember } from "@/site-config";
 
+export type PostMeta = {
+  slug: string;
+  publishedAt: Date;
+  title: string;
+  authors: TeamMember[];
+  summary: string;
+};
+
+export type Post = {
+  meta: PostMeta;
+  content: any;
+};
+
 const rootDirectory = path.join(process.cwd(), "content");
 
 export const getPostBySlug = async (slug: string) => {
@@ -28,16 +41,7 @@ export const getPostBySlug = async (slug: string) => {
       authors: siteConfig.team.filter((member) => authors.includes(member.id)),
     },
     content,
-  } as unknown as {
-    meta: {
-      slug: string;
-      publishedAt: Date;
-      title: string;
-      authors: TeamMember[];
-      summary: string;
-    };
-    content: any;
-  };
+  } as unknown as Post;
 };
 
 export const getAllPostsMeta = async () => {

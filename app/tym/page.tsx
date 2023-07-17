@@ -52,25 +52,27 @@ export default function AboutPage() {
           role="list"
           className="mt-8 grid gap-x-8 gap-y-8 grid-cols-2 md:grid-cols-3 sm:gap-y-10"
         >
-          {siteConfig.team.map((member, i) => (
-            <li key={i}>
-              <div className="flex items-center gap-x-3">
-                <img
-                  className="h-16 w-16 rounded-full"
-                  src={member.avatar}
-                  alt=""
-                />
-                <div>
-                  <h3 className="text-base font-semibold leading-tight tracking-tight text-text">
-                    {member.name}
-                  </h3>
-                  <p className="text-base leading-6 text-text">
-                    {member.description}
-                  </p>
+          {siteConfig.team
+            .filter((member) => member.displayOnTeamPage == true)
+            .map((member, i) => (
+              <li key={i}>
+                <div className="flex items-center gap-x-3">
+                  <img
+                    className="h-16 w-16 rounded-full"
+                    src={member.avatar}
+                    alt=""
+                  />
+                  <div>
+                    <h3 className="text-base font-semibold leading-tight tracking-tight text-text">
+                      {member.name}
+                    </h3>
+                    <p className="text-base leading-6 text-text">
+                      {member.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            ))}
         </ul>
         <Card className="mt-32 mb-32 md:col-span-3 bg-primary text-center flex py-10 px-10 flex-col items-center justify-center">
           <div className="max-w-lg mb-6 flex flex-col items-center">

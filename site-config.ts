@@ -2,6 +2,7 @@ export interface TeamMember {
   id: string;
   name: string;
   description: string;
+  displayOnTeamPage?: boolean;
   avatar?: string;
   twitter?: string;
 }
@@ -42,36 +43,49 @@ const siteConfig: SiteConfig = {
       name: "Petr Škyřík",
       description: "",
       avatar: "/avatars/petr-skyrik.jpeg",
+      displayOnTeamPage: true,
     },
     {
       id: "kacova",
       name: "Natálie Káčová",
       description: "PM",
       avatar: "/avatars/natalie-kacova.jpeg",
+      displayOnTeamPage: true,
     },
     {
       id: "tokmakova",
       name: "Evgeniia Tokmakova",
       description: "Výzkum",
       avatar: "/avatars/evgeniia-tokmakova.jpg",
+      displayOnTeamPage: true,
     },
     {
       id: "penkava",
       name: "Matěj Pěnkava",
       description: "Výzkum",
       avatar: "/avatars/placeholder.jpg",
+      displayOnTeamPage: true,
     },
     {
       id: "aldabaghova",
       name: "Jasmína Aldabaghová",
       description: "Výzkum",
       avatar: "/avatars/jasmina-aldabaghova.jpg",
+      displayOnTeamPage: true,
     },
     {
       id: "cernocky",
       name: "Dalibor Černocký",
       description: "Výzkum",
       avatar: "/avatars/dalibor-cernocky.png",
+      displayOnTeamPage: true,
+    },
+    {
+      id: "knihovnaai",
+      name: "Tým knihovna.ai",
+      description: "",
+      avatar: "/avatars/knihovnaai.png",
+      displayOnTeamPage: false,
     },
   ],
   navigation: [
@@ -79,7 +93,10 @@ const siteConfig: SiteConfig = {
     { title: "Náš tým", href: "/tym" },
     { title: "Blog", href: "/blog" },
   ],
-  footerNavigation: [{ title: "Náš tým", href: "/tym" }],
+  footerNavigation: [
+    { title: "Náš tým", href: "/tym" },
+    { title: "Blog", href: "/blog" },
+  ],
 };
 
 export default siteConfig;
