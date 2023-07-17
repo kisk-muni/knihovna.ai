@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { formatRelative } from "date-fns";
-import { locale } from "@/lib/date";
 import Headline from "@/components/headline";
+import Time from "@/components/time";
 import { getAllPostsMeta } from "@/lib/mdx";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -42,11 +41,11 @@ export default async function BlogPage() {
                 />
               ))}
             </div>
-            <time className="text-base text-text/80">
-              {formatRelative(post.publishedAt, new Date(), {
-                locale,
-              })}
-            </time>
+            <Time
+              date={post.publishedAt}
+              relative
+              className="text-base text-text/80"
+            />
           </div>
         </Link>
       ))}

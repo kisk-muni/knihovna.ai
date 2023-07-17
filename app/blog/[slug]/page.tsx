@@ -1,18 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { formatRelative } from "date-fns";
 import Headline from "@/components/headline";
+import Time from "@/components/time";
 import { getPostBySlug } from "@/lib/mdx";
 import Link from "next/link";
 import { Fragment } from "react";
-import { locale } from "@/lib/date";
-import Head from "next/head";
 import { createMetadata } from "@/lib/metadata";
-import { Metadata, ResolvingMetadata } from "next";
-
-type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
 
 const getPageContent = async (slug: string) => {
   const { meta, content } = await getPostBySlug(slug);
@@ -46,11 +39,11 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
       </nav>
       <article>
         <header className="mt-16 mb-6">
-          <time className="block text-lg text-text/80 mb-4">
-            {formatRelative(meta.publishedAt, new Date(), {
-              locale,
-            })}
-          </time>
+          <Time
+            date={meta.publishedAt}
+            relative
+            className="block text-lg text-text/80 mb-4"
+          />
           <Headline as="h1" level="ultra">
             {meta.title}
           </Headline>

@@ -9,6 +9,7 @@ import {
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/solid";
 import Button from "@/components/button";
+import Time from "@/components/time";
 import Link from "next/link";
 import { Metadata } from "next";
 import TypeformButton from "../components/typeform-button";
@@ -16,7 +17,6 @@ import Image from "next/image";
 import { getAllPostsMeta } from "@/lib/mdx";
 import { locale } from "@/lib/date";
 import { formatRelative } from "date-fns";
-import Head from "next/head";
 
 export const metadata: Metadata = {
   title:
@@ -102,11 +102,11 @@ export default async function Home() {
                           />
                         ))}
                       </div>
-                      <time className="text-lg text-text/80">
-                        {formatRelative(post.publishedAt, new Date(), {
-                          locale,
-                        })}
-                      </time>
+                      <Time
+                        date={post.publishedAt}
+                        relative
+                        className="text-lg text-text/80"
+                      />
                     </div>
                   </Card>
                 </Link>
