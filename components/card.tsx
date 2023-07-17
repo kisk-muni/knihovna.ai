@@ -12,7 +12,7 @@ export default function Button({
   return (
     <div
       className={classNames(
-        "rounded-2xl",
+        "rounded-2xl transition duration-150 ease-out",
         {
           "px-6 py-8": size === "md",
           "px-4 py-4": size === "sm",

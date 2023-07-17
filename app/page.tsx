@@ -15,8 +15,6 @@ import { Metadata } from "next";
 import TypeformButton from "../components/typeform-button";
 import Image from "next/image";
 import { getAllPostsMeta } from "@/lib/mdx";
-import { locale } from "@/lib/date";
-import { formatRelative } from "date-fns";
 
 export const metadata: Metadata = {
   title:
@@ -85,7 +83,7 @@ export default async function Home() {
                   <Card
                     size="md"
                     key={i}
-                    className="hover:border-text/40 bg-[#FCF2E8] hover:bg-[#f3e6d9] py-4"
+                    className="hover:border-text/40 bg-[#FCF2E8] hover:bg-[#f3e6d9] py-4 "
                   >
                     <Headline as="h3" level="2" className="mb-0 font-bold">
                       {post?.title}
