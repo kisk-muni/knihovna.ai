@@ -91,11 +91,11 @@ const siteConfig: SiteConfig = {
   navigation: [
     { title: "Domů", href: "/" },
     { title: "Náš tým", href: "/tym" },
-    { title: "Blog", href: "/blog" },
+    // { title: "Blog", href: "/blog" },
   ],
   footerNavigation: [
     { title: "Náš tým", href: "/tym" },
-    { title: "Blog", href: "/blog" },
+    //{ title: "Blog", href: "/blog" },
   ],
 };
 
