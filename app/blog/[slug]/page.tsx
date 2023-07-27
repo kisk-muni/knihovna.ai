@@ -1,22 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import Headline from "@/components/headline";
 import FormatedDate from "@/components/formated-date";
-import { getPostBySlug } from "@/lib/mdx";
+import { getPageContent, components } from "@/lib/mdx";
 import Link from "next/link";
 import { Fragment } from "react";
 import { createMetadata } from "@/lib/metadata";
-
-const getPageContent = async (slug: string) => {
-  const { meta, content } = await getPostBySlug(slug);
-  return { meta, content };
-};
+import { MDXRemote } from "next-mdx-remote/rsc";
 
 export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
 }) {
-  const { meta } = await getPageContent(params.slug);
+  const { meta } = await getPageContent(params.slug, "blog");
   return createMetadata({
     title: meta.title,
     description: meta.summary,
@@ -24,7 +20,7 @@ export async function generateMetadata({
 }
 
 const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
-  const { content, meta } = await getPageContent(params.slug);
+  const { content, meta } = await getPageContent(params.slug, "blog");
 
   return (
     <Fragment>
@@ -69,8 +65,12 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
             ))}
           </div>
         </header>
-        <div className="container pb-24 prose-lg text-text prose-headings:font-bold prose-ul:list-disc">
-          {content}
+        <div className="container pb-24 prose-lg text-text prose-headings:font-bold prose-headings:leading-tight  prose-ul:list-disc prose-ol:list-decimal">
+          <MDXRemote
+            source={content}
+            options={{ parseFrontmatter: true }}
+            components={components}
+          />
         </div>
       </article>
     </Fragment>

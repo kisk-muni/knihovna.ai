@@ -2,6 +2,11 @@ import fs from "fs";
 import path from "path";
 import { compileMDX } from "next-mdx-remote/rsc";
 import siteConfig, { TeamMember } from "@/site-config";
+import Roadmap from "@/components/visualization/roadmap";
+import ResponsiveImage from "@/components/responsive-image";
+import PlaceholderComponent from "@/components/placeholder-component";
+import Container from "@/components/container";
+import Section from "@/components/section";
 
 export type PostMeta = {
   slug: string;
@@ -18,9 +23,9 @@ export type Post = {
 
 const rootDirectory = path.join(process.cwd(), "content");
 
-export const getPostBySlug = async (slug: string) => {
+export const getPostBySlug = async (slug: string, type: "blog" | "pages") => {
   const realSlug = slug.replace(/\.mdx$/, "");
-  const filePath = path.join(rootDirectory, `${realSlug}.mdx`);
+  const filePath = path.join(rootDirectory, type, `${realSlug}.mdx`);
 
   const fileContent = fs.readFileSync(filePath, { encoding: "utf8" });
 
@@ -40,21 +45,34 @@ export const getPostBySlug = async (slug: string) => {
       slug: realSlug,
       authors: siteConfig.team.filter((member) => authors.includes(member.id)),
     },
-    content,
+    content: fileContent,
   } as unknown as Post;
 };
 
-export const getAllPostsMeta = async () => {
-  const files = fs.readdirSync(rootDirectory);
+export const getAllPostsMeta = async (type: "blog" | "pages") => {
+  const files = fs.readdirSync(path.join(rootDirectory, type));
 
   let posts = [];
 
   for (const file of files) {
-    const { meta } = await getPostBySlug(file);
+    const { meta } = await getPostBySlug(file, type);
     posts.push(meta);
   }
 
   return posts.sort(
     (a, b) => b.publishedAt.getTime() - a.publishedAt.getTime()
   );
+};
+
+export const getPageContent = async (slug: string, type: "blog" | "pages") => {
+  const { meta, content } = await getPostBySlug(slug, type);
+  return { meta, content };
+};
+
+export const components = {
+  img: ResponsiveImage,
+  Roadmap: Roadmap,
+  Container: Container,
+  Section: Section,
+  Placeholder: PlaceholderComponent,
 };

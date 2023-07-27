@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const posts = await getAllPostsMeta();
+  const posts = await getAllPostsMeta("blog");
   const recentPosts = posts.slice(0, 1);
   return (
     <main className="flex flex-col">

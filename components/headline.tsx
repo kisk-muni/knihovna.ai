@@ -13,9 +13,9 @@ export default function Headline({
 }) {
   const props = {
     className: classNames(
-      "block text-text mb-6 font-bold tracking-tight",
+      "block text-text mb-6 font-bold tracking-tight leading-tight md:leading-tight",
       {
-        "md:text-5xl text-4xl leading-normal font-extrabold": level === "ultra",
+        "md:text-5xl text-4xl font-extrabold ": level === "ultra",
         "md:text-4xl text-3xl": level === "1",
         "md:text-3xl text-2xl": level === "2",
         "md:text-2xl text-xl": level === "3",

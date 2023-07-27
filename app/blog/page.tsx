@@ -12,7 +12,7 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default async function BlogPage() {
-  const posts = await getAllPostsMeta();
+  const posts = await getAllPostsMeta("blog");
   return (
     <div className={"mt-20"}>
       <div className="mb-14">
