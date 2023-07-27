@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import Container from "./container";
 import { Fragment } from "react";
 
 export default function Section({
@@ -29,7 +28,7 @@ export default function Section({
         className={classNames(
           "w-full max-w-3xl mx-auto px-6 lg:px-8 relative z-10",
           {
-            "mt-16 pt-20 pb-16 md:pt-28 md:pb-20 text-center max-w-3xl flex flex-col justify-center items-center":
+            "mt-16 pt-20 pb-18 md:pt-28 md:pb-24 text-center max-w-3xl flex flex-col justify-center items-center [&>p]:my-0 [&>p]:text-2xl [&>p]:text-text/80":
               hero,
             "pb-16": prose,
           },
@@ -37,7 +36,7 @@ export default function Section({
         )}
       >
         {title ? (
-          <div className="uppercase mb-4 text-sm text-primary font-bold tracking-wider rounded-full px-4 py-2">
+          <div className="uppercase mb-4 text-base text-primary font-bold tracking-wider rounded-full px-4 py-2">
             {title}
           </div>
         ) : null}
