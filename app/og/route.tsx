@@ -14,7 +14,7 @@ const sizes = {
 
 // Font
 const interSemiBold = fetch(
-  new URL("../../public/font/Inter-Bold.ttf", import.meta.url)
+  new URL("../../public/Inter-Bold.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer());
 
 // Image generation
