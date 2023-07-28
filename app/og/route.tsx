@@ -28,11 +28,7 @@ export async function GET(request: Request) {
       ? searchParams.get("title")?.slice(0, 100)
       : "Mapujeme budoucnost knihoven v éře AI.";
 
-    const imageData = await fetch(
-      new URL("../../public/bg-2.png", import.meta.url)
-    ).then((res) => res.arrayBuffer());
     // Convert image data to base64
-    const image = Buffer.from(imageData).toString("base64");
     return new ImageResponse(
       (
         // ImageResponse JSX element
@@ -45,17 +41,19 @@ export async function GET(request: Request) {
             alignItems: "center",
             justifyContent: "center",
             letterSpacing: "-.02em",
+            background: "linear-gradient(180deg, #fff2e6 9%, #ffffff)",
             fontWeight: 700,
-            backgroundImage: `url(data:image/png;base64,${image})`,
-            backgroundSize: "110% 100%",
-            backgroundPosition: "center",
           }}
         >
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              margin: "-48px 0 24px",
+              justifyContent: "center",
+              position: "absolute",
+              top: "42px",
+              left: "42px",
+              right: "42px",
             }}
           >
             <span
