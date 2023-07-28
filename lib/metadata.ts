@@ -6,6 +6,9 @@ export function createMetadata(metadata: {
   description: string;
   ogTitle?: string;
 }): Metadata {
+  const ogImage = `/og?title=${
+    metadata.ogTitle ? metadata.ogTitle : metadata.title
+  }`;
   return {
     title: `${metadata.title} | ${siteConfig.title}`,
     description: metadata.description,
@@ -14,12 +17,18 @@ export function createMetadata(metadata: {
       siteName: siteConfig.title,
       images: [
         {
-          url: `/og?title=${
-            metadata.ogTitle ? metadata.ogTitle : metadata.title
-          }`,
+          url: ogImage,
         },
       ],
       authors: siteConfig.team.map((member) => member.name),
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [
+        {
+          url: ogImage,
+        },
+      ],
     },
   };
 }
