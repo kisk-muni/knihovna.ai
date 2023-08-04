@@ -85,7 +85,7 @@ export default async function Roadmap({}: {}) {
   const calendarItems = data.themes.slice(0, -1);
 
   return (
-    <div className="relative">
+    <div className="relative mb-8">
       <div className="overflow-x-scroll">
         <div className="min-w-[1230px]">
           <div
