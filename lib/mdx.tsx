@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { compileMDX } from "next-mdx-remote/rsc";
+import { compileMDX, MDXRemoteProps } from "next-mdx-remote/rsc";
 import siteConfig, { TeamMember } from "@/site-config";
 import Roadmap from "@/components/visualization/roadmap";
 import ResponsiveImage from "@/components/responsive-image";
@@ -69,7 +69,7 @@ export const getPageContent = async (slug: string, type: "blog" | "pages") => {
   return { meta, content };
 };
 
-export const components = {
+export const components: any = {
   img: ResponsiveImage,
   Roadmap: Roadmap,
   Container: Container,

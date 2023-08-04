@@ -28,6 +28,12 @@ interface SiteConfig {
 
   navigation: Link[];
   footerNavigation: Link[];
+
+  notion: {
+    databases: {
+      roadmap: string;
+    };
+  };
 }
 
 const siteConfig: SiteConfig = {
@@ -99,6 +105,11 @@ const siteConfig: SiteConfig = {
     { title: "O projektu", href: "/o-projektu" },
     //{ title: "Blog", href: "/blog" },
   ],
+  notion: {
+    databases: {
+      roadmap: "664e6b73ea50434cbaad7d120c149446",
+    },
+  },
 };
 
 export default siteConfig;

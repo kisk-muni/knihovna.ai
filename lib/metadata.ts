@@ -24,6 +24,7 @@ export function createMetadata(metadata: {
     },
     twitter: {
       card: "summary_large_image",
+      description: metadata.description,
       images: [
         {
           url: ogImage,

@@ -2,7 +2,7 @@
 import { getPageContent, components } from "@/lib/mdx";
 import { createMetadata } from "@/lib/metadata";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { Fragment } from "react";
+import { Fragment, Suspense } from "react";
 
 export async function generateMetadata({
   params,

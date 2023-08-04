@@ -26,11 +26,12 @@ export default function Section({
       )}
       <div
         className={classNames(
-          "w-full max-w-3xl mx-auto px-6 lg:px-8 relative z-10",
+          "px-6 lg:px-8 relative z-10",
           {
+            "w-full": !prose && !hero,
+            "w-full max-w-3xl mx-auto": prose || hero,
             "mt-16 pt-20 pb-18 md:pt-28 md:pb-24 text-center max-w-3xl flex flex-col justify-center items-center [&>p]:my-0 [&>p]:text-2xl [&>p]:text-text/80":
               hero,
-            "pb-16": prose,
           },
           className
         )}

@@ -16,6 +16,7 @@ import Image from "next/image";
 import { getAllPostsMeta } from "@/lib/mdx";
 import PostCard from "@/components/post/post-card";
 import { createMetadata } from "@/lib/metadata";
+import BackgroundGradient from "@/components/background-gradient";
 
 export const metadata: Metadata = createMetadata({
   title:
@@ -32,12 +33,7 @@ export default async function Home() {
     <main className="flex flex-col">
       <section className="relative">
         <Container>
-          <div
-            className="md:block absolute inset-0 md:-inset-x-[calc(100%)] md:top-0 md:-bottom-0 md:-bottom-[calc(50%)] -z-10 transform-gpu hblur-3xl"
-            aria-hidden="true"
-          >
-            <div className="absolute inset-x-0 inset-y-0 bg-gradient-to-b from-[#FCF2E8] to-[#ffffff]"></div>
-          </div>
+          <BackgroundGradient.Home />
           <div className="relative max-w-2xl mx-auto pt-32 pb-20 lg:pt-40">
             <div className="text-left">
               <div

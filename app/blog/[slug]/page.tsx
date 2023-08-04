@@ -3,7 +3,7 @@ import Headline from "@/components/headline";
 import FormatedDate from "@/components/formated-date";
 import { getPageContent, components } from "@/lib/mdx";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, Suspense } from "react";
 import { createMetadata } from "@/lib/metadata";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
@@ -66,11 +66,13 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
           </div>
         </header>
         <div className="container pb-24 prose-lg text-text prose-headings:font-bold prose-headings:leading-tight  prose-ul:list-disc prose-ol:list-decimal">
-          <MDXRemote
-            source={content}
-            options={{ parseFrontmatter: true }}
-            components={components}
-          />
+          <Suspense fallback={<div>Loading...</div>}>
+            <MDXRemote
+              source={content}
+              options={{ parseFrontmatter: true }}
+              components={components}
+            />
+          </Suspense>
         </div>
       </article>
     </Fragment>
