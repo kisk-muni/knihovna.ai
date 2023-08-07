@@ -97,7 +97,7 @@ const siteConfig: SiteConfig = {
   navigation: [
     { title: "Domů", href: "/" },
     { title: "Náš tým", href: "/tym" },
-    { title: "Roadmap", href: "/roadmap" },
+    // { title: "Roadmap", href: "/roadmap" },
     { title: "O projektu", href: "/o-projektu" },
     // { title: "Blog", href: "/blog" },
   ],
