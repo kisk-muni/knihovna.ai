@@ -1,7 +1,7 @@
 import Container from "@/components/container";
 import Headline from "@/components/headline";
 import BackgroundGradient from "@/components/background-gradient";
-import Roadmap from "@/components/visualization/roadmap";
+import Roadmap from "@/components/visualization/roadmap/roadmap-timeline";
 
 export default function RoadmapPage() {
   return (

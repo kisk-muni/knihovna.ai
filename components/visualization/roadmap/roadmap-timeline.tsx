@@ -1,15 +1,9 @@
 import classNames from "classnames";
-import notion from "@/lib/notion";
-import siteConfig from "@/site-config";
-import {
-  parseISO,
-  format,
-  isThisYear,
-  eachMonthOfInterval,
-  differenceInDays,
-} from "date-fns";
+import { format, isThisYear, differenceInDays } from "date-fns";
 import { cs } from "date-fns/locale";
-//import { ArrowsPointingOutIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
+import { ArrowsPointingOutIcon } from "@heroicons/react/24/solid";
+import getRoadmapData from "./get-roadmap-data";
 
 function FloatingButton(props: { children: React.ReactNode }) {
   const { children } = props;
@@ -20,72 +14,25 @@ function FloatingButton(props: { children: React.ReactNode }) {
   );
 }
 
-type RoadmapNotionItem = {
-  id: string;
-  url: string;
-  public_url: string;
-  properties: {
-    Name: {
-      title: {
-        plain_text: string;
-      }[];
-    };
-    Dates: {
-      date: {
-        start: string;
-        end: string;
-        time_zone: string | null;
-      };
-    };
-  };
-};
+export default async function RoadmapTimeline({
+  detailed = false,
+}: {
+  detailed?: boolean;
+}) {
+  const data = await getRoadmapData();
 
-async function getData() {
-  const database = (
-    await notion.databases.query({
-      database_id: siteConfig.notion.databases.roadmap,
-    })
-  ).results as unknown as RoadmapNotionItem[];
-  const roadmapThemes = database
-    .map((item) => {
-      return {
-        id: item.id,
-        name: item.properties.Name.title[0].plain_text,
-        dates: {
-          start: parseISO(item.properties.Dates.date.start),
-          end: parseISO(item.properties.Dates.date.end),
-        },
-      };
-    })
-    .sort((a, b) => {
-      return a.dates.start.getTime() - b.dates.start.getTime();
-    });
-  const range = {
-    start: roadmapThemes[0].dates.start,
-    end: roadmapThemes[roadmapThemes.length - 1].dates.end,
-  };
-  // move the first item in roadmapThemes to the end
-  roadmapThemes.push(roadmapThemes.shift() as any);
-  return { themes: roadmapThemes, range };
-}
-
-export default async function Roadmap({}: {}) {
-  const data = await getData();
-
-  // using date-fns compoute perentage of the date range, given data.range.start and data.range.end
   const now = new Date();
   const percentage =
     ((now.getTime() - data.range.start.getTime()) /
       (data.range.end.getTime() - data.range.start.getTime())) *
     100;
 
-  const months = eachMonthOfInterval(data.range);
   const totalNumberOfDays = differenceInDays(data.range.end, data.range.start);
 
   const calendarItems = data.themes.slice(0, -1);
 
   return (
-    <div className="relative mb-8">
+    <div className="relative">
       <div className="overflow-x-scroll">
         <div className="min-w-[1230px]">
           <div
@@ -157,19 +104,6 @@ export default async function Roadmap({}: {}) {
                           ? `Fáze ${i + 1}`
                           : "Průběžná fáze"}
                       </div>
-                      {/*<span className="text-sm">
-                    {format(
-                      item.dates.start,
-                      `LLL d${isThisYear(item.dates.start) ? "" : ", yy"}`,
-                      { locale: cs }
-                    )}{" "}
-                    -{" "}
-                    {format(
-                      item.dates.end,
-                      `LLL d${isThisYear(item.dates.end) ? "" : ", yy"}`,
-                      { locale: cs }
-                    )}
-                    </span>*/}
                     </div>
                     <div className="text-text text-base mb-1 leading-tight flex justify-between">
                       {item.name}
@@ -190,7 +124,7 @@ export default async function Roadmap({}: {}) {
           </div>
         </div>
       </div>
-      {/*!detailed && (
+      {false && (
         <Link
           href={"/roadmap"}
           className="absolute z-30 bottom-8 left-[50%] -ml-[75px]"
@@ -200,7 +134,7 @@ export default async function Roadmap({}: {}) {
             Detailní plán
           </FloatingButton>
         </Link>
-      )*/}
+      )}
     </div>
   );
 }
