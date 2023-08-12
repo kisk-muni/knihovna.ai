@@ -46,15 +46,11 @@ export default async function Home() {
                   <span className="text-text">umělé inteligence</span>.
                 </h1>
                 <p>
-                  AI promění, jak pracujeme. Podobně jako u příchodu internetu
-                  nám AI připomíná, že je důležité rozvíjet svůj lidský
-                  potenciál. Technologie pro nás nemá být ohrožením, ale novou
-                  příležitostí.
-                </p>
-                <p>
                   Knihovny podle nás sehrají důležitou roli v popularizaci AI a
-                  pomoci ohroženým skupinám obyvatel.
+                  pomoci ohroženým skupinám obyvatel. AI pro společnost nemá být
+                  ohrožením ale novou příležitostí.
                 </p>
+                <p></p>
               </div>
               <div className="mt-10 flex items-center justify-start gap-x-4">
                 <Link href="#zapojeni">
@@ -116,7 +112,7 @@ export default async function Home() {
               </Card>
               <Card className="bg-[url('/bg-2.png')] bg-cover bg-no-repeat flex flex-col border-[2px] border-text px-10 md:aspect-45/39 justify-center text-center">
                 <p className="text-base md:text-xl text-text font-bold">
-                  Nabízí programy vzdělávání a oslovuje široké skupiny lidí.
+                  Nabízí celoživotní vzdělávání pro široké skupiny lidí.
                 </p>
               </Card>
               <Card className="bg-[url('/bg-3.png')] bg-cover bg-no-repeat flex flex-col border-[2px] border-text px-10 md:aspect-45/39 justify-center text-center">
