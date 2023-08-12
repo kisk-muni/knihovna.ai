@@ -17,9 +17,9 @@ BackgroundGradient.Radial = function Radial() {
         right: "0px",
         left: "0px",
         top: "0px",
-        height: "80vh",
+        height: "100vh",
         background:
-          "radial-gradient(159.9% 159.9% at 56.47% 11.47%, #FCF2E8 21.35%, rgba(251, 246, 241, 0) 61.46%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */",
+          "radial-gradient(159.9% 159.9% at 56.47% 11.47%, #FCF2E8 21.35%, rgba(255, 255, 255, 0) 61.46%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */",
       }}
     ></div>
   );
