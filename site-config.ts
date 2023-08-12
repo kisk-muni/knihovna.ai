@@ -12,7 +12,7 @@ interface Link {
   href: string;
 }
 
-interface SiteConfig {
+export interface SiteConfig {
   title: string;
   description: string;
   siteUrl: string;
@@ -32,6 +32,7 @@ interface SiteConfig {
   notion: {
     databases: {
       roadmap: string;
+      handbook: string;
     };
   };
 }
@@ -105,11 +106,12 @@ const siteConfig: SiteConfig = {
   footerNavigation: [
     { title: "Náš tým", href: "/tym" },
     { title: "O projektu", href: "/o-projektu" },
-    //{ title: "Blog", href: "/blog" },
+    // { title: "Blog", href: "/blog" },
   ],
   notion: {
     databases: {
       roadmap: "664e6b73ea50434cbaad7d120c149446",
+      handbook: "ddce45ad40974edfa0746df7f3f6ecd4",
     },
   },
 };

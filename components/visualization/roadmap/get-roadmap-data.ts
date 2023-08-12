@@ -1,6 +1,6 @@
 import siteConfig from "@/site-config";
-import notion from "@/lib/notion";
-import n2m from "@/lib/notion2md";
+import notion, { TextBlock } from "@/lib/notion/notion";
+import n2m from "@/lib/notion/notion2md";
 import parseISO from "date-fns/parseISO";
 
 type RoadmapNotionItem = {
@@ -8,11 +8,7 @@ type RoadmapNotionItem = {
   url: string;
   public_url: string;
   properties: {
-    Name: {
-      title: {
-        plain_text: string;
-      }[];
-    };
+    Name: TextBlock;
     Dates: {
       date: {
         start: string;
