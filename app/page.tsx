@@ -67,7 +67,7 @@ export default async function Home() {
           </div>
         </Container>
       </section>
-      {recentPosts.length > 0 && (
+      {false && recentPosts.length > 0 && (
         <section className="pt-12 lg:pt-20">
           <Container>
             <h2 className="block uppercase text-base font-semibold text-text/60 mb-4">
