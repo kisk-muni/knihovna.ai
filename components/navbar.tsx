@@ -11,7 +11,7 @@ function Item({ href, title }: { href: string; title: string }) {
     <li>
       <Link
         href={href}
-        className="block py-2 pl-3 pr-4 text-base text-text font-semibold hover:bg-sheet md:hover:bg-transparent md:hover:text-primary md:p-1 transition duration-150 ease-out"
+        className="block py-2 pl-3 pr-4 text-base text-text font-medium hover:bg-sheet md:hover:bg-transparent md:hover:text-primary md:p-1 transition duration-150 ease-out"
       >
         {title}
       </Link>
@@ -96,7 +96,7 @@ export default function Navbar() {
           )}
           id="navbar-sticky"
         >
-          <ul className="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent">
+          <ul className="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-6 md:mt-0 md:border-0 md:bg-transparent">
             {siteConfig.navigation
               .filter((item) => item.href != pathname)
               .map((item, i) => (

@@ -31,9 +31,9 @@ export default async function Home() {
   const recentPosts = posts.slice(0, 1);
   return (
     <main className="flex flex-col">
+      <BackgroundGradient.Radial />
       <section className="relative">
         <Container>
-          <BackgroundGradient.Home />
           <div className="relative max-w-2xl mx-auto pt-32 pb-20 lg:pt-40">
             <div className="text-left">
               <div
@@ -56,10 +56,15 @@ export default async function Home() {
                   pomoci ohroženým skupinám obyvatel.
                 </p>
               </div>
-              <div className="mt-10 flex items-center justify-start gap-x-12">
+              <div className="mt-10 flex items-center justify-start gap-x-4">
                 <Link href="#zapojeni">
                   <Button theme="primary" size="large">
                     Jak se zapojit?
+                  </Button>
+                </Link>
+                <Link href="/o-projektu">
+                  <Button theme="gray" size="large" variant="ghost">
+                    Více o projektu
                   </Button>
                 </Link>
               </div>

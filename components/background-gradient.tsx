@@ -9,14 +9,19 @@ function BackgroundGradient() {
   );
 }
 
-BackgroundGradient.Home = function Small() {
+BackgroundGradient.Radial = function Radial() {
   return (
     <div
-      className="md:block absolute inset-0 md:-inset-x-[calc(100%)] md:top-0 md:-bottom-0 md:-bottom-[calc(50%)] -z-10 transform-gpu hblur-3xl"
-      aria-hidden="true"
-    >
-      <div className="absolute inset-x-0 inset-y-0 bg-gradient-to-b from-[#FCF2E8] to-[#ffffff]"></div>
-    </div>
+      style={{
+        position: "absolute",
+        right: "0px",
+        left: "0px",
+        top: "0px",
+        height: "80vh",
+        background:
+          "radial-gradient(159.9% 159.9% at 56.47% 11.47%, #FCF2E8 21.35%, rgba(251, 246, 241, 0) 61.46%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */",
+      }}
+    ></div>
   );
 };
 
