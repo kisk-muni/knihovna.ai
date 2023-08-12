@@ -1,8 +1,8 @@
-import Button from "@/components/button";
 import Card from "@/components/card";
 import Container from "@/components/container";
 import Headline from "@/components/headline";
 import FormatedDate from "@/components/formated-date";
+import { Button } from "@/components/button";
 
 /* eslint-disable @next/next/no-img-element */
 export default function DesignPage() {
@@ -24,10 +24,24 @@ export default function DesignPage() {
           Container Full Width
         </Container>
       </div>
-      <Container className="flex mb-10 gap-6 flex-wrap">
-        <Button>Button primary</Button>
-        <Button smaller>Button primary smaller</Button>
-        <Button invert>Button inverted</Button>
+      <Container className="flex mb-10 gap-6 flex-wrap items-start">
+        <Button theme="primary" variant="solid" size="large">
+          Primary Large
+        </Button>
+        <Button theme="primary" variant="solid">
+          Primary
+        </Button>
+        <Button variant="ghost" theme="primary" size="small">
+          Primary Ghost
+        </Button>
+        <Button theme="primary" size="small">
+          Primary
+        </Button>
+        <Button theme="gray">Gray Solid</Button>
+        <Button theme="gray" variant="ghost">
+          Gray Ghost
+        </Button>
+        <Button theme="white">White</Button>
       </Container>
       <Container className="flex gap-3 mb-10 py-10">
         <Card className="bg-sheet" size="md">

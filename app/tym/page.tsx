@@ -1,5 +1,5 @@
 import Card from "@/components/card";
-import Button from "@/components/button";
+import { Button } from "@/components/button";
 import Headline from "@/components/headline";
 import siteConfig from "@/site-config";
 import { createMetadata } from "@/lib/metadata";
@@ -90,7 +90,7 @@ export default function AboutPage() {
           </div>
           <div className="flex justify-center">
             <TypeformButton id="UzBhUVqf">
-              <Button invert smaller>
+              <Button theme="white" size="base">
                 Zanechat kontakt
               </Button>
             </TypeformButton>

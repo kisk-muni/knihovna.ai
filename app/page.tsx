@@ -8,7 +8,7 @@ import {
   SquaresPlusIcon,
   WrenchScrewdriverIcon,
 } from "@heroicons/react/24/solid";
-import Button from "@/components/button";
+import { Button } from "@/components/button";
 import Link from "next/link";
 import { Metadata } from "next";
 import TypeformButton from "../components/typeform-button";
@@ -58,14 +58,16 @@ export default async function Home() {
               </div>
               <div className="mt-10 flex items-center justify-start gap-x-12">
                 <Link href="#zapojeni">
-                  <Button className="py-7">Jak se zapojit?</Button>
+                  <Button theme="primary" size="large">
+                    Jak se zapojit?
+                  </Button>
                 </Link>
               </div>
             </div>
           </div>
         </Container>
       </section>
-      {false && recentPosts.length > 0 && (
+      {recentPosts.length > 0 && (
         <section className="pt-12 lg:pt-20">
           <Container>
             <h2 className="block uppercase text-base font-semibold text-text/60 mb-4">
@@ -80,8 +82,8 @@ export default async function Home() {
                 className="block flex items-stretch text-text/80 hover:text-text"
               >
                 <Button
-                  secondary
-                  invert
+                  theme="gray"
+                  variant="ghost"
                   className="flex justify-center md:justify-between items-center gap-x-4 w-full px-0 md:px-6"
                 >
                   <div className="text-left">
@@ -215,7 +217,9 @@ export default async function Home() {
                 </div>
                 <div className="flex justify-start">
                   <TypeformButton id="ZkIhUqLK">
-                    <Button smaller>Odebírat novinky</Button>
+                    <Button theme="primary" size="base">
+                      Odebírat novinky
+                    </Button>
                   </TypeformButton>
                 </div>
               </Card>
@@ -232,7 +236,7 @@ export default async function Home() {
                 </div>
                 <div className="flex justify-center">
                   <TypeformButton id="UzBhUVqf">
-                    <Button invert smaller>
+                    <Button size="base" theme="white">
                       Vyplnit kontakt
                     </Button>
                   </TypeformButton>
