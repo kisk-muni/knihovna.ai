@@ -42,7 +42,7 @@ export default function Navbar() {
   return (
     <nav
       className={classNames(
-        "fixed h-[72px] w-full flex items-center z-20 top-0 left-0 transition-[height,padding] ease-out delay-50",
+        "fixed h-[72px] w-full flex items-center z-40 top-0 left-0 transition-[height,padding] ease-out delay-50",
         {
           "bg-transparent": pathname === "/" && !stick,
           "border-b border-sheet/70 bg-white drop-shadow-sm": stick,
