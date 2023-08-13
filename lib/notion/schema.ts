@@ -4,6 +4,14 @@ export type Title = {
   }[];
 };
 
+export type Dates = {
+  date: {
+    start: string;
+    end: string;
+    time_zone: string | null;
+  };
+};
+
 export type RichText = {
   id: string;
   type: "rich_text";

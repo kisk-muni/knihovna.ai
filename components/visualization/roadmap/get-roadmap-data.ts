@@ -1,24 +1,17 @@
 import siteConfig from "@/site-config";
-import notion, { TextBlock } from "@/lib/notion/notion";
+import notion from "@/lib/notion/notion";
 import n2m from "@/lib/notion/notion2md";
 import parseISO from "date-fns/parseISO";
+import {
+  Dates,
+  QueryResultWithMarkdownContents,
+  Title,
+} from "@/lib/notion/schema";
 
-type RoadmapNotionItem = {
-  id: string;
-  url: string;
-  public_url: string;
-  properties: {
-    Name: TextBlock;
-    Dates: {
-      date: {
-        start: string;
-        end: string;
-        time_zone: string | null;
-      };
-    };
-  };
-  markdownContents?: string;
-};
+type RoadmapNotionItem = QueryResultWithMarkdownContents<{
+  Name: Title;
+  Dates: Dates;
+}>;
 
 export default async function getRoadmapData() {
   const database = (
