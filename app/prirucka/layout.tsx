@@ -3,7 +3,7 @@ import { Button } from "@/components/button";
 import Container from "@/components/container";
 import { getHandbookPages } from "@/lib/notion/get-handbook-data";
 import Link from "next/link";
-import slugify from "slugify";
+import { Pagination, SideNavigation } from "./navigation";
 
 export default async function HandbookLayout({
   children,
@@ -65,18 +65,7 @@ export default async function HandbookLayout({
             </Link>
           </h1>
           <div className="h-px mb-6 w-full bg-[#C8C8C8]"></div>
-          <ul className="mb-6">
-            {navItems.slice(1).map((link, i) => (
-              <li className="mb-5" key={i}>
-                <Link
-                  href={link.href}
-                  className="text-lg cursor-not-allowed text-text hover:text-primary font-medium"
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <SideNavigation items={navItems} />
           <Button theme="gray" size="small" className="cursor-not-allowed">
             Sdílet
             <svg
@@ -101,7 +90,10 @@ export default async function HandbookLayout({
             </svg>
           </Button>
         </aside>
-        <main className="ml-8 pt-16">{children}</main>
+        <div className="ml-8 pt-16 w-full">
+          {children}
+          <Pagination items={navItems} />
+        </div>
       </Container>
     </div>
   );
