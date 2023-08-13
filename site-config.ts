@@ -12,6 +12,10 @@ interface Link {
   href: string;
 }
 
+interface NavLink extends Link {
+  private?: boolean;
+}
+
 export interface SiteConfig {
   title: string;
   description: string;
@@ -26,8 +30,9 @@ export interface SiteConfig {
   // team
   team: TeamMember[];
 
-  navigation: Link[];
-  footerNavigation: Link[];
+  navigation: NavLink[];
+  privateNavigation: NavLink[];
+  footerNavigation: NavLink[];
 
   notion: {
     databases: {
@@ -97,11 +102,13 @@ const siteConfig: SiteConfig = {
   ],
   navigation: [
     { title: "Domů", href: "/" },
-    { title: "AI Příručka", href: "/prirucka" },
     { title: "Náš tým", href: "/tym" },
-    // { title: "Roadmap", href: "/roadmap" },
     { title: "O projektu", href: "/o-projektu" },
-    // { title: "Blog", href: "/blog" },
+  ],
+  privateNavigation: [
+    { title: "AI Příručka", href: "/prirucka", private: true },
+    { title: "Roadmap", href: "/roadmap", private: true },
+    { title: "Blog", href: "/blog", private: true },
   ],
   footerNavigation: [
     { title: "Náš tým", href: "/tym" },
