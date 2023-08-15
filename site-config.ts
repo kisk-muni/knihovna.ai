@@ -38,6 +38,8 @@ export interface SiteConfig {
     databases: {
       roadmap: string;
       handbook: string;
+      sprints: string;
+      todos: string;
     };
   };
 }
@@ -119,6 +121,8 @@ const siteConfig: SiteConfig = {
     databases: {
       roadmap: "664e6b73ea50434cbaad7d120c149446",
       handbook: "ddce45ad40974edfa0746df7f3f6ecd4",
+      todos: "b9a43c293aa64860b94c3c3f04d0d5e2",
+      sprints: "bc7967210a6142b3b97b841e6a004c96",
     },
   },
 };

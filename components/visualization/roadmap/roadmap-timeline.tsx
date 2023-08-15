@@ -50,7 +50,7 @@ export default async function RoadmapTimeline({
               return (
                 <div
                   key={i}
-                  className="mr-2"
+                  className="pt-1 mr-2"
                   style={{
                     width: `calc(${percentageOfTheme}% - 8px)`,
                   }}

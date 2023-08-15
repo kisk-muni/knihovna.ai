@@ -105,17 +105,26 @@ export default async function Home() {
               Naší vizí je knihovna, která ...
             </Headline>
             <div className="grid md:grid-cols-3 gap-x-6 gap-y-4">
-              <Card className="bg-[url('/bg-1.png')] bg-cover bg-no-repeat flex flex-col border-[2px] border-text px-10 md:aspect-45/39 justify-center text-center">
+              <Card
+                size="md"
+                className="bg-[url('/bg-1.png')] bg-cover bg-no-repeat flex flex-col border-[2px] border-text px-10 md:aspect-45/39 justify-center text-center"
+              >
                 <p className="text-base md:text-xl text-text font-bold">
                   Zpřístupňuje nové technologie komunitám.
                 </p>
               </Card>
-              <Card className="bg-[url('/bg-2.png')] bg-cover bg-no-repeat flex flex-col border-[2px] border-text px-10 md:aspect-45/39 justify-center text-center">
+              <Card
+                size="md"
+                className="bg-[url('/bg-2.png')] bg-cover bg-no-repeat flex flex-col border-[2px] border-text px-10 md:aspect-45/39 justify-center text-center"
+              >
                 <p className="text-base md:text-xl text-text font-bold">
                   Nabízí celoživotní vzdělávání pro široké skupiny lidí.
                 </p>
               </Card>
-              <Card className="bg-[url('/bg-3.png')] bg-cover bg-no-repeat flex flex-col border-[2px] border-text px-10 md:aspect-45/39 justify-center text-center">
+              <Card
+                size="md"
+                className="bg-[url('/bg-3.png')] bg-cover bg-no-repeat flex flex-col border-[2px] border-text px-10 md:aspect-45/39 justify-center text-center"
+              >
                 <p className="text-base md:text-xl text-text font-bold">
                   Pomáhá jako přístupný bod sociální záchranné sítě.
                 </p>
@@ -131,7 +140,7 @@ export default async function Home() {
               Co od nás můžete čekat?
             </Headline>
             <div className="grid md:grid-cols-2 gap-x-6 gap-y-6">
-              <Card className="bg-sheet flex flex-col justify-start">
+              <Card size="md" className="bg-sheet flex flex-col justify-start">
                 <div className="rounded-full bg-white p-2 w-fit">
                   <MapIcon className="w-9 h-9 text-emerald-500" />
                 </div>
@@ -150,7 +159,7 @@ export default async function Home() {
                   <li>zapojování knihoven do sociální záchranné sítě</li>
                 </ul>
               </Card>
-              <Card className="bg-sheet flex flex-col justify-start">
+              <Card size="md" className="bg-sheet flex flex-col justify-start">
                 <div className="rounded-full bg-white p-2 w-fit">
                   <SquaresPlusIcon className="w-9 h-9 text-blue-500" />
                 </div>
@@ -159,7 +168,7 @@ export default async function Home() {
                   institucemi a službami.{" "}
                 </p>
               </Card>
-              <Card className="bg-sheet flex flex-col justify-start">
+              <Card size="md" className="bg-sheet flex flex-col justify-start">
                 <div className="rounded-full bg-white p-2 w-fit">
                   <WrenchScrewdriverIcon className="w-9 h-9 text-pink-500" />
                 </div>
@@ -173,7 +182,7 @@ export default async function Home() {
                   </p>
                 </div>
               </Card>
-              <Card className="bg-sheet flex flex-col justify-start">
+              <Card size="md" className="bg-sheet flex flex-col justify-start">
                 <div className="rounded-full bg-white p-2 w-fit">
                   <FunnelIcon className="w-9 h-9 text-purple-500" />
                 </div>
@@ -206,7 +215,10 @@ export default async function Home() {
             </Headline>
 
             <div className="grid md:grid-cols-5 gap-x-6 gap-y-6">
-              <Card className="md:col-span-2 bg-sheet text-center flex py-10 px-10 flex-col items-center justify-center">
+              <Card
+                size="md"
+                className="md:col-span-2 bg-sheet text-center flex py-10 px-10 flex-col items-center justify-center"
+              >
                 <div className="max-w-lg mb-6 flex flex-col items-center">
                   <p className="mb-4 text-3xl font-bold text-text">
                     Sledujte projektové novinky
@@ -224,7 +236,10 @@ export default async function Home() {
                   </TypeformButton>
                 </div>
               </Card>
-              <Card className="md:col-span-3 bg-primary text-center flex py-10 px-10 flex-col items-center justify-center">
+              <Card
+                size="md"
+                className="md:col-span-3 bg-primary text-center flex py-10 px-10 flex-col items-center justify-center"
+              >
                 <div className="max-w-lg mb-6 flex flex-col items-center">
                   <p className="w-86 mb-4 text-3xl font-bold text-white">
                     Zanechejte nám kontakt pro spolupráci

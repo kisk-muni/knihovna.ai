@@ -1,26 +1,41 @@
-import classNames from "classnames";
+import { cva, VariantProps } from "class-variance-authority";
 
-export default function Button({
-  children,
+const button = cva(["rounded-2xl", "transition", "duration-150", "ease-out"], {
+  variants: {
+    theme: {
+      white: ["bg-white"],
+      primary: [],
+      gray: [],
+    },
+    variant: {
+      solid: "",
+      ghost: ["bg-transparent", "hover:bg-transparent"],
+    },
+    size: {
+      base: [],
+      sm: ["px-4", "py-4"],
+      md: ["px-6", "py-8"],
+    },
+  },
+  defaultVariants: {
+    theme: "primary",
+    variant: "solid",
+    size: "base",
+  },
+});
+
+export interface CardProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof button> {}
+
+const Card: React.FC<CardProps> = ({
   className,
-  size = "md",
-}: {
-  children: React.ReactNode;
-  className?: string | null;
-  size?: "sm" | "md" | "lg";
-}) {
-  return (
-    <div
-      className={classNames(
-        "rounded-2xl transition duration-150 ease-out",
-        {
-          "px-6 py-8": size === "md",
-          "px-4 py-4": size === "sm",
-        },
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
-}
+  theme,
+  variant,
+  size,
+  ...props
+}) => (
+  <div className={button({ theme, size, variant, className })} {...props} />
+);
+
+export default Card;
