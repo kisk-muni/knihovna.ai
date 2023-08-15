@@ -109,7 +109,7 @@ const siteConfig: SiteConfig = {
   ],
   privateNavigation: [
     { title: "AI Příručka", href: "/prirucka", private: true },
-    { title: "Roadmap", href: "/roadmap", private: true },
+    { title: "Otevřený projekt", href: "/prehled", private: true },
     { title: "Blog", href: "/blog", private: true },
   ],
   footerNavigation: [
