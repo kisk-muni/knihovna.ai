@@ -1,6 +1,7 @@
 "use client";
 import siteConfig from "@/site-config";
 import Link from "next/link";
+import Image from "next/image";
 import classNames from "classnames";
 import { usePathname } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
@@ -45,7 +46,8 @@ export default function Navbar() {
         "fixed h-[72px] w-full flex items-center z-40 top-0 left-0 transition-[height,padding] ease-out delay-50",
         {
           "bg-transparent": pathname === "/" && !stick,
-          "border-b border-sheet/70 bg-white drop-shadow-sm": stick,
+          "border-b border-sheet/70 bg-white drop-shadow-sm":
+            stick && pathname != "/roadmap",
         }
       )}
     >
@@ -53,9 +55,16 @@ export default function Navbar() {
         <Link
           href="/"
           className={classNames(
-            "self-center whitespace-nowrap text-text font-bold transition ease-out delay-150"
+            "self-center whitespace-nowrap text-text flex font-bold transition ease-out delay-150"
           )}
         >
+          <Image
+            src="/logo-clean-a.png"
+            width="24"
+            height="24"
+            alt="Logo knihovna.ai"
+            className="mr-2 shadow-sm rounded-[8px] ovefrlow-hidden"
+          />
           {siteConfig.title}
         </Link>
         <div className="flex lg:hidden md:order-2">
