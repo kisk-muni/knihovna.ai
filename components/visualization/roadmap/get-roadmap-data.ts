@@ -1,34 +1,23 @@
 import siteConfig from "@/site-config";
-import notion from "@/lib/notion/notion";
-import n2m from "@/lib/notion/notion2md";
 import parseISO from "date-fns/parseISO";
-import {
-  Dates,
-  QueryResultWithMarkdownContents,
-  Title,
-} from "@/lib/notion/schema";
-
-type RoadmapNotionItem = QueryResultWithMarkdownContents<{
-  Name: Title;
-  Dates: Dates;
-}>;
+import getData from "@/lib/notion/get-data";
+import { RoadmapSchema } from "@/lib/notion/schema";
 
 export default async function getRoadmapData() {
-  const database = (
-    await notion.databases.query({
-      database_id: siteConfig.notion.databases.roadmap,
-    })
-  ).results as unknown as RoadmapNotionItem[];
+  const data = await getData<RoadmapSchema>(
+    siteConfig.notion.databases.roadmap,
+    {
+      withPages: true,
+      filter: {
+        property: "Type",
+        select: {
+          equals: "Theme",
+        },
+      },
+    }
+  );
 
-  for (const item of database) {
-    const { results } = await notion.blocks.children.list({
-      block_id: item.id,
-    });
-    const x = await n2m.blocksToMarkdown(results);
-    item.markdownContents = n2m.toMarkdownString(x).parent;
-  }
-
-  const roadmapThemes = database
+  const roadmapThemes = data
     .map((item) => {
       return {
         id: item.id,

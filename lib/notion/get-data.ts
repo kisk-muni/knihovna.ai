@@ -7,7 +7,7 @@ import {
 
 export default async function getData<ItemProperties>(
   database_id: string,
-  config: {
+  config?: {
     withPages?: boolean;
     sorts?: Array<
       | {
@@ -25,12 +25,12 @@ export default async function getData<ItemProperties>(
   const database = (
     await notion.databases.query({
       database_id,
-      sorts: config.sorts,
-      filter: config.filter,
+      sorts: config?.sorts,
+      filter: config?.filter,
     })
   ).results as unknown as QueryResult<ItemProperties>[];
 
-  if (config.withPages) {
+  if (config?.withPages) {
     for (const item of database) {
       const { results } = await notion.blocks.children.list({
         block_id: item.id,
