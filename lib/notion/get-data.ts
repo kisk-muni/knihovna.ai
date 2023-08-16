@@ -3,12 +3,14 @@ import n2m from "./notion2md";
 import {
   QueryResult,
   QueryResultWithMarkdownContents,
+  Relation,
 } from "@/lib/notion/schema";
 
 export default async function getData<ItemProperties>(
   database_id: string,
   config?: {
-    withPages?: boolean;
+    withRelations?: boolean | string[];
+    withBlocks?: boolean;
     sorts?: Array<
       | {
           property: string;
@@ -30,8 +32,30 @@ export default async function getData<ItemProperties>(
     })
   ).results as unknown as QueryResult<ItemProperties>[];
 
-  if (config?.withPages) {
-    for (const item of database) {
+  for (const item of database) {
+    if (
+      config?.withRelations === true ||
+      Array.isArray(config?.withRelations)
+    ) {
+      for (const name in item.properties) {
+        const property = item.properties[name] as Relation<{}>;
+        if (
+          property.type === "relation" &&
+          (config?.withRelations === true ||
+            config?.withRelations.includes(name))
+        ) {
+          const items = [];
+          for (const relation of property.relation) {
+            const response = await notion.pages.retrieve({
+              page_id: relation.id,
+            });
+            items.push(response);
+          }
+          property.items = items as any;
+        }
+      }
+    }
+    if (config?.withBlocks) {
       const { results } = await notion.blocks.children.list({
         block_id: item.id,
       });
@@ -41,11 +65,9 @@ export default async function getData<ItemProperties>(
         item as QueryResultWithMarkdownContents<ItemProperties>
       ).markdownContents = n2m.toMarkdownString(x).parent;
     }
-    const items = database as QueryResultWithMarkdownContents<ItemProperties>[];
-    return items;
   }
-
-  return database;
+  const items = database as QueryResultWithMarkdownContents<ItemProperties>[];
+  return items;
 }
 
 function transformChildDatabase(block: any) {

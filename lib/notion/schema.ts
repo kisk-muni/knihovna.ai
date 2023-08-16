@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export type Title = {
   title: {
     plain_text: string;
@@ -63,6 +65,12 @@ export type Status = {
   };
 };
 
+export type URL = {
+  id: string;
+  type: "url";
+  url: string;
+};
+
 export type Select<T> = {
   id: string;
   type: "select";
@@ -83,10 +91,11 @@ export type MultiSelect<T> = {
   }[];
 };
 
-export type Relation = {
+export type Relation<T> = {
   id: string;
   type: "relation";
   relation: { id: string }[];
+  items?: QueryResult<T>[];
   has_more: boolean;
 };
 
@@ -102,16 +111,39 @@ export type QueryResultWithMarkdownContents<Properties> =
     markdownContents?: string;
   };
 
+export type MaterialsSchema = {
+  Name: Title;
+  Description: RichText;
+  Labels: MultiSelect<string>;
+  Type: Select<
+    | "App"
+    | "Book"
+    | "Article"
+    | "Video"
+    | "Podcast"
+    | "Course"
+    | "Research Paper"
+    | "Institution"
+    | "Best Practices"
+  >;
+  Image: any;
+  URL: URL;
+  Chapter: Relation<HandbookSchema>;
+  "Is Project Output": Checkbox;
+  Featured: Checkbox;
+};
+
 export type HandbookSchema = {
   Order: Number;
   Title: Title;
   Description: RichText;
   Slug: RichText;
+  "Recommended Materials": Relation<MaterialsSchema>;
 };
 
 export type TodoSchema = {
   "Story Points": Select<"1" | "2" | "3" | "5" | "8">;
-  "Parent item": Relation;
+  "Parent item": Relation<TodoSchema>;
   Category: MultiSelect<
     | "Web"
     | "Výzkum"
@@ -122,12 +154,12 @@ export type TodoSchema = {
     | "/Terén"
     | "/Rešerše"
   >;
-  Sprint: Relation;
+  // Sprint: Relation;
   Dates: Dates;
-  "Sub-item": Relation;
-  Blocking: Relation;
+  "Sub-item": Relation<TodoSchema>;
+  // Blocking: Relation;
   Status: Status;
-  "Blocked by": Relation;
+  // "Blocked by": Relation;
   Private: Checkbox;
   Assignee: People;
   Name: Title;
@@ -138,7 +170,7 @@ export type RoadmapSchema = {
   Dates: Dates;
   Type: Select<"Theme" | "Epic">;
   Status: Status;
-  Theme: Relation;
-  Epic: Relation;
-  "To-dos": Relation;
+  Theme: Relation<RoadmapSchema>;
+  Epic: Relation<RoadmapSchema>;
+  "To-dos": Relation<TodoSchema>;
 };

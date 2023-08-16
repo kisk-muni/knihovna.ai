@@ -7,7 +7,7 @@ export default async function getRoadmapData() {
   const data = await getData<RoadmapSchema>(
     siteConfig.notion.databases.roadmap,
     {
-      withPages: true,
+      withBlocks: true,
       filter: {
         property: "Type",
         select: {

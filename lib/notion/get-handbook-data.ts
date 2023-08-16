@@ -6,7 +6,7 @@ export async function getHandbookPages() {
   const data = await getData<HandbookSchema>(
     siteConfig.notion.databases.handbook,
     {
-      withPages: false,
+      withBlocks: false,
       sorts: [
         {
           property: "Order",
@@ -23,7 +23,8 @@ export async function getHandbookPage(slug: string) {
   const data = await getData<HandbookSchema>(
     siteConfig.notion.databases.handbook,
     {
-      withPages: true,
+      withRelations: true,
+      withBlocks: true,
       filter: {
         property: "Slug",
         rich_text: {
