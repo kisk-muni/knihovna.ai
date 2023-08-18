@@ -1,23 +1,47 @@
 import BackgroundGradient from "@/components/background-gradient";
 import { Button } from "@/components/button";
 import Container from "@/components/container";
-import { getHandbookPages } from "@/lib/notion/get-handbook-data";
+import { getMaterialsPages } from "@/lib/notion/get-materials-data";
 import Link from "next/link";
 import { Pagination, SideNavigation } from "./navigation";
+import {
+  DocsSchema,
+  QueryResultWithMarkdownContents,
+} from "@/lib/notion/schema";
 
-export default async function HandbookLayout({
+type NavItem = {
+  name: string;
+  href: string;
+  items?: NavItem[];
+};
+
+function prepareNavitems(
+  items?: QueryResultWithMarkdownContents<DocsSchema>[],
+  parentHref?: string
+) {
+  if (!items) return undefined;
+  const navItems: NavItem[] = items.map((item) => {
+    const name = item.properties.Title.title[0].plain_text;
+    const slug = item.properties.Slug.rich_text[0]?.plain_text;
+    const href = parentHref + (slug ? "/" + slug : "");
+    return {
+      name,
+      href,
+      items: item.properties["Sub-pages"].items
+        ? prepareNavitems(item.properties["Sub-pages"].items, href)
+        : undefined,
+    };
+  });
+  return navItems;
+}
+
+export default async function MaterialsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const items = await getHandbookPages();
-  const navItems = items.map((item) => {
-    const name = item.properties.Title.title[0].plain_text;
-    return {
-      name,
-      href: "/prirucka" + item.properties.Slug.rich_text[0].plain_text,
-    };
-  });
+  const items = await getMaterialsPages();
+  const navItems = prepareNavitems(items, "/materialy");
   return (
     <div>
       <BackgroundGradient.Radial />
@@ -29,42 +53,6 @@ export default async function HandbookLayout({
             minHeight: "calc(100vh - 72px)",
           }}
         >
-          <Link href="/">
-            <Button
-              theme="primary"
-              size="base"
-              variant="ghost"
-              className="-ml-8"
-            >
-              ← Domů
-            </Button>
-          </Link>
-          <h1 className="uppercase mt-3 mb-6 text-lg text-text font-medium">
-            <Link href="/prirucka">
-              <svg
-                width="22"
-                height="auto"
-                viewBox="0 0 26 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="-mt-0.5 inline-block mr-2"
-              >
-                <path
-                  d="M12.9086 4.77807C10.9106 2.98585 8.32019 1.99631 5.6362 2.00001C4.3611 2.00001 3.13692 2.21818 2 2.62059V19.8925C3.16797 19.4804 4.39767 19.2706 5.6362 19.2719C8.43001 19.2719 10.979 20.3228 12.9086 22.05M12.9086 4.77807C14.9065 2.98575 17.497 1.99619 20.181 2.00001C21.4561 2.00001 22.6803 2.21818 23.8172 2.62059V19.8925C22.6492 19.4804 21.4195 19.2706 20.181 19.2719C17.497 19.2682 14.9065 20.2578 12.9086 22.05M12.9086 4.77807V22.05"
-                  stroke="#D68A67"
-                  style={{
-                    stroke: "color(display-p3 0.8392 0.5412 0.4039)",
-                    strokeOpacity: "1",
-                  }}
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              AI Příručka
-            </Link>
-          </h1>
-          <div className="h-px mb-6 w-full bg-[#C8C8C8]"></div>
           <SideNavigation items={navItems} />
           <Button theme="gray" size="small" className="cursor-not-allowed">
             Sdílet

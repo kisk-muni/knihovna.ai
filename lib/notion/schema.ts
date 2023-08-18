@@ -95,7 +95,7 @@ export type Relation<T> = {
   id: string;
   type: "relation";
   relation: { id: string }[];
-  items?: QueryResult<T>[];
+  items?: QueryResultWithMarkdownContents<T>[];
   has_more: boolean;
 };
 
@@ -128,17 +128,20 @@ export type MaterialsSchema = {
   >;
   Image: any;
   URL: URL;
-  Chapter: Relation<HandbookSchema>;
+  Chapter: Relation<DocsSchema>;
   "Is Project Output": Checkbox;
   Featured: Checkbox;
 };
 
-export type HandbookSchema = {
+export type DocsSchema = {
   Order: Number;
   Title: Title;
   Description: RichText;
   Slug: RichText;
+  State: Select<"Draft" | "Published">;
   "Recommended Materials": Relation<MaterialsSchema>;
+  "Sub-pages": Relation<DocsSchema>;
+  "Parent page": Relation<DocsSchema>;
 };
 
 export type TodoSchema = {

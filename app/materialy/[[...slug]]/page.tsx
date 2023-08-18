@@ -3,7 +3,7 @@ import Card from "@/components/card";
 import Headline from "@/components/headline";
 import { components } from "@/lib/mdx";
 import { createMetadata } from "@/lib/metadata";
-import { getHandbookPage } from "@/lib/notion/get-handbook-data";
+import { getMaterialsPage } from "@/lib/notion/get-materials-data";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,15 +14,15 @@ export async function generateMetadata({
 }: {
   params: { slug?: string[] };
 }) {
-  const page = await getHandbookPage(params.slug?.join("/") || "");
+  const page = await getMaterialsPage(params.slug?.join("/") || "");
   return createMetadata({
     title: page?.properties.Title.title[0]?.plain_text || "",
     description: page?.properties.Description.rich_text[0]?.plain_text || "",
   });
 }
 
-const HandbookPage = async ({ params }: { params: { slug?: string[] } }) => {
-  const page = await getHandbookPage(params.slug?.join("/") || "");
+const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
+  const page = await getMaterialsPage(params.slug?.join("/") || "");
   const materials = page?.properties["Recommended Materials"].items;
   return (
     <main>
@@ -39,7 +39,7 @@ const HandbookPage = async ({ params }: { params: { slug?: string[] } }) => {
       {Array.isArray(materials) && materials.length > 0 && (
         <Fragment>
           <Headline level="3" as="h2" className="mt-8">
-            Doporučené materiály
+            Doporučujeme
           </Headline>
           <div className="grid grid-cols-1 gap-4">
             {materials.map((resource, i) => {
@@ -73,4 +73,4 @@ const HandbookPage = async ({ params }: { params: { slug?: string[] } }) => {
   );
 };
 
-export default HandbookPage;
+export default MaterialPage;
