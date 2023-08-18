@@ -11,12 +11,18 @@ import { Fragment } from "react";
 
 export const revalidate = 3600;
 
+function getLookupSlug(slug?: string[]) {
+  const lookupSlug = slug && slug.length ? slug[slug.length - 1] : "materialy";
+  return lookupSlug;
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: { slug?: string[] };
 }) {
-  const page = await getMaterialsPage(params.slug?.join("/") || "");
+  const lookupSlug = getLookupSlug(params.slug);
+  const page = await getMaterialsPage(lookupSlug);
   return createMetadata({
     title: page?.properties.Title.title[0]?.plain_text || "",
     description: page?.properties.Description.rich_text[0]?.plain_text || "",
@@ -24,10 +30,7 @@ export async function generateMetadata({
 }
 
 const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
-  const lookupSlug =
-    params.slug && params.slug.length
-      ? params.slug[params.slug.length - 1]
-      : "";
+  const lookupSlug = getLookupSlug(params.slug);
   const page = await getMaterialsPage(lookupSlug);
   const materials = page?.properties["Recommended Materials"].items;
   return (

@@ -11,6 +11,31 @@ import { Suspense } from "react";
 
 export const revalidate = 3600;
 
+function getAllSlugs(pages: QueryResultWithMarkdownContents<DocsSchema>[]) {
+  const slugs: { slug: string[] }[] = [];
+  pages.forEach((page) => {
+    const slug = page.properties.Slug.rich_text[0]?.plain_text;
+    if (slug) {
+      slugs.push({ slug: [slug] });
+    }
+    const subpages = page.properties["Sub-pages"].items;
+    if (subpages) {
+      const subslugs = getAllSlugs(subpages);
+      subslugs.forEach((subslug) => {
+        slugs.push({ slug: [slug, ...subslug.slug] });
+      });
+    }
+  });
+  return slugs;
+}
+
+export async function generateStaticParams() {
+  const pages = await getMaterialsPages();
+  const slugs = getAllSlugs(pages);
+  console.log(slugs);
+  return slugs;
+}
+
 type NavItem = {
   name: string;
   href: string;
