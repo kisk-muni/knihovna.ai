@@ -56,7 +56,8 @@ function prepareNavitems(
   const navItems: NavItem[] = items.map((item) => {
     const name = item.properties.Title.title[0].plain_text;
     const slug = item.properties.Slug.rich_text[0]?.plain_text;
-    const href = parentHref + (slug ? "/" + slug : "");
+    const href =
+      parentHref + (slug !== "materialy" ? (slug ? "/" + slug : "") : "");
     return {
       name,
       href,
