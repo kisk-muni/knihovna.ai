@@ -1,17 +1,16 @@
 "use client";
-
 import { Button } from "@/components/button";
 import classNames from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 
-const rootHref = "/materialy";
+export const rootHref = "/materialy";
 
-type NavigationItem = {
+export type NavItem = {
   name: string;
   href: string;
-  items?: NavigationItem[];
+  items?: NavItem[];
 };
 
 const topNavIcons: { [key: string]: any } = {
@@ -82,14 +81,14 @@ const topNavIcons: { [key: string]: any } = {
   ),
 };
 
-export function SideNavigation({ items }: { items?: NavigationItem[] }) {
+export function SideNavigation({ items }: { items?: NavItem[] }) {
   const pathname = usePathname();
   const slug = pathname.split("/");
   const topLevelSlug = slug.slice(0, 3).join("/");
   const activeSection = items?.find((item) => item.href == topLevelSlug);
   if (pathname == rootHref)
     return (
-      <Fragment>
+      <div className="mt-14 mb-4">
         {activeSection && <SectionHeadline item={activeSection} />}
         <SubNavigation
           maxDepth={1}
@@ -100,7 +99,7 @@ export function SideNavigation({ items }: { items?: NavigationItem[] }) {
             </Fragment>
           )}
         />
-      </Fragment>
+      </div>
     );
   return (
     <Fragment>
@@ -115,8 +114,7 @@ export function SideNavigation({ items }: { items?: NavigationItem[] }) {
   );
 }
 
-export function SectionHeadline({ item }: { item: NavigationItem }) {
-  const pathname = usePathname();
+export function SectionHeadline({ item }: { item: NavItem }) {
   return (
     <Fragment>
       <h1 className={"uppercase mt-3 mb-6 text-lg font-medium text-text"}>
@@ -138,8 +136,8 @@ export function SubNavigation({
 }: {
   maxDepth: number;
   depth?: number;
-  items?: NavigationItem[];
-  renderItem?: (item: NavigationItem) => JSX.Element;
+  items?: NavItem[];
+  renderItem?: (item: NavItem) => JSX.Element;
 }) {
   const pathname = usePathname();
   return (
@@ -177,7 +175,7 @@ export function SubNavigation({
   );
 }
 
-export function Pagination({ items }: { items?: NavigationItem[] }) {
+export function Pagination({ items }: { items?: NavItem[] }) {
   let pathname = usePathname();
   const slug = pathname.split("/");
   const topLevelSlug = slug.slice(0, 3).join("/");

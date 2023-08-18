@@ -15,11 +15,14 @@ function Item({ href, title }: { href: string; title: string }) {
   );
 }
 
-export default function Footer() {
+export default function Footer({ fullWidth = false }: { fullWidth?: boolean }) {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="mt-auto z-40">
-      <Container className="py-12 grid md:flex md:items-center md:justify-between">
+      <Container
+        fullWidth={fullWidth}
+        className="py-12 grid md:flex md:items-center md:justify-between"
+      >
         <span className="text-base text-text font-medium text-center md:text-left">
           ©{" "}
           {siteConfig.sinceYear == currentYear

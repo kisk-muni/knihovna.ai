@@ -1,3 +1,4 @@
+import Image from "next/image";
 import notion from "./notion";
 import n2m from "./notion2md";
 import {
@@ -44,20 +45,6 @@ export default async function getData<ItemProperties>(
   return items;
 }
 
-function transformChildDatabase(block: any) {
-  const { type, id } = block as any;
-  // const child_database = block[type];
-  return "";
-  /*   const data = await getData(id, {
-    withPages: false,
-  });
-  console.log(data);
-  if (!child_database[type]?.url) return;
-  return `<figure>
-    <iframe src="${child_database[type]?.url}"></iframe>
-  </figure>`; */
-}
-
 async function getItem<ItemProperties>(
   item: QueryResult<ItemProperties>,
   depth: number,
@@ -97,7 +84,34 @@ async function getItem<ItemProperties>(
     });
     const x = await n2m.blocksToMarkdown(results);
     n2m.setCustomTransformer("child_database", transformChildDatabase);
+    n2m.setCustomTransformer("image", transformImage);
     (item as QueryResultWithMarkdownContents<ItemProperties>).markdownContents =
       n2m.toMarkdownString(x).parent;
   }
+}
+
+function transformChildDatabase(block: any) {
+  return "";
+}
+
+function transformImage(block: any) {
+  const { type, id } = block as any;
+  const image = block[type];
+  if ((image.type = "file"))
+    return `
+    <img src="${image?.file?.url}" />
+  `;
+  if ((image.type = "external"))
+    return `
+    <img src="${image?.external?.url}" />
+  `;
+  return "";
+  /*   const data = await getData(id, {
+    withPages: false,
+  });
+  console.log(data);
+  if (!child_database[type]?.url) return;
+  return `<figure>
+    <iframe src="${child_database[type]?.url}"></iframe>
+  </figure>`; */
 }

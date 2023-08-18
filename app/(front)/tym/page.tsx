@@ -3,7 +3,7 @@ import { Button } from "@/components/button";
 import Headline from "@/components/headline";
 import siteConfig from "@/site-config";
 import { createMetadata } from "@/lib/metadata";
-import TypeformButton from "../../components/typeform-button";
+import TypeformButton from "@/components/typeform-button";
 
 export const metadata = createMetadata({
   title: "Náš tým",

@@ -108,7 +108,13 @@ const siteConfig: SiteConfig = {
     { title: "O projektu", href: "/o-projektu" },
   ],
   privateNavigation: [
-    { title: "AI Příručka", href: "/prirucka", private: true },
+    { title: "Materiály", href: "/materialy", private: true },
+    {
+      title: "Příručka pro knihovníky",
+      href: "/materialy/prirucka",
+      private: true,
+    },
+    { title: "Nástroje", href: "/materialy/nastroje", private: true },
     { title: "Otevřený projekt", href: "/prehled", private: true },
     { title: "Blog", href: "/blog", private: true },
   ],

@@ -20,7 +20,7 @@ function Item({ href, title }: { href: string; title: string }) {
   );
 }
 
-export default function Navbar() {
+export default function Navbar({ fullWidth = false }: { fullWidth?: boolean }) {
   const pathname = usePathname();
   const [showMenu, setShowMenu] = useState(false);
   const [stick, setStick] = useState(false);
@@ -51,7 +51,10 @@ export default function Navbar() {
         }
       )}
     >
-      <Container className="flex flex-wrap items-center justify-between mx-auto">
+      <Container
+        fullWidth={fullWidth}
+        className="flex flex-wrap items-center justify-between mx-auto"
+      >
         <Link
           href="/"
           className={classNames(

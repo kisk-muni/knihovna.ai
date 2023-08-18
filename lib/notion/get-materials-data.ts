@@ -25,14 +25,13 @@ export async function getMaterialsPages() {
 
 export async function getMaterialsPage(slug: string) {
   const data = await getData<DocsSchema>(siteConfig.notion.databases.handbook, {
-    withRelations: ["Sub-pages", "Recommended Materials"],
-    recursive: true,
-    maxDepth: 3,
+    withRelations: ["Recommended Materials"],
+    maxDepth: 2,
     withBlocks: true,
     filter: {
       property: "Slug",
       rich_text: {
-        equals: "/" + slug,
+        equals: slug,
       },
     },
   });

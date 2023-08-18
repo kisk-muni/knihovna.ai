@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/button";
 import Link from "next/link";
 import { Metadata } from "next";
-import TypeformButton from "../components/typeform-button";
+import TypeformButton from "../../components/typeform-button";
 import Image from "next/image";
 import { getAllPostsMeta } from "@/lib/mdx";
 import PostCard from "@/components/post/post-card";

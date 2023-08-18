@@ -5,9 +5,11 @@ import { components } from "@/lib/mdx";
 import { createMetadata } from "@/lib/metadata";
 import { getMaterialsPage } from "@/lib/notion/get-materials-data";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
-import { Fragment, Suspense } from "react";
+import { Fragment } from "react";
+
+export const revalidate = 3600;
 
 export async function generateMetadata({
   params,
@@ -22,14 +24,18 @@ export async function generateMetadata({
 }
 
 const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
-  const page = await getMaterialsPage(params.slug?.join("/") || "");
+  const lookupSlug =
+    params.slug && params.slug.length
+      ? params.slug[params.slug.length - 1]
+      : "";
+  const page = await getMaterialsPage(lookupSlug);
   const materials = page?.properties["Recommended Materials"].items;
   return (
     <main>
       <Headline level="1" as="h1" className="mt-2">
         {page?.properties.Title.title[0].plain_text}
       </Headline>
-      <div className="prose-lg text-text prose-headings:font-bold prose-headings:leading-tight prose-ul:list-disc prose-ol:list-decimal">
+      <div className="prose-lg text-text prose-headings:font-bold prose-a:text-primary prose-headings:leading-tight prose-ul:list-disc prose-ol:list-decimal">
         <MDXRemote
           source={page?.markdownContents || ""}
           options={{ parseFrontmatter: true }}
@@ -50,7 +56,6 @@ const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
                     theme="white"
                     className="flex shadow hover:shadow-lg overflow-hidden"
                   >
-                    <div className="w-32 grow shrink-0 overflow-hidden bg-sheet"></div>
                     <div className="p-4">
                       <p className="text-lg leading-tight mb-2 text-text font-semibold">
                         {resource.properties.Name.title[0].plain_text}{" "}
@@ -62,6 +67,7 @@ const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
                         }
                       </p>
                     </div>
+                    <div className="w-48 grow shrink-0 overflow-hidden bg-sheet"></div>
                   </Card>
                 </Link>
               );
