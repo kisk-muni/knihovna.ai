@@ -1,6 +1,9 @@
-import chromium from "chrome-aws-lambda";
+import chromium from "@sparticuz/chromium-min";
 import playwright from "playwright-core";
 import { NextRequest, NextResponse } from "next/server";
+
+// https://gist.github.com/kettanaito/56861aff96e6debc575d522dd03e5725#step-1-install-dependencies
+//
 
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
