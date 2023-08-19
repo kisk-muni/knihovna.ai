@@ -10,6 +10,7 @@ export function createMetadata(metadata: {
     metadata.ogTitle ? metadata.ogTitle : metadata.title
   }`;
   return {
+    metadataBase: new URL("https://knihovna.ai"),
     title: `${metadata.title} | ${siteConfig.title}`,
     description: metadata.description,
     openGraph: {
