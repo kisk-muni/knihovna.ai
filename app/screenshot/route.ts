@@ -2,17 +2,15 @@ import chromium from "@sparticuz/chromium-min";
 import playwright from "playwright-core";
 import { NextRequest, NextResponse } from "next/server";
 
-// https://gist.github.com/kettanaito/56861aff96e6debc575d522dd03e5725#step-1-install-dependencies
-//
-
 export async function GET(req: NextRequest, res: NextResponse) {
   try {
     const { searchParams } = new URL(req.url);
     const hasURL = searchParams.has("url");
     const url = hasURL ? searchParams.get("url") : null;
     if (!url) throw new Error("URL to screenshot not set.");
+    // thanks https://github.com/stefanjudis/tiny-helpers/blob/primary/api/screenshot.js
     const browser = await playwright.chromium.launch({
-      args: chromium.args,
+      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
       executablePath: await chromium.executablePath(
         "https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar"
       ),
