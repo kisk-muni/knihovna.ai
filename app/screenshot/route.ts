@@ -13,6 +13,9 @@ export async function GET(req: NextRequest, res: NextResponse) {
     if (!url) throw new Error("URL to screenshot not set.");
     const browser = await playwright.chromium.launch({
       args: chromium.args,
+      executablePath: await chromium.executablePath(
+        "https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar"
+      ),
       headless: true,
     });
     const page = await browser.newPage({
