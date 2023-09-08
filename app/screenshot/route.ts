@@ -25,7 +25,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
       },
     });
     await page.goto(url, {
-      timeout: 15 * 1000,
+      waitUntil: "domcontentloaded",
     });
     const data = await page.screenshot({
       type: "png",
