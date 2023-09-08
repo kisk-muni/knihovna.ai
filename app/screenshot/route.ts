@@ -29,7 +29,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
       },
     });
     await page.goto(url, {
-      waitUntil: "domcontentloaded",
+      waitUntil: "load",
     });
     const data = await page.screenshot({
       type: "png",
