@@ -10,7 +10,13 @@ export async function GET(req: NextRequest, res: NextResponse) {
     if (!url) throw new Error("URL to screenshot not set.");
     // thanks https://github.com/stefanjudis/tiny-helpers/blob/primary/api/screenshot.js
     const browser = await playwright.chromium.launch({
-      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+      args: [
+        ...chromium.args,
+        "--hide-scrollbars",
+        "--disable-web-security",
+        "--proxy-server='direct://'",
+        "--proxy-bypass-list=*",
+      ],
       executablePath: await chromium.executablePath(
         "https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar"
       ),
