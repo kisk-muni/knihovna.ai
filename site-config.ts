@@ -96,9 +96,9 @@ const siteConfig: SiteConfig = {
     },
     {
       id: "knihovnaai",
-      name: "Tým knihovna.ai",
+      name: "Tým Knihovna.ai",
       description: "",
-      avatar: "/avatars/knihovnaai.png",
+      avatar: "/logo-clean-a.png",
       displayOnTeamPage: false,
     },
   ],
