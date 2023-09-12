@@ -8,6 +8,7 @@ import ResponsiveImage from "@/components/responsive-image";
 import PlaceholderComponent from "@/components/placeholder-component";
 import Container from "@/components/container";
 import Section from "@/components/section";
+import ContactCard from "@/components/contact-card";
 
 export type PostMeta = {
   slug: string;
@@ -77,4 +78,5 @@ export const components: any = {
   Container: Container,
   Section: Section,
   Placeholder: PlaceholderComponent,
+  ContactCard: ContactCard,
 };

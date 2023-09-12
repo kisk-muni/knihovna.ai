@@ -8,7 +8,7 @@ export default function DesignPage() {
     <main className="mt-24 mb-24">
       <Container className="mt-12 pb-40 flex flex-col items-center justify-center">
         <Headline as="h1" level="1">
-          Připravujeme
+          Nezveřejněné stránky
         </Headline>
         {siteConfig.privateNavigation.map((item) => (
           <Link
