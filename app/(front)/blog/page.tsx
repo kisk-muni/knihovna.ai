@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import Headline from "@/components/headline";
-import { getAllPostsMeta } from "@/lib/mdx";
 import type { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
-import PostCard from "@/components/post/post-card";
+import PostCard from "@/app/(front)/blog/[slug]/post-card";
+import { getBlogPages } from "@/lib/notion/get-blog-data";
 
 export const metadata: Metadata = createMetadata({
   title: "Blog",
@@ -12,7 +12,7 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default async function BlogPage() {
-  const posts = await getAllPostsMeta("blog");
+  const posts = await getBlogPages();
   return (
     <div className={"mt-20"}>
       <div className="mb-14">

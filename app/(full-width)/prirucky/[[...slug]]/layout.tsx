@@ -2,16 +2,16 @@ import BackgroundGradient from "@/components/background-gradient";
 // import { Button } from "@/components/button";
 import Container from "@/components/container";
 import {
-  DocsSchema,
+  GuidesSchema,
   QueryResultWithMarkdownContents,
 } from "@/lib/notion/schema";
-import { getMaterialsPages } from "@/lib/notion/get-materials-data";
+import { getGuidesPages } from "@/lib/notion/get-guides-data";
 import { Pagination, SideNavigation } from "./navigation";
 import { Suspense } from "react";
 
 export const revalidate = 3600;
 
-function getAllSlugs(pages: QueryResultWithMarkdownContents<DocsSchema>[]) {
+function getAllSlugs(pages: QueryResultWithMarkdownContents<GuidesSchema>[]) {
   const slugs: { slug: string[] }[] = [];
   pages.forEach((page) => {
     const slug = page.properties.Slug.rich_text[0]?.plain_text;
@@ -30,7 +30,7 @@ function getAllSlugs(pages: QueryResultWithMarkdownContents<DocsSchema>[]) {
 }
 
 export async function generateStaticParams() {
-  const pages = await getMaterialsPages();
+  const pages = await getGuidesPages();
   const slugs = getAllSlugs(pages);
   console.log(slugs);
   return slugs;
@@ -43,21 +43,21 @@ type NavItem = {
 };
 
 async function getPagesTree() {
-  const pages = await getMaterialsPages();
-  const navItems = prepareNavitems("/materialy", pages);
+  const pages = await getGuidesPages();
+  const navItems = prepareNavitems("/prirucky", pages);
   return navItems;
 }
 
 function prepareNavitems(
   parentHref: string,
-  items?: QueryResultWithMarkdownContents<DocsSchema>[]
+  items?: QueryResultWithMarkdownContents<GuidesSchema>[]
 ) {
   if (!items) return undefined;
   const navItems: NavItem[] = items.map((item) => {
     const name = item.properties.Title.title[0].plain_text;
     const slug = item.properties.Slug.rich_text[0]?.plain_text;
     const href =
-      parentHref + (slug !== "materialy" ? (slug ? "/" + slug : "") : "");
+      parentHref + (slug !== "prirucky" ? (slug ? "/" + slug : "") : "");
     return {
       name,
       href,
@@ -94,6 +94,7 @@ export default async function MaterialsLayout({
             <div className="grid grid-cols-12 relative gap-4">
               <div className="relative col-span-12 md:col-span-9 transition-all ease-out duration-100">
                 {children}
+                <div className="h-px mt-8 mb-6 w-full bg-text/20"></div>
                 <Pagination items={items} />
               </div>
             </div>

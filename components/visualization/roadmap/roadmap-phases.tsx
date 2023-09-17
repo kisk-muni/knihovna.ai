@@ -5,7 +5,7 @@ import Link from "next/link";
 import getRoadmapData from "./get-roadmap-data";
 import { Fragment } from "react";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { components } from "@/lib/mdx";
+import { defaultComponents } from "@/lib/mdx";
 
 export default async function RoadmapPhases() {
   const data = await getRoadmapData();
@@ -42,7 +42,7 @@ export default async function RoadmapPhases() {
             </div>
             <div className="pl-1 mt-3 [&>p]:mt-0 [&>p]:mb-2 [&>ul]:mt-0 [&>ul]:mb-3 [&>ul>li]:mt-0 [&>ul>li]:mb-0.5 [&>ul>li]:leading-normal">
               <MDXRemote
-                components={components}
+                components={defaultComponents}
                 source={item.markdownContents as unknown as {}}
               />
             </div>

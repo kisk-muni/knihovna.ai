@@ -38,6 +38,9 @@ export default function DesignPage() {
           Primary
         </Button>
         <Button theme="gray">Gray Solid</Button>
+        <Button theme="gray" variant="pagination">
+          Pagination
+        </Button>
         <Button theme="gray" variant="ghost">
           Gray Ghost
         </Button>

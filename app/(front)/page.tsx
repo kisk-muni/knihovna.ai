@@ -13,10 +13,11 @@ import Link from "next/link";
 import { Metadata } from "next";
 import TypeformButton from "../../components/typeform-button";
 import Image from "next/image";
-import { getAllPostsMeta } from "@/lib/mdx";
-import PostCard from "@/components/post/post-card";
+import PostCard from "@/app/(front)/blog/[slug]/post-card";
 import { createMetadata } from "@/lib/metadata";
 import BackgroundGradient from "@/components/background-gradient";
+import { get } from "http";
+import { getBlogPages } from "@/lib/notion/get-blog-data";
 
 export const metadata: Metadata = createMetadata({
   title:
@@ -27,7 +28,7 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default async function Home() {
-  const posts = await getAllPostsMeta("blog");
+  const posts = await getBlogPages();
   const recentPosts = posts.slice(0, 1);
   return (
     <main className="flex flex-col">

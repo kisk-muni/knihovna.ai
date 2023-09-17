@@ -1,6 +1,7 @@
+"use client";
 import Container from "@/components/container";
 import Tabs from "./tabs";
-import BackgroundGradient from "@/components/background-gradient";
+import Navbar from "@/components/navbar";
 
 export default async function OpenProjectLayout({
   children,
@@ -8,8 +9,8 @@ export default async function OpenProjectLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="grow bg-[#fafafa]">
-      <Tabs />
+    <div className="grow pt-[100px] bg-[#fafafa]">
+      <Navbar fullWidth subNav={() => <Tabs />} />
       <Container>{children}</Container>
     </div>
   );

@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import Card from "@/components/card";
 import Headline from "@/components/headline";
-import { components } from "@/lib/mdx";
+import { defaultComponents } from "@/lib/mdx";
 import { createMetadata } from "@/lib/metadata";
-import { getMaterialsPage } from "@/lib/notion/get-materials-data";
+import { getGuidesPage } from "@/lib/notion/get-guides-data";
+import { getYoutubeId } from "@/lib/youtube-id";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import Image from "next/image";
 // import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
@@ -12,7 +14,7 @@ import { Fragment } from "react";
 export const revalidate = 3600;
 
 function getLookupSlug(slug?: string[]) {
-  const lookupSlug = slug && slug.length ? slug[slug.length - 1] : "materialy";
+  const lookupSlug = slug && slug.length ? slug[slug.length - 1] : "prirucky";
   return lookupSlug;
 }
 
@@ -22,7 +24,7 @@ export async function generateMetadata({
   params: { slug?: string[] };
 }) {
   const lookupSlug = getLookupSlug(params.slug);
-  const page = await getMaterialsPage(lookupSlug);
+  const page = await getGuidesPage(lookupSlug);
   return createMetadata({
     title: page?.properties.Title.title[0]?.plain_text || "",
     description: page?.properties.Description.rich_text[0]?.plain_text || "",
@@ -31,7 +33,7 @@ export async function generateMetadata({
 
 const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
   const lookupSlug = getLookupSlug(params.slug);
-  const page = await getMaterialsPage(lookupSlug);
+  const page = await getGuidesPage(lookupSlug);
   const materials = page?.properties["Recommended Materials"].items;
   return (
     <main>
@@ -42,7 +44,7 @@ const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
         <MDXRemote
           source={page?.markdownContents || ""}
           options={{ parseFrontmatter: true }}
-          components={components}
+          components={defaultComponents}
         />
       </div>
       {Array.isArray(materials) && materials.length > 0 && (
@@ -52,12 +54,29 @@ const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
           </Headline>
           <div className="grid grid-cols-1 gap-4">
             {materials.map((resource, i) => {
+              const url = resource.properties.URL.url || "#";
+              let image = "";
+              if (resource.properties.Type.select.name === "Video") {
+                image = `https://img.youtube.com/vi/${getYoutubeId(
+                  url || ""
+                )}/maxresdefault.jpg`;
+              } else if (resource.properties.Image.files.length > 0) {
+                const file = resource.properties.Image.files[0];
+                // typescript complains when simplified
+                if (file.type === "external") {
+                  image = file.external.url;
+                } else {
+                  image = file.file.url;
+                }
+              } else {
+                image = "https://knihovna.ai/screenshot?url=" + url;
+              }
               return (
-                <Link href={resource.properties.URL.url || "#"} key={i}>
+                <Link href={url} key={i}>
                   <Card
                     size="base"
                     theme="white"
-                    className="flex shadow hover:shadow-lg overflow-hidden"
+                    className="flex shadow-sm hover:shadow overflow-hidden border border-text/10 hover:border-text/20"
                   >
                     <div className="p-4">
                       <p className="text-lg leading-tight mb-2 text-text font-semibold">
@@ -70,7 +89,18 @@ const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
                         }
                       </p>
                     </div>
-                    <div className="w-48 grow shrink-0 overflow-hidden bg-sheet"></div>
+                    <div className="w-52 relative grow shrink-0 overflow-hidden bg-sheet border-l border-text/5">
+                      <Image
+                        src={image}
+                        alt={
+                          resource.properties.Description.rich_text[0]
+                            .plain_text
+                        }
+                        layout="fill"
+                        objectFit="cover"
+                        objectPosition="left top"
+                      />
+                    </div>
                   </Card>
                 </Link>
               );

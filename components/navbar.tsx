@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import classNames from "classnames";
 import { usePathname } from "next/navigation";
-import { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Container from "./container";
 
 function Item({ href, title }: { href: string; title: string }) {
@@ -12,7 +12,7 @@ function Item({ href, title }: { href: string; title: string }) {
     <li>
       <Link
         href={href}
-        className="block py-2 pl-3 pr-4 text-base text-text font-medium hover:bg-sheet md:hover:bg-transparent md:hover:text-primary md:p-1 transition duration-150 ease-out"
+        className="block py-2 pl-3 pr-4 text-base text-text hover:bg-sheet md:hover:bg-transparent md:hover:text-primary md:p-1 transition duration-150 ease-out"
       >
         {title}
       </Link>
@@ -20,7 +20,13 @@ function Item({ href, title }: { href: string; title: string }) {
   );
 }
 
-export default function Navbar({ fullWidth = false }: { fullWidth?: boolean }) {
+export default function Navbar({
+  fullWidth = false,
+  subNav,
+}: {
+  fullWidth?: boolean;
+  subNav?: () => JSX.Element;
+}) {
   const pathname = usePathname();
   const [showMenu, setShowMenu] = useState(false);
   const [stick, setStick] = useState(false);
@@ -43,79 +49,81 @@ export default function Navbar({ fullWidth = false }: { fullWidth?: boolean }) {
   return (
     <nav
       className={classNames(
-        "fixed h-[72px] w-full flex items-center z-40 top-0 left-0 transition-[height,padding] ease-out delay-50",
+        "fixed w-full flex items-center z-40 top-0 left-0 transition-[height,padding] ease-out delay-50",
         {
           "bg-transparent": pathname === "/" && !stick,
           "border-b border-sheet/70 bg-white drop-shadow-sm":
             stick && pathname != "/roadmap",
+          "h-[72px]": !subNav,
+          "pt-4 bg-white border-b border-sheet/70 drop-shadow-sm": !!subNav,
         }
       )}
     >
-      <Container
-        fullWidth={fullWidth}
-        className="flex flex-wrap items-center justify-between mx-auto"
-      >
-        <Link
-          href="/"
-          className={classNames(
-            "self-center whitespace-nowrap text-text flex font-bold transition ease-out delay-150"
-          )}
-        >
-          <Image
-            src="/logo-clean-a.png"
-            width="24"
-            height="24"
-            alt="Logo knihovna.ai"
-            className="mr-2 shadow-sm rounded-[8px] ovefrlow-hidden"
-          />
-          {siteConfig.title}
-        </Link>
-        <div className="flex lg:hidden md:order-2">
-          <button
-            data-collapse-toggle="navbar-sticky"
-            type="button"
-            onClick={() => setShowMenu(!showMenu)}
+      <Container fullWidth={fullWidth} className="mx-auto">
+        <div className="flex flex-wrap items-center justify-between">
+          <Link
+            href="/"
             className={classNames(
-              "inline-flex items-center -mr-1.5 p-2 text-sm text-text rounded-lg focus:outline-none focus:ring-2",
-              {
-                "hover:bg-primary/20 focus:ring-primary/30": !stick,
-                "hover:bg-sheet focus:ring-sheet": stick,
-              }
+              "self-center whitespace-nowrap text-text flex font-bold transition ease-out delay-150"
             )}
-            aria-controls="navbar-sticky"
-            aria-expanded="false"
           >
-            <span className="sr-only">Otevřít navigaci</span>
-            <svg
-              className="w-6 h-6"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
+            <Image
+              src="/logo-clean-a.png"
+              width="24"
+              height="24"
+              alt="Logo knihovna.ai"
+              className="mr-2 shadow-sm rounded-[8px] ovefrlow-hidden"
+            />
+            {siteConfig.title}
+          </Link>
+          <div className="flex lg:hidden md:order-2">
+            <button
+              data-collapse-toggle="navbar-sticky"
+              type="button"
+              onClick={() => setShowMenu(!showMenu)}
+              className={classNames(
+                "inline-flex items-center -mr-1.5 p-2 text-sm text-text rounded-lg focus:outline-none focus:ring-2",
+                {
+                  "hover:bg-primary/20 focus:ring-primary/30": !stick,
+                  "hover:bg-sheet focus:ring-sheet": stick,
+                }
+              )}
+              aria-controls="navbar-sticky"
+              aria-expanded="false"
             >
-              <path
-                fillRule="evenodd"
-                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-          </button>
-        </div>
+              <span className="sr-only">Otevřít navigaci</span>
+              <svg
+                className="w-6 h-6"
+                aria-hidden="true"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+            </button>
+          </div>
 
-        <div
-          className={classNames(
-            "items-center hidden w-full lg:flex md:w-auto md:order-1"
-          )}
-          id="navbar-sticky"
-        >
-          <ul className="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-6 md:mt-0 md:border-0 md:bg-transparent">
-            {siteConfig.navigation
-              .filter((item) => item.href != pathname)
-              .map((item, i) => (
-                <Item key={i} href={item.href} title={item.title} />
-              ))}
-          </ul>
+          <div
+            className={classNames(
+              "items-center hidden w-full lg:flex md:w-auto md:order-1"
+            )}
+            id="navbar-sticky"
+          >
+            <ul className="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-6 md:mt-0 md:border-0 md:bg-transparent">
+              {siteConfig.navigation
+                .filter((item) => item.href != pathname)
+                .map((item, i) => (
+                  <Item key={i} href={item.href} title={item.title} />
+                ))}
+            </ul>
+          </div>
         </div>
+        {subNav && subNav()}
 
         {showMenu && (
           <Fragment>

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Card from "@/components/card";
 import Headline from "@/components/headline";
-import { PostMeta } from "@/lib/mdx";
+import { PostMeta } from "@/lib/notion/get-blog-data";
 import FormatedDate from "@/components/formated-date";
 import classNames from "classnames";
 

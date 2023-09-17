@@ -2,10 +2,10 @@ import { cva, VariantProps } from "class-variance-authority";
 
 const button = cva(
   [
-    "button",
-    "focus:ring-4",
+    "flex",
+    "focus:ring-2",
     "focus:outline-none",
-    "focus:ring-primary-300",
+    "focus:ring-primary/50",
     "font-bold",
     "rounded-xl",
     "text-center",
@@ -28,11 +28,26 @@ const button = cva(
       variant: {
         solid: "",
         ghost: ["bg-transparent", "hover:bg-transparent"],
+        pagination: [
+          "flex-col",
+          "bg-transparent",
+          "hover:bg-transparent",
+          "border border-text/20",
+          "hover:border-text/50",
+          "ring-0",
+          "focus:ring-0",
+        ],
       },
       size: {
-        small: ["text-base", "font-medium", "px-4", "py-2"],
-        base: ["text-base", "font-semibold", "px-8", "py-4"],
-        large: ["text-lg", "font-bold", "px-12", "py-4", "py-7"],
+        none: [],
+        small: ["text-base", "font-medium"],
+        base: ["text-base", "font-semibold"],
+        large: ["text-lg", "font-bold"],
+      },
+      align: {
+        left: "justify-start",
+        center: "justify-center",
+        right: "justify-end",
       },
     },
     compoundVariants: [
@@ -61,11 +76,32 @@ const button = cva(
         variant: "ghost",
         className: ["text-text", "hover:text-text/80"],
       },
+      {
+        variant: ["solid", "ghost"],
+        size: ["small"],
+        className: ["px-4", "py-2"],
+      },
+      {
+        variant: ["solid", "ghost"],
+        size: ["base"],
+        className: ["px-8", "py-4"],
+      },
+      {
+        variant: ["solid", "ghost"],
+        size: ["large"],
+        className: ["px-12", "py-7"],
+      },
+      {
+        variant: "pagination",
+        size: "base",
+        className: ["text-text", "gap-1", "px-6", "py-4"],
+      },
     ],
     defaultVariants: {
       theme: "primary",
       variant: "solid",
       size: "base",
+      align: "center",
     },
   }
 );
@@ -79,7 +115,11 @@ export const Button: React.FC<ButtonProps> = ({
   theme,
   variant,
   size,
+  align,
   ...props
 }) => (
-  <button className={button({ theme, size, variant, className })} {...props} />
+  <button
+    className={button({ theme, size, align, variant, className })}
+    {...props}
+  />
 );

@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { Button } from "./button";
 import Card from "./card";
 import TypeformButton from "./typeform-button";
+import siteConfig from "@/site-config";
 
 export default function ContactCard({
   title = "Chcete se s námi spojit?",
@@ -27,7 +28,7 @@ export default function ContactCard({
           Těšíme se na nové možnosti spolupráce. Neváhej{formal && "te"} se nám
           ozvat na adrese{" "}
           <span className="bg-primarydarker/40 px-1 py-0.5 rounded-md">
-            kiskxai@gmail.com
+            {siteConfig.email}
           </span>
           {showLeaveContact &&
             ` nebo nám zanechej${formal ? "te" : ""} svůj kontakt`}

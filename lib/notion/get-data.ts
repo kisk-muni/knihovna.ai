@@ -2,6 +2,8 @@ import Image from "next/image";
 import notion from "./notion";
 import n2m from "./notion2md";
 import {
+  File,
+  People,
   QueryResult,
   QueryResultWithMarkdownContents,
   Relation,
@@ -50,35 +52,45 @@ async function getItem<ItemProperties>(
   depth: number,
   config?: Config
 ) {
-  if (config?.maxDepth && depth > config?.maxDepth) {
+  const defaultConfig: Config = {
+    withRelations: false,
+    recursive: false,
+    maxDepth: 1,
+    withBlocks: false,
+  };
+  const conf = { ...defaultConfig, ...config };
+  if (conf?.maxDepth && depth > conf?.maxDepth) {
     return;
   }
   for (const name in item.properties) {
     const property = item.properties[name] as Relation<{}>;
     if (
       property.type === "relation" &&
-      (config?.withRelations ||
-        (Array.isArray(config?.withRelations) &&
-          config?.withRelations.includes(name)))
+      (conf?.withRelations ||
+        (Array.isArray(conf?.withRelations) &&
+          conf?.withRelations.includes(name)))
     ) {
+      // too long, might be separated into a function getRelationItems or something
       const items = [];
       for (const relation of property.relation) {
         const response = await notion.pages.retrieve({
           page_id: relation.id,
         });
-        if (config.recursive) {
+        if (conf.recursive) {
           await getItem(
             response as unknown as QueryResult<ItemProperties>,
             depth + 1,
-            config
+            conf
           );
         }
         items.push(response);
       }
       property.items = items as any;
     }
+    // if ((property as unknown as People).type === "people") {
+    // }
   }
-  if (config?.withBlocks) {
+  if (conf?.withBlocks) {
     const { results } = await notion.blocks.children.list({
       block_id: item.id,
     });
@@ -95,7 +107,7 @@ function transformChildDatabase(block: any) {
 }
 
 function transformImage(block: any) {
-  const { type, id } = block as any;
+  const { type } = block as any;
   const image = block[type];
   if ((image.type = "file"))
     return `

@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  fastRefresh: true,
   experimental: {
     serverComponentsExternalPackages: [
       "@sparticuz/chromium-min",
@@ -11,7 +12,19 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "img.youtube.com",
+      },
+      {
+        protocol: "https",
+        hostname: "knihovna.ai",
+      },
+      {
+        protocol: "https",
         hostname: "s3.us-west-2.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "prod-files-secure.s3.us-west-2.amazonaws.com",
       },
     ],
   },

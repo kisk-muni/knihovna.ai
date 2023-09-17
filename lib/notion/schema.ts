@@ -71,6 +71,27 @@ export type URL = {
   url: string;
 };
 
+export type File =
+  | {
+      type: "external";
+      external: {
+        url: string;
+      };
+    }
+  | {
+      type: "file";
+      file: {
+        url: string;
+        expiry_time: string;
+      };
+    };
+
+export type Files = {
+  id: string;
+  type: "files";
+  files: File[];
+};
+
 export type Select<T> = {
   id: string;
   type: "select";
@@ -111,7 +132,9 @@ export type QueryResultWithMarkdownContents<Properties> =
     markdownContents?: string;
   };
 
-export type MaterialsSchema = {
+export type State = Select<"Draft" | "Published" | "Archived">;
+
+export type RecommendedResourcesSchema = {
   Name: Title;
   Description: RichText;
   Labels: MultiSelect<string>;
@@ -126,23 +149,47 @@ export type MaterialsSchema = {
     | "Institution"
     | "Best Practices"
   >;
-  Image: any;
+  Image: Files;
   URL: URL;
-  Chapter: Relation<DocsSchema>;
+  Chapter: Relation<GuidesSchema>;
   "Is Project Output": Checkbox;
   Featured: Checkbox;
 };
 
-export type DocsSchema = {
+export type GuidesSchema = {
   Order: Number;
   Title: Title;
   Description: RichText;
   Slug: RichText;
-  State: Select<"Draft" | "Published">;
-  "Recommended Materials": Relation<MaterialsSchema>;
-  "Sub-pages": Relation<DocsSchema>;
-  "Parent page": Relation<DocsSchema>;
+  State: State;
+  "Recommended Materials": Relation<RecommendedResourcesSchema>;
+  "Sub-pages": Relation<GuidesSchema>;
+  "Parent page": Relation<GuidesSchema>;
 };
+
+export type MaterialsSchema = {
+  Title: Title;
+  Description: RichText;
+  Slug: RichText;
+  State: State;
+  "Material type": Select<"Research" | "Workshop">;
+  "Published at": Dates;
+  Authors: People;
+  "Recommended Materials": Relation<RecommendedResourcesSchema>;
+  "Sub-pages": Relation<GuidesSchema>;
+  "Parent page": Relation<GuidesSchema>;
+};
+
+export type PageSchema = {
+  Title: Title;
+  Description: RichText;
+  Slug: RichText;
+  State: State;
+  "Published at": Dates;
+  Authors: People;
+};
+
+export type BlogSchema = PageSchema;
 
 export type TodoSchema = {
   "Story Points": Select<"1" | "2" | "3" | "5" | "8">;

@@ -1,26 +1,37 @@
 /* eslint-disable @next/next/no-img-element */
 import Headline from "@/components/headline";
 import FormatedDate from "@/components/formated-date";
-import { getPageContent, components } from "@/lib/mdx";
+import { defaultComponents } from "@/lib/mdx";
 import Link from "next/link";
 import { Fragment, Suspense } from "react";
 import { createMetadata } from "@/lib/metadata";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import { getBlogPage, getBlogPages } from "@/lib/notion/get-blog-data";
 
 export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
 }) {
-  const { meta } = await getPageContent(params.slug, "blog");
+  const data = await getBlogPage(params.slug);
   return createMetadata({
-    title: meta.title,
-    description: meta.summary,
+    title: data ? data.meta.title : "Příspěvek neexistuje",
+    description: data?.meta.summary || "",
   });
 }
 
+export async function generateStaticParams() {
+  const pages = await getBlogPages();
+  const slugs = pages.map((page) => ({ params: { slug: page.slug } }));
+  return slugs;
+}
+
 const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
-  const { content, meta } = await getPageContent(params.slug, "blog");
+  const data = await getBlogPage(params.slug);
+  if (data == null) {
+    return <p>No post on this address :(</p>;
+  }
+  const { content, meta } = data;
 
   return (
     <Fragment>
@@ -34,11 +45,13 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
       </nav>
       <article>
         <header className="mt-16 mb-6">
-          <FormatedDate
-            date={meta.publishedAt}
-            relative
-            className="block text-lg text-text/80 mb-4"
-          />
+          {meta.publishedAt && (
+            <FormatedDate
+              date={meta.publishedAt}
+              relative
+              className="block text-lg text-text/80 mb-4"
+            />
+          )}
           <Headline as="h1" level="ultra">
             {meta.title}
           </Headline>
@@ -70,7 +83,7 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
             <MDXRemote
               source={content}
               options={{ parseFrontmatter: true }}
-              components={components}
+              components={defaultComponents}
             />
           </Suspense>
         </div>
