@@ -15,7 +15,7 @@ export default async function RoadmapPage() {
   return (
     <main className="mt-12 mb-12 overflow-hidden">
       <Headline as="h1" level="ultra">
-        Úkoly
+        Plán
       </Headline>
       <section className="text-text">
         {publicTodos?.map((item, i) => {

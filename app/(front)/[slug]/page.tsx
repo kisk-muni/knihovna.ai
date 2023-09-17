@@ -19,7 +19,7 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const pages = await getPages();
-  const slugs = pages.map((page) => ({ params: { slug: page.slug } }));
+  const slugs = pages.map((page) => ({ slug: page.slug }));
   return slugs;
 }
 
