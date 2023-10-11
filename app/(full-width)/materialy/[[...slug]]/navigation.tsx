@@ -1,18 +1,25 @@
 "use client";
 import { Button } from "@/components/button";
+import Card from "@/components/card";
+import FormatedDate from "@/components/formated-date";
+import Headline from "@/components/headline";
 import classNames from "classnames";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { type } from "os";
 import { Fragment } from "react";
 
 export const revalidate = 3600;
 
 export const rootHref = "/materialy";
 
-export type NavItem = {
+export type MaterialNavItem = {
+  publishedAt?: Date;
+  description?: string;
+  type?: string;
   name: string;
   href: string;
-  items?: NavItem[];
+  items?: MaterialNavItem[];
 };
 
 const topNavIcons: { [key: string]: any } = {
@@ -56,7 +63,7 @@ const topNavIcons: { [key: string]: any } = {
       />
     </svg>
   ),
-  "/materialy/nastroje": (
+  Workshop: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -81,7 +88,7 @@ const topNavIcons: { [key: string]: any } = {
       />
     </svg>
   ),
-  "/materialy/vyzkum": (
+  Research: (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -102,26 +109,48 @@ const topNavIcons: { [key: string]: any } = {
   ),
 };
 
-export function Navigation({ items }: { items?: NavItem[] }) {
+const typeName = {
+  Workshop: "Workshopy",
+  Research: "Výzkum",
+  Other: "Ostatní",
+};
+
+export function Navigation({ items }: { items?: MaterialNavItem[] }) {
   const pathname = usePathname();
   const slug = pathname.split("/");
-  const topLevelSlug = slug.slice(0, 3).join("/");
-  const activeSection = items?.find((item) => item.href == topLevelSlug);
-  if (pathname == rootHref)
-    return (
-      <div className="mt-14 mb-4">
-        <SubNavigation
-          maxDepth={2}
-          items={items?.filter((item) => item.href != rootHref)}
-          renderItem={(item) => (
-            <Fragment>
-              {topNavIcons[item.href] && topNavIcons[item.href]} {item.name}
-            </Fragment>
-          )}
-        />
-      </div>
-    );
+  // const topLevelSlug = slug.slice(0, 3).join("/");
+  // render cards and list items in them, each card represents a group by item.type
+
+  //const activeSection = items?.find((item) => item.href == topLevelSlug);
   return (
+    <div className="mt-6 mb-4 grid gap-4 grid-cols-1">
+      {items?.map((item, i) => {
+        return (
+          <Link key={i} href={item.href}>
+            <Card
+              size="md"
+              className="bg-white hover:bg-sheet flex flex-col justify-start shadow-sm"
+            >
+              <div className="uppercase mb-6 text-lg font-medium text-text">
+                {topNavIcons[item.type as string] &&
+                  topNavIcons[item.type as string]}{" "}
+                {typeName[item.type as keyof typeof typeName]}
+              </div>
+              <Headline as="h3" level="2" className="mb-0 font-bold">
+                {item?.name && item.name}
+              </Headline>
+              {item?.publishedAt && (
+                <div className="text-lg text-text/70">
+                  <FormatedDate date={item.publishedAt} relative />
+                </div>
+              )}
+            </Card>
+          </Link>
+        );
+      })}
+    </div>
+  );
+  /* return (
     <Fragment>
       <Link href={rootHref}>
         <Button theme="primary" size="base" variant="ghost" className="-ml-8">
@@ -131,10 +160,10 @@ export function Navigation({ items }: { items?: NavItem[] }) {
       {activeSection && <SectionHeadline item={activeSection} />}
       <SubNavigation maxDepth={2} items={activeSection?.items} />
     </Fragment>
-  );
+  ); */
 }
 
-export function SectionHeadline({ item }: { item: NavItem }) {
+export function SectionHeadline({ item }: { item: MaterialNavItem }) {
   return (
     <Fragment>
       <h1 className={"uppercase mt-3 mb-6 text-lg font-medium text-text"}>
@@ -156,8 +185,8 @@ export function SubNavigation({
 }: {
   maxDepth: number;
   depth?: number;
-  items?: NavItem[];
-  renderItem?: (item: NavItem) => JSX.Element;
+  items?: MaterialNavItem[];
+  renderItem?: (item: MaterialNavItem) => JSX.Element;
 }) {
   const pathname = usePathname();
   return (
@@ -195,7 +224,7 @@ export function SubNavigation({
   );
 }
 
-export function Pagination({ items }: { items?: NavItem[] }) {
+export function Pagination({ items }: { items?: MaterialNavItem[] }) {
   let pathname = usePathname();
   const slug = pathname.split("/");
   const topLevelSlug = slug.slice(0, 3).join("/");

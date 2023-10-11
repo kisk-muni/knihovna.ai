@@ -168,6 +168,7 @@ export type GuidesSchema = {
 };
 
 export type MaterialsSchema = {
+  Order: Number;
   Title: Title;
   Description: RichText;
   Slug: RichText;

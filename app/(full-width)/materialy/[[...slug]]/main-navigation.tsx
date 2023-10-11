@@ -1,26 +1,30 @@
 import { getMaterialsPages } from "@/lib/notion/get-materials-data";
-import { NavItem, Navigation } from "./navigation";
+import { MaterialNavItem, Navigation } from "./navigation";
 import {
-  GuidesSchema,
+  MaterialsSchema,
   QueryResultWithMarkdownContents,
 } from "@/lib/notion/schema";
 
 function prepareNavitems(
   parentHref: string,
-  items?: QueryResultWithMarkdownContents<GuidesSchema>[]
+  items?: QueryResultWithMarkdownContents<MaterialsSchema>[]
 ) {
   if (!items) return undefined;
-  const navItems: NavItem[] = items.map((item) => {
+  const navItems: MaterialNavItem[] = items.map((item) => {
     const name = item.properties.Title.title[0].plain_text;
     const slug = item.properties.Slug.rich_text[0]?.plain_text;
+    const type = item.properties["Material type"].select.name;
+    const publishedAt = item.properties["Published at"].date.start;
+    const description =
+      item.properties["Description"]?.rich_text[0]?.plain_text;
     const href =
       parentHref + (slug !== "materialy" ? (slug ? "/" + slug : "") : "");
     return {
+      type,
       name,
+      description,
+      publishedAt: publishedAt ? new Date(publishedAt) : undefined,
       href,
-      items: item.properties["Sub-pages"].items
-        ? prepareNavitems(href, item.properties["Sub-pages"].items)
-        : undefined,
     };
   });
   return navItems;

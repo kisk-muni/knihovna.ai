@@ -32,10 +32,20 @@ export async function generateMetadata({
 
 const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
   const lookupSlug = getLookupSlug(params.slug);
+  if (lookupSlug === "materialy") {
+    return (
+      <main>
+        <Headline level="ultra" as="h1" className="mt-2">
+          Materiály
+        </Headline>
+        <MainNavigation />
+      </main>
+    );
+  }
   const page = await getMaterialsPage(lookupSlug);
   return (
     <main>
-      <Headline level="1" as="h1" className="mt-2">
+      <Headline level="ultra" as="h1" className="mt-2">
         {page?.properties.Title.title[0].plain_text}
       </Headline>
       <div className="prose-lg text-text prose-headings:font-bold prose-a:text-primary prose-headings:leading-tight prose-ul:list-disc prose-ol:list-decimal">
@@ -44,7 +54,6 @@ const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
           options={{ parseFrontmatter: true }}
           components={components}
         />
-        {lookupSlug === "materialy" && <MainNavigation />}
       </div>
     </main>
   );

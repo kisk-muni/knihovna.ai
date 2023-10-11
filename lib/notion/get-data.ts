@@ -24,7 +24,7 @@ type Config = {
         direction: "ascending" | "descending";
       }
   >;
-  filter?: any;
+  filter?: any | any[];
 };
 
 export default async function getData<ItemProperties>(

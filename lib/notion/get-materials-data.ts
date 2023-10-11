@@ -1,13 +1,12 @@
 import siteConfig from "@/site-config";
 import getData from "./get-data";
-import { GuidesSchema } from "./schema";
+import { MaterialsSchema } from "./schema";
 
 export async function getMaterialsPages() {
-  const data = await getData<GuidesSchema>(
+  const data = await getData<MaterialsSchema>(
     siteConfig.notion.databases.materials,
     {
       withBlocks: false,
-      withRelations: ["Sub-pages"],
       sorts: [
         {
           property: "Order",
@@ -15,10 +14,20 @@ export async function getMaterialsPages() {
         },
       ],
       filter: {
-        property: "Parent page",
-        relation: {
-          is_empty: true,
-        },
+        and: [
+          {
+            property: "State",
+            select: {
+              equals: "Published",
+            },
+          },
+          {
+            property: "Parent page",
+            relation: {
+              is_empty: true,
+            },
+          },
+        ],
       },
     }
   );
@@ -26,7 +35,7 @@ export async function getMaterialsPages() {
 }
 
 export async function getMaterialsPage(slug: string) {
-  const data = await getData<GuidesSchema>(
+  const data = await getData<MaterialsSchema>(
     siteConfig.notion.databases.materials,
     {
       withRelations: false,

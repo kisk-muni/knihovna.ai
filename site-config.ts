@@ -126,7 +126,7 @@ const siteConfig: SiteConfig = {
   navigation: [
     { title: "Domů", href: "/" },
     // { title: "Průvodce AI", href: "/prirucky/ai" },
-    // { title: "Materiály", href: "/materialy" },
+    { title: "Materiály", href: "/materialy" },
     // { title: "Otevřený projekt", href: "/open" },
     { title: "Blog", href: "/blog" },
     { title: "Náš tým", href: "/tym" },
@@ -138,7 +138,6 @@ const siteConfig: SiteConfig = {
       href: "/prirucky",
       private: true,
     },
-    { title: "Materiály", href: "/materialy", private: true },
     { title: "Otevřený projekt", href: "/open", private: true },
     { title: "Design", href: "/design", private: true },
   ],
