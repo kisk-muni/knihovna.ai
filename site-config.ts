@@ -99,20 +99,20 @@ const siteConfig: SiteConfig = {
       notionId: "25268f38-469b-4267-b734-1c694065547c",
     },
     {
+      id: "sevcikova",
+      avatar: "/avatars/jana-sevcikova.jpg",
+      name: "Jana Ševčíková",
+      description: "Výzkum",
+      displayOnTeamPage: true,
+      notionId: "5bc11fff-07a4-4daf-93db-ae1acd25ea43",
+    },
+    {
       id: "cernocky",
       name: "Dalibor Černocký",
       description: "Výzkum",
       avatar: "/avatars/dalibor-cernocky.png",
       displayOnTeamPage: true,
       notionId: "eb9e1b42-ce12-4573-a9ca-073a33bdeedb",
-    },
-    {
-      id: "jana",
-      avatar: "/avatars/placeholder.jpg",
-      name: "Jana",
-      description: "Výzkum",
-      displayOnTeamPage: false,
-      notionId: "5bc11fff-07a4-4daf-93db-ae1acd25ea43",
     },
     {
       id: "knihovnaai",
