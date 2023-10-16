@@ -33,9 +33,9 @@ export default function Tabs() {
         >
           <button
             className={classNames(
-              "block relative py-1.5 px-3 mb-2 font-medium whitespace-nowrap rounded-lg text-text/90 hover:text-text hover:bg-sheet active:bg-gray-200",
+              "block relative py-1.5 px-3 mb-2 font-semibold whitespace-nowrap rounded-xl text-text/90 hover:text-text hover:bg-sheet active:bg-primary/40",
               {
-                "bg-sheet": pathname == tab.href,
+                "bg-primary/20": pathname == tab.href,
               }
             )}
           >

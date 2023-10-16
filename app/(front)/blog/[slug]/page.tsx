@@ -8,6 +8,8 @@ import { createMetadata } from "@/lib/metadata";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getBlogPage, getBlogPages } from "@/lib/notion/get-blog-data";
 
+export const revalidate = 3600;
+
 export async function generateMetadata({
   params,
 }: {

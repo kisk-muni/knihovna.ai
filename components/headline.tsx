@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import slugify from "slugify";
 
 export default function Headline({
   children,
@@ -11,9 +12,11 @@ export default function Headline({
   level: "1" | "2" | "3" | "4" | "5" | "6" | "ultra";
   className?: string | null;
 }) {
+  const id = (typeof children === "string" && slugify(children)) || "";
   const props = {
+    id,
     className: classNames(
-      "block text-text mb-6 font-bold tracking-tight leading-tight md:leading-tight",
+      "block text-text mb-6 font-bold tracking-tight scroll-mt-20 leading-tight md:leading-tight",
       {
         "md:text-5xl text-4xl font-extrabold ": level === "ultra",
         "md:text-4xl text-3xl": level === "1",
@@ -41,3 +44,39 @@ export default function Headline({
       return <h6 {...props}>{children}</h6>;
   }
 }
+
+export const Headline1 = ({ children }: { children: string }) => (
+  <Headline level="1" as="h1">
+    {children}
+  </Headline>
+);
+
+export const Headline2 = ({ children }: { children: string }) => (
+  <Headline level="2" as="h2">
+    {children}
+  </Headline>
+);
+
+export const Headline3 = ({ children }: { children: string }) => (
+  <Headline level="3" as="h3">
+    {children}
+  </Headline>
+);
+
+export const Headline4 = ({ children }: { children: string }) => (
+  <Headline level="4" as="h4">
+    {children}
+  </Headline>
+);
+
+export const Headline5 = ({ children }: { children: string }) => (
+  <Headline level="5" as="h5">
+    {children}
+  </Headline>
+);
+
+export const Headline6 = ({ children }: { children: string }) => (
+  <Headline level="6" as="h6">
+    {children}
+  </Headline>
+);

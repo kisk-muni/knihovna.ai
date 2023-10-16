@@ -1,5 +1,5 @@
 import { getMaterialsPages } from "@/lib/notion/get-materials-data";
-import { MaterialNavItem, Navigation } from "./navigation";
+import { MaterialNavItem, List } from "./list";
 import {
   MaterialsSchema,
   QueryResultWithMarkdownContents,
@@ -36,7 +36,7 @@ async function getPagesTree() {
   return navItems;
 }
 
-export async function MainNavigation() {
+export async function MaterialsList() {
   const items = await getPagesTree();
-  return <Navigation items={items} />;
+  return <List items={items} />;
 }

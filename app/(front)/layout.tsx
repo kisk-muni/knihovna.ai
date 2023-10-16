@@ -1,5 +1,5 @@
 import Footer from "@/components/footer";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/nav-bar";
 import { Fragment } from "react";
 
 export default function FrontLayout({

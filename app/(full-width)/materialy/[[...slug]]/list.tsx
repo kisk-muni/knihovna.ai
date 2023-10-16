@@ -1,13 +1,8 @@
 "use client";
-import { Button } from "@/components/button";
 import Card from "@/components/card";
 import FormatedDate from "@/components/formated-date";
 import Headline from "@/components/headline";
-import classNames from "classnames";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { type } from "os";
-import { Fragment } from "react";
 
 export const revalidate = 3600;
 
@@ -115,13 +110,7 @@ const typeName = {
   Other: "Ostatní",
 };
 
-export function Navigation({ items }: { items?: MaterialNavItem[] }) {
-  const pathname = usePathname();
-  const slug = pathname.split("/");
-  // const topLevelSlug = slug.slice(0, 3).join("/");
-  // render cards and list items in them, each card represents a group by item.type
-
-  //const activeSection = items?.find((item) => item.href == topLevelSlug);
+export function List({ items }: { items?: MaterialNavItem[] }) {
   return (
     <div className="mt-6 mb-4 grid gap-4 grid-cols-1">
       {items?.map((item, i) => {
@@ -148,114 +137,6 @@ export function Navigation({ items }: { items?: MaterialNavItem[] }) {
           </Link>
         );
       })}
-    </div>
-  );
-  /* return (
-    <Fragment>
-      <Link href={rootHref}>
-        <Button theme="primary" size="base" variant="ghost" className="-ml-8">
-          ← Materiály
-        </Button>
-      </Link>
-      {activeSection && <SectionHeadline item={activeSection} />}
-      <SubNavigation maxDepth={2} items={activeSection?.items} />
-    </Fragment>
-  ); */
-}
-
-export function SectionHeadline({ item }: { item: MaterialNavItem }) {
-  return (
-    <Fragment>
-      <h1 className={"uppercase mt-3 mb-6 text-lg font-medium text-text"}>
-        <Link href={item?.href || "/materialy"}>
-          {item?.href && topNavIcons[item?.href]}
-          {item?.name}
-        </Link>
-      </h1>
-      <div className="h-px mb-6 w-full bg-[#C8C8C8]"></div>
-    </Fragment>
-  );
-}
-
-export function SubNavigation({
-  maxDepth,
-  depth = 1,
-  items,
-  renderItem,
-}: {
-  maxDepth: number;
-  depth?: number;
-  items?: MaterialNavItem[];
-  renderItem?: (item: MaterialNavItem) => JSX.Element;
-}) {
-  const pathname = usePathname();
-  return (
-    <Fragment>
-      <ul className="mb-6">
-        {items?.map((item, i) => (
-          <Fragment key={i}>
-            <li className="mb-5" key={i}>
-              <Link
-                href={item.href}
-                className={classNames(
-                  "text-lg hover:text-primary font-medium",
-                  {
-                    "text-primary": pathname === item.href,
-                    "text-text": pathname !== item.href,
-                  }
-                )}
-              >
-                {renderItem ? renderItem(item) : item.name}
-              </Link>
-            </li>
-            {depth + 1 < maxDepth && item.items && (
-              <li key={"c" + i} className="pl-4">
-                <SubNavigation
-                  maxDepth={maxDepth}
-                  depth={depth + 1}
-                  items={item.items}
-                />
-              </li>
-            )}
-          </Fragment>
-        ))}
-      </ul>
-    </Fragment>
-  );
-}
-
-export function Pagination({ items }: { items?: MaterialNavItem[] }) {
-  let pathname = usePathname();
-  const slug = pathname.split("/");
-  const topLevelSlug = slug.slice(0, 3).join("/");
-  const activesection = items?.find((item) => item.href == topLevelSlug);
-  const aItems = activesection?.items;
-  if (!aItems) return;
-  // if (pathname === "/prirucka") pathname = "/prirucka/";
-  const currentIndex = aItems.findIndex((item) => item.href === pathname);
-  const prev = currentIndex > 0 ? aItems[currentIndex - 1] : null;
-  const next =
-    currentIndex <= aItems.length - 1 ? aItems[currentIndex + 1] : null;
-  return (
-    <div className="mt-8 mb-12 flex justify-between -mx-6">
-      {prev && prev?.href && (
-        <div className="flex grow justify-start">
-          <Link href={prev.href}>
-            <Button theme="gray" size="base" variant="ghost">
-              ← {prev.name}
-            </Button>
-          </Link>
-        </div>
-      )}
-      {next && next?.href && (
-        <div className="flex grow justify-end">
-          <Link href={next.href}>
-            <Button theme="gray" size="base" variant="ghost">
-              {next.name} →
-            </Button>
-          </Link>
-        </div>
-      )}
     </div>
   );
 }

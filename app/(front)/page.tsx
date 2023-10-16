@@ -35,11 +35,11 @@ export default async function Home() {
       <BackgroundGradient.Radial />
       <section className="relative">
         <Container>
-          <div className="relative max-w-2xl mx-auto pt-32 pb-20 lg:pt-40">
-            <div className="text-left">
+          <div className="relative max-w-2xl mx-auto pt-20 pb-20 lg:pt-32">
+            <div className="text-center">
               <div
                 className={
-                  "mt-6 text-primary [&>h1]:leading-normal [&>h1]:text-5xl [&>h1]:font-extrabold [&>h1]:mb-6 [&>p]:mb-6 [&>p]:text-xl [&>p]:font-normal [&>p]:leading-relaxed [&>p]:text-text"
+                  "mt-6 text-primary [&>h1]:leading-normal [&>h1]:text-5xl  2xl:[&>h1]:text-6xl 2xl:[&>h1]:leading-normal [&>h1]:font-extrabold [&>h1]:mb-6 [&>p]:mb-6 [&>p]:text-xl [&>p]:font-normal [&>p]:leading-relaxed [&>p]:text-text"
                 }
               >
                 <h1>
@@ -53,14 +53,14 @@ export default async function Home() {
                 </p>
                 <p></p>
               </div>
-              <div className="mt-10 flex items-center justify-start gap-x-4">
+              <div className="mt-10 flex items-center justify-center gap-x-4">
                 <Link href="#zapojeni">
-                  <Button theme="primary" size="large">
+                  <Button theme="primary" size="base">
                     Jak se zapojit?
                   </Button>
                 </Link>
                 <Link href="/o-projektu">
-                  <Button theme="gray" size="large" variant="ghost">
+                  <Button theme="gray" size="base" variant="ghost">
                     Více o projektu
                   </Button>
                 </Link>
@@ -110,7 +110,7 @@ export default async function Home() {
             <div className="grid md:grid-cols-3 gap-x-6 gap-y-4">
               <Card
                 size="md"
-                className="bg-[url('/bg-1.png')] bg-cover bg-no-repeat flex flex-col border-[2px] border-text px-10 md:aspect-45/39 justify-center text-center"
+                className="bg-[url('/bg-1.png')] bg-cover bg-no-repeat flex flex-col border-[1px] border-text/20 px-10 md:aspect-45/39 justify-center text-center"
               >
                 <p className="text-base md:text-xl text-text font-bold">
                   Zpřístupňuje nové technologie komunitám.
@@ -118,7 +118,7 @@ export default async function Home() {
               </Card>
               <Card
                 size="md"
-                className="bg-[url('/bg-2.png')] bg-cover bg-no-repeat flex flex-col border-[2px] border-text px-10 md:aspect-45/39 justify-center text-center"
+                className="bg-[url('/bg-2.png')] bg-cover bg-no-repeat flex flex-col border-[1px] border-text/20 px-10 md:aspect-45/39 justify-center text-center"
               >
                 <p className="text-base md:text-xl text-text font-bold">
                   Nabízí celoživotní vzdělávání pro široké skupiny lidí.
@@ -126,7 +126,7 @@ export default async function Home() {
               </Card>
               <Card
                 size="md"
-                className="bg-[url('/bg-3.png')] bg-cover bg-no-repeat flex flex-col border-[2px] border-text px-10 md:aspect-45/39 justify-center text-center"
+                className="bg-[url('/bg-3.png')] bg-cover bg-no-repeat flex flex-col border-[1px] border-text/20 px-10 md:aspect-45/39 justify-center text-center"
               >
                 <p className="text-base md:text-xl text-text font-bold">
                   Pomáhá jako přístupný bod sociální záchranné sítě.

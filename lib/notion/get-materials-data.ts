@@ -39,7 +39,7 @@ export async function getMaterialsPage(slug: string) {
     siteConfig.notion.databases.materials,
     {
       withRelations: false,
-      maxDepth: 2,
+      maxDepth: 1,
       withBlocks: true,
       filter: {
         property: "Slug",

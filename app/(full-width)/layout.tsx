@@ -1,5 +1,5 @@
 import Footer from "@/components/footer";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/nav-bar";
 import { Fragment } from "react";
 
 export default function DataIntensiveLayout({
@@ -9,9 +9,9 @@ export default function DataIntensiveLayout({
 }) {
   return (
     <Fragment>
-      <Navbar fullWidth />
+      <Navbar />
       {children}
-      <Footer fullWidth />
+      <Footer />
     </Fragment>
   );
 }

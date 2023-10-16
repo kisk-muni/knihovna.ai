@@ -2,12 +2,12 @@ import Image from "next/image";
 import notion from "./notion";
 import n2m from "./notion2md";
 import {
-  File,
-  People,
   QueryResult,
   QueryResultWithMarkdownContents,
   Relation,
+  TocItem,
 } from "@/lib/notion/schema";
+import slugify from "slugify";
 
 type Config = {
   withRelations?: boolean | string[];
@@ -26,6 +26,34 @@ type Config = {
   >;
   filter?: any | any[];
 };
+
+function convertToToc(headings: { level: number; text: string }[]): TocItem[] {
+  const nestedHeadings: TocItem[] = [];
+  const stack: TocItem[] = [];
+
+  headings.forEach((heading) => {
+    const newItem: TocItem = {
+      level: heading.level,
+      text: heading.text,
+      href: "#" + slugify(heading.text) || "",
+      children: [],
+    };
+
+    while (stack.length > 0 && heading.level <= stack[stack.length - 1].level) {
+      stack.pop();
+    }
+
+    if (stack.length > 0) {
+      stack[stack.length - 1].children.push(newItem);
+    } else {
+      nestedHeadings.push(newItem);
+    }
+
+    stack.push(newItem);
+  });
+
+  return nestedHeadings;
+}
 
 export default async function getData<ItemProperties>(
   database_id: string,
@@ -94,6 +122,19 @@ async function getItem<ItemProperties>(
     const { results } = await notion.blocks.children.list({
       block_id: item.id,
     });
+    const headings = results
+      .filter((block: any) => block.type.startsWith("heading"))
+      .map((block: any) => {
+        const { type } = block;
+        return {
+          level: parseInt(block.type.split("_")[1]),
+          text: block[type].rich_text.length
+            ? (block[type].rich_text[0]?.plain_text as string | "")
+            : "",
+        };
+      });
+    const toc = convertToToc(headings);
+    (item as QueryResultWithMarkdownContents<ItemProperties>).toc = toc;
     const x = await n2m.blocksToMarkdown(results);
     n2m.setCustomTransformer("child_database", transformChildDatabase);
     n2m.setCustomTransformer("image", transformImage);
@@ -109,11 +150,11 @@ function transformChildDatabase(block: any) {
 function transformImage(block: any) {
   const { type } = block as any;
   const image = block[type];
-  if ((image.type = "file"))
+  if (image.type == "file")
     return `
     <img src="${image?.file?.url}" />
   `;
-  if ((image.type = "external"))
+  else if (image.type == "external")
     return `
     <img src="${image?.external?.url}" />
   `;

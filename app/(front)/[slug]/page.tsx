@@ -5,6 +5,8 @@ import { getPage, getPages } from "@/lib/notion/get-pages-data";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Fragment } from "react";
 
+export const revalidate = 3600;
+
 export async function generateMetadata({
   params,
 }: {
@@ -23,7 +25,7 @@ export async function generateStaticParams() {
   return slugs;
 }
 
-const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
+const Page = async ({ params }: { params: { slug: string } }) => {
   const data = await getPage(params.slug);
   if (!data) {
     return <p>Stránka neexistuje :(</p>;
@@ -42,4 +44,4 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
   );
 };
 
-export default BlogPostPage;
+export default Page;

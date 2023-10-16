@@ -18,6 +18,7 @@ const button = cva(
       theme: {
         primary: [],
         gray: [],
+        "dark-gray": [],
         white: [
           "text-text",
           "bg-white",
@@ -72,6 +73,17 @@ const button = cva(
         ],
       },
       {
+        theme: "dark-gray",
+        variant: "solid",
+        className: [
+          "text-white",
+          "hover:text-white/80",
+          "bg-text/90",
+          "hover:bg-text/80",
+          "shadow-sm",
+        ],
+      },
+      {
         theme: "gray",
         variant: "ghost",
         className: ["text-text", "hover:text-text/80"],
@@ -79,7 +91,7 @@ const button = cva(
       {
         variant: ["solid", "ghost"],
         size: ["small"],
-        className: ["px-4", "py-2"],
+        className: ["px-3", "py-1.5"],
       },
       {
         variant: ["solid", "ghost"],

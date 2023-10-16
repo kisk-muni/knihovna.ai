@@ -6,13 +6,28 @@ import classNames from "classnames";
 import { usePathname } from "next/navigation";
 import React, { Fragment, useEffect, useState } from "react";
 import Container from "./container";
+import path from "path";
 
-function Item({ href, title }: { href: string; title: string }) {
+function Item({
+  href,
+  title,
+  active,
+}: {
+  href: string;
+  title: string;
+  active?: boolean;
+}) {
   return (
-    <li>
+    <li className="ml-4">
       <Link
         href={href}
-        className="block py-2 pl-3 pr-4 text-base text-text hover:bg-sheet md:hover:bg-transparent md:hover:text-primary md:p-1 transition duration-150 ease-out"
+        className={classNames(
+          `block px-1 py-1.5 transition duration-150 ease-out`,
+          {
+            "text-primary": active,
+            "text-text hover:text-primary": !active,
+          }
+        )}
       >
         {title}
       </Link>
@@ -54,17 +69,17 @@ export default function Navbar({
           "bg-transparent": pathname === "/" && !stick,
           "border-b border-sheet/70 bg-white drop-shadow-sm":
             stick && pathname != "/roadmap",
-          "h-[72px]": !subNav,
-          "pt-4 bg-white border-b border-sheet/70 drop-shadow-sm": !!subNav,
+          "h-[50px]": !subNav,
+          "pt-2 bg-white border-b border-sheet/70 drop-shadow-sm": !!subNav,
         }
       )}
     >
       <Container fullWidth={fullWidth} className="mx-auto">
-        <div className="flex flex-wrap items-center justify-between">
+        <div className="flex flex-wrap items-center justify-start">
           <Link
             href="/"
             className={classNames(
-              "self-center whitespace-nowrap text-text flex font-bold transition ease-out delay-150"
+              "self-center whitespace-nowrap text-text flex font-semibold transition ease-out delay-150"
             )}
           >
             <Image
@@ -114,13 +129,34 @@ export default function Navbar({
             )}
             id="navbar-sticky"
           >
-            <ul className="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-6 md:mt-0 md:border-0 md:bg-transparent">
+            <ul className="flex p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:mt-0 md:border-0 md:bg-transparent">
               {siteConfig.navigation
-                .filter((item) => item.href != pathname)
+                .filter((item) => !(pathname === "/" && item.href === pathname))
                 .map((item, i) => (
-                  <Item key={i} href={item.href} title={item.title} />
+                  <Item
+                    key={i}
+                    href={item.href}
+                    title={item.title}
+                    active={item.href === pathname}
+                  />
                 ))}
             </ul>
+          </div>
+          <div className="w-auto md:order-2 flex items-center justify-self-end ml-auto">
+            <Link
+              href={"/open"}
+              className={classNames(
+                `block px-1 py-1.5 transition duration-150 ease-out`,
+                {
+                  "text-primary": "/open" === pathname,
+                  "text-text": "/open" != pathname,
+                  "bg-primary hover:bg-primarydarker text-white rounded-xl px-3 border border-primarydarker/30":
+                    true,
+                }
+              )}
+            >
+              Otevřený projekt
+            </Link>
           </div>
         </div>
         {subNav && subNav()}
@@ -164,7 +200,7 @@ export default function Navbar({
                           <Link
                             href={item.href}
                             key={i}
-                            className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-sheet"
+                            className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-sheet`}
                           >
                             {item.title}
                           </Link>

@@ -6,6 +6,14 @@ import Container from "@/components/container";
 import Section from "@/components/section";
 import ContactCard from "@/components/contact-card";
 import Card from "@/components/card";
+import {
+  Headline1,
+  Headline2,
+  Headline3,
+  Headline4,
+  Headline5,
+  Headline6,
+} from "@/components/headline";
 
 export const defaultComponents: any = {
   img: ResponsiveImage,
@@ -15,5 +23,11 @@ export const defaultComponents: any = {
   Section: Section,
   Placeholder: PlaceholderComponent,
   ContactCard: ContactCard,
+  h1: Headline1,
+  h2: Headline2,
+  h3: Headline3,
+  h4: Headline4,
+  h5: Headline5,
+  h6: Headline6,
   Card: Card,
 };
