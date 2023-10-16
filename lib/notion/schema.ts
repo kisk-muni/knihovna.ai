@@ -213,7 +213,7 @@ export type TodoSchema = {
     | "/Terén"
     | "/Rešerše"
   >;
-  // Sprint: Relation;
+  Sprint: Relation<SprintSchema>;
   Dates: Dates;
   "Sub-item": Relation<TodoSchema>;
   // Blocking: Relation;
@@ -222,6 +222,12 @@ export type TodoSchema = {
   Private: Checkbox;
   Assignee: People;
   Name: Title;
+};
+
+export type SprintSchema = {
+  Dates: Dates;
+  Name: Title;
+  "To-dos": Relation<TodoSchema>;
 };
 
 export type RoadmapSchema = {

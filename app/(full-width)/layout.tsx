@@ -1,5 +1,5 @@
 import Footer from "@/components/footer";
-import Navbar from "@/components/nav-bar";
+import Navbar from "@/components/navbar";
 import { Fragment } from "react";
 
 export default function DataIntensiveLayout({

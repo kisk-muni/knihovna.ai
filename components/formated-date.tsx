@@ -1,6 +1,6 @@
 "use client";
 import { formatRelative, format } from "date-fns";
-import { locale } from "@/lib/date";
+import { formattedDate, locale } from "@/lib/date";
 
 export default function FormatedDate({
   date,
@@ -17,7 +17,7 @@ export default function FormatedDate({
         ? formatRelative(date, new Date(), {
             locale,
           })
-        : format(date, "d. MMMM yyyy")}
+        : formattedDate(date)}
     </time>
   );
 }

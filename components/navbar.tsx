@@ -1,218 +1,84 @@
 "use client";
-import siteConfig from "@/site-config";
+
+import React from "react";
+import {
+  Navbar as Nav,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+} from "@nextui-org/navbar";
+import { Button } from "./button";
 import Link from "next/link";
-import Image from "next/image";
-import classNames from "classnames";
+import Logo from "./logo";
+import siteConfig from "@/site-config";
 import { usePathname } from "next/navigation";
-import React, { Fragment, useEffect, useState } from "react";
-import Container from "./container";
-import path from "path";
+import { Bars3Icon } from "@heroicons/react/24/solid";
 
-function Item({
-  href,
-  title,
-  active,
-}: {
-  href: string;
-  title: string;
-  active?: boolean;
-}) {
-  return (
-    <li className="ml-4">
-      <Link
-        href={href}
-        className={classNames(
-          `block px-1 py-1.5 transition duration-150 ease-out`,
-          {
-            "text-primary": active,
-            "text-text hover:text-primary": !active,
-          }
-        )}
-      >
-        {title}
-      </Link>
-    </li>
-  );
-}
-
-export default function Navbar({
-  fullWidth = false,
-  subNav,
-}: {
-  fullWidth?: boolean;
-  subNav?: () => JSX.Element;
-}) {
+export default function Navbar({ sticky = true }: { sticky?: boolean }) {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathname = usePathname();
-  const [showMenu, setShowMenu] = useState(false);
-  const [stick, setStick] = useState(false);
-
-  const changeNavBg = () => {
-    window.scrollY >= 1 ? setStick(true) : setStick(false);
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", changeNavBg);
-    return () => {
-      window.removeEventListener("scroll", changeNavBg);
-    };
-  }, []);
-
-  useEffect(() => {
-    setShowMenu(false);
-  }, [pathname]);
-
   return (
-    <nav
-      className={classNames(
-        "fixed w-full flex items-center z-40 top-0 left-0 transition-[height,padding] ease-out delay-50",
-        {
-          "bg-transparent": pathname === "/" && !stick,
-          "border-b border-sheet/70 bg-white drop-shadow-sm":
-            stick && pathname != "/roadmap",
-          "h-[50px]": !subNav,
-          "pt-2 bg-white border-b border-sheet/70 drop-shadow-sm": !!subNav,
-        }
-      )}
+    <Nav
+      className={`backdrop-blur-xl flex flex-col ${
+        sticky ? "bg-[#fdf0ee]/30 px-6 lg:px-8" : "bg-white px-8"
+      }`}
+      classNames={{
+        wrapper: `py-2 max-w-screen-xl justify-start mx-auto ${
+          sticky ? "border-b px-6 lg:px-8 border-[#f5e0d5]" : ""
+        }`,
+        menuItem:
+          "data-[active=true]:text-primary data-[active=true]:font-semibold text-text hover:text-text/80",
+      }}
+      position={sticky ? "sticky" : "static"}
+      isBlurred={sticky}
+      onMenuOpenChange={setIsMenuOpen}
     >
-      <Container fullWidth={fullWidth} className="mx-auto">
-        <div className="flex flex-wrap items-center justify-start">
-          <Link
-            href="/"
-            className={classNames(
-              "self-center whitespace-nowrap text-text flex font-semibold transition ease-out delay-150"
-            )}
-          >
-            <Image
-              src="/logo-clean-a.png"
-              width="24"
-              height="24"
-              alt="Logo knihovna.ai"
-              className="mr-2 shadow-sm rounded-[8px] ovefrlow-hidden"
-            />
-            {siteConfig.title}
-          </Link>
-          <div className="flex lg:hidden md:order-2">
-            <button
-              data-collapse-toggle="navbar-sticky"
-              type="button"
-              onClick={() => setShowMenu(!showMenu)}
-              className={classNames(
-                "inline-flex items-center -mr-1.5 p-2 text-sm text-text rounded-lg focus:outline-none focus:ring-2",
-                {
-                  "hover:bg-primary/20 focus:ring-primary/30": !stick,
-                  "hover:bg-sheet focus:ring-sheet": stick,
-                }
-              )}
-              aria-controls="navbar-sticky"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Otevřít navigaci</span>
-              <svg
-                className="w-6 h-6"
-                aria-hidden="true"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            </button>
+      <NavbarMenuToggle
+        icon={
+          <div className="h-8 w-8 shrink-0 flex justify-center items-center">
+            <Bars3Icon className="h-7 w-7 block text-text" />
           </div>
-
-          <div
-            className={classNames(
-              "items-center hidden w-full lg:flex md:w-auto md:order-1"
-            )}
-            id="navbar-sticky"
+        }
+        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        className="sm:hidden"
+      />
+      <NavbarBrand>
+        <Link href={"/"}>
+          <Logo />
+        </Link>
+      </NavbarBrand>
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        {siteConfig.navigation.map((link, i) => (
+          <NavbarItem
+            isActive={pathname === link.href}
+            key={i}
+            className="data-[active=true]:text-primary text-text hover:text-text/70"
           >
-            <ul className="flex p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:mt-0 md:border-0 md:bg-transparent">
-              {siteConfig.navigation
-                .filter((item) => !(pathname === "/" && item.href === pathname))
-                .map((item, i) => (
-                  <Item
-                    key={i}
-                    href={item.href}
-                    title={item.title}
-                    active={item.href === pathname}
-                  />
-                ))}
-            </ul>
-          </div>
-          <div className="w-auto md:order-2 flex items-center justify-self-end ml-auto">
-            <Link
-              href={"/open"}
-              className={classNames(
-                `block px-1 py-1.5 transition duration-150 ease-out`,
-                {
-                  "text-primary": "/open" === pathname,
-                  "text-text": "/open" != pathname,
-                  "bg-primary hover:bg-primarydarker text-white rounded-xl px-3 border border-primarydarker/30":
-                    true,
-                }
-              )}
-            >
+            <Link href={link.href}>{link.title}</Link>
+          </NavbarItem>
+        ))}
+      </NavbarContent>
+      <NavbarContent justify="end" className="ml-auto">
+        <NavbarItem>
+          <Link href={"/open"}>
+            <Button theme="primary" size="small">
               Otevřený projekt
+            </Button>
+          </Link>
+        </NavbarItem>
+      </NavbarContent>
+      <NavbarMenu>
+        {siteConfig.navigation.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`} className="block">
+            <Link className="w-full py-1 block" href={item.href}>
+              {item.title}
             </Link>
-          </div>
-        </div>
-        {subNav && subNav()}
-
-        {showMenu && (
-          <Fragment>
-            <div className="lg:hidden" role="dialog" aria-modal="true">
-              <div className="fixed min-h-screen inset-0 z-90 w-full overflow-y-auto bg-white px-8 py-6">
-                <div className="flex items-center justify-between">
-                  <a href="#" className="-m-1.5 p-1.5">
-                    <span className="sr-only">Your Company</span>
-                  </a>
-                  <button
-                    type="button"
-                    onClick={() => setShowMenu(!showMenu)}
-                    className="-m-2.5 -mr-3.5 rounded-lg p-2 text-text hover:bg-sheet focus:outline-none focus:ring-2 focus:ring-gray-200"
-                  >
-                    <span className="sr-only">Close menu</span>
-                    <svg
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div className="mt-6 flow-root">
-                  <div className="-my-6 divide-y-2">
-                    <div className="space-y-2 py-6">
-                      {siteConfig.navigation
-                        .filter((item) => item.href != pathname)
-                        .map((item, i) => (
-                          <Link
-                            href={item.href}
-                            key={i}
-                            className={`-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-sheet`}
-                          >
-                            {item.title}
-                          </Link>
-                        ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Fragment>
-        )}
-      </Container>
-    </nav>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
+    </Nav>
   );
 }

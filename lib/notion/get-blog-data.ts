@@ -1,6 +1,7 @@
 import siteConfig, { TeamMember } from "@/site-config";
 import getData from "./get-data";
 import { BlogSchema, People, QueryResultWithMarkdownContents } from "./schema";
+import { mapAuthors } from "./map-authors";
 
 export type PostMeta = {
   slug: string;
@@ -17,19 +18,12 @@ export type Post = {
 
 const defaultTitle = "Příspěvek bez názvu";
 
-function getAuthors(people: People) {
-  const authorIds = people.people.map((author) => author.id) || [];
-  return siteConfig.team.filter((member) =>
-    authorIds.includes(member?.notionId || "")
-  );
-}
-
 function getMeta(page: QueryResultWithMarkdownContents<BlogSchema>): PostMeta {
   const properties = page.properties;
   const meta = {
     publishedAt: new Date(properties["Published at"].date.start) || null,
     title: properties?.Title.title[0]?.plain_text || defaultTitle,
-    authors: getAuthors(properties?.Authors),
+    authors: mapAuthors(properties?.Authors),
     summary: properties.Description.rich_text[0]?.plain_text || "",
     slug: properties.Slug.rich_text[0]?.plain_text || "",
   };

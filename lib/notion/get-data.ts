@@ -8,6 +8,7 @@ import {
   TocItem,
 } from "@/lib/notion/schema";
 import slugify from "slugify";
+import siteConfig from "@/site-config";
 
 type Config = {
   withRelations?: boolean | string[];
@@ -100,20 +101,35 @@ async function getItem<ItemProperties>(
     ) {
       // too long, might be separated into a function getRelationItems or something
       const items = [];
-      for (const relation of property.relation) {
-        const response = await notion.pages.retrieve({
-          page_id: relation.id,
+      // hacking
+      if (name === "To-dos") {
+        console.log("getting todos on ", item.id);
+        const todos = getData(siteConfig.notion.databases.todos, {
+          withBlocks: true,
+          filter: {
+            property: "Sprint",
+            relation: {
+              contains: item.id,
+            },
+          },
         });
-        if (conf.recursive) {
-          await getItem(
-            response as unknown as QueryResult<ItemProperties>,
-            depth + 1,
-            conf
-          );
+        property.items = todos as any;
+      } else {
+        for (const relation of property.relation) {
+          const response = await notion.pages.retrieve({
+            page_id: relation.id,
+          });
+          if (conf.recursive) {
+            await getItem(
+              response as unknown as QueryResult<ItemProperties>,
+              depth + 1,
+              conf
+            );
+          }
+          items.push(response);
         }
-        items.push(response);
+        property.items = items as any;
       }
-      property.items = items as any;
     }
     // if ((property as unknown as People).type === "people") {
     // }

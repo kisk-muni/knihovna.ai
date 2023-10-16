@@ -1,6 +1,6 @@
 import { cva, VariantProps } from "class-variance-authority";
 
-const button = cva(["rounded-2xl", "transition", "duration-150", "ease-out"], {
+const button = cva(["rounded-3xl", "transition", "duration-150", "ease-out"], {
   variants: {
     theme: {
       white: ["bg-white"],

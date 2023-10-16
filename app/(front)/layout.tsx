@@ -1,5 +1,5 @@
 import Footer from "@/components/footer";
-import Navbar from "@/components/nav-bar";
+import Navbar from "@/components/navbar";
 import { Fragment } from "react";
 
 export default function FrontLayout({
@@ -10,7 +10,7 @@ export default function FrontLayout({
   return (
     <Fragment>
       <Navbar />
-      {children}
+      <div className="grow">{children}</div>
       <Footer />
     </Fragment>
   );

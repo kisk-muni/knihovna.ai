@@ -1,3 +1,4 @@
+import { format, isThisYear } from "date-fns";
 import { cs } from "date-fns/locale";
 
 const formatRelativeLocale = {
@@ -21,3 +22,7 @@ export const locale = {
       | "other"
   ) => formatRelativeLocale[token],
 };
+
+export function formattedDate(date: Date) {
+  return format(date, isThisYear(date) ? "d. MMM" : "d. MMM yyyy", { locale });
+}

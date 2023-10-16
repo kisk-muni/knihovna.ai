@@ -1,10 +1,10 @@
 function BackgroundGradient() {
   return (
     <div
-      className="absolute md:-inset-x-[calc(100%)] top-0 h-[300px] -z-10 transform-gpu"
+      className="absolute md:-inset-x-[calc(100%)] top-0 h-[300px] -z-20 transform-gpu"
       aria-hidden="true"
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-[#FCF2E8] -z-10 to-[#ffffff]"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#FCF2E8] -z-20 to-[#ffffff]"></div>
     </div>
   );
 }

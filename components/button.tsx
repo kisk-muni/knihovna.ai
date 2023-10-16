@@ -7,7 +7,6 @@ const button = cva(
     "focus:outline-none",
     "focus:ring-primary/50",
     "font-bold",
-    "rounded-xl",
     "text-center",
     "transition",
     "duration-150",
@@ -41,9 +40,9 @@ const button = cva(
       },
       size: {
         none: [],
-        small: ["text-base", "font-medium"],
-        base: ["text-base", "font-semibold"],
-        large: ["text-lg", "font-bold"],
+        small: ["text-base", "font-medium", "rounded-xl"],
+        base: ["text-base", "font-semibold", "rounded-2xl"],
+        large: ["text-lg", "font-bold", "rounded-2xl"],
       },
       align: {
         left: "justify-start",
@@ -75,12 +74,14 @@ const button = cva(
       {
         theme: "dark-gray",
         variant: "solid",
+        size: "small",
         className: [
           "text-white",
           "hover:text-white/80",
-          "bg-text/90",
+          "bg-primary",
           "hover:bg-text/80",
           "shadow-sm",
+          "font-normal",
         ],
       },
       {
