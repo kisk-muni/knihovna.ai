@@ -25,6 +25,8 @@ export default function App() {
       className="py-2 backdrop-blur-xl bg-white/40"
       classNames={{
         wrapper: "max-w-screen-xl mx-auto px-6 lg:px-8",
+        menuItem:
+          "data-[active=true]:text-primary text-text hover:text-text/80",
       }}
       maxWidth="md"
       position="sticky"
@@ -33,7 +35,11 @@ export default function App() {
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarMenuToggle
-        icon={<Bars3Icon className="h-5 w-5" />}
+        icon={
+          <div className="h-8 w-8 shrink-0 flex justify-center items-center">
+            <Bars3Icon className="h-7 w-7 block text-text" />
+          </div>
+        }
         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
         className="sm:hidden"
       />
@@ -64,18 +70,8 @@ export default function App() {
       </NavbarContent>
       <NavbarMenu>
         {siteConfig.navigation.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2
-                  ? "primary"
-                  : index === siteConfig.navigation.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              className="w-full"
-              href={item.href}
-            >
+          <NavbarMenuItem key={`${item}-${index}`} className="block">
+            <Link className="w-full py-1 block" href={item.href}>
               {item.title}
             </Link>
           </NavbarMenuItem>
