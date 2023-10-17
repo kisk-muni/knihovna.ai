@@ -22,12 +22,12 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
   const pathname = usePathname();
   return (
     <Nav
-      className={`backdrop-blur-xl flex flex-col ${
-        sticky ? "bg-[#fdf0ee]/30 px-6 lg:px-8" : "bg-white px-8"
+      className={`flex flex-col px-0 ${
+        sticky ? "backdrop-blur-xl bg-[#fdf0ee]/30" : "bg-white"
       }`}
       classNames={{
-        wrapper: `py-2 max-w-screen-xl justify-start mx-auto ${
-          sticky ? "border-b px-6 lg:px-8 border-[#f5e0d5]" : ""
+        wrapper: `py-2 justify-start mx-auto px-0 ${
+          sticky ? "max-w-screen-xl border-b border-[#f5e0d5]" : "px-6 lg:px-8"
         }`,
         menuItem:
           "data-[active=true]:text-primary data-[active=true]:font-semibold text-text hover:text-text/80",

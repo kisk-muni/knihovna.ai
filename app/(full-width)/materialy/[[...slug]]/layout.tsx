@@ -43,7 +43,7 @@ export default async function MaterialsLayout({
   return (
     <div>
       <BackgroundGradient.Radial />
-      <Container fullWidth className="h-full">
+      <Container size="max" className="h-full">
         <div className="mx-auto py-8">{children}</div>
       </Container>
     </div>

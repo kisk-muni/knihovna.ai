@@ -41,6 +41,7 @@ export async function getMaterialsPage(slug: string) {
       withRelations: false,
       maxDepth: 1,
       withBlocks: true,
+      blocksAs: ["markdown", "toc"],
       filter: {
         property: "Slug",
         rich_text: {

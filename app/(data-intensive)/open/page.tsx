@@ -11,20 +11,22 @@ import Card from "@/components/card";
 export default async function RoadmapPage() {
   return (
     <main className="my-6">
-      <section>
-        <Card
-          theme="white"
-          size="md"
-          className="mt-4 overflow-hidden border border-sheet shadow"
-        >
-          <Headline as="h2" level="3">
-            Harmonogram projektu
-          </Headline>
-          <div className="-mx-6 -mb-8">
-            <RoadmapTimeline />
-          </div>
-        </Card>
-      </section>
+      <Container size="max">
+        <section>
+          <Card
+            theme="white"
+            size="md"
+            className="mt-4 overflow-hidden border border-sheet shadow"
+          >
+            <Headline as="h2" level="3">
+              Harmonogram projektu
+            </Headline>
+            <div className="-mx-6 -mb-8">
+              <RoadmapTimeline />
+            </div>
+          </Card>
+        </section>
+      </Container>
     </main>
   );
 }

@@ -8,13 +8,13 @@ import {
   TocItem,
 } from "@/lib/notion/schema";
 import slugify from "slugify";
-import siteConfig from "@/site-config";
 
 type Config = {
   withRelations?: boolean | string[];
   recursive?: boolean;
   maxDepth?: number;
   withBlocks?: boolean;
+  blocksAs?: ("markdown" | "objects" | "toc")[];
   sorts?: Array<
     | {
         property: string;
@@ -28,7 +28,9 @@ type Config = {
   filter?: any | any[];
 };
 
-function convertToToc(headings: { level: number; text: string }[]): TocItem[] {
+export function convertToToc(
+  headings: { level: number; text: string }[]
+): TocItem[] {
   const nestedHeadings: TocItem[] = [];
   const stack: TocItem[] = [];
 
@@ -86,6 +88,7 @@ async function getItem<ItemProperties>(
     recursive: false,
     maxDepth: 1,
     withBlocks: false,
+    blocksAs: ["markdown"],
   };
   const conf = { ...defaultConfig, ...config };
   if (conf?.maxDepth && depth > conf?.maxDepth) {
@@ -101,69 +104,60 @@ async function getItem<ItemProperties>(
     ) {
       // too long, might be separated into a function getRelationItems or something
       const items = [];
-      // hacking
-      if (name === "To-dos") {
-        console.log("getting todos on ", item.id);
-        const todos = getData(siteConfig.notion.databases.todos, {
-          withBlocks: true,
-          filter: {
-            property: "Sprint",
-            relation: {
-              contains: item.id,
-            },
-          },
+      for (const relation of property.relation) {
+        const response = await notion.pages.retrieve({
+          page_id: relation.id,
         });
-        property.items = todos as any;
-      } else {
-        for (const relation of property.relation) {
-          const response = await notion.pages.retrieve({
-            page_id: relation.id,
-          });
-          if (conf.recursive) {
-            await getItem(
-              response as unknown as QueryResult<ItemProperties>,
-              depth + 1,
-              conf
-            );
-          }
-          items.push(response);
+        if (conf.recursive) {
+          await getItem(
+            response as unknown as QueryResult<ItemProperties>,
+            depth + 1,
+            conf
+          );
         }
-        property.items = items as any;
+        items.push(response);
       }
+      property.items = items as any;
     }
-    // if ((property as unknown as People).type === "people") {
-    // }
   }
   if (conf?.withBlocks) {
     const { results } = await notion.blocks.children.list({
       block_id: item.id,
     });
-    const headings = results
-      .filter((block: any) => block.type.startsWith("heading"))
-      .map((block: any) => {
-        const { type } = block;
-        return {
-          level: parseInt(block.type.split("_")[1]),
-          text: block[type].rich_text.length
-            ? (block[type].rich_text[0]?.plain_text as string | "")
-            : "",
-        };
-      });
-    const toc = convertToToc(headings);
-    (item as QueryResultWithMarkdownContents<ItemProperties>).toc = toc;
-    const x = await n2m.blocksToMarkdown(results);
-    n2m.setCustomTransformer("child_database", transformChildDatabase);
-    n2m.setCustomTransformer("image", transformImage);
-    (item as QueryResultWithMarkdownContents<ItemProperties>).markdownContents =
-      n2m.toMarkdownString(x).parent;
+    if (conf?.blocksAs?.includes("objects")) {
+      item.blocks = results;
+    }
+    if (conf?.blocksAs?.includes("markdown")) {
+      if (conf?.blocksAs?.includes("toc")) {
+        const headings = results
+          .filter((block: any) => block.type.startsWith("heading"))
+          .map((block: any) => {
+            const { type } = block;
+            return {
+              level: parseInt(block.type.split("_")[1]),
+              text: block[type].rich_text.length
+                ? (block[type].rich_text[0]?.plain_text as string | "")
+                : "",
+            };
+          });
+        const toc = convertToToc(headings);
+        (item as QueryResultWithMarkdownContents<ItemProperties>).toc = toc;
+      }
+      const x = await n2m.blocksToMarkdown(results);
+      n2m.setCustomTransformer("child_database", transformChildDatabase);
+      n2m.setCustomTransformer("image", transformImage);
+      (
+        item as QueryResultWithMarkdownContents<ItemProperties>
+      ).markdownContents = n2m.toMarkdownString(x).parent;
+    }
   }
 }
 
-function transformChildDatabase(block: any) {
+export function transformChildDatabase(block: any) {
   return "";
 }
 
-function transformImage(block: any) {
+export function transformImage(block: any) {
   const { type } = block as any;
   const image = block[type];
   if (image.type == "file")
@@ -175,12 +169,4 @@ function transformImage(block: any) {
     <img src="${image?.external?.url}" />
   `;
   return "";
-  /*   const data = await getData(id, {
-    withPages: false,
-  });
-  console.log(data);
-  if (!child_database[type]?.url) return;
-  return `<figure>
-    <iframe src="${child_database[type]?.url}"></iframe>
-  </figure>`; */
 }

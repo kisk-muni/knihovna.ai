@@ -123,8 +123,14 @@ export type Relation<T> = {
 export type QueryResult<Properties> = {
   id: string;
   url: string;
-  public_url: string;
+  created_time: string;
+  last_edited_time: string;
+  created_by: User;
+  last_edited_by: User;
+  cover: any | null;
+  public_url: string | null;
   properties: Properties;
+  blocks?: any[];
 };
 
 export type TocItem = {
