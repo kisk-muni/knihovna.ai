@@ -23,16 +23,16 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
   const pathname = usePathname();
   return (
     <Nav
-      className={`px-0 ${
+      className={`px-0 flex justify-center items-center ${
         sticky ? "backdrop-blur-xl bg-[#FCF2E8]/50" : "bg-white"
       }`}
       height={"52px"}
       classNames={{
         base: sticky ? "" : "",
-        wrapper: `py-0  mx-auto ${
+        wrapper: `py-0 px-5 lg:px-8 w-full max-w-full mx-auto ${
           sticky
-            ? "w-full md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl px-6 lg:px-8"
-            : "px-6 lg:px-8"
+            ? "md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl"
+            : ""
         }`,
         menuItem:
           "data-[active=true]:text-primary data-[active=true]:font-semibold text-text hover:text-text/80",
@@ -43,10 +43,12 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
       onMenuOpenChange={setIsMenuOpen}
     >
       <div
-        className={classNames("flex justify-start items-center gap-4 py-2", {
-          "border-b border-[#efdecc] w-full md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl":
-            sticky,
-        })}
+        className={classNames(
+          "flex w-full justify-start items-center gap-4 py-2",
+          {
+            "border-b border-[#efdecc]": sticky,
+          }
+        )}
       >
         <NavbarMenuToggle
           icon={
