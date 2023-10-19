@@ -18,9 +18,7 @@ export default function RootLayout({
       </Head>
       <body className={`${inter.className}`}>
         <Providers>
-          <div
-            className={`flex flex-col min-h-screen max-w-full overflow-x-hidden`}
-          >
+          <div className={`flex flex-col min-h-screen max-w-full`}>
             {children}
             <Analytics />
           </div>
