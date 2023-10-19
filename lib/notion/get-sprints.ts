@@ -63,8 +63,8 @@ export async function getSprints(publicOnly = true, full = false) {
                   : "",
               };
             }) || [];
-        const toc = convertToToc(headings);
-        item.toc = toc;
+        const { nestedHeadings } = convertToToc(headings);
+        item.toc = nestedHeadings;
         const x = await n2m.blocksToMarkdown(item.blocks);
         n2m.setCustomTransformer("child_database", transformChildDatabase);
         n2m.setCustomTransformer("image", transformImage);
