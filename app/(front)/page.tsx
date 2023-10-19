@@ -16,7 +16,6 @@ import Image from "next/image";
 import PostCard from "@/app/(front)/blog/[slug]/post-card";
 import { createMetadata } from "@/lib/metadata";
 import BackgroundGradient from "@/components/background-gradient";
-import { get } from "http";
 import { getBlogPages } from "@/lib/notion/get-blog-data";
 
 export const metadata: Metadata = createMetadata({
@@ -35,7 +34,7 @@ export default async function Home() {
       <BackgroundGradient.Radial />
       <section className="relative">
         <Container>
-          <div className="relative max-w-2xl mx-auto pt-20 pb-20 lg:pt-32">
+          <div className="relative max-w-3xl mx-auto pt-20 pb-20 lg:pt-32">
             <div className="text-center">
               <div
                 className={

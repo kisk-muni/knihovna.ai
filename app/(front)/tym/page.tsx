@@ -13,7 +13,7 @@ export const metadata = createMetadata({
 export default function AboutPage() {
   return (
     <main className="flex flex-col">
-      <div className="relative py-24 sm:pt-32 lg:pt-40 pb-0">
+      <div className="relative py-16 sm:pt-18 lg:pt-20 pb-0">
         <div
           className="absolute -inset-x-[calc(100%)] top-0 -bottom-[calc(50%)] -z-10 transform-gpu overflow-hidden hblur-3xl"
           aria-hidden="true"

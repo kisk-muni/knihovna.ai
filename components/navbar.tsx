@@ -23,11 +23,16 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
   return (
     <Nav
       className={`flex flex-col px-0 ${
-        sticky ? "backdrop-blur-xl bg-[#fdf0ee]/30" : "bg-white"
+        sticky ? "backdrop-blur-xl bg-white/80" : "bg-white"
       }`}
       classNames={{
-        wrapper: `py-2 justify-start mx-auto px-0 ${
-          sticky ? "max-w-screen-xl border-b border-[#f5e0d5]" : "px-6 lg:px-8"
+        base: sticky
+          ? "border-b border-[#e4dfdc66] shadow-lg shadow-[#e4dfdc66]"
+          : "",
+        wrapper: `py-2 justify-start mx-auto ${
+          sticky
+            ? "w-full md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl px-6 lg:px-8"
+            : "px-6 lg:px-8"
         }`,
         menuItem:
           "data-[active=true]:text-primary data-[active=true]:font-semibold text-text hover:text-text/80",
@@ -50,7 +55,7 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
           <Logo />
         </Link>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden sm:flex gap-4" justify="start">
         {siteConfig.navigation.map((link, i) => (
           <NavbarItem
             isActive={pathname === link.href}

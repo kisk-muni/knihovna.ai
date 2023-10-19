@@ -14,8 +14,8 @@ export const metadata: Metadata = createMetadata({
 export default async function BlogPage() {
   const posts = await getBlogPages();
   return (
-    <div className={"mt-6"}>
-      <div className="mb-14">
+    <div>
+      <div className="mt-12 mb-18">
         <Headline as="h1" level="ultra">
           Všechny příspěvky
         </Headline>
