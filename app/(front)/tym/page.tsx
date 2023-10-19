@@ -2,6 +2,7 @@ import Headline from "@/components/headline";
 import siteConfig from "@/site-config";
 import { createMetadata } from "@/lib/metadata";
 import ContactCard from "@/components/contact-card";
+import BackgroundGradient from "@/components/background-gradient";
 
 export const metadata = createMetadata({
   title: "Náš tým",
@@ -13,13 +14,8 @@ export const metadata = createMetadata({
 export default function AboutPage() {
   return (
     <main className="flex flex-col">
+      <BackgroundGradient />
       <div className="relative py-16 sm:pt-18 lg:pt-20 pb-0">
-        <div
-          className="absolute -inset-x-[calc(100%)] top-0 -bottom-[calc(50%)] -z-10 transform-gpu overflow-hidden hblur-3xl"
-          aria-hidden="true"
-        >
-          <div className="absolute inset-x-0 inset-y-0 bg-gradient-to-b from-[#FCF2E8] to-[#ffffff]"></div>
-        </div>
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
           <div className="mt-6">
             <h1 className="mt-6 text-text leading-normal text-5xl font-extrabold mb-6">

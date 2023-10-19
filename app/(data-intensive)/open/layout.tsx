@@ -1,9 +1,9 @@
 "use client";
-import Container from "@/components/container";
 import Tabs from "./tabs";
 import Footer from "@/components/footer";
 import { ErrorBoundary } from "react-error-boundary";
 import { Fallback } from "@/components/fallback";
+import { Fragment } from "react";
 
 export default async function OpenProjectLayout({
   children,
@@ -11,10 +11,10 @@ export default async function OpenProjectLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <Fragment>
       <Tabs />
       <ErrorBoundary fallbackRender={Fallback}>{children}</ErrorBoundary>
       <Footer />
-    </div>
+    </Fragment>
   );
 }

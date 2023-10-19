@@ -16,14 +16,16 @@ export default function RootLayout({
       <Head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
-      <Providers>
-        <body
-          className={`${inter.className} flex flex-col min-h-screen max-w-full overflow-x-hidden`}
-        >
-          {children}
-          <Analytics />
-        </body>
-      </Providers>
+      <body className={`${inter.className}`}>
+        <Providers>
+          <div
+            className={`flex flex-col min-h-screen max-w-full overflow-x-hidden`}
+          >
+            {children}
+            <Analytics />
+          </div>
+        </Providers>
+      </body>
     </html>
   );
 }
