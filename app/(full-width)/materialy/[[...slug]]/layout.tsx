@@ -30,7 +30,6 @@ function getAllSlugs(pages: QueryResultWithMarkdownContents<GuidesSchema>[]) {
 export async function generateStaticParams() {
   const pages = await getMaterialsPages();
   const slugs = getAllSlugs(pages);
-  console.log(slugs);
   return slugs;
 }
 

@@ -28,19 +28,24 @@ type Config = {
   filter?: any | any[];
 };
 
-export function convertToToc(
-  headings: { level: number; text: string }[]
-): TocItem[] {
+export function convertToToc(headings: { level: number; text: string }[]): {
+  nestedHeadings: TocItem[];
+  ids: string[];
+} {
+  const ids: string[] = [];
   const nestedHeadings: TocItem[] = [];
   const stack: TocItem[] = [];
 
   headings.forEach((heading) => {
+    const id = slugify(heading.text) || "";
     const newItem: TocItem = {
       level: heading.level,
       text: heading.text,
-      href: "#" + slugify(heading.text) || "",
+      id: id,
       children: [],
     };
+
+    ids.push(id);
 
     while (stack.length > 0 && heading.level <= stack[stack.length - 1].level) {
       stack.pop();
@@ -55,7 +60,7 @@ export function convertToToc(
     stack.push(newItem);
   });
 
-  return nestedHeadings;
+  return { nestedHeadings, ids };
 }
 
 export default async function getData<ItemProperties>(
@@ -140,8 +145,10 @@ async function getItem<ItemProperties>(
                 : "",
             };
           });
-        const toc = convertToToc(headings);
-        (item as QueryResultWithMarkdownContents<ItemProperties>).toc = toc;
+        const { nestedHeadings, ids } = convertToToc(headings);
+        (item as QueryResultWithMarkdownContents<ItemProperties>).toc =
+          nestedHeadings;
+        (item as QueryResultWithMarkdownContents<ItemProperties>).ids = ids;
       }
       const x = await n2m.blocksToMarkdown(results);
       n2m.setCustomTransformer("child_database", transformChildDatabase);

@@ -136,7 +136,7 @@ export type QueryResult<Properties> = {
 export type TocItem = {
   text: string;
   level: number;
-  href: string;
+  id: string;
   children: TocItem[];
 };
 
@@ -144,6 +144,7 @@ export type QueryResultWithMarkdownContents<Properties> =
   QueryResult<Properties> & {
     markdownContents?: string;
     toc?: TocItem[];
+    ids?: string[];
   };
 
 export type State = Select<"Draft" | "Published" | "Archived">;

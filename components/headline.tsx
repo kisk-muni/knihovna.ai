@@ -6,15 +6,16 @@ export default function Headline({
   className,
   level,
   as,
+  id,
 }: {
   children: React.ReactNode;
   as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   level: "1" | "2" | "3" | "4" | "5" | "6" | "ultra";
   className?: string | null;
+  id?: string;
 }) {
-  const id = (typeof children === "string" && slugify(children)) || "";
   const props = {
-    id,
+    id: id ? id : (typeof children === "string" && slugify(children)) || "",
     className: classNames(
       "block text-text mb-6 font-bold tracking-tight scroll-mt-20 leading-tight md:leading-tight",
       {

@@ -27,6 +27,7 @@ const button = cva(
       },
       variant: {
         solid: "",
+        link: "",
         ghost: ["bg-transparent", "hover:bg-transparent"],
         pagination: [
           "flex-col",
@@ -58,7 +59,7 @@ const button = cva(
       },
       {
         theme: "primary",
-        variant: "ghost",
+        variant: ["ghost", "link"],
         className: "text-primary hover:text-primarydarker",
       },
       {
