@@ -14,6 +14,8 @@ import {
   Headline5,
   Headline6,
 } from "@/components/headline";
+import remarkGfm from "remark-gfm";
+import { compileMDX } from "next-mdx-remote/rsc";
 
 export const defaultComponents: any = {
   img: ResponsiveImage,
@@ -31,3 +33,27 @@ export const defaultComponents: any = {
   h6: Headline6,
   Card: Card,
 };
+
+export async function compile(source: string) {
+  return await compileMDX({
+    options: {
+      scope: {},
+      mdxOptions: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [],
+        remarkRehypeOptions: {
+          footnoteLabel: "Reference",
+          footnoteLabelTagName: "div",
+          footnoteLabelProperties: {
+            style: "display: none;",
+          },
+          footnoteBackLabel: "Zpět na referenci",
+        },
+        format: "mdx",
+      },
+      parseFrontmatter: false,
+    },
+    source,
+    components: defaultComponents,
+  });
+}

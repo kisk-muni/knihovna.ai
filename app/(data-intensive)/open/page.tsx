@@ -4,11 +4,12 @@ import BackgroundGradient from "@/components/background-gradient";
 import getData from "@/lib/notion/get-data";
 import siteConfig from "@/site-config";
 import { TodoSchema } from "@/lib/notion/schema";
-import RoadmapTimeline from "@/components/visualization/roadmap/roadmap-timeline";
 import Card from "@/components/card";
+import getRoadmapData from "@/components/visualization/roadmap/get-roadmap-data";
 // import Roadmap from "@/components/visualization/roadmap/roadmap-timeline";
 
 export default async function RoadmapPage() {
+  const data = await getRoadmapData();
   return (
     <main className="my-6">
       <Container size="max">
@@ -22,7 +23,9 @@ export default async function RoadmapPage() {
               Harmonogram projektu
             </Headline>
             <div className="-mx-6 -mb-8">
-              <RoadmapTimeline />
+              {data.themes.map((item, index) => (
+                <div key={index}>{item?.name}</div>
+              ))}
             </div>
           </Card>
         </section>

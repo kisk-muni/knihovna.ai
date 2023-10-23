@@ -44,7 +44,7 @@ export default function Tabs() {
               {tab.label}
             </button>
             <div
-              className={classNames("h-[3px] rounded-full mx-2", {
+              className={classNames("h-[2px] rounded-full mx-2", {
                 "bg-text": pathname == tab.href,
                 "bg-transparent": pathname != tab.href,
               })}

@@ -17,7 +17,7 @@ export default function Headline({
   const props = {
     id: id ? id : (typeof children === "string" && slugify(children)) || "",
     className: classNames(
-      "block text-text mb-6 font-bold tracking-tight scroll-mt-20 leading-tight md:leading-tight",
+      "text-text mb-6 font-bold tracking-tight scroll-mt-20 leading-tight md:leading-tight",
       {
         "md:text-5xl text-4xl font-extrabold ": level === "ultra",
         "md:text-4xl text-3xl": level === "1",

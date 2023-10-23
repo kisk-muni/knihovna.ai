@@ -188,7 +188,7 @@ export type MaterialsSchema = {
   Description: RichText;
   Slug: RichText;
   State: State;
-  "Material type": Select<"Research" | "Workshop">;
+  "Material type": Select<"Research" | "Workshop" | "Collection">;
   "Published at": Dates;
   Authors: People;
   "Recommended Materials": Relation<RecommendedResourcesSchema>;
