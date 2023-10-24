@@ -6,7 +6,7 @@ import siteConfig from "@/site-config";
 import { TodoSchema } from "@/lib/notion/schema";
 import Card from "@/components/card";
 import getRoadmapData from "@/components/visualization/roadmap/get-roadmap-data";
-// import Roadmap from "@/components/visualization/roadmap/roadmap-timeline";
+import Roadmap from "@/components/visualization/roadmap/roadmap-timeline";
 
 export default async function RoadmapPage() {
   const data = await getRoadmapData();
@@ -23,9 +23,10 @@ export default async function RoadmapPage() {
               Harmonogram projektu
             </Headline>
             <div className="-mx-6 -mb-8">
-              {data.themes.map((item, index) => (
+              <Roadmap />
+              {/* {data.themes.map((item, index) => (
                 <div key={index}>{item?.name}</div>
-              ))}
+              ))} */}
             </div>
           </Card>
         </section>

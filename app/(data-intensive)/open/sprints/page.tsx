@@ -3,7 +3,6 @@ import Headline from "@/components/headline";
 import FormatedDate from "@/components/formated-date";
 import classNames from "classnames";
 import { isWithinInterval } from "date-fns";
-import { FireIcon } from "@heroicons/react/24/solid";
 import { getSprints } from "@/lib/notion/get-sprints";
 import Link from "next/link";
 import Container from "@/components/container";
@@ -29,6 +28,8 @@ async function getSprintKanbans() {
   return sprints;
 }
 
+const statuses = ["Not Started", "In Progress", "Review", "Done"];
+
 export default async function SprintsPage() {
   const sprints = await getSprintKanbans();
 
@@ -48,6 +49,34 @@ export default async function SprintsPage() {
             <p className="uppercase mt-2 mb-4 text-sm font-medium text-text/80">
               Navigace
             </p>
+            {sprints.map((sprint, i) => {
+              const active = isWithinInterval(new Date(), {
+                start: sprint.dates.start,
+                end: sprint.dates.end,
+              });
+              return (
+                <div key={i} className="mb-2 -ml-2">
+                  <Link
+                    className={classNames(
+                      "block py-1 px-2 rounded-lg hover:bg-sheet transition duration-150 ease-out",
+                      {
+                        "bg-orange": active,
+                        "bg-white": !active,
+                      }
+                    )}
+                    href={`/open/sprints#${sprint.id}`}
+                  >
+                    <div className="text-sm font-medium">
+                      {sprint.name.split(" (")[0].split(".").join("")}
+                      {" ("}
+                      <FormatedDate date={sprint.dates.start} /> -{" "}
+                      <FormatedDate date={sprint.dates.end} />
+                      {")"}
+                    </div>
+                  </Link>
+                </div>
+              );
+            })}
           </aside>
           <div className="max-w-8xl pr-5 mx-auto">
             <section className="text-text mt-10">
@@ -75,8 +104,11 @@ export default async function SprintsPage() {
                             </div>
                           )}
                         </div>
-                        <div className="text-base font-bold mr-4">
-                          {sprint.name.split(" (")[0]}
+                        <div
+                          className="text-base font-bold mr-4 scroll-mt-32"
+                          id={sprint.id}
+                        >
+                          {sprint.name.split(" (")[0].split(".").join("")}
                         </div>
                         <div className="text-base">
                           <FormatedDate date={sprint.dates.start} /> -{" "}
@@ -88,8 +120,9 @@ export default async function SprintsPage() {
                         hideScrollBar
                         className="pb-16 max-w-full overflow-scroll"
                       >
-                        <div className="grid grid-cols-5 gap-2 max-w-screen">
-                          {Object.keys(sprint.todos).map((status, j) => {
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 max-w-screen">
+                          {statuses.map((status, j) => {
+                            //Object.keys(sprint.todos).map((status, j) => {
                             const todos =
                               sprint.todos[status as keyof typeof sprint.todos];
                             return (
@@ -100,14 +133,14 @@ export default async function SprintsPage() {
                                 <div className="mb-1">
                                   <div
                                     className={classNames(
-                                      "rounded-full text-white px-2 py-2 uppercase text-gray-500 font-medium inline-block text-sm"
+                                      "rounded-full text-text/80 px-2 py-2 uppercase text-gray-500 font-medium inline-block text-sm"
                                     )}
                                   >
                                     {status}
                                   </div>
                                 </div>
                                 <div className="flex flex-col gap-1">
-                                  {todos.map((todo, k) => {
+                                  {todos?.map((todo, k) => {
                                     return (
                                       <div
                                         key={k}
