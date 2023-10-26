@@ -6,6 +6,7 @@ import Container from "@/components/container";
 import Section from "@/components/section";
 import ContactCard from "@/components/contact-card";
 import Card from "@/components/card";
+import Bookmark from "@/components/bookmark";
 import {
   Headline1,
   Headline2,
@@ -25,6 +26,7 @@ export const defaultComponents: any = {
   Section: Section,
   Placeholder: PlaceholderComponent,
   ContactCard: ContactCard,
+  Bookmark: Bookmark,
   h1: Headline1,
   h2: Headline2,
   h3: Headline3,
@@ -39,7 +41,6 @@ export async function compile(source: string) {
     options: {
       scope: {},
       mdxOptions: {
-        remarkPlugins: [remarkGfm],
         rehypePlugins: [],
         remarkRehypeOptions: {
           footnoteLabel: "Reference",
