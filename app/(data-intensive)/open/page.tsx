@@ -7,9 +7,18 @@ import { TodoSchema } from "@/lib/notion/schema";
 import Card from "@/components/card";
 import getRoadmapData from "@/components/visualization/roadmap/get-roadmap-data";
 import Roadmap from "@/components/visualization/roadmap/roadmap-timeline";
+import { Metadata } from "next";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "Roadmap",
+  description: "Projektový harmonogram a plánované výstupy projektu.",
+});
+
+export const revalidate = 3600;
 
 export default async function RoadmapPage() {
-  const data = await getRoadmapData();
+  // const data = await getRoadmapData();
   return (
     <main className="my-6">
       <Container size="max">

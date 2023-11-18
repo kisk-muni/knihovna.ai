@@ -7,6 +7,15 @@ import { getSprints } from "@/lib/notion/get-sprints";
 import Link from "next/link";
 import Container from "@/components/container";
 import { ScrollShadow } from "@nextui-org/react";
+import { Metadata } from "next";
+import { createMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createMetadata({
+  title: "Sprinty",
+  description: "Práci a úkoly v projektu organizujeme do týdenních sprintů.",
+});
+
+export const revalidate = 3600;
 
 async function getSprintKanbans() {
   const sprints = (await getSprints())?.map((sprint) => {
