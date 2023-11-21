@@ -67,7 +67,7 @@ export default async function SprintsPage() {
                 <div key={i} className="mb-2 -ml-2">
                   <Link
                     className={classNames(
-                      "block py-1 px-2 rounded-lg hover:bg-sheet transition duration-150 ease-out",
+                      "block py-1 px-2 rounded-lg text-text hover:bg-sheet transition duration-150 ease-out",
                       {
                         "bg-orange": active,
                         "bg-white": !active,
