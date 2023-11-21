@@ -80,7 +80,7 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
             ))}
           </div>
         </header>
-        <div className="container pb-24 prose-lg text-text prose-headings:font-bold prose-headings:leading-tight  prose-ul:list-disc prose-ol:list-decimal">
+        <div className="container pb-24 prose-lg text-text prose-headings:font-bold prose-headings:leading-tight prose-a:text-primary prose-ul:list-disc prose-ol:list-decimal">
           <Suspense fallback={<div>Loading...</div>}>
             <MDXRemote
               source={content}
