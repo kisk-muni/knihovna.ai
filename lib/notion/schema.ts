@@ -193,8 +193,8 @@ export type MaterialsSchema = {
   "Published at": Dates;
   Authors: People;
   "Recommended Materials": Relation<RecommendedResourcesSchema>;
-  "Sub-pages": Relation<GuidesSchema>;
-  "Parent page": Relation<GuidesSchema>;
+  "Sub-pages": Relation<MaterialsSchema>;
+  "Parent page": Relation<MaterialsSchema>;
 };
 
 export type PageSchema = {

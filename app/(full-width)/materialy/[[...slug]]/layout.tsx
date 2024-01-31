@@ -2,14 +2,16 @@ import BackgroundGradient from "@/components/background-gradient";
 // import { Button } from "@/components/button";
 import Container from "@/components/container";
 import {
-  GuidesSchema,
+  MaterialsSchema,
   QueryResultWithMarkdownContents,
 } from "@/lib/notion/schema";
 import { getMaterialsPages } from "@/lib/notion/get-materials-data";
 
 export const revalidate = 3600;
 
-function getAllSlugs(pages: QueryResultWithMarkdownContents<GuidesSchema>[]) {
+function getAllSlugs(
+  pages: QueryResultWithMarkdownContents<MaterialsSchema>[]
+) {
   const slugs: { slug: string[] }[] = [];
   pages.forEach((page) => {
     const slug = page.properties.Slug.rich_text[0]?.plain_text;
