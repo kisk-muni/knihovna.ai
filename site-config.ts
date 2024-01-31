@@ -59,20 +59,20 @@ const siteConfig: SiteConfig = {
   twitter: "https://twitter.com/knihovna_ai",
   team: [
     {
+      id: "kacova",
+      name: "Natálie Káčová",
+      description: "PI/PM",
+      avatar: "/avatars/natalie-kacova.jpeg",
+      displayOnTeamPage: true,
+      notionId: "1773415b-2754-4fb3-86e7-98b34cd6dc75",
+    },
+    {
       id: "skyrik",
       name: "Petr Škyřík",
       description: "",
       avatar: "/avatars/petr-skyrik.jpeg",
       displayOnTeamPage: true,
       notionId: "2d28f926-1996-495f-b35f-b0caf7d596ff",
-    },
-    {
-      id: "kacova",
-      name: "Natálie Káčová",
-      description: "PM",
-      avatar: "/avatars/natalie-kacova.jpeg",
-      displayOnTeamPage: true,
-      notionId: "1773415b-2754-4fb3-86e7-98b34cd6dc75",
     },
     {
       id: "tokmakova",
@@ -105,6 +105,14 @@ const siteConfig: SiteConfig = {
       description: "Výzkum",
       displayOnTeamPage: true,
       notionId: "5bc11fff-07a4-4daf-93db-ae1acd25ea43",
+    },
+    {
+      id: "kobylkova",
+      name: "Veronika Kobylková",
+      description: "Komunikace",
+      avatar: "/avatars/veronika-kobylkova.jpg",
+      displayOnTeamPage: true,
+      notionId: "3dcb0c15-b81a-4d70-9297-772fa307bd39",
     },
     {
       id: "cernocky",
