@@ -15,6 +15,7 @@ function prepareNavitems(
     const slug = item.properties.Slug.rich_text[0]?.plain_text;
     const type = item.properties["Material type"].select.name;
     const publishedAt = item.properties["Published at"].date.start;
+    const state = item.properties.State.multi_select.map((s) => s.name);
     const description =
       item.properties["Description"]?.rich_text[0]?.plain_text;
     const href =
@@ -22,6 +23,7 @@ function prepareNavitems(
     return {
       type,
       name,
+      state,
       description,
       publishedAt: publishedAt ? new Date(publishedAt) : undefined,
       href,

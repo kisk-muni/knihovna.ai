@@ -55,6 +55,34 @@ const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
         <div className="max-w-7xl pr-5 mx-auto">
           <div className="grid grid-cols-12 relative gap-4">
             <div className="relative col-span-12 md:col-span-9 transition-all ease-out duration-100">
+              <div></div>
+              <div className="text-text text-lg normal-case bg-blue-100 py-2 flex items-start px-3 rounded-xl">
+                <div className="inline-block rounded-full text-blue-600 mt-0.5 mr-1.5">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+                    />
+                  </svg>
+                </div>
+                <div className="">
+                  <div className="inline-block text-blue-600 font-semibold tracking-tight">
+                    {"Tato stránka je rozpracovaná"}
+                  </div>
+                  <p className="text-base mt-0">
+                    Obsah této stránky se bude měnit. Může být doplněn, upraven
+                    či revidován.{" "}
+                  </p>
+                </div>
+              </div>
               <div className="my-6">
                 <Link href="/materialy">
                   <Button

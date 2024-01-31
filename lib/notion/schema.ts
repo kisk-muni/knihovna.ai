@@ -148,6 +148,7 @@ export type QueryResultWithMarkdownContents<Properties> =
   };
 
 export type State = Select<"Draft" | "Published" | "Archived">;
+export type MultiState = MultiSelect<"Draft" | "Published" | "Archived">;
 
 export type RecommendedResourcesSchema = {
   Name: Title;
@@ -187,7 +188,7 @@ export type MaterialsSchema = {
   Title: Title;
   Description: RichText;
   Slug: RichText;
-  State: State;
+  State: MultiState;
   "Material type": Select<"Research" | "Workshop" | "Collection">;
   "Published at": Dates;
   Authors: People;
@@ -243,6 +244,6 @@ export type RoadmapSchema = {
   Type: Select<"Theme" | "Epic">;
   Status: Status;
   Theme: Relation<RoadmapSchema>;
-  Epic: Relation<RoadmapSchema>;
+  Epics: Relation<RoadmapSchema>;
   "To-dos": Relation<TodoSchema>;
 };

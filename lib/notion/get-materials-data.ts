@@ -17,8 +17,8 @@ export async function getMaterialsPages() {
         and: [
           {
             property: "State",
-            select: {
-              equals: "Published",
+            multi_select: {
+              contains: "Published",
             },
           },
           {
