@@ -10,6 +10,9 @@ import TocNavigation from "@/components/toc-navigation";
 import { Button } from "@/components/button";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import FormatedDate from "@/components/formated-date";
+import { formatRelative } from "date-fns";
+import { cs } from "date-fns/locale";
 
 export const revalidate = 3600;
 
@@ -55,8 +58,7 @@ const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
         <div className="max-w-7xl pr-5 mx-auto">
           <div className="grid grid-cols-12 relative gap-4">
             <div className="relative col-span-12 md:col-span-9 transition-all ease-out duration-100">
-              <div></div>
-              <div className="text-text text-lg normal-case bg-blue-100 py-2 flex items-start px-3 rounded-xl">
+              <div className="text-text text-lg normal-case bg-blue-100 py-2 flex items-start px-3 mb-8 rounded-xl">
                 <div className="inline-block rounded-full text-blue-600 mt-0.5 mr-1.5">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -78,8 +80,15 @@ const MaterialPage = async ({ params }: { params: { slug?: string[] } }) => {
                     {"Tato stránka je rozpracovaná"}
                   </div>
                   <p className="text-base mt-0">
-                    Obsah této stránky se bude měnit. Může být doplněn, upraven
-                    či revidován.{" "}
+                    Obsah této stránky se bude měnit. Naposledy upraveno{" "}
+                    {page?.last_edited_time && (
+                      <FormatedDate
+                        className="font-bold"
+                        originalRelative={true}
+                        date={new Date(page?.last_edited_time)}
+                      />
+                    )}
+                    .
                   </p>
                 </div>
               </div>
