@@ -33,7 +33,10 @@ function prepareNavitems(
 async function getPagesTree() {
   const pages = await getMaterialsPages();
   const navItems = prepareNavitems("/materialy", pages);
-  return navItems;
+  return navItems?.sort(
+    (a, b) =>
+      (b?.publishedAt?.getTime() || 0) - (a?.publishedAt?.getTime() || 0)
+  );
 }
 
 export async function MaterialsList() {
