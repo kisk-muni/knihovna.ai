@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  fastRefresh: true,
   experimental: {
     serverComponentsExternalPackages: [
       "@sparticuz/chromium-min",
