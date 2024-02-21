@@ -62,7 +62,7 @@ const siteConfig: SiteConfig = {
       id: "kacova",
       name: "Natálie Káčová",
       description: "PI/PM",
-      avatar: "/avatars/natalie-kacova.jpeg",
+      avatar: "/avatars/natalie-kacova.jpg",
       displayOnTeamPage: true,
       notionId: "1773415b-2754-4fb3-86e7-98b34cd6dc75",
     },
