@@ -1,6 +1,6 @@
-import BackgroundGradient from "@/components/background-gradient";
+import BackgroundGradient from "@/components/ui/background-gradient";
 // import { Button } from "@/components/button";
-import Container from "@/components/container";
+import Container from "@/components/ui/container";
 import {
   GuidesSchema,
   QueryResultWithMarkdownContents,

@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import Card from "@/components/card";
-import Headline from "@/components/headline";
+import Card from "@/components/ui/card";
+import Headline from "@/components/ui/headline";
 import { PostMeta } from "@/lib/notion/get-blog-data";
-import FormatedDate from "@/components/formated-date";
+import FormatedDate from "@/components/ui/formated-date";
 import classNames from "classnames";
 
 export default function PostCard({

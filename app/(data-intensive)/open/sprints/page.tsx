@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import Headline from "@/components/headline";
-import FormatedDate from "@/components/formated-date";
+import Headline from "@/components/ui/headline";
+import FormatedDate from "@/components/ui/formated-date";
 import classNames from "classnames";
 import { isWithinInterval } from "date-fns";
 import { getSprints } from "@/lib/notion/get-sprints";
 import Link from "next/link";
-import Container from "@/components/container";
+import Container from "@/components/ui/container";
 import { ScrollShadow } from "@nextui-org/react";
 import { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";

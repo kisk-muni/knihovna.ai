@@ -1,6 +1,6 @@
 import siteConfig from "@/site-config";
 import Link from "next/link";
-import Container from "./container";
+import Container from "./ui/container";
 
 function Item({ href, title }: { href: string; title: string }) {
   return (

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import Headline from "@/components/headline";
+import Headline from "@/components/ui/headline";
 import { createMetadata } from "@/lib/metadata";
 import { getMaterialsPage } from "@/lib/notion/get-materials-data";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -7,10 +7,10 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { compile } from "@/lib/mdx";
 import { MaterialsList } from "./materials-list";
 import TocNavigation from "@/components/toc-navigation";
-import { Button } from "@/components/button";
+import { Button } from "@/components/ui/button";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import FormatedDate from "@/components/formated-date";
+import FormatedDate from "@/components/ui/formated-date";
 import { formatRelative } from "date-fns";
 import { cs } from "date-fns/locale";
 

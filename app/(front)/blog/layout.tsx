@@ -1,5 +1,5 @@
-import BackgroundGradient from "@/components/background-gradient";
-import Container from "@/components/container";
+import BackgroundGradient from "@/components/ui/background-gradient";
+import Container from "@/components/ui/container";
 
 export default function BlogLayout({
   children,

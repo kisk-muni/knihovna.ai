@@ -1,14 +1,13 @@
 import classNames from "classnames";
 import { format, isThisYear, differenceInDays } from "date-fns";
 import { cs } from "date-fns/locale";
-import Link from "next/link";
-import getRoadmapData from "./get-roadmap-data";
+import getTimelineData from "./get-timeline-data";
 import { Fragment } from "react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { defaultComponents } from "@/lib/mdx";
 
-export default async function RoadmapPhases() {
-  const data = await getRoadmapData();
+export default async function TimelinePhases() {
+  const data = await getTimelineData();
 
   return (
     <Fragment>

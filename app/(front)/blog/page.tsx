@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import Headline from "@/components/headline";
+import Headline from "@/components/ui/headline";
 import type { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
 import PostCard from "@/app/(front)/blog/[slug]/post-card";

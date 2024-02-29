@@ -1,4 +1,3 @@
-import Image from "next/image";
 import notion from "./notion";
 import n2m from "./notion2md";
 import {
@@ -151,6 +150,7 @@ async function getItem<ItemProperties>(
         (item as QueryResultWithMarkdownContents<ItemProperties>).ids = ids;
       }
       const x = await n2m.blocksToMarkdown(results);
+      n2m.setCustomTransformer("bookmark", transformBookmark);
       n2m.setCustomTransformer("child_database", transformChildDatabase);
       n2m.setCustomTransformer("image", transformImage);
       (
@@ -175,5 +175,24 @@ export function transformImage(block: any) {
     return `
     <img src="${image?.external?.url}" />
   `;
+  return "";
+}
+
+export function transformBookmark(block: any) {
+  const { type, bookmark } = block as {
+    type: any;
+    bookmark?: {
+      caption: { plain_text: string }[];
+      url: string;
+    };
+  };
+  return "";
+  if (type == "bookmark") {
+    return `
+    <Bookmark url="${bookmark?.url}" description="${
+      bookmark?.caption.length ? bookmark?.caption[0].plain_text : ""
+    }" />
+  `;
+  }
   return "";
 }

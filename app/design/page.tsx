@@ -1,8 +1,8 @@
-import Card from "@/components/card";
-import Container from "@/components/container";
-import Headline from "@/components/headline";
-import FormatedDate from "@/components/formated-date";
-import { Button } from "@/components/button";
+import Card from "@/components/ui/card";
+import Container from "@/components/ui/container";
+import Headline from "@/components/ui/headline";
+import FormatedDate from "@/components/ui/formated-date";
+import { Button } from "@/components/ui/button";
 
 /* eslint-disable @next/next/no-img-element */
 export default function DesignPage() {

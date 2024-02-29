@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import { Button } from "./button";
-import Card from "./card";
-import TypeformButton from "./typeform-button";
+import { Button } from "./ui/button";
+import Card from "./ui/card";
+import TypeformButton from "./ui/typeform-button";
 import siteConfig from "@/site-config";
 
 export default function ContactCard({

@@ -1,0 +1,17 @@
+import { relations } from "drizzle-orm";
+import { pgTable, text, uuid } from "drizzle-orm/pg-core";
+
+import { usersToBlogPosts } from "../schema";
+
+export const users = pgTable("users", {
+  id: uuid("id").defaultRandom().notNull().primaryKey(),
+  notionId: text("notion_id").unique(),
+  name: text("name").notNull(),
+  username: text("username").notNull(),
+  description: text("description"),
+});
+
+export const usersRelations = relations(users, ({ many }) => ({
+  blogPosts: many(usersToBlogPosts),
+  todos: many(usersToBlogPosts),
+}));

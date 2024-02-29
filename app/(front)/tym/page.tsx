@@ -1,8 +1,8 @@
-import Headline from "@/components/headline";
+import Headline from "@/components/ui/headline";
 import siteConfig from "@/site-config";
 import { createMetadata } from "@/lib/metadata";
 import ContactCard from "@/components/contact-card";
-import BackgroundGradient from "@/components/background-gradient";
+import BackgroundGradient from "@/components/ui/background-gradient";
 
 export const metadata = createMetadata({
   title: "Náš tým",

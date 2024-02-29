@@ -7,7 +7,7 @@ export default async function getRoadmapData() {
   const data = await getData<RoadmapSchema>(
     siteConfig.notion.databases.roadmap,
     {
-      withBlocks: true,
+      withBlocks: false,
       filter: {
         property: "Type",
         select: {
@@ -17,7 +17,7 @@ export default async function getRoadmapData() {
     }
   );
 
-  const roadmapThemes = data
+  const timelineThemes = data
     .map((item) => {
       return {
         id: item.id,
@@ -33,9 +33,9 @@ export default async function getRoadmapData() {
       return a.dates.start.getTime() - b.dates.start.getTime();
     });
   const range = {
-    start: roadmapThemes[0].dates.start,
-    end: roadmapThemes[roadmapThemes.length - 1].dates.end,
+    start: timelineThemes[0].dates.start,
+    end: timelineThemes[timelineThemes.length - 1].dates.end,
   };
-  roadmapThemes.push(roadmapThemes.shift() as any);
-  return { themes: roadmapThemes, range };
+  timelineThemes.push(timelineThemes.shift() as any);
+  return { themes: timelineThemes, range };
 }

@@ -1,5 +1,5 @@
-import Container from "@/components/container";
-import Headline from "@/components/headline";
+import Container from "@/components/ui/container";
+import Headline from "@/components/ui/headline";
 import siteConfig from "@/site-config";
 import Link from "next/link";
 

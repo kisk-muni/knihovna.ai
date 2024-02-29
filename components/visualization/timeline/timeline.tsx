@@ -3,7 +3,7 @@ import { format, isThisYear, differenceInDays } from "date-fns";
 import { cs } from "date-fns/locale";
 import Link from "next/link";
 import { ArrowsPointingOutIcon } from "@heroicons/react/24/solid";
-import getRoadmapData from "./get-roadmap-data";
+import getTimelineData from "./get-timeline-data";
 
 function FloatingButton(props: { children: React.ReactNode }) {
   const { children } = props;
@@ -19,7 +19,7 @@ export default async function RoadmapTimeline({
 }: {
   detailed?: boolean;
 }) {
-  const data = await getRoadmapData();
+  const data = await getTimelineData();
 
   const now = new Date();
   const percentage =

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import Headline from "@/components/headline";
-import FormatedDate from "@/components/formated-date";
+import Headline from "@/components/ui/headline";
+import FormatedDate from "@/components/ui/formated-date";
 import { defaultComponents } from "@/lib/mdx";
 import Link from "next/link";
 import { Fragment, Suspense } from "react";

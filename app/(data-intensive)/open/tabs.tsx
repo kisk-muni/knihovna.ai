@@ -1,5 +1,5 @@
 "use client";
-import Container from "@/components/container";
+import Container from "@/components/ui/container";
 import Navbar from "@/components/navbar";
 import classNames from "classnames";
 import Link from "next/link";
@@ -7,12 +7,28 @@ import { usePathname } from "next/navigation";
 
 const tabs = [
   {
-    label: "Roadmap",
+    label: "Přehled",
     href: "/open",
+  },
+  {
+    label: "O projektu",
+    href: "/open/about",
+  },
+  {
+    label: "Plán",
+    href: "/open/roadmap",
   },
   {
     label: "Sprinty",
     href: "/open/sprints",
+  },
+  {
+    label: "Úkoly",
+    href: "/open/tasks",
+  },
+  {
+    label: "Zapojit se",
+    href: "/open/connect",
   },
 ];
 

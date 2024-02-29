@@ -1,7 +1,7 @@
 "use client";
-import Card from "@/components/card";
-import FormatedDate from "@/components/formated-date";
-import Headline from "@/components/headline";
+import Card from "@/components/ui/card";
+import FormatedDate from "@/components/ui/formated-date";
+import Headline from "@/components/ui/headline";
 import { MultiState } from "@/lib/notion/schema";
 import classNames from "classnames";
 import Link from "next/link";

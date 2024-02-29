@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import Card from "@/components/card";
-import Headline from "@/components/headline";
+import Card from "@/components/ui/card";
+import Headline from "@/components/ui/headline";
 import { defaultComponents } from "@/lib/mdx";
 import { createMetadata } from "@/lib/metadata";
 import { getGuidesPage } from "@/lib/notion/get-guides-data";
