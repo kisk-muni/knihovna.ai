@@ -1,4 +1,6 @@
+import Link from "next/link";
 import Container from "./ui/container";
+import { Button } from "./ui/button";
 
 export default function SectionHero() {
   return (
@@ -20,7 +22,18 @@ export default function SectionHero() {
                 pomoci ohroženým skupinám obyvatel. AI pro společnost nemá být
                 ohrožením ale novou příležitostí.
               </p>
-              <p></p>
+              <div className="mt-10 flex items-center justify-center gap-x-4">
+                <Link href="#zapojeni">
+                  <Button theme="primary" size="base">
+                    Jak se zapojit?
+                  </Button>
+                </Link>
+                <Link href="/o-projektu">
+                  <Button theme="gray" size="base" variant="ghost">
+                    Více o projektu
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

@@ -13,6 +13,8 @@ export const epics = pgTable("epic", {
   stateId: uuid("state_id"),
 });
 
+export type Epic = typeof epics.$inferSelect;
+
 export const epicsRelations = relations(epics, ({ many, one }) => ({
   themes: many(themesToEpics),
   todos: many(todosToEpics),

@@ -29,10 +29,10 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
       height={"52px"}
       classNames={{
         base: sticky ? "" : "",
-        wrapper: `py-0 px-5 lg:px-8 w-full max-w-full mx-auto ${
+        wrapper: `py-0 w-full max-w-full mx-auto ${
           sticky
-            ? "md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl"
-            : ""
+            ? " px-5 lg:px-8 md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl"
+            : "px-0"
         }`,
         menuItem:
           "data-[active=true]:text-primary data-[active=true]:font-semibold text-text hover:text-text/80",
@@ -44,7 +44,7 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
     >
       <div
         className={classNames(
-          "flex w-full justify-start items-center gap-4 py-2",
+          "flex w-full justify-start items-center gap-4 py-3",
           {
             "border-b border-[#efdecc]": sticky,
           }
@@ -75,15 +75,6 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
               <Link href={link.href}>{link.title}</Link>
             </NavbarItem>
           ))}
-        </NavbarContent>
-        <NavbarContent justify="end" className="ml-auto">
-          <NavbarItem>
-            <Link href={"/open"}>
-              <Button theme="primary" size="small">
-                Otevřený projekt
-              </Button>
-            </Link>
-          </NavbarItem>
         </NavbarContent>
       </div>
       <NavbarMenu>

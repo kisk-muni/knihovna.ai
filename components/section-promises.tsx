@@ -15,7 +15,7 @@ export default function SectionPromises() {
       <Container>
         <div className="flex flex-col gap-x-6">
           <Headline level="2" as="h2" className="max-w-sm mb-10">
-            Co od nás můžete čekat?
+            Co děláme?
           </Headline>
           <div className="grid md:grid-cols-2 gap-x-6 gap-y-6">
             <Card size="md" className="bg-sheet flex flex-col justify-start">
@@ -23,9 +23,11 @@ export default function SectionPromises() {
                 <MapIcon className="w-9 h-9 text-emerald-500" />
               </div>
               <p className="mt-6 mb-3 text-lg md:text-xl font-bold text-text">
-                Zmapujeme potenciály a bariéry v knihovnách.
+                Mapujeme potenciály a bariéry v knihovnách.
               </p>
-              <p className="text-text text-lg">Zaměříme se na tyto oblasti:</p>
+              <p className="text-text text-lg">
+                Zaměřujeme se na tyto oblasti:
+              </p>
               <ul className="text-lg text-text list-disc pl-6">
                 <li>poskytování přístupné osvěty o AI</li>
                 <li>
@@ -40,7 +42,7 @@ export default function SectionPromises() {
                 <SquaresPlusIcon className="w-9 h-9 text-blue-500" />
               </div>
               <p className="mt-6 text-lg md:text-xl font-bold text-text">
-                Prozkoumáme, jak mohou knihovny spolupracovat s dalšími
+                Prozkoumáváme, jak mohou knihovny spolupracovat s dalšími
                 institucemi a službami.{" "}
               </p>
             </Card>
@@ -50,7 +52,7 @@ export default function SectionPromises() {
               </div>
               <div>
                 <p className="mt-6 mb-3 text-lg md:text-xl font-bold text-text">
-                  Navrhneme a otestujeme relevantní nástroje pro knihovníky.
+                  Navrhujeme a testujeme relevantní nástroje pro knihovníky.
                 </p>
                 <p className="text-text text-lg">
                   Nástroje knihovníkům poskytnou inspiraci a podporu pro další
@@ -64,8 +66,8 @@ export default function SectionPromises() {
               </div>
               <div>
                 <p className="mt-6 mb-3 text-lg md:text-xl font-bold text-text">
-                  Výstupy z výzkumu a sadu prověřených nástrojů pro vás shrneme
-                  do jednoduchých manuálů.
+                  Výstupy z výzkumu a sadu prověřených nástrojů pro vás
+                  shrnujeme do jednoduchých manuálů.
                 </p>
                 <p className="text-text text-lg">
                   Předpokládanými výstupy jsou:

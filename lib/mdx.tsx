@@ -15,7 +15,6 @@ import {
   Headline5,
   Headline6,
 } from "@/components/ui/headline";
-import remarkGfm from "remark-gfm";
 import { compileMDX } from "next-mdx-remote/rsc";
 
 export const defaultComponents: any = {
@@ -33,6 +32,19 @@ export const defaultComponents: any = {
   h4: Headline4,
   h5: Headline5,
   h6: Headline6,
+  p: (props: any) => <p className="text-text mb-4" {...props} />,
+  ol: (props: any) => (
+    <ol className="mb-4 pl-4 -mt-2 list-decimal list-inside" {...props} />
+  ),
+  ul: (props: any) => (
+    <ul className="mb-4 pl-4 -mt-2 list-disc list-inside" {...props} />
+  ),
+  li: (props: any) => (
+    <li className="mb-1 pl-3 leading-normal text-text" {...props} />
+  ),
+  a: ({ ...props }) => (
+    <a className="text-primary hover:underline" {...props} />
+  ),
   Card: Card,
 };
 

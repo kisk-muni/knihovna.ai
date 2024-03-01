@@ -10,7 +10,10 @@ export const states = pgTable("state", {
   name: text("name").notNull(),
   color: text("color").notNull(),
   order: integer("order"),
+  standardised: text("standardised").notNull(),
 });
+
+export type State = typeof states.$inferSelect;
 
 export const statesRelations = relations(states, ({ many }) => ({
   todos: many(todos),

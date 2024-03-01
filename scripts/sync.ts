@@ -62,12 +62,25 @@ const sync = async () => {
     })
     .flat();
 
+  const standardiseState = (state: string) => {
+    if (state === "Backlog") return "not-started";
+    if (state === "Not started") return "not-started";
+    if (state === "Not Started") return "not-started";
+    if (state === "In Progress") return "in-progress";
+    if (state === "In progress") return "in-progress";
+    if (state === "Canceled") return "canceled";
+    if (state === "Review") return "review";
+    if (state === "Done") return "done";
+    return "unknown";
+  };
+
   const uniqueStates = [
     ...tasks.map((t) => {
       return {
         notionId: t.properties.Status.status.id,
         name: t.properties.Status.status.name,
         color: t.properties.Status.status.color,
+        standardised: standardiseState(t.properties.Status.status.name),
       };
     }),
     ...roadmap.map((t) => {
@@ -75,6 +88,7 @@ const sync = async () => {
         notionId: t.properties.Status.status.id,
         name: t.properties.Status.status.name,
         color: t.properties.Status.status.color,
+        standardised: standardiseState(t.properties.Status.status.name),
       };
     }),
   ].filter((s) => !!s);
@@ -239,6 +253,7 @@ const sync = async () => {
           return {
             notionId: t.id,
             name: t.properties.Name?.title[0]?.plain_text || "Untitled theme",
+            stateId: statesIdByNotionId[t.properties.Status.status.id],
             dateStart: t.properties.Dates.date?.start
               ? new Date(t.properties.Dates.date.start)
               : null,
@@ -263,6 +278,7 @@ const sync = async () => {
           return {
             notionId: t.id,
             name: t.properties.Name.title[0]?.plain_text || "Untitled epic",
+            stateId: statesIdByNotionId[t.properties.Status.status.id],
             dateStart: t.properties.Dates.date?.start
               ? new Date(t.properties.Dates.date.start)
               : null,

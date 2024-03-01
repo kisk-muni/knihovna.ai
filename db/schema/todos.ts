@@ -28,6 +28,8 @@ export const todos = pgTable("todo", {
   stateId: uuid("state_id"),
 });
 
+export type Todo = typeof todos.$inferSelect;
+
 export const todosRelations = relations(todos, ({ many, one }) => ({
   categories: many(todosToCategories),
   sprints: many(todosToSprints),

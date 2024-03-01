@@ -1,5 +1,8 @@
+const withMDX = require("@next/mdx")();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ["mdx", "ts", "tsx"],
   experimental: {
     serverComponentsExternalPackages: [
       "@sparticuz/chromium-min",
@@ -33,4 +36,4 @@ const nextConfig = {
   },
 };
 // Merge MDX config with Next.js config
-module.exports = nextConfig;
+module.exports = withMDX(nextConfig);

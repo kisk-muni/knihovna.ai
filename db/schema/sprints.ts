@@ -11,6 +11,8 @@ export const sprints = pgTable("sprint", {
   dateEnd: timestamp("date_end", { mode: "date" }),
 });
 
+export type Sprint = typeof sprints.$inferSelect;
+
 export const sprintsRelations = relations(sprints, ({ many }) => ({
   todos: many(todosToSprints),
 }));

@@ -134,9 +134,8 @@ const siteConfig: SiteConfig = {
   navigation: [
     { title: "Domů", href: "/" },
     { title: "Materiály", href: "/materialy" },
-    { title: "Blog", href: "/blog" },
-    { title: "Náš tým", href: "/tym" },
-    { title: "O projektu", href: "/o-projektu" },
+    { title: "Aktuality", href: "/blog" },
+    { title: "Projekt", href: "/project" },
   ],
   privateNavigation: [
     {
@@ -144,13 +143,12 @@ const siteConfig: SiteConfig = {
       href: "/prirucky",
       private: true,
     },
-    { title: "Otevřený projekt", href: "/open", private: true },
     { title: "Design", href: "/design", private: true },
   ],
   footerNavigation: [
     { title: "Blog", href: "/blog" },
     { title: "Náš tým", href: "/tym" },
-    { title: "O projektu", href: "/o-projektu" },
+    { title: "Project", href: "/project" },
   ],
   notion: {
     databases: {
