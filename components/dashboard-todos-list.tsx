@@ -16,6 +16,8 @@ export default async function DashboardTodosList({
 }) {
   const data = await loadTodos(selectedStates);
 
+  if (!data) return null;
+
   if (displayMode === "kanban") {
     return (
       <div className="pt-8">

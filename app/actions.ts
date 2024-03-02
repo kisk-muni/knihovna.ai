@@ -11,8 +11,6 @@ import {
   Category,
   Epic,
 } from "@/db/schema";
-import siteConfig from "@/site-config";
-import { select } from "@nextui-org/react";
 import { isFuture, isPast, isWithinInterval } from "date-fns";
 import { desc } from "drizzle-orm";
 import { type Selection } from "react-aria-components";
@@ -93,7 +91,10 @@ export async function getThemes(selectedState: Selection) {
             selectedState == "all" ||
             selectedState.has("all") ||
             (theme.state?.standardised &&
-              (selectedState as Set<string>).has(theme.state.standardised))
+              (selectedState as Set<string>).has(theme.state.standardised)) ||
+            ((theme.state?.standardised == "in-progress" ||
+              theme.state?.standardised == "review") &&
+              (selectedState as Set<string>).has("active"))
         )
         .map((theme) => {
           const timeFlags = getRelativeTimeFlags(
@@ -185,26 +186,58 @@ export async function getSprint(id: string) {
   return result;
 }
 
-export async function getEpic(id: string) {
-  const result = await db.query.epics.findFirst({
-    where: (epics, { eq }) => eq(epics.id, id),
-    with: {
-      todos: {
-        with: {
-          todo: {
-            with: {
-              state: true,
-              users: {
-                with: {
-                  user: true,
+export async function getEpic(id: string, selectedStates: Selection) {
+  const result = await db.query.epics
+    .findFirst({
+      where: (epics, { eq }) => eq(epics.id, id),
+      with: {
+        todos: {
+          with: {
+            todo: {
+              with: {
+                users: {
+                  with: {
+                    user: true,
+                  },
                 },
+                epics: {
+                  with: {
+                    epic: true,
+                  },
+                },
+                categories: {
+                  with: {
+                    category: true,
+                  },
+                },
+                state: true,
               },
             },
           },
         },
       },
-    },
-  });
+    })
+    .then((epic) => {
+      const todos = epic?.todos.reduce((acc, { todo }) => {
+        const state = todo.state?.standardised || "not-started";
+        if (
+          selectedStates != "all" &&
+          !selectedStates.has(state) &&
+          selectedStates.size
+        )
+          return acc;
+        if (acc[state]) {
+          acc[state].push(todo);
+        } else {
+          acc[state] = [todo];
+        }
+        return acc;
+      }, {} as Record<string, CompleteTodo[]>);
+      return {
+        ...epic,
+        todos,
+      };
+    });
   return result;
 }
 

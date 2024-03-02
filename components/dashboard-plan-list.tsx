@@ -22,10 +22,7 @@ const ThemeRow = ({
 }) => {
   return (
     <div>
-      <Link
-        href={`/project/theme/${theme.id}`}
-        className="px-8 border-b bg-sheet flex items-center hover:bg-hover/40 space-x-2 py-3"
-      >
+      <div className="px-8 border-b bg-sheet flex items-center space-x-2 py-3">
         <MapIcon className="w-4 h-4 text-text/50" />
         <span className="grow text-sm font-medium">{theme.name}</span>
         {theme.state && <StateLabel state={theme.state} />}
@@ -34,7 +31,7 @@ const ThemeRow = ({
             {theme.isPast ? "Uplynulé" : "Nadcházející"}
           </span>
         )}
-      </Link>
+      </div>
       <div>
         {theme.epics.map((epic, e) => (
           <EpicRow epic={epic.epic} key={e} />
