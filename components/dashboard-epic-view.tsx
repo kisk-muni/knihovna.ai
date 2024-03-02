@@ -1,6 +1,7 @@
 import { getEpic } from "@/app/actions";
 import { cache } from "react";
-import { TodoListItem } from "./ui/todo-list-item";
+import { TodoListItem } from "./ui/todo-views";
+import { Squares2X2Icon } from "@heroicons/react/24/solid";
 
 const loadEpic = cache(async (id: string) => {
   return await getEpic(id);
@@ -11,7 +12,8 @@ export default async function DashboardEpicView({ id }: { id: string }) {
 
   return (
     <div>
-      <div className="px-8 py-6 border-b">
+      <div className="px-8 py-6 border-b flex items-center">
+        <Squares2X2Icon className="w-6 h-6 mr-3 relative text-text/50" />
         <h2 className="font-medium text-2xl">{data?.name}</h2>
       </div>
       <div>

@@ -52,7 +52,7 @@ export const EpicRow = ({
   return (
     <Link
       href={`/project/epic/${epic.id}`}
-      className="block pl-16 pr-8 hover:bg-sheet py-3 border-b"
+      className="block pl-16 pr-8 hover:bg-sheet py-2.5 border-b"
     >
       <div className="flex items-center">
         <Squares2X2Icon className="w-4 h-4 mr-2 relative text-text/50" />

@@ -39,7 +39,7 @@ export default function OpenProjectLayout({
   return (
     <Fragment>
       <Tabs />
-      <div className="flex h-full grow">
+      <div className="flex h-full w-full grow">
         <div className="h-full border-gray-200 shrink-0 w-auto min-w-[160px] md:max-w-[240px] px-2 md:flex pt-3 flex-col items-start fixed md:sticky top-[53px] z-10 hidden">
           {tabs.map((tab) => (
             <Link
@@ -60,7 +60,7 @@ export default function OpenProjectLayout({
             </Link>
           ))}
         </div>
-        <div className="grow border-l border-gray-200">
+        <div className="grow border-l overflow-x-clip border-gray-200">
           <ErrorBoundary fallbackRender={Fallback}>{children}</ErrorBoundary>
         </div>
       </div>

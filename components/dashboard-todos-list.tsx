@@ -1,19 +1,28 @@
 import { cache } from "react";
-import { TodoListItem } from "./ui/todo-list-item";
+import { GroupedTodoList, TodosKanban } from "./ui/todo-views";
 import { getTodos } from "@/app/actions";
+import { type Selection } from "react-aria-components";
 
-const loadTodos = cache(async () => {
-  return await getTodos();
+const loadTodos = cache(async (selectedStates: Selection) => {
+  return await getTodos(selectedStates);
 });
 
-export default async function DashboardTodosList() {
-  const data = await loadTodos();
+export default async function DashboardTodosList({
+  displayMode,
+  selectedStates,
+}: {
+  displayMode: "list" | "kanban";
+  selectedStates: Selection;
+}) {
+  const data = await loadTodos(selectedStates);
 
-  return (
-    <div>
-      {data.map((todo, t) => (
-        <TodoListItem todo={todo} key={t} />
-      ))}
-    </div>
-  );
+  if (displayMode === "kanban") {
+    return (
+      <div className="pt-8">
+        <TodosKanban groups={data} />
+      </div>
+    );
+  }
+
+  return <GroupedTodoList groups={data} />;
 }

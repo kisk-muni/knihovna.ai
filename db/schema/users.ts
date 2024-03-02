@@ -9,7 +9,10 @@ export const users = pgTable("users", {
   name: text("name").notNull(),
   username: text("username").notNull(),
   description: text("description"),
+  avatar: text("avatar"),
 });
+
+export type User = typeof users.$inferSelect;
 
 export const usersRelations = relations(users, ({ many }) => ({
   blogPosts: many(usersToBlogPosts),

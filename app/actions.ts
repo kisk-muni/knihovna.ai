@@ -1,10 +1,28 @@
 "use server";
 
 import { db } from "@/db";
-import { State, Todo, themes } from "@/db/schema";
+import {
+  State,
+  Todo,
+  themes,
+  User,
+  users,
+  todos,
+  Category,
+  Epic,
+} from "@/db/schema";
+import siteConfig from "@/site-config";
+import { select } from "@nextui-org/react";
 import { isFuture, isPast, isWithinInterval } from "date-fns";
 import { desc } from "drizzle-orm";
 import { type Selection } from "react-aria-components";
+
+export type CompleteTodo = Todo & {
+  state: State | null;
+  users: { user: User }[];
+  categories: { category: Category }[];
+  epics: { epic: Epic }[];
+};
 
 function getRelativeTimeFlags(start: Date | null, end: Date | null) {
   return {
@@ -119,20 +137,51 @@ export async function getSprints() {
 }
 
 export async function getSprint(id: string) {
-  const result = await db.query.sprints.findFirst({
-    where: (sprints, { eq }) => eq(sprints.id, id),
-    with: {
-      todos: {
-        with: {
-          todo: {
-            with: {
-              state: true,
+  const result = await db.query.sprints
+    .findFirst({
+      where: (sprints, { eq }) => eq(sprints.id, id),
+      with: {
+        todos: {
+          with: {
+            todo: {
+              with: {
+                users: {
+                  with: {
+                    user: true,
+                  },
+                },
+                epics: {
+                  with: {
+                    epic: true,
+                  },
+                },
+                categories: {
+                  with: {
+                    category: true,
+                  },
+                },
+                state: true,
+              },
             },
           },
         },
       },
-    },
-  });
+    })
+    .then((sprint) => {
+      if (!sprint) return undefined;
+      const timeFlags = getRelativeTimeFlags(sprint.dateStart, sprint.dateEnd);
+      const stats = getSprintStats(sprint.todos);
+      const todos = sprint.todos.reduce((acc, { todo }) => {
+        const state = todo.state?.standardised || "not-started";
+        if (acc[state]) {
+          acc[state].push(todo);
+        } else {
+          acc[state] = [todo];
+        }
+        return acc;
+      }, {} as Record<string, CompleteTodo[]>);
+      return { ...timeFlags, ...stats, ...sprint, todos };
+    });
   return result;
 }
 
@@ -159,30 +208,51 @@ export async function getEpic(id: string) {
   return result;
 }
 
-export async function getTodos() {
-  const result = await db.query.todos.findMany({
-    with: {
-      state: true,
-      users: {
-        with: {
-          user: true,
+export async function getTodos(selectedStates: Selection) {
+  const result = await db.query.todos
+    .findMany({
+      with: {
+        state: true,
+        users: {
+          with: {
+            user: true,
+          },
         },
-      },
-      epics: {
-        with: {
-          epic: {
-            columns: { id: true, name: true },
+        epics: {
+          with: {
+            epic: true,
+          },
+        },
+        categories: {
+          with: {
+            category: true,
+          },
+        },
+        sprints: {
+          with: {
+            sprint: {
+              columns: { id: true, name: true },
+            },
           },
         },
       },
-      sprints: {
-        with: {
-          sprint: {
-            columns: { id: true, name: true },
-          },
-        },
-      },
-    },
-  });
+    })
+    .then((todos) =>
+      todos.reduce((acc, todo) => {
+        const state = todo.state?.standardised || "not-started";
+        if (
+          selectedStates != "all" &&
+          !selectedStates.has(state) &&
+          selectedStates.size
+        )
+          return acc;
+        if (acc[state]) {
+          acc[state].push(todo);
+        } else {
+          acc[state] = [todo];
+        }
+        return acc;
+      }, {} as Record<string, CompleteTodo[]>)
+    );
   return result;
 }

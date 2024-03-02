@@ -15,7 +15,7 @@ export default function SprintPage({
   let [selectedStateFilter, setSelectedStateFilter] = useState<Selection>(
     new Set(["all"])
   );
-  let [selectedDisplayFilter, setSelectedDisplayFilter] = useState<Selection>(
+  let [selectedDisplayMode, setSelectedDisplayMode] = useState<Selection>(
     new Set(["kanban"])
   );
   const stateFilterItems = [
@@ -28,6 +28,10 @@ export default function SprintPage({
     { id: "list", label: "Seznam" },
     { id: "kanban", label: "Kanban" },
   ];
+  const displayMode =
+    selectedDisplayMode === "all"
+      ? "kanban"
+      : selectedDisplayMode.entries().next().value[0];
   return (
     <>
       <div className="text-text">
@@ -42,14 +46,14 @@ export default function SprintPage({
           /> */}
           <HorizontalFilter
             aria-label="Filtr stavu"
-            selectedKeys={selectedDisplayFilter}
-            onSelectionChange={setSelectedDisplayFilter}
+            selectedKeys={selectedDisplayMode}
+            onSelectionChange={setSelectedDisplayMode}
             selectionMode="single"
             items={displayFilterItems}
           />
         </DashboardHeader>
         <Suspense fallback={<div>Loading...</div>}>
-          <DashboardSprintView id={id} />
+          <DashboardSprintView id={id} displayMode={displayMode} />
         </Suspense>
       </div>
     </>

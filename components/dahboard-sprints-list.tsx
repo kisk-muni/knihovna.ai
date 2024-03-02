@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { cache } from "react";
 import Link from "next/link";
 import DashboardHeader from "@/components/ui/dashboard-header";
+import { SprintIcon } from "./ui/sprint-icon";
 
 const loadSprints = cache(async () => {
   return await getSprints();
@@ -51,12 +52,11 @@ export default async function DashboardSprintsList({}: {}) {
               </div>
               <div className="border-b grow flex items-center pl-2 pr-8 py-8">
                 <div className="flex grow items-center">
-                  {isActive && (
-                    <PlayCircleIcon className="w-5 h-5 mr-2 text-primary" />
-                  )}
-                  {!isActive && isPast && (
-                    <CheckCircleIcon className="w-5 h-5 mr-2 -mt-0.5 relative text-text/50" />
-                  )}
+                  <SprintIcon
+                    isActive={sprint.isActive}
+                    isPast={isPast}
+                    className="w-5 h-5 mr-2"
+                  />
                   <h2 className="font-medium text-sm">{sprint.name}</h2>
                 </div>
                 {!isActive && (

@@ -9,6 +9,7 @@ export default function HorizontalFilter<
   return (
     <ListBox
       {...props}
+      orientation="horizontal"
       className="flex bg-sheet rounded-lg p-0.5 space-x-0.5 mt-px overflow-hidden"
     >
       {(item) => (

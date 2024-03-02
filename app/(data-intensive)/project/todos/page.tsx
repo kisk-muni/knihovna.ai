@@ -1,5 +1,4 @@
 "use client";
-import DashboardPlanList from "@/components/dashboard-plan-list";
 import DashboardTodosList from "@/components/dashboard-todos-list";
 import DashboardHeader from "@/components/ui/dashboard-header";
 import HorizontalFilter from "@/components/ui/horizontal-filter";
@@ -8,21 +7,25 @@ import { type Selection } from "react-aria-components";
 
 export default function TodosPage() {
   let [selectedStateFilter, setSelectedStateFilter] = useState<Selection>(
-    new Set(["all"])
+    new Set([])
   );
-  let [selectedDisplayFilter, setSelectedDisplayFilter] = useState<Selection>(
-    new Set(["list"])
+  let [selectedDisplayMode, setSelectedDisplayMode] = useState<Selection>(
+    new Set(["kanban"])
   );
   const stateFilterItems = [
     { id: "not-started", label: "Nezačaté" },
-    { id: "active", label: "Aktivní" },
+    { id: "in-progress", label: "Probíhající" },
+    { id: "review", label: "Čekající na schválení" },
     { id: "done", label: "Dokončené" },
-    { id: "all", label: "Všechny" },
   ];
   const displayFilterItems = [
     { id: "list", label: "Seznam" },
     { id: "kanban", label: "Kanban" },
   ];
+  const displayMode =
+    selectedDisplayMode === "all"
+      ? "kanban"
+      : selectedDisplayMode.entries().next().value[0];
   return (
     <>
       <div className="text-text">
@@ -31,20 +34,22 @@ export default function TodosPage() {
             aria-label="Filtr stavu"
             selectedKeys={selectedStateFilter}
             onSelectionChange={setSelectedStateFilter}
-            selectionBehavior="replace"
             selectionMode="multiple"
             items={stateFilterItems}
           />
           <HorizontalFilter
             aria-label="Filtr stavu"
-            selectedKeys={selectedDisplayFilter}
-            onSelectionChange={setSelectedDisplayFilter}
+            selectedKeys={selectedDisplayMode}
+            onSelectionChange={setSelectedDisplayMode}
             selectionMode="single"
             items={displayFilterItems}
           />
         </DashboardHeader>
         <Suspense fallback={<div>Loading...</div>}>
-          <DashboardTodosList />
+          <DashboardTodosList
+            displayMode={displayMode}
+            selectedStates={selectedStateFilter}
+          />
         </Suspense>
       </div>
     </>

@@ -22,6 +22,13 @@ import {
   todosToEpics,
 } from "../db/schema";
 
+const usersAvatars = siteConfig.team.reduce((acc, user) => {
+  if (user.avatar !== undefined) {
+    acc[user.notionId] = user.avatar;
+  }
+  return acc;
+}, {} as Record<string, string>);
+
 const download = async () => {
   const start = Date.now();
 
@@ -97,6 +104,7 @@ const sync = async () => {
     .values(
       allUsers.map((user) => ({
         notionId: user.notionId,
+        avatar: usersAvatars[user.notionId] || null,
         name: user.name,
         username: user.username,
       }))
@@ -155,7 +163,7 @@ const sync = async () => {
       return t.properties.Assignee.people.map((p) => {
         return {
           userId: usersIdByNotionId[p.id],
-          todoId: todosIdByNotionId[p.id],
+          todoId: todosIdByNotionId[t.id],
         };
       });
     })

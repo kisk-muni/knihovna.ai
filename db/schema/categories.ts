@@ -10,6 +10,8 @@ export const categories = pgTable("category", {
   order: integer("order"),
 });
 
+export type Category = typeof categories.$inferSelect;
+
 export const categoriesRelations = relations(categories, ({ many }) => ({
   todos: many(todosToCategories),
 }));

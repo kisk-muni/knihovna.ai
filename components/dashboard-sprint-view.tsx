@@ -1,27 +1,37 @@
 import { getSprint } from "@/app/actions";
 import { cache } from "react";
-import { TodoListItem } from "./ui/todo-list-item";
+import { GroupedTodoList, TodosKanban } from "./ui/todo-views";
+import { SprintIcon } from "./ui/sprint-icon";
 
 const loadSprint = cache(async (id: string) => {
   return await getSprint(id);
 });
 
-export default async function DashboardSprintView({ id }: { id: string }) {
+export default async function DashboardSprintView({
+  id,
+  displayMode = "kanban",
+}: {
+  id: string;
+  displayMode: "list" | "kanban";
+}) {
   const data = await loadSprint(id);
+  if (!data) return null;
 
   return (
     <div>
-      <div className="px-8 py-6 border-b">
+      <div className="px-8 py-6 flex items-center">
+        <SprintIcon
+          isActive={data.isActive}
+          isPast={data.isPast}
+          className="w-6 h-6 mr-4"
+        />
         <h2 className="font-medium text-2xl">{data?.name}</h2>
       </div>
-      <div>
-        <p className="text-text px-8 py-2 border-b text-sm font-medium">
-          Úkoly
-        </p>
-      </div>
-      {data?.todos.map((todo, t) => (
-        <TodoListItem todo={todo.todo} key={t} />
-      ))}
+      {displayMode === "kanban" ? (
+        <TodosKanban groups={data?.todos} />
+      ) : (
+        <GroupedTodoList groups={data?.todos} />
+      )}
     </div>
   );
 }

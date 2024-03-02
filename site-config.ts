@@ -1,6 +1,6 @@
 export interface TeamMember {
   id: string;
-  notionId?: string;
+  notionId: string;
   name: string;
   description: string;
   displayOnTeamPage?: boolean;
