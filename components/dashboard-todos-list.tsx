@@ -8,19 +8,19 @@ const loadTodos = cache(async (selectedStates: Selection) => {
 });
 
 export default async function DashboardTodosList({
-  displayMode,
+  selectedDisplayModes,
   selectedStates,
 }: {
-  displayMode: "list" | "kanban";
   selectedStates: Selection;
+  selectedDisplayModes: Selection;
 }) {
   const data = await loadTodos(selectedStates);
 
   if (!data) return null;
 
-  if (displayMode === "kanban") {
+  if (selectedDisplayModes !== "all" && selectedDisplayModes.has("kanban")) {
     return (
-      <div className="pt-8">
+      <div className="">
         <TodosKanban groups={data} />
       </div>
     );

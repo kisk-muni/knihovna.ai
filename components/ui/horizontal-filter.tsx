@@ -16,11 +16,11 @@ export default function HorizontalFilter<
         <ListBoxItem
           className={({ isFocusVisible, isSelected, isFocused }) =>
             classNames(
-              "px-2 py-1 leading-normal rounded-lg text-sm hover:cursor-pointer",
+              "px-2 items-center flex py-1 leading-normal rounded-lg text-sm hover:cursor-pointer",
               {
-                "bg-primary text-white": isSelected,
-                "bg-sheet text-text/90 hover:text-text": !isSelected,
-                "outline-primary": isFocused,
+                "bg-text-700 text-white": isSelected,
+                "bg-sheet text-text hover:text-text": !isSelected,
+                "outline-0": isFocused,
                 "outline-primarydarker": isFocusVisible,
               }
             )

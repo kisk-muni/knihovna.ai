@@ -64,7 +64,7 @@ const BlogPostPage = async ({ params }: { params: { slug: string } }) => {
                 key={i}
               >
                 <img
-                  className="h-10 w-10 mr-1.5 rounded-full ring-1 ring-gray-100"
+                  className="h-10 w-10 mr-1.5 rounded-full ring-1 ring-neutral-100"
                   src={author.avatar}
                   alt=""
                 />

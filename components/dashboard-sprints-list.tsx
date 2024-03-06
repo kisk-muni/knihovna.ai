@@ -1,21 +1,19 @@
 import { getSprints } from "@/app/actions";
 import { formattedDate } from "@/lib/date";
-import { CheckCircleIcon, PlayCircleIcon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
 import { cache } from "react";
 import Link from "next/link";
-import DashboardHeader from "@/components/ui/dashboard-header";
 import { SprintIcon } from "./ui/sprint-icon";
 
 const loadSprints = cache(async () => {
   return await getSprints();
 });
 
-export default async function DashboardSprintsList({}: {}) {
+export default async function DashboardSprintsList() {
   const data = await loadSprints();
 
   return (
-    <div className="mt-8">
+    <div className="pt-8">
       {data.map((sprint, t) => {
         const { isActive, isPast, scope, activeRate, successRate } = sprint;
 
@@ -23,41 +21,45 @@ export default async function DashboardSprintsList({}: {}) {
           <div key={t} className="flex">
             <Link
               href={`/project/sprints/${sprint.id}`}
-              className="flex grow transition duration-150 ease-out hover:bg-sheet/40"
+              className="flex grow transition duration-150 ease-out hover:bg-neutral-100"
             >
               {" "}
               <div className="mr-6 pl-6 pr-3 w-[100px] flex justify-end text-right">
-                <div className="text-gray-600 mr-4">
+                <div className="text-neutral-600 mr-4">
                   <span className="text-xs relative -top-3.5 leading-3 text-">
                     {sprint.dateEnd && formattedDate(sprint.dateEnd)}
                   </span>
                 </div>
                 <div
-                  className={classNames("relative border-r-1.5 0 w-px h-full", {
-                    "": !isPast,
-                    "border-primary": isPast,
-                  })}
+                  className={classNames("relative h-full")}
                 >
                   <div
+                  className={classNames("border-r-[1.5px] border-solid w-[1.5px] absolute -right-[0.75px] bottom-[6px] top-[4px]", {
+                    "border-neutral-200": !isPast,
+                    "border-primary": isPast || isActive,
+                  })}
+                  >
+                  </div>
+                  <div
                     className={classNames(
-                      "absolute w-2.5 h-2.5 border-1.5 -right-[5.5px] -top-[6px] rounded-full z-20",
+                      "absolute w-2.5 h-2.5 border-[1.5px] border-solid -right-[5.25px] -top-[5.25px] rounded-full z-20",
                       {
-                        "border-primary bg-primary": isPast && !isActive,
-                        "bg-background": !isPast && !isActive,
-                        "border-primary bg-background": isActive,
+                        "border-transparent bg-primary": isPast && !isActive,
+                        "border-neutral-200 bg-transparent": !isPast && !isActive,
+                        "border-primary bg-transparent": isActive,
                       }
                     )}
                   ></div>
                 </div>
               </div>
-              <div className="border-b grow flex items-center pl-2 pr-8 py-8">
+              <div className="border-b border-neutral-200 grow flex items-center pl-2 pr-8 py-8">
                 <div className="flex grow items-center">
                   <SprintIcon
                     isActive={sprint.isActive}
                     isPast={isPast}
                     className="w-5 h-5 mr-2"
                   />
-                  <h2 className="font-medium text-sm">{sprint.name}</h2>
+                  <h2 className="font-medium text-text-900 text-sm">{sprint.name}</h2>
                 </div>
                 {!isActive && (
                   <span className="bg-sheet py-0.5 px-1.5 mr-6 rounded-md text-text/80 text-sm font-medium">

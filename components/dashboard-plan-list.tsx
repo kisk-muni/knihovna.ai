@@ -1,10 +1,11 @@
 import { getThemes } from "@/app/actions";
 import { Epic, State, Theme, Todo } from "@/db/schema";
-import { MapIcon, Squares2X2Icon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { cache } from "react";
 import { type Selection } from "react-aria-components";
 import { StateLabel } from "./ui/state-label";
+import { IconMapTrifold, IconSquaresFour } from "./ui/icons";
+import CircularProgress from "./ui/circular-status";
 
 const loadThemes = cache(async (selectedState: Selection) => {
   return await getThemes(selectedState);
@@ -22,8 +23,8 @@ const ThemeRow = ({
 }) => {
   return (
     <div>
-      <div className="px-8 border-b bg-sheet flex items-center space-x-2 py-3">
-        <MapIcon className="w-4 h-4 text-text/50" />
+      <div className="px-6 border-b border-neutral-200 bg-sheet flex items-center space-x-2 py-2.5">
+        <IconMapTrifold className="w-4 h-4 text-text/50" />
         <span className="grow text-sm font-medium">{theme.name}</span>
         {theme.state && <StateLabel state={theme.state} />}
         {!theme.isActive && (
@@ -49,24 +50,30 @@ export const EpicRow = ({
   return (
     <Link
       href={`/project/epic/${epic.id}`}
-      className="block pl-16 pr-8 hover:bg-sheet py-2.5 border-b"
+      className="block pl-16 pr-6 bg-white hover:bg-sheet py-2.5 border-b border-neutral-200 transition duration-150 ease-out"
     >
       <div className="flex items-center">
-        <Squares2X2Icon className="w-4 h-4 mr-2 relative text-text/50" />
-        <span className="text-text/80 grow mr-6 text-sm">
-          {epic.name}{" "}
+        <IconSquaresFour.filled className="w-3 h-3 mr-2 relative text-text-400" />
+        <div className="text-text-900 grow flex space-x-1.5 items-center mr-6 text-sm">
+          <span>{epic.name}</span>
+          {epic.progress !== undefined && epic.progress != null && (
+            <CircularProgress
+              svgClassName="h-4 w-4"
+              value={parseFloat(epic.progress)}
+            />
+          )}
           {!!epic.todos.length && (
-            <span className="text-text/80 ml-4 text-sm">
-              {`(${
+            <span className="text-text-400 text-[13px]">
+              {`${
                 epic.todos.length === 1
-                  ? "1 úkol"
+                  ? "1 aktivita"
                   : epic.todos.length < 5
-                  ? `${epic.todos.length} úkoly`
-                  : `${epic.todos.length} úkolů`
-              })`}
+                  ? `${epic.todos.length} aktivity`
+                  : `${epic.todos.length} aktivit`
+              }`}
             </span>
           )}
-        </span>
+        </div>
         {epic.state && <StateLabel state={epic.state} />}
       </div>
       {/* <div>
@@ -87,7 +94,7 @@ export default async function DashboardPlanList({
   stateFilter: selectedState,
 }: {
   stateFilter: Selection;
-  displayFilter: Selection;
+  displayFilter?: Selection;
 }) {
   const data = await loadThemes(selectedState);
 

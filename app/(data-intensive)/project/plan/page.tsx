@@ -1,52 +1,27 @@
 "use client";
 import DashboardPlanList from "@/components/dashboard-plan-list";
+import FilterPhaseState from "@/components/filter-phase-state";
 import DashboardHeader from "@/components/ui/dashboard-header";
-import HorizontalFilter from "@/components/ui/horizontal-filter";
-import { Suspense, useState } from "react";
-import { type Selection } from "react-aria-components";
+import { getFilterUrlParam } from "@/lib/filters";
+import { Suspense } from "react";
 
-export default function PlanPage() {
-  let [selectedStateFilter, setSelectedStateFilter] = useState<Selection>(
-    new Set(["all"])
-  );
-  let [selectedDisplayFilter, setSelectedDisplayFilter] = useState<Selection>(
-    new Set(["list"])
-  );
-  const stateFilterItems = [
-    { id: "not-started", label: "Nezačaté" },
-    { id: "active", label: "Aktivní" },
-    { id: "done", label: "Dokončené" },
-    { id: "all", label: "Všechny" },
-  ];
-  const displayFilterItems = [
-    { id: "list", label: "Seznam" },
-    { id: "timeline", label: "Časová osa" },
-  ];
+export default function PlanPage({
+  searchParams,
+}: {
+  searchParams?: {
+    display?: string[] | "all";
+    "phase-state"?: string[] | "all";
+  };
+}) {
+  const selectedPhaseState = getFilterUrlParam(searchParams?.["phase-state"]);
   return (
     <>
       <div className="text-text">
         <DashboardHeader className="justify-between">
-          <HorizontalFilter
-            aria-label="Filtr stavu"
-            selectedKeys={selectedStateFilter}
-            onSelectionChange={setSelectedStateFilter}
-            selectionBehavior="replace"
-            selectionMode="multiple"
-            items={stateFilterItems}
-          />
-          <HorizontalFilter
-            aria-label="Filtr stavu"
-            selectedKeys={selectedDisplayFilter}
-            onSelectionChange={setSelectedDisplayFilter}
-            selectionMode="single"
-            items={displayFilterItems}
-          />
+          <FilterPhaseState />
         </DashboardHeader>
         <Suspense fallback={<div>Loading...</div>}>
-          <DashboardPlanList
-            displayFilter={selectedDisplayFilter}
-            stateFilter={selectedStateFilter}
-          />
+          <DashboardPlanList stateFilter={selectedPhaseState} />
         </Suspense>
       </div>
     </>

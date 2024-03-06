@@ -3,7 +3,7 @@
 import dotenv from "dotenv";
 dotenv.config({ path: [".env.local"] });
 import { RoadmapSchema, SprintSchema, TodoSchema } from "../lib/notion/schema";
-import getData from "../lib/notion/get-data";
+import { getPaginatedData } from "../lib/notion/get-data";
 import siteConfig from "../site-config";
 import { db } from "../db";
 import {
@@ -32,11 +32,17 @@ const usersAvatars = siteConfig.team.reduce((acc, user) => {
 const download = async () => {
   const start = Date.now();
 
-  const sprintsPromise = getData<SprintSchema>(
+  const sprintsPromise = getPaginatedData<SprintSchema>(
     siteConfig.notion.databases.sprints
   );
-  const todosPromise = getData<TodoSchema>(siteConfig.notion.databases.todos);
-  const roadmapPromise = getData<RoadmapSchema>(
+  const todosPromise = getPaginatedData<TodoSchema>(
+    siteConfig.notion.databases.todos,
+    {
+      withBlocks: true,
+      blocksAs: ["markdown"],
+    }
+  );
+  const roadmapPromise = getPaginatedData<RoadmapSchema>(
     siteConfig.notion.databases.roadmap
   );
   const result = await Promise.all([
@@ -44,6 +50,7 @@ const download = async () => {
     todosPromise,
     roadmapPromise,
   ]);
+  console.log(result[1].length, "todos");
   const end = Date.now();
   const time = end - start;
   console.log(`Downloaded in ${time}ms`);
@@ -76,6 +83,7 @@ const sync = async () => {
     if (state === "In Progress") return "in-progress";
     if (state === "In progress") return "in-progress";
     if (state === "Canceled") return "canceled";
+    if (state === "Backlog") return "backlog";
     if (state === "Review") return "review";
     if (state === "Done") return "done";
     return "unknown";
@@ -138,13 +146,19 @@ const sync = async () => {
       tasks.map((t) => {
         const value = {
           notionId: t.id,
+          notionUrl: t.public_url,
           isPrivate: t.properties.Private.checkbox,
+          content: t.markdownContents || null,
           storyPoints:
             parseInt(t.properties["Story Points"].select?.name) || null,
           name: t.properties.Name.title.length
             ? t.properties.Name.title[0]?.plain_text
             : "",
           stateId: statesIdByNotionId[t.properties.Status.status.id],
+          dateCreated: t.created_time ? new Date(t.created_time) : null,
+          dateLastEdited: t.last_edited_time
+            ? new Date(t.last_edited_time)
+            : null,
           dateStart: t.properties.Dates.date?.start
             ? new Date(t.properties.Dates.date.start)
             : null,

@@ -1,16 +1,14 @@
-"use client";
-import DashboardSprintView from "@/components/dashboard-sprint-view";
-import FilterDisplayMode from "@/components/filter-display-mode";
-import FilterState from "@/components/filter-state";
+import DashboardTodosList from "@/components/dashboard-todos-list";
 import DashboardHeader from "@/components/ui/dashboard-header";
-import { getFilterUrlParam } from "@/lib/filters";
 import { Suspense } from "react";
+import Loading from "./loading";
+import FilterState from "@/components/filter-state";
+import FilterDisplayMode from "@/components/filter-display-mode";
+import { getFilterUrlParam } from "@/lib/filters";
 
-export default function SprintPage({
-  params: { id },
+export default function TodosPage({
   searchParams,
 }: {
-  params: { id: string };
   searchParams?: {
     display?: string[] | "all";
     state?: string[] | "all";
@@ -18,13 +16,15 @@ export default function SprintPage({
 }) {
   const states = getFilterUrlParam(searchParams?.state);
   const display = getFilterUrlParam(searchParams?.display, ["kanban"]);
-
   return (
     <>
       <div className="text-text">
-        <Suspense fallback={<div>Loading...</div>}>
-          <DashboardSprintView
-            id={id}
+        <DashboardHeader className="justify-between">
+          <FilterState />
+          <FilterDisplayMode />
+        </DashboardHeader>
+        <Suspense fallback={<Loading />}>
+          <DashboardTodosList
             selectedStates={states}
             selectedDisplayModes={display}
           />

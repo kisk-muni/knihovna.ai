@@ -8,6 +8,37 @@ import {
 } from "@/lib/notion/schema";
 import slugify from "slugify";
 
+export async function getPaginatedData<ItemProperties>(
+  database_id: string,
+  config?: Config
+): Promise<QueryResultWithMarkdownContents<ItemProperties>[]> {
+  let depth = 1;
+
+  let results = [];
+  let data = await notion.databases.query({
+    database_id,
+    sorts: config?.sorts,
+    filter: config?.filter,
+  }); /* .results as unknown as QueryResult<ItemProperties>[]; */
+
+  results = [...data.results];
+
+  while (data.has_more && data.next_cursor) {
+    data = await notion.databases.query({
+      database_id,
+      start_cursor: data.next_cursor,
+      sorts: config?.sorts,
+      filter: config?.filter,
+    });
+    results = [...results, ...data.results];
+  }
+
+  for (const item of results as unknown as QueryResult<ItemProperties>[]) {
+    await getItem(item, depth, config);
+  }
+  return results as unknown as QueryResultWithMarkdownContents<ItemProperties>[];
+}
+
 type Config = {
   withRelations?: boolean | string[];
   recursive?: boolean;

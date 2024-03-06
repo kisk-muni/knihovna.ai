@@ -12,14 +12,27 @@ import {
   Epic,
 } from "@/db/schema";
 import { isFuture, isPast, isWithinInterval } from "date-fns";
-import { desc } from "drizzle-orm";
+import { and, desc } from "drizzle-orm";
 import { type Selection } from "react-aria-components";
 
-export type CompleteTodo = Todo & {
+export type EpicTodos = {
+  doneTodosCount?: number;
+  todos?: {
+    todo: Todo & {
+      state: {
+        standardised: string;
+      } | null;
+    };
+  }[];
+};
+
+export type CompleteTodo<S = {}> = Todo & {
   state: State | null;
   users: { user: User }[];
   categories: { category: Category }[];
-  epics: { epic: Epic }[];
+  epics: {
+    epic: Epic & S;
+  }[];
 };
 
 function getRelativeTimeFlags(start: Date | null, end: Date | null) {
@@ -34,6 +47,24 @@ function getRelativeTimeFlags(start: Date | null, end: Date | null) {
     isPast: end ? isPast(end) : false,
     isUpcoming: start ? isFuture(start) : false,
   };
+}
+
+function aggEpicProgress(epic: {
+  epic: Epic & {
+    todos: {
+      todo: Todo & { state: ({ standardised: string } & State) | null };
+    }[];
+  };
+  todoId: string;
+  epicId: string;
+}) {
+  const todos = epic.epic.todos.map((todoRelation) => todoRelation.todo);
+  const newEpic = {
+    ...epic.epic,
+    doneTodosCount: todos.filter((todo) => todo.state?.standardised === "done")
+      .length,
+  };
+  return { ...epic, epic: newEpic };
 }
 
 function getSprintStats(todos: { todo: Todo & { state: State | null } }[]) {
@@ -89,6 +120,7 @@ export async function getThemes(selectedState: Selection) {
         .filter(
           (theme) =>
             selectedState == "all" ||
+            selectedState.size == 0 ||
             selectedState.has("all") ||
             (theme.state?.standardised &&
               (selectedState as Set<string>).has(theme.state.standardised)) ||
@@ -137,7 +169,7 @@ export async function getSprints() {
   return result;
 }
 
-export async function getSprint(id: string) {
+export async function getSprint(id: string, selectedStates: Selection) {
   const result = await db.query.sprints
     .findFirst({
       where: (sprints, { eq }) => eq(sprints.id, id),
@@ -172,15 +204,34 @@ export async function getSprint(id: string) {
       if (!sprint) return undefined;
       const timeFlags = getRelativeTimeFlags(sprint.dateStart, sprint.dateEnd);
       const stats = getSprintStats(sprint.todos);
-      const todos = sprint.todos.reduce((acc, { todo }) => {
-        const state = todo.state?.standardised || "not-started";
-        if (acc[state]) {
-          acc[state].push(todo);
-        } else {
-          acc[state] = [todo];
-        }
-        return acc;
-      }, {} as Record<string, CompleteTodo[]>);
+      const todos = sprint.todos
+        .map((todo) => {
+          if (todo.todo?.isPrivate)
+            return {
+              ...todo,
+              todo: {
+                ...todo.todo,
+                name: "Soukromá položka",
+                content: "Tato položka je soukromá a nemůže být zobrazena",
+              },
+            };
+          return todo;
+        })
+        .reduce((acc, { todo }) => {
+          const state = todo.state?.standardised || "not-started";
+          if (
+            selectedStates != "all" &&
+            !selectedStates.has(state) &&
+            selectedStates.size
+          )
+            return acc;
+          if (acc[state]) {
+            acc[state].push(todo);
+          } else {
+            acc[state] = [todo];
+          }
+          return acc;
+        }, {} as Record<string, CompleteTodo[]>);
       return { ...timeFlags, ...stats, ...sprint, todos };
     });
   return result;
@@ -218,25 +269,37 @@ export async function getEpic(id: string, selectedStates: Selection) {
       },
     })
     .then((epic) => {
-      const todos = epic?.todos.reduce((acc, { todo }) => {
-        const state = todo.state?.standardised || "not-started";
-        if (
-          selectedStates != "all" &&
-          !selectedStates.has(state) &&
-          selectedStates.size
-        )
+      if (!epic) return undefined;
+      const todos = epic.todos
+        .map((todo) => {
+          if (todo.todo?.isPrivate)
+            return {
+              ...todo,
+              todo: {
+                ...todo.todo,
+                name: "Soukromá položka",
+                content: "Tato položka je soukromá a nemůže být zobrazena",
+              },
+            };
+          return todo;
+        })
+        .reduce((acc, { todo }) => {
+          const state = todo.state?.standardised || "not-started";
+          if (
+            selectedStates != "all" &&
+            !selectedStates.has(state) &&
+            selectedStates.size
+          )
+            return acc;
+
+          if (acc[state]) {
+            acc[state].push(todo);
+          } else {
+            acc[state] = [todo];
+          }
           return acc;
-        if (acc[state]) {
-          acc[state].push(todo);
-        } else {
-          acc[state] = [todo];
-        }
-        return acc;
-      }, {} as Record<string, CompleteTodo[]>);
-      return {
-        ...epic,
-        todos,
-      };
+        }, {} as Record<string, CompleteTodo[]>);
+      return { ...epic, todos };
     });
   return result;
 }
@@ -244,6 +307,7 @@ export async function getEpic(id: string, selectedStates: Selection) {
 export async function getTodos(selectedStates: Selection) {
   const result = await db.query.todos
     .findMany({
+      where: (todos, { ne }) => ne(todos.name, ""),
       with: {
         state: true,
         users: {
@@ -271,21 +335,71 @@ export async function getTodos(selectedStates: Selection) {
       },
     })
     .then((todos) =>
-      todos.reduce((acc, todo) => {
-        const state = todo.state?.standardised || "not-started";
-        if (
-          selectedStates != "all" &&
-          !selectedStates.has(state) &&
-          selectedStates.size
-        )
+      todos
+        .map((todo) => {
+          if (todo?.isPrivate)
+            return {
+              ...todo,
+              name: "Soukromá položka",
+              content: "Tato položka je soukromá a nemůže být zobrazena",
+            };
+          return todo;
+        })
+        .reduce((acc, todo) => {
+          const state = todo.state?.standardised || "not-started";
+          if (
+            selectedStates != "all" &&
+            !selectedStates.has(state) &&
+            selectedStates.size
+          )
+            return acc;
+          if (acc[state]) {
+            acc[state].push(todo);
+          } else {
+            acc[state] = [todo];
+          }
           return acc;
-        if (acc[state]) {
-          acc[state].push(todo);
-        } else {
-          acc[state] = [todo];
-        }
-        return acc;
-      }, {} as Record<string, CompleteTodo[]>)
+        }, {} as Record<string, CompleteTodo[]>)
     );
+  return result;
+}
+
+export async function getTodo(id: string) {
+  const result = await db.query.todos
+    .findFirst({
+      where: (todos, { eq }) => eq(todos.id, id),
+      with: {
+        users: {
+          with: {
+            user: true,
+          },
+        },
+        epics: {
+          with: {
+            epic: true,
+          },
+        },
+        categories: {
+          with: {
+            category: true,
+          },
+        },
+        sprints: {
+          with: {
+            sprint: true,
+          },
+        },
+        state: true,
+      },
+    })
+    .then((todo) => {
+      if (todo?.isPrivate)
+        return {
+          ...todo,
+          name: "Soukromá položka",
+          content: "Tato položka je soukromá a nemůže být zobrazena",
+        };
+      return todo;
+    });
   return result;
 }

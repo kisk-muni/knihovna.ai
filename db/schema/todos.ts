@@ -19,10 +19,13 @@ import { usersToTodos } from "./users-to-todos";
 export const todos = pgTable("todo", {
   id: uuid("id").defaultRandom().notNull().primaryKey(),
   notionId: text("notion_id").unique(),
+  notionUrl: text("notion_url"),
   name: text("name").notNull(),
   isPrivate: boolean("is_private").notNull().default(false),
   storyPoints: integer("story_points"),
   content: text("content"),
+  dateCreated: timestamp("date_created", { mode: "date" }),
+  dateLastEdited: timestamp("date_last_edited", { mode: "date" }),
   dateStart: timestamp("date_start", { mode: "date" }),
   dateEnd: timestamp("date_end", { mode: "date" }),
   stateId: uuid("state_id"),

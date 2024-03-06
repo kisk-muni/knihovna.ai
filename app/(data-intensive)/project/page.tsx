@@ -10,5 +10,10 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default async function Home() {
-  return <main className="flex flex-col"></main>;
+  return (
+    <main className="flex flex-col">
+      <div>popis projektu</div>
+      <div>aktuální nebo nadcházející sprint</div>
+    </main>
+  );
 }

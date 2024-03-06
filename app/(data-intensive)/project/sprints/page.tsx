@@ -1,10 +1,10 @@
 import { Suspense } from "react";
-import DashboardSprintsList from "@/components/dahboard-sprints-list";
+import DashboardSprintsList from "@/components/dashboard-sprints-list";
 
 export default async function SprintsPage() {
   return (
     <>
-      <div className="text-text">
+      <div className="bg-white">
         <Suspense fallback={<div>Loading...</div>}>
           <DashboardSprintsList />
         </Suspense>

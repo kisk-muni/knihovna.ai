@@ -1,5 +1,6 @@
 import { State } from "@/db/schema";
 import classNames from "classnames";
+import { TodoIcon } from "./todo-icon";
 
 export const stateNames: { [key: string]: string } = {
   "in-progress": "Probíhající",
@@ -10,24 +11,43 @@ export const stateNames: { [key: string]: string } = {
 };
 
 export const StateLabel = ({
+  className,
   state: { standardised },
+  icon,
 }: {
+  className?: string;
+  icon?: "todo" | "plan";
   state: {
-    standardised: State["standardised"];
+    standardised: string;
   };
 }) => {
   return (
     <span
       className={classNames(
-        "inline-block py-0.5 px-1.5 rounded-md text-sm font-medium",
+        "py-0.5 px-2 flex self-start w-max grow-0 rounded-full text-sm font-medium",
         {
-          "bg-emerald-500 text-white": standardised === "done",
+          "bg-text-400 text-white": standardised === "backlog",
+          "bg-emerald-600 text-white": standardised === "done",
           "bg-yellow-500 text-white": standardised === "in-progress",
           "bg-orange-500 text-white": standardised === "review",
-          "bg-hover text-text/90": standardised === "not-started",
-        }
+          "bg-text-600 text-white": standardised === "not-started",
+        },
+        className
       )}
     >
+      {icon == "todo" && (
+        <TodoIcon
+          className="h-5 -ml-1 w-5 mr-0.5 text-white"
+          state={
+            standardised as unknown as
+              | "not-started"
+              | "in-progress"
+              | "review"
+              | "done"
+              | "cancelled"
+          }
+        />
+      )}
       {stateNames[standardised]}
     </span>
   );
