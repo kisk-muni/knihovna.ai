@@ -20,7 +20,7 @@ export default function UserList({
   return (
     <div
       className={classNames(
-        "flex flex-wrap -ml-1.5 relative items-center",
+        "flex flex-wrap ml-1 relative items-center",
         className
       )}
     >
@@ -59,7 +59,7 @@ export default function UserList({
               >
                 {users.slice(maxUsers).map(({ user }, i) => (
                   <ListBoxItem key={i} href={`/project/members/${user.id}`}>
-                    <div className="block h-5 w-5 -ml-0.5 bg-hover rounded-full ring-1 ring-white overflow-hidden">
+                    <div className="block h-5 w-5 bg-hover rounded-full ring-1 ring-white overflow-hidden">
                       {user.avatar && (
                         <Avatar
                           name={user.name}
