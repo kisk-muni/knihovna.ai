@@ -30,22 +30,23 @@ export default async function DashboardSprintsList() {
                     {sprint.dateEnd && formattedDate(sprint.dateEnd)}
                   </span>
                 </div>
-                <div
-                  className={classNames("relative h-full")}
-                >
+                <div className={classNames("relative h-full")}>
                   <div
-                  className={classNames("border-r-[1.5px] border-solid w-[1.5px] absolute -right-[0.75px] bottom-[6px] top-[4px]", {
-                    "border-neutral-200": !isPast,
-                    "border-primary": isPast || isActive,
-                  })}
-                  >
-                  </div>
+                    className={classNames(
+                      "border-r-[1.5px] border-solid w-[1.5px] absolute -right-[0.75px] bottom-[6px] top-[4px]",
+                      {
+                        "border-neutral-200": !isPast,
+                        "border-primary": isPast || isActive,
+                      }
+                    )}
+                  ></div>
                   <div
                     className={classNames(
                       "absolute w-2.5 h-2.5 border-[1.5px] border-solid -right-[5.25px] -top-[5.25px] rounded-full z-20",
                       {
                         "border-transparent bg-primary": isPast && !isActive,
-                        "border-neutral-200 bg-transparent": !isPast && !isActive,
+                        "border-neutral-200 bg-transparent":
+                          !isPast && !isActive,
                         "border-primary bg-transparent": isActive,
                       }
                     )}
@@ -59,7 +60,9 @@ export default async function DashboardSprintsList() {
                     isPast={isPast}
                     className="w-5 h-5 mr-2"
                   />
-                  <h2 className="font-medium text-text-900 text-sm">{sprint.name}</h2>
+                  <h2 className="font-medium text-text-900 text-sm">
+                    {sprint.name}
+                  </h2>
                 </div>
                 {!isActive && (
                   <span className="bg-sheet py-0.5 px-1.5 mr-6 rounded-md text-text/80 text-sm font-medium">
@@ -67,14 +70,14 @@ export default async function DashboardSprintsList() {
                   </span>
                 )}
                 <div className="flex space-x-6 text-sm">
-                  {!!scope && (
+                  {!!scope && !["NaN", "0"].includes(activeRate?.toFixed()) && (
                     <div className="text-yellow-600">
-                      {activeRate ? activeRate.toFixed() : 0} % aktivních
+                      {activeRate.toFixed()} % aktivních
                     </div>
                   )}
-                  {!!scope && (
+                  {!!scope && successRate && (
                     <div className="text-emerald-600">
-                      {successRate ? successRate.toFixed() : 0} % hotových
+                      {successRate.toFixed()} % hotových
                     </div>
                   )}
                   <div className="text-text/80">{scope} celkem</div>
