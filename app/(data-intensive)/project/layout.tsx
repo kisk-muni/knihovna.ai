@@ -16,9 +16,9 @@ import {
 
 const tabs = [
   {
-    label: "Přehled",
+    label: "O projektu",
     icon: <IconCompas className="w-4 h-4 relative" />,
-    href: "/project",
+    href: "/project/about",
   },
   {
     label: "Aktivity",
@@ -38,7 +38,7 @@ const tabs = [
   {
     label: "Tým",
     icon: <IconUsers className="w-4 h-4 relative" />,
-    href: "/project/tasks",
+    href: "/project/members",
   },
 ];
 

@@ -403,3 +403,8 @@ export async function getTodo(id: string) {
     });
   return result;
 }
+
+export async function getMembers() {
+  const result = await db.query.users.findMany();
+  return result;
+}

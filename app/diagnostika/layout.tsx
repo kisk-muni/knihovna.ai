@@ -3,19 +3,13 @@ import { DiagnosisFormContext } from "@/lib/hooks/use-diagnosis-form";
 import { useState } from "react";
 import questions from "@/questions";
 
-export default function FrontLayout({
-  defaultStarted = false,
-  defaultAnswers = {},
+export default function DiagnostikaLayout({
   children,
 }: {
-  defaultStarted: boolean;
-  defaultAnswers: {
-    [index: string]: boolean;
-  };
   children: React.ReactNode;
 }) {
-  const [started, setStarted] = useState(defaultStarted);
-  const [answers, setAnswers] = useState(defaultAnswers);
+  const [started, setStarted] = useState(false);
+  const [answers, setAnswers] = useState({});
   return (
     <DiagnosisFormContext.Provider
       value={{
