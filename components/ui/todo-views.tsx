@@ -40,12 +40,12 @@ export const TodoKanbanItem = ({
         </Link>
       </div>
 
-      <div className="flex justify-between items-end">
-        <div className="space-y-1">
+      <div className="flex justify-between space-x-2 space-y-2 flex-wrap items-end">
+        <div className="space-y-1 max-w-[16rem]">
           <EpicsList epics={epics} />
           <CategoriesList categories={categories} />
         </div>
-        <UserList users={users} />
+        <UserList users={users} className="grow justify-end" />
       </div>
     </div>
   );
@@ -83,7 +83,7 @@ export const TodosKanban = ({ groups }: { groups: GroupedTodos }) => {
           return (
             <div
               key={state}
-              className="bg-sheet min-w-[18rem] mr-2 flex-1 max-w-[28rem] rounded-lg"
+              className="bg-sheet min-w-[22rem] mr-2 flex-1 max-w-[28rem] rounded-lg"
             >
               <div className="py-4">
                 <StateLabel

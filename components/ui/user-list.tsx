@@ -20,27 +20,27 @@ export default function UserList({
   return (
     <div
       className={classNames(
-        "flex flex-wrap ml-1 relative items-center",
+        "flex flex-wrap -ml-1.5 relative items-center",
         className
       )}
     >
-      {(remainingUsers.length === 1 ? users : displayedUsers)?.map(({ user }, i) => (
-        <div key={i}>
-          <TooltipTrigger delay={0}>
+      {(remainingUsers.length === 1 ? users : displayedUsers)?.map(
+        ({ user }, i) => (
+          <TooltipTrigger key={i} delay={0}>
             <Avatar
-              href={`/project/users/${user.id}`}
+              href={`/project/members/${user.id}`}
               src={user.avatar}
               name={user.name}
             />
             <Tooltip>{user.name}</Tooltip>
           </TooltipTrigger>
-        </div>
-      ))}
+        )
+      )}
       {remainingUsers.length > 1 && (
         <DialogTrigger>
           <Button
             className={
-              "block text-text rounded-full h-6 w-6 hover:bg-neutral-100 ring-white text-[13px] ml-0.5 -mr-1 outline-0" 
+              "block text-text rounded-full h-6 w-6 hover:bg-neutral-100 ring-white text-[13px] ml-0.5 -mr-1 outline-0"
             }
           >
             +{remainingUsers.length}
@@ -58,9 +58,15 @@ export default function UserList({
                 className="p-0"
               >
                 {users.slice(maxUsers).map(({ user }, i) => (
-                  <ListBoxItem key={i} href={`/project/users/${user.id}`}>
+                  <ListBoxItem key={i} href={`/project/members/${user.id}`}>
                     <div className="block h-5 w-5 -ml-0.5 bg-hover rounded-full ring-1 ring-white overflow-hidden">
-                      {user.avatar && <Avatar name={user.name} src={user.avatar} href={`/project/users/${user.id}`} />}
+                      {user.avatar && (
+                        <Avatar
+                          name={user.name}
+                          src={user.avatar}
+                          href={`/project/members/${user.id}`}
+                        />
+                      )}
                     </div>{" "}
                     <span className="text-text-700 text-sm">{user.name}</span>
                   </ListBoxItem>

@@ -10,7 +10,6 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/navbar";
-import { Button } from "./ui/button";
 import Link from "next/link";
 import Logo from "./logo";
 import siteConfig from "@/site-config";

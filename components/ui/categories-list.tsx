@@ -7,7 +7,7 @@ export const CategoriesList = ({
   categories: { category: Category }[];
 }) => {
   return (
-    <div className="space-x-1 flex">
+    <div className="gap-1 flex flex-wrap">
       {categories.map(({ category }, c) => (
         <span
           key={c}
