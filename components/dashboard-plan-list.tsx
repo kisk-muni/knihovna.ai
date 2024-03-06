@@ -97,10 +97,10 @@ export default async function DashboardPlanList({
   displayFilter?: Selection;
 }) {
   const data = await loadThemes(selectedState);
-
+  if (!data) return null;
   return (
     <div>
-      {data.map((theme, t) => (
+      {data?.map((theme, t) => (
         <ThemeRow theme={theme} key={t} />
       ))}
     </div>
