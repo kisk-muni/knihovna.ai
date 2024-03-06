@@ -25,7 +25,7 @@ export default async function Home() {
       <SectionNews />
       <SectionVision />
       <SectionPromises />
-      <SectionExploreProject />
+      {/*       <SectionExploreProject /> */}
       <SectionEngage />
       <SectionAffiliation />
     </main>

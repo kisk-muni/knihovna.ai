@@ -1,5 +1,5 @@
 import { nextui } from "@nextui-org/react";
-const colors = require('tailwindcss/colors')
+const colors = require("tailwindcss/colors");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -11,14 +11,14 @@ module.exports = {
   ],
   theme: {
     colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
+      transparent: "transparent",
+      current: "currentColor",
       navbar: "#ffffffcc",
       background: "#fff",
       sheet: "#F3F3F3",
       hover: "#D2D2D2",
       primary: {
-        'DEFAULT': "#d68a67",
+        DEFAULT: "#d68a67",
         50: "#fbf6f1",
         100: "#f7e8dd",
         200: "#edcfbb",
@@ -32,7 +32,7 @@ module.exports = {
         950: "#371613",
       },
       text: {
-        "DEFAULT": "#403f3f",
+        DEFAULT: "#403f3f",
         50: "#f6f5f5",
         100: "#e7e6e6",
         200: "#d1d0d0",
@@ -63,6 +63,9 @@ module.exports = {
       white: colors.white,
       yellow: colors.amber,
       orange: colors.orange,
+      blue: colors.blue,
+      purple: colors.purple,
+      pink: colors.pink,
       emerald: colors.emerald,
     },
     extend: {
