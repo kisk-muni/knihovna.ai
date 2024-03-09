@@ -28,9 +28,9 @@ export default function SectionHero() {
                     Jak se zapojit?
                   </Button>
                 </Link>
-                <Link href="/o-projektu">
+                <Link href="/project/about">
                   <Button theme="gray" size="base" variant="ghost">
-                    Více o projektu
+                    Prozkoumat projekt
                   </Button>
                 </Link>
               </div>
