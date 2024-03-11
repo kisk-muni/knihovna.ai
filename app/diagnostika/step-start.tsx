@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import useDiagnosisForm from "@/lib/hooks/use-diagnosis-form";
+import { urlName } from "@/framework";
+import { useDiagnosisForm } from "./use-diagnosis-form";
 import { useRouter } from "next/navigation";
 
 export default function StepStart() {
@@ -8,7 +9,7 @@ export default function StepStart() {
   const router = useRouter();
   const start = () => {
     setStarted(true);
-    router.push("/diagnostika/0-0");
+    router.push(`/${urlName}/1`);
   };
   return (
     <>

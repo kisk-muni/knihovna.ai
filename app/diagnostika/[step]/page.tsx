@@ -2,10 +2,31 @@
 import Container from "@/components/ui/container";
 /* eslint-disable react/no-unescaped-entities */
 import BackgroundGradient from "@/components/ui/background-gradient";
-import useDiagnosisForm from "@/lib/hooks/use-diagnosis-form";
-import { Button } from "@/components/ui/button";
+import { useDiagnosisForm, ActionKind } from "../use-diagnosis-form";
 import { useRouter } from "next/navigation";
-import { set } from "date-fns";
+import { urlName } from "@/framework";
+import classNames from "classnames";
+import { Button } from "react-aria-components";
+import Logo from "@/components/logo";
+
+function SelectTrueFalse({ selected }: { selected: (value: boolean) => void }) {
+  return (
+    <div className="flex space-x-6 mb-4">
+      <Button
+        className="items-center py-3 px-4 w-28 rounded-lg bg-red-400"
+        onPress={() => selected(false)}
+      >
+        Ne
+      </Button>
+      <Button
+        className="items-center py-3 px-4 w-28 rounded-lg bg-emerald-400"
+        onPress={() => selected(true)}
+      >
+        Ano
+      </Button>
+    </div>
+  );
+}
 
 export default function Step({
   params: { step: stringifiedStep },
@@ -13,73 +34,89 @@ export default function Step({
   params: { step: string };
 }) {
   const router = useRouter();
-  const [theme, step] = stringifiedStep.split("-").map((s) => parseInt(s, 10));
-  const { started, questions, setAnswers, answers } = useDiagnosisForm();
-  const currentTheme = questions[theme];
-  const currentQuestion = currentTheme.questions[step];
+  const step = parseInt(stringifiedStep, 10);
+  const { started, questions, questionsDispatch } = useDiagnosisForm();
+  if (!started || !step) {
+    router.push(`/${urlName}`);
+  }
 
-  const click = (value: boolean) => {
-    setAnswers({ ...answers, [`${theme}${step}`]: value });
-    router.push(
-      step + 1 < currentTheme.questions.length
-        ? `/diagnostika/${theme}-${step + 1}`
-        : theme + 1 < questions.length
-        ? `/diagnostika/${theme + 1}-0`
-        : "/diagnostika/vysledky"
-    );
+  const currentQuestion = questions[step - 1];
+
+  const navigate = (direction: "back" | "forward" | "results") => {
+    if (direction === "back" && step === 1) {
+      router.push(`/${urlName}`);
+      return;
+    }
+    if (
+      direction === "results" ||
+      (questions.length === step && direction === "forward")
+    ) {
+      router.push(`/${urlName}/vysledky`);
+      return;
+    }
+    router.push(`/${urlName}/${direction === "back" ? step - 1 : step + 1}`);
   };
 
-  const navigate = (direction: "back" | "forward") => {
-    router.push(
-      direction === "back"
-        ? step - 1 >= 0
-          ? `/diagnostika/${theme}-${step - 1}`
-          : theme - 1 >= 0
-          ? `/diagnostika/${theme - 1}-${
-              questions[theme - 1].questions.length - 1
-            }`
-          : "/diagnostika"
-        : step + 1 < currentTheme.questions.length
-        ? `/diagnostika/${theme}-${step + 1}`
-        : theme + 1 < questions.length
-        ? `/diagnostika/${theme + 1}-0`
-        : "/diagnostika/vysledky"
-    );
+  const selectedTrueFalse = (value: boolean) => {
+    questionsDispatch({
+      type: ActionKind.TrueFalseAnswer,
+      payload: {
+        qi: step - 1,
+        answer: value,
+      },
+    });
+    navigate("forward");
   };
 
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col grow h-full">
+      <div className="flex justify-start items-center space-x-0.5 px-0.5 py-0.5 z-50">
+        {questions.map((_question, index) => {
+          return (
+            <div
+              key={index}
+              className={classNames("h-1 flex-1 rounded-full", {
+                "bg-text-700 h-2": index == step - 1,
+                "bg-emerald-400": !!_question.answer != false,
+                "bg-red-400":
+                  _question.answer != undefined && !!_question.answer == false,
+                "bg-text-300": _question.answer == undefined,
+              })}
+            ></div>
+          );
+        })}
+      </div>
+      <div className="text-text-500 z-50 font-medium py-2 px-3 text-sm">
+        <div className="flex space-x-1 py-0.5">
+          <Logo />
+          <span>{" · "}</span>
+          <span>Diagnostika knihovny</span>
+          <span>{" · "}</span>
+          <span>
+            Otázka {step} z {questions.length}
+          </span>
+        </div>
+      </div>
       <BackgroundGradient.Radial />
-      <section className="bg-white pt-12 lg:pt-20 pb-0">
-        <Container className="flex items-center space-x-8">
+      <section className="grow flex items-center justify-center relative z-50 h-full pb-40">
+        <div className="max-w-lg">
           <div>
-            <Button variant="pagination" onClick={() => navigate("back")}>
-              Předešlá otázka
-            </Button>
+            {step > 1 && (
+              <Button onPress={() => navigate("back")}>Předešlá otázka</Button>
+            )}
           </div>
           <div className="flex text-text flex-col gap-x-6">
             <div className="mb-6 text-text/60 text-lg font-medium">
-              {currentTheme.title} ({step + 1}/{currentTheme.questions.length})
+              {currentQuestion.category} ({step}/{questions.length})
             </div>
-            <h2 className="mb-6 text-4xl">
-              {typeof currentQuestion === "string" ? currentQuestion : ""}
+            <h2 className="mb-6 text-2xl font-medium">
+              {currentQuestion.questionText}
             </h2>
-            <div className="flex space-x-6 mb-4">
-              <Button
-                className="items-center w-40 py-8"
-                onClick={() => click(false)}
-              >
-                Ne
-              </Button>
-              <Button
-                className="items-center w-40 py-8"
-                onClick={() => click(true)}
-              >
-                Ano
-              </Button>
-            </div>
+            {currentQuestion.type === "TrueFalse" && (
+              <SelectTrueFalse selected={selectedTrueFalse} />
+            )}
           </div>
-        </Container>
+        </div>
       </section>
     </main>
   );
