@@ -6,13 +6,17 @@ import { Question, urlName } from "@/framework";
 import MyRadarChart from "@/components/radar-chart";
 import { Dimension } from "@/components/radar-chart";
 import classNames from "classnames";
+import { useEffect } from "react";
 
 export default function ResultsPage() {
-  const { questions, started } = useDiagnosisForm();
   const router = useRouter();
-  if (!started) {
-    router.push(`/${urlName}`);
-  }
+  const { questions, started } = useDiagnosisForm();
+  // wrap in useEffect
+  useEffect(() => {
+    if (!started) {
+      router.push(`/${urlName}`);
+    }
+  }, [started, router]);
   const questionsByCategory = questions.reduce((acc, question) => {
     if (!acc[question.category]) {
       acc[question.category] = [];

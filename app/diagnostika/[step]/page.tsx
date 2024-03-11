@@ -1,6 +1,4 @@
 "use client";
-import Container from "@/components/ui/container";
-/* eslint-disable react/no-unescaped-entities */
 import BackgroundGradient from "@/components/ui/background-gradient";
 import { useDiagnosisForm, ActionKind } from "../use-diagnosis-form";
 import { useRouter } from "next/navigation";
@@ -8,6 +6,7 @@ import { urlName } from "@/framework";
 import classNames from "classnames";
 import { Button } from "react-aria-components";
 import Logo from "@/components/logo";
+import { useEffect } from "react";
 
 function SelectTrueFalse({ selected }: { selected: (value: boolean) => void }) {
   return (
@@ -36,9 +35,11 @@ export default function Step({
   const router = useRouter();
   const step = parseInt(stringifiedStep, 10);
   const { started, questions, questionsDispatch } = useDiagnosisForm();
-  if (!started || !step) {
-    router.push(`/${urlName}`);
-  }
+  useEffect(() => {
+    if (!started || !step) {
+      router.push(`/${urlName}`);
+    }
+  }, [started, step, router]);
 
   const currentQuestion = questions[step - 1];
 
