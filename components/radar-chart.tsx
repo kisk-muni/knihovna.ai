@@ -1,10 +1,9 @@
+"use client";
 import {
   Radar,
   RadarChart,
   PolarGrid,
-  // Legend,
   PolarAngleAxis,
-  PolarRadiusAxis,
   ResponsiveContainer,
   Tooltip,
 } from "recharts";

@@ -1,5 +1,4 @@
 "use client";
-import Container from "@/components/ui/container";
 import BackgroundGradient from "@/components/ui/background-gradient";
 import { useDiagnosisForm } from "../use-diagnosis-form";
 import { useRouter } from "next/navigation";
