@@ -52,8 +52,6 @@ export default function ResultsPage() {
   );
   return (
     <main className="flex flex-col">
-      <BackgroundGradient.Radial />
-
       <section className="relative mt-20 mb-20 flex flex-col items-center">
         <div className="max-w-screen-lg px-6 flex flex-col items-center">
           <h1 className="text-text-300 uppercase text-center text-sm font-medium mb-4 mt-4">
@@ -63,7 +61,7 @@ export default function ResultsPage() {
             Vaše knihovna je na začátku
           </h1>
           <div className="grid grid-cols-2 space-x-6">
-            <div className="w-auto h-auto min-h-[200px] border border-neutral-150 py-6 px-3 bg-white rounded-md">
+            <div className="w-auto h-auto min-h-[200px] border border-neutral-200 shadow-xs py-6 px-3 bg-white rounded-md">
               <MyRadarChart data={radarData} />
             </div>
             <div className="text-text mt-6">
@@ -71,7 +69,7 @@ export default function ResultsPage() {
                 Tady bude kratky souhrn výsledků a doporučení na základě testu.
               </p>
               <h3 className="text-text font-bold text-lg mb-3 mt-4">
-                Zaměřte se na následující:
+                Doporučujeme:
               </h3>
               <p className="text-text-500 mb-4">
                 Kratce popsany next step, ktery jsme vyhodnotili jako

@@ -26,7 +26,7 @@ export default function MyRadarChart({ data }: { data: Dimension[] }) {
           type="monotone"
           name="Knihovna"
           dataKey="normalizedValue"
-          className="stroke-emerald-600/60 fill-emerald-200/60"
+          className="stroke-emerald-600/60 fill-emerald-200/80"
         />
         <Tooltip
           content={({ active, payload, label }) => {
