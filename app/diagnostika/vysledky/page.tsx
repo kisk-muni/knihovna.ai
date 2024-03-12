@@ -6,7 +6,8 @@ import { Question, urlName } from "@/framework";
 import MyRadarChart from "@/components/radar-chart";
 import { Dimension } from "@/components/radar-chart";
 import classNames from "classnames";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Button } from "react-aria-components";
 
 export default function ResultsPage() {
   const router = useRouter();
@@ -46,68 +47,94 @@ export default function ResultsPage() {
     .sort((a, b) => a.name.localeCompare(b.name));
 
   // push to next step if there is one, otherwise push to next theme if there is next one or to results
+  const [expanded, setExpanded] = useState<boolean[]>(
+    Object.keys(questionsByCategory).map(() => false)
+  );
   return (
-    <main className="flex flex-col pb-12">
+    <main className="flex flex-col">
       <BackgroundGradient.Radial />
-      <section className="relative mt-20 flex flex-col items-center">
-        <h1 className="text-text-300 uppercase text-center text-sm font-medium mb-4 mt-4">
-          Vyhodnocení
-        </h1>
-        <h1 className="text-text text-3xl mb-16 mt-6 font-bold">
-          Vaše knihovna je na začátku
-        </h1>
-        <div className="grid grid-cols-2 px-6 max-w-screen-lg">
-          <div className="text-text mt-6">
-            <p className="text-text-500 mb-4">
-              Tady bude kratky souhrn výsledků a doporučení na základě testu.
-            </p>
-            <h3 className="text-text font-bold text-lg mb-3 mt-4">
-              Zaměřte se na následující:
-            </h3>
-            <p className="text-text-500 mb-4">
-              Kratce popsany next step, ktery jsme vyhodnotili jako
-              nejdulezitejsi.
-            </p>
-          </div>
-          <div className="w-auto h-auto min-h-[200px]">
-            <MyRadarChart data={radarData} />
+
+      <section className="relative mt-20 mb-20 flex flex-col items-center">
+        <div className="max-w-screen-lg px-6 flex flex-col items-center">
+          <h1 className="text-text-300 uppercase text-center text-sm font-medium mb-4 mt-4">
+            Vyhodnocení
+          </h1>
+          <h1 className="text-text text-3xl mb-16 mt-6 font-bold">
+            Vaše knihovna je na začátku
+          </h1>
+          <div className="grid grid-cols-2 space-x-6">
+            <div className="w-auto h-auto min-h-[200px] border border-neutral-150 py-6 px-3 bg-white rounded-md">
+              <MyRadarChart data={radarData} />
+            </div>
+            <div className="text-text mt-6">
+              <p className="text-text-500 mb-4">
+                Tady bude kratky souhrn výsledků a doporučení na základě testu.
+              </p>
+              <h3 className="text-text font-bold text-lg mb-3 mt-4">
+                Zaměřte se na následující:
+              </h3>
+              <p className="text-text-500 mb-4">
+                Kratce popsany next step, ktery jsme vyhodnotili jako
+                nejdulezitejsi.
+              </p>
+            </div>
           </div>
         </div>
-        <div className="flex text-text flex-col max-w-2xl mx-auto bg-white shadow-xl p-6 border border-neutral-150 rounded-lg mt-20 gap-x-6">
-          <h3 className="text-text font-bold text-xl mb-4">Další doporučení</h3>
-          <p className="text-text-500 mb-4">
-            Tady bude vypis odpovedi, pokud odpovedeli Ne zobrazi se doporuceny
-            material s doprovodnym textem.
-          </p>
-          {Object.keys(questionsByCategory).map((category, categoryIndex) => {
-            return (
-              <div key={categoryIndex} className="mb-6">
-                <div className="text-base text-text font-bold mb-3">
-                  {category}
+      </section>
+
+      <section className="bg-primary-50/40 pb-12 border-t grow h-full border-neutral-200">
+        <div className="max-w-screen-lg px-6 py-10 mx-auto">
+          <h3 className="text-text font-semibold text-2xl mt-4 mb-8">
+            Detail vyhodnocení
+          </h3>
+          <div className="flex text-text flex-col bg-white border border-neutral-200 shadow-sm rounded-lg">
+            {Object.keys(questionsByCategory).map((category, categoryIndex) => {
+              return (
+                <div key={categoryIndex} className="">
+                  <Button
+                    onPress={() => {
+                      setExpanded((prev) => {
+                        const next = [...prev];
+                        next[categoryIndex] = !prev[categoryIndex];
+                        return next;
+                      });
+                    }}
+                    className="text-sm w-full text-left px-4 py-4 border-b border-neutral-200 flex justify-between text-text font-semibold"
+                  >
+                    <span>{category}</span>
+                    <span className="text-text-400 font-normal">
+                      3 doporučení
+                    </span>
+                  </Button>
+                  {expanded[categoryIndex] && (
+                    <div>
+                      {questionsByCategory[category].map((question, qi) => {
+                        return (
+                          <div
+                            key={qi}
+                            className="flex justify-between pr-4 pl-8 text-sm border-b last:border-b border-neutral-200 py-3"
+                          >
+                            <div>{question.questionText}</div>
+                            {question.type == "TrueFalse" &&
+                              question.answer !== undefined && (
+                                <div
+                                  className={classNames("w-20 text-right", {
+                                    "text-emerald-600": question.answer,
+                                    "text-red-600": !question.answer,
+                                  })}
+                                >
+                                  {question.answer ? "Ano" : "Ne"}
+                                </div>
+                              )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
-                <div>
-                  {questionsByCategory[category].map((question, qi) => {
-                    return (
-                      <div key={qi} className="flex justify-between mb-4">
-                        <div>{question.questionText}</div>
-                        {question.type == "TrueFalse" &&
-                          question.answer !== undefined && (
-                            <div
-                              className={classNames("w-20 text-right", {
-                                "text-emerald-600": question.answer,
-                                "text-red-600": !question.answer,
-                              })}
-                            >
-                              {question.answer ? "Ano" : "Ne"}
-                            </div>
-                          )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </section>
     </main>

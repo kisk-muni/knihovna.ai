@@ -23,6 +23,7 @@ export default function MyRadarChart({ data }: { data: Dimension[] }) {
         <PolarGrid />
         <PolarAngleAxis dataKey="name" fontSize={15} className="text-text" />
         <Radar
+          type="monotone"
           name="Knihovna"
           dataKey="normalizedValue"
           className="stroke-emerald-600/60 fill-emerald-200/60"
