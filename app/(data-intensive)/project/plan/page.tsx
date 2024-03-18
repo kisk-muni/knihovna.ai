@@ -1,4 +1,3 @@
-"use client";
 import DashboardPlanList from "@/components/dashboard-plan-list";
 import FilterPhaseState from "@/components/filter-phase-state";
 import DashboardHeader from "@/components/ui/dashboard-header";
