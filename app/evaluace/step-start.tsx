@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { urlName } from "@/framework";
 import { useDiagnosisForm } from "./use-diagnosis-form";
 import { useRouter } from "next/navigation";
+import Card from "@/components/ui/card";
+import { IconArrowRight } from "@/components/ui/icons";
 
 export default function StepStart() {
-  const { setStarted } = useDiagnosisForm();
+  const { setStarted, questions } = useDiagnosisForm();
   const router = useRouter();
   const start = () => {
     setStarted(true);
@@ -13,7 +15,9 @@ export default function StepStart() {
   };
   return (
     <>
-      <Button onClick={start}>Začít</Button>
+      <Button onClick={start} className="flex items-center">
+        Spustit evaluaci <IconArrowRight className="h-5 w-5 ml-1" />
+      </Button>
     </>
   );
 }

@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-anonymous-default-export
-export const urlName = "diagnostika";
+export const urlName = "evaluace";
 
 export enum Category {
   "O knihovně" = "O knihovně",

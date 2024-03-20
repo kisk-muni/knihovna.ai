@@ -7,6 +7,7 @@ import classNames from "classnames";
 import { Button } from "react-aria-components";
 import Logo from "@/components/logo";
 import { useEffect } from "react";
+import { IconArrowRight } from "@/components/ui/icons";
 
 function SelectTrueFalse({ selected }: { selected: (value: boolean) => void }) {
   return (
@@ -91,7 +92,7 @@ export default function Step({
         <div className="flex space-x-1 py-0.5">
           <Logo />
           <span>{" · "}</span>
-          <span>Diagnostika knihovny</span>
+          <span>Evaluace knihovny</span>
           <span>{" · "}</span>
           <span>
             Otázka {step} z {questions.length}
@@ -103,14 +104,17 @@ export default function Step({
         <div className="max-w-lg">
           <div>
             {step > 1 && (
-              <Button onPress={() => navigate("back")}>Předešlá otázka</Button>
+              <Button
+                className="text-text-400 mb-8 flex items-center"
+                onPress={() => navigate("back")}
+              >
+                <IconArrowRight className="h-4 w-4 rotate-180 mr-1" />
+                Předešlá otázka
+              </Button>
             )}
           </div>
           <div className="flex text-text flex-col gap-x-6">
-            <div className="mb-6 text-text/60 text-lg font-medium">
-              {currentQuestion.category} ({step}/{questions.length})
-            </div>
-            <h2 className="mb-6 text-2xl font-medium">
+            <h2 className="mb-8 text-2xl font-medium">
               {currentQuestion.questionText}
             </h2>
             {currentQuestion.type === "TrueFalse" && (

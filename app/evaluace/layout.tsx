@@ -1,5 +1,5 @@
 "use client";
-import { DiagnosisFormProvider } from "@/app/diagnostika/use-diagnosis-form";
+import { DiagnosisFormProvider } from "@/app/evaluace/use-diagnosis-form";
 
 export default function DiagnostikaLayout({
   children,
