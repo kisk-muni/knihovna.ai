@@ -12,6 +12,8 @@ export const users = pgTable("users", {
   avatar: text("avatar"),
 });
 
+export type UserTable = typeof users;
+
 export type User = typeof users.$inferSelect;
 
 export const usersRelations = relations(users, ({ many }) => ({
