@@ -8,7 +8,6 @@ import StepStart from "./step-start";
 import classNames from "classnames";
 import Logo from "@/components/logo";
 import Card from "@/components/ui/card";
-import { useDiagnosisForm } from "./use-diagnosis-form";
 
 export const metadata: Metadata = createMetadata({
   title: "knihovna.ai od KISK MUNI - Evaluace",
@@ -18,13 +17,16 @@ export const metadata: Metadata = createMetadata({
   ogTitle: "Mapujeme budoucnost knihoven v éře AI",
 });
 
-export default async function Home() {
+export default async function EvaluationPage() {
   const steps = [
     {
       description: "Evaluaci proveďte sami nebo s kolegy.",
     },
     {
-      description: `Čeká vás ${32} otázek na 10 až 15 minut`,
+      description: `Čeká vás ${32} otázek na 10 až 15 minut.`,
+    },
+    {
+      description: `Otázky se týkají připravenosti na dopady AI a využití AI v knihovnách.`,
     },
     {
       description: `Výsledky získáte ihned po vyplnění.`,
@@ -49,7 +51,7 @@ export default async function Home() {
                 as="h2"
                 className="text-center max-w-screen-md"
               >
-                Zjistěte, jak je vaše knihovna připravena na AI
+                Zjistěte, jak je vaše knihovna připravena na rostoucí vliv AI
               </Headline>
               <p className="text-text text-lg">
                 Získejte praktická doporučení, jak knihovnu zlepšovat.

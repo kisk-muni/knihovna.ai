@@ -59,7 +59,7 @@ export interface Action {
   type: ActionKind;
   payload: {
     qi: number;
-    answer: string[] | string | boolean;
+    answer: boolean | null;
   };
 }
 
