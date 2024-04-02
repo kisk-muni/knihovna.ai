@@ -17,7 +17,7 @@ export const metadata: Metadata = createMetadata({
     `,
 });
 
-export const questionsLength = questions.length;
+const questionsLength = questions.length;
 
 export default async function EvaluationPage() {
   const steps = [
