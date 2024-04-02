@@ -35,7 +35,7 @@ export type TrueFalse = {
   info?: string;
   examples?: string;
   notes?: string;
-  recommendation?: {
+  recommendation: {
     name: string;
     description: string;
     link?: string;
@@ -58,7 +58,7 @@ export type SingleChoice = {
   answer?: string;
 };
 
-export const questions = <Question[]>[
+export const questions = <TrueFalse[]>[
   /* {
     category: Category["O knihovně"],
     type: "SingleChoice",
@@ -81,7 +81,7 @@ export const questions = <Question[]>[
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText:
-      "Používáte webovou analytiku pro sběr dat o využívání vašich služeb nad rámec povinných statistik za účelem zlepšování služeb?",
+      "Používáte webovou analytiku pro sběr dat o využívání vašich služeb nad rámec povinných statistik?",
     examples:
       "uživatelské interakce na webu, typy rezervace, návštěvnost webu, sociální sítě, newsletter",
     recommendation: {
@@ -108,13 +108,20 @@ export const questions = <Question[]>[
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText: "Navrhujete nebo zlepšujete služby pomocí AI nástrojů?",
+    examples: "pro personalizaci služeb nebo doporučování dokumentů",
+    recommendation: {
+      name: "Zvažte využití AI pro návrh a zlepšování služeb",
+      description:
+        "Využití AI pro návrh a zlepšování služeb může zvýšit efektivitu a uživatelskou spokojenost. Zkuste nástroje jako Adobe Sensei nebo Salesforce Einstein pro personalizaci služeb a doporučování dokumentů.",
+      link: "https://www.adobe.com/sensei.html",
+    },
   },
   {
     category: Category["Knihovní služby"],
     type: "TrueFalse",
     questionText:
-      "Využíváte pro komunikaci s uživateli chatbota nebo jinou formu virtuálního asistenta??",
-    info: "Dotazy se myslí 80% dotazů, které se běžně opakují a nevyžadují speciální znalosti či dovednosti.",
+      "Využíváte pro komunikaci s uživateli chatbota nebo jinou formu virtuálního asistenta?",
+    info: "Komunikací se myslí řešení 80 % dotazů, které se běžně opakují a nevyžadují speciální znalosti či dovednosti.",
     recommendation: {
       name: "Zvažte nasazení chatbota nebo virtuálního asistenta pro komunikaci s uživateli",
       description:
@@ -127,7 +134,8 @@ export const questions = <Question[]>[
     type: "TrueFalse",
     questionText: "Nabízíte samoobslužné služby?",
     examples:
-      "výpůjčky, vracení knih, či přístup ke studovnám a pracováním prostrům",
+      "výpůjčky, vracení knih, či přístup ke studovnám a pracováním prostorům",
+    info: "Chatbot může čerpat i z informací na webu (knihovny, obce) a jiných zdrojů, ke kterým mu dáme přístup.",
     recommendation: {
       name: "Rozšiřte nabídku samoobslužných služeb",
       description:
@@ -173,7 +181,7 @@ export const questions = <Question[]>[
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText:
-      "Poskytujete uživatelům praktické workshopy s online nástroji a AI?",
+      "Poskytujete uživatelům praktické workshopy s AI nástroji a digitálními aplikacemi vzužívající AI?",
     examples: "ChatGPT, Canva, Scratch",
     recommendation: {
       name: "Zvažte poskytování praktických workshopů s online nástroji a AI",
@@ -197,6 +205,7 @@ export const questions = <Question[]>[
     type: "TrueFalse",
     questionText:
       "Vytváříte vzdělávací obsah pro dospělé v produktivním věku v závislosti na jejich potřebách?",
+    info: "Podpora rozvoje kompetencí a flexibility dospělých je klíčová v kontextu technologických změn, co pronikají na trh práce. Dospělým můžeme mj. nabízet příležitosti k upskillingu (navýšení kompetencí) či reskillingu (osvojení si nových kompetencí).",
     recommendation: {
       name: "Vytvářejte vzdělávací obsah pro dospělé v produktivním věku",
       description:
@@ -218,7 +227,7 @@ export const questions = <Question[]>[
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText:
-      "Vzdělávají se zaměstnanci knihovny v digitálních dovednostech kontinálně?",
+      "Vzdělávají se zaměstnanci knihovny v digitálních dovednostech kontinuálně?",
     info: "Kontinuální vzdělávání neznamená pouze účast na kurzech, ale dlouhodobé vzdělávání a rozvoj dovedností na základě předem daných cílů.",
     recommendation: {
       name: "Zajistěte kontinuální vzdělávání zaměstnanců v digitálních dovednostech",
@@ -231,7 +240,8 @@ export const questions = <Question[]>[
     type: "TrueFalse",
     questionText:
       "Nabízíte uživatelům prostor pro rozvoj digitálních kompetencí?",
-    examples: "skrze vzdělávací kurzy, workshopy, konzultace",
+    examples:
+      "skrze vzdělávací kurzy, workshopy, konzultace, nabídku licencí softwaru a zázemí k samostudiu?",
     recommendation: {
       name: "Poskytněte uživatelům prostor pro rozvoj digitálních kompetencí",
       description:
@@ -244,7 +254,7 @@ export const questions = <Question[]>[
     questionText:
       "Umožňujete uživatelům pracovat s moderními technologiemi nad rámec PC a čteček?",
     examples:
-      "3D tisk, Virtuální realita, šicí stroj, práce s roboty, půjčování kamer, mikrofonů, zvukových zařízení",
+      "3D tisk, virtuální realita, šicí stroj, práce s roboty, půjčování kamer, mikrofonů, zvukových zařízení",
     recommendation: {
       name: "Rozšiřte nabídku moderních technologií pro uživatele",
       description:
@@ -264,7 +274,7 @@ export const questions = <Question[]>[
     },
   },
   {
-    category: Category["Komunitní role"],
+    category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText:
       "Nabízíte uživatelům osobní konzultace a pomoc s technologiemi?",
@@ -278,18 +288,19 @@ export const questions = <Question[]>[
     category: Category["Komunitní role"],
     type: "TrueFalse",
     questionText:
-      "Nabízíte uživatelům možnost pořádání vlastních komunitních akcí?",
+      "Nabízíte uživatelům či organizacím (vzdělávacím, kulturním) nebo spolkům možnost pořádání vlastních komunitních akcí?",
     recommendation: {
       name: "Umožněte uživatelům rezervaci prostorů pro vlastní komunitní akce",
       description:
-        "Zajistěte rezervační systém, který umožní uživatelům rezervovat prostory pro organizaci vlastních komunitních akcí. To podporuje zapojení komunity a posiluje roli knihovny jako centra pro setkávání a sdílení znalostí.",
+        "Zajistěte rezervační systém, který umožní uživatelům rezervovat prostory pro organizaci vlastních komunitních akcí. To podporuje zapojení komunity a posiluje roli knihovny jako centra pro setkávání a sdílení znalostí. Informujte o těchto možnostech také místní organizace a spolky.",
     },
   },
   {
     category: Category["Sociální role"],
     type: "TrueFalse",
     questionText:
-      "Nabízíte služby podporující digitálně vyloučené osoby napříč celým věkovým spektrem?",
+      "Nabízíte služby podporující osoby digitální vyloučené a osobz v ohrožení digitálním vyloučením napříč celým věkovým spektrem?",
+    info: "Mezi rizikové skupiny patří osoby bez přístupu k technologiím, ale i osoby s nízkými digitálními dovednostmi (např. děti a mladiství ze socioekonomicky znevýhodněného prostředí, pasivní konzumenti obsahu, kteří nedovedou internet využívat produktivně), viz digitální profily od projektu Digitální inkluze.",
     recommendation: {
       name: "Zaměřte se na navrhování služeb pro marginalizované osoby a ohrožené skupiny",
       description:
@@ -301,6 +312,7 @@ export const questions = <Question[]>[
     type: "TrueFalse",
     questionText:
       "Pomáháte specificky skupinám v populaci, které mohou nové technologie ohrozit nebo znevýhodnit?",
+    info: "Nové technologie mohou být ohrožením pro osoby s nízkými digitálními dovednostmi a s nízkým přístupem ke vzdělávání, ale také pro profese pod vlivem automatizace (např. pokladní, řidiči) či generativní AI (např. překladatelé, grafici).",
     recommendation: {
       name: "Poskytujte pomoc specifickým skupinám, které mohou být znevýhodněny novými technologiemi",
       description:
@@ -344,7 +356,7 @@ export const questions = <Question[]>[
     },
   },
   {
-    category: Category["Sociální role"],
+    category: Category["Komunitní role"],
     type: "TrueFalse",
     questionText:
       "Umožňujete uživatelům zapojení do organizace akcí a dobrovolnické zapojení do provozu knihovny?",
@@ -369,19 +381,31 @@ export const questions = <Question[]>[
   {
     category: Category["Knihovní procesy"],
     type: "TrueFalse",
-    questionText: "Používáte pro vyhledávání nebo řazení knih roboty?",
+    questionText:
+      "Využíváte nástroje na generování textů (e-maily, propagace, oficiální dokumenty)?",
     recommendation: {
-      name: "Robotické vyhledávání a řazení knih",
+      name: "Zvažte využití nástrojů na generování textů",
       description:
-        "Pokud tvoří vyhledávání a řazení knih podstatný náklad vaší knihovny, zvažte možnosti využití robotů pro vyhledávání a řazení knih, což může výrazně zefektivnit vaše procesy. Existují specializované roboty pro tuto činnost, například knihovní roboty od společnosti Bibliotheca.",
-      link: "https://www.bibliotheca.com/library-solutions/library-automation/library-robots",
+        "Využití nástrojů na generování textů může zefektivnit tvorbu e-mailů, propagace a oficiálních dokumentů. Zkuste nástroje jako je OpenAI nebo GPT-3 pro generování obsahu.",
+      link: "https://openai.com/",
     },
   },
   {
     category: Category["Knihovní procesy"],
     type: "TrueFalse",
     questionText:
-      "Využíváte nástroje pro analýzu obsahu, věcný popis, automatickou klasifikaci nebo tvorbu klíčových slov dokumentů?",
+      "Využíváte RFID technologie pro automatické třídění knih, kontrolu řazení nebo revizi?",
+    recommendation: {
+      name: "Nasaďte RFID technologii v automatizaci knihovních procesů",
+      description:
+        "Zvažte využití RFID technologií pro automatizaci třídění knih, kontrolu řazení a revizi. RFID technologie mohou zvýšit efektivitu a přesnost knihovních procesů a usnadnit práci knihovníkům.",
+    },
+  },
+  {
+    category: Category["Knihovní procesy"],
+    type: "TrueFalse",
+    questionText:
+      "Využíváte nástroje pro analýzu obsahu, věcný popis, automatickou klasifikaci nebo tvorbu klíčových slov (digitalizovaných nebo digitálních) dokumentů?",
     recommendation: {
       name: "Nástroje pro analýzu obsahu a automatickou klasifikaci",
       description:
@@ -393,7 +417,7 @@ export const questions = <Question[]>[
     category: Category["Knihovní procesy"],
     type: "TrueFalse",
     questionText:
-      "Využíváte AI pro akvizici dokumentů (na základě statistik výpůjček, vyhledávacích dotazů v katalogu apod.)?",
+      "Využíváte AI pro akvizici dokumentů (návrhy na nákup na základě statistik výpůjček, vyhledávacích dotazů v katalogu apod.)?",
     recommendation: {
       name: "Využívání umělé inteligence pro akvizici dokumentů",
       description:

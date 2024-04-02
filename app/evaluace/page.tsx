@@ -8,14 +8,16 @@ import StepStart from "./step-start";
 import classNames from "classnames";
 import Logo from "@/components/logo";
 import Card from "@/components/ui/card";
+import { questions } from "@/framework";
 
 export const metadata: Metadata = createMetadata({
-  title: "knihovna.ai od KISK MUNI - Evaluace",
+  title: "Evaluační framework",
   description: `
-    Zjistěte, jak je vaše knihovna připravena na AI. Získejte praktická doporučení, jak knihovnu zlepšovat.
+    Zjistěte, jak je vaše knihovna připravena na rostoucí vliv AI. Získejte praktická doporučení, jak knihovnu zlepšovat.
     `,
-  ogTitle: "Mapujeme budoucnost knihoven v éře AI",
 });
+
+export const questionsLength = questions.length;
 
 export default async function EvaluationPage() {
   const steps = [
@@ -23,10 +25,10 @@ export default async function EvaluationPage() {
       description: "Evaluaci proveďte sami nebo s kolegy.",
     },
     {
-      description: `Čeká vás ${32} otázek na 10 až 15 minut.`,
+      description: `Čeká vás ${questionsLength} otázek na 10 až 15 minut.`,
     },
     {
-      description: `Otázky se týkají připravenosti na dopady AI a využití AI v knihovnách.`,
+      description: `Otázky se týkají využívání AI v knihovnách, řešení sociálních dopadů AI i širších nároků na moderní a uživatelsky přívětivou knihovnu.`,
     },
     {
       description: `Výsledky získáte ihned po vyplnění.`,
