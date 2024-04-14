@@ -104,36 +104,36 @@ export const questions = <TrueFalse[]>[
     type: "TrueFalse",
     questionText:
       {cs: "Využíváte pro komunikaci s uživateli chatbota nebo jinou formu virtuálního asistenta?", en: "Do you use a chatbot or other form of virtual assistant to communicate with users?"},
-    info: "Komunikací se myslí řešení 80 % dotazů, které se běžně opakují a nevyžadují speciální znalosti či dovednosti.",
+    info: {cs: "Komunikací se myslí řešení 80 % dotazů, které se běžně opakují a nevyžadují speciální znalosti či dovednosti.", en: "By communication, we mean solving 80% of queries that are routinely repeated and do not require special knowledge or skills."},
     recommendation: {
-      name: "Zvažte nasazení chatbota nebo virtuálního asistenta pro komunikaci s uživateli",
+      name: {cs: "Zvažte nasazení chatbota nebo virtuálního asistenta pro komunikaci s uživateli", en: "Consider deploying a chatbot or virtual assistant to communicate with users"},
       description:
-        "Pro zlepšení komunikace s uživateli můžete zvážit nasazení chatbota nebo jiné formy virtuálního asistenta. Tyto nástroje mohou pomoci rychleji a efektivněji odpovídat na běžné dotazy uživatelů.",
+        {cs: "Pro zlepšení komunikace s uživateli můžete zvážit nasazení chatbota nebo jiné formy virtuálního asistenta. Tyto nástroje mohou pomoci rychleji a efektivněji odpovídat na běžné dotazy uživatelů.", en: "To improve communication with users, you may consider deploying a chatbot or other form of virtual assistant. These tools can help answer common user questions more quickly and efficiently."},
       link: "https://chatbotsmagazine.com/top-ai-chatbot-platforms-52d75bb89c56",
     },
   },
   {
     category: Category["Knihovní služby"],
     type: "TrueFalse",
-    questionText: "Nabízíte samoobslužné služby?",
+    questionText: {cs: "Nabízíte samoobslužné služby?", en: "Do you offer self-service?"},
     examples:
-      "výpůjčky, vracení knih, či přístup ke studovnám a pracováním prostorům",
-    info: "Chatbot může čerpat i z informací na webu (knihovny, obce) a jiných zdrojů, ke kterým mu dáme přístup.",
+      {cs: "výpůjčky, vracení knih, či přístup ke studovnám a pracováním prostorům", en: "borrowing, returning books, or access to study and work spaces"},
+    info: {cs: "Chatbot může čerpat i z informací na webu (knihovny, obce) a jiných zdrojů, ke kterým mu dáme přístup.", en: "The chatbot can also draw on information on the web (libraries, municipalities) and other sources that we give it access to."},
     recommendation: {
-      name: "Rozšiřte nabídku samoobslužných služeb",
+      name: {cs: "Rozšiřte nabídku samoobslužných služeb", en: "Expand your self-service offer"},
       description:
-        "Zvýšení dostupnosti samoobslužných služeb může zlepšit uživatelskou spokojenost a efektivitu knihovny. Zvažte možnosti výpůjček, vrácení knih a přístupu ke studovnám a pracovním prostranstvím bez nutnosti interakce s knihovníkem.",
+        {cs: "Zvýšení dostupnosti samoobslužných služeb může zlepšit uživatelskou spokojenost a efektivitu knihovny. Zvažte možnosti výpůjček, vrácení knih a přístupu ke studovnám a pracovním prostranstvím bez nutnosti interakce s knihovníkem.", en: "Increasing the availability of self-service can improve user satisfaction and library efficiency. Consider options for borrowing, returning books, and accessing study and work areas without having to interact with a librarian."},
     },
   },
   {
     category: Category["Knihovní služby"],
     type: "TrueFalse",
     questionText:
-      "Nabízí váš knihovní systém doporučování dokumentů a služeb (na základě historie výpůjček, dotazů, profilu uživatele)?",
+      {cs: "Nabízí váš knihovní systém doporučování dokumentů a služeb (na základě historie výpůjček, dotazů, profilu uživatele)?", en: "Does your library system offer document and service recommendation (based on borrowing history, queries, user profile)?"},
     recommendation: {
-      name: "Zkuste implementovat doporučovací systém",
+      name: {cs: "Zkuste implementovat doporučovací systém", en: "Try to implement a recommendation system"},
       description:
-        "Využití knihovního systému pro doporučování dokumentů a služeb může zlepšit uživatelskou zkušenost a zvýšit využívání knihovny. Existuje mnoho nástrojů a knihovních systémů, které nabízejí funkce doporučování.",
+        {cs: "Využití knihovního systému pro doporučování dokumentů a služeb může zlepšit uživatelskou zkušenost a zvýšit využívání knihovny. Existuje mnoho nástrojů a knihovních systémů, které nabízejí funkce doporučování.", en: "Using a library system to recommend documents and services can improve the user experience and increase library usage. There are many tools and library systems that offer recommendation features."},
       link: "https://en.wikipedia.org/wiki/Library_catalog#Library_discovery_services",
     },
   },
