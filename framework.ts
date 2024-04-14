@@ -62,12 +62,12 @@ export const questions = <TrueFalse[]>[
   {
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
-    questionText: {cs: "Analyzujete svá data pomocí AI nástrojů?", en: ""},
-    examples: "knihovní fond, uživatelská data, výpůjčky, akvizice",
+    questionText: {cs: "Analyzujete svá data pomocí AI nástrojů?", en: "Are you analyzing your data with AI tools?"},
+    examples: {cs: "knihovní fond, uživatelská data, výpůjčky, akvizice", en: "library collection, user data, loans, acquisitions"},
     recommendation: {
-      name: "Začněte analyzovat data pomocí AI nástrojů",
+      name: {cs: "Začněte analyzovat data pomocí AI nástrojů", en: "Start analysing data with AI tools"},
       description:
-        "Zvažte využití AI nástrojů pro analýzu dat, jako je knihovní fond, uživatelská data, výpůjčky a akvizice. Například můžete použít platformy jako IBM Watson nebo Google Cloud AI.",
+        {cs: "Zvažte využití AI nástrojů pro analýzu dat, jako je knihovní fond, uživatelská data, výpůjčky a akvizice. Například můžete použít platformy jako IBM Watson nebo Google Cloud AI.", en: "Consider using AI tools to analyze data such as library holdings, user data, borrowing and acquisitions. For example, you can use platforms like IBM Watson or Google Cloud AI."},
       link: "https://www.ibm.com/watson",
     },
   },
@@ -75,13 +75,13 @@ export const questions = <TrueFalse[]>[
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText:
-      "Používáte webovou analytiku pro sběr dat o využívání vašich služeb nad rámec povinných statistik?",
+      {cs: "Používáte webovou analytiku pro sběr dat o využívání vašich služeb nad rámec povinných statistik?", en: "Do you use web analytics to collect data about the use of your services beyond the mandatory statistics?"},
     examples:
-      "uživatelské interakce na webu, typy rezervace, návštěvnost webu, sociální sítě, newsletter",
+      {cs: "uživatelské interakce na webu, typy rezervace, návštěvnost webu, sociální sítě, newsletter", en: "user interaction on the website, booking types, website traffic, social networks, newsletter"},
     recommendation: {
-      name: "Implementujte webovou analytiku pro detailnější sběr dat",
+      name: {cs: "Implementujte webovou analytiku pro detailnější sběr dat", en: "Implement web analytics for more detailed data collection"},
       description:
-        "Zaměřte se na implementaci pokročilé webové analytiky, která vám umožní získávat detailní informace o interakcích uživatelů na vašem webu. Můžete vyzkoušet Google Analytics nebo Matomo Analytics.",
+        {cs: "Zaměřte se na implementaci pokročilé webové analytiky, která vám umožní získávat detailní informace o interakcích uživatelů na vašem webu. Můžete vyzkoušet Google Analytics nebo Matomo Analytics.", en: "Focus on implementing advanced web analytics that allow you to gain detailed information about user interactions on your website. You can try Google Analytics or Matomo Analytics."},
       link: "https://analytics.google.com/",
     },
   },
@@ -89,24 +89,24 @@ export const questions = <TrueFalse[]>[
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText:
-      "Monitorujete potřeby uživatelů ale i místních obyvatel pro zlepšení vašich služeb?",
+      {cs: "Monitorujete potřeby uživatelů ale i místních obyvatel pro zlepšení vašich služeb?", en: "Do you monitor the needs of users and local residents to improve your services?"},
     notes: "",
     recommendation: {
-      name: "Zahajte pravidelný průzkum potřeb uživatelů a místních obyvatel",
+      name: {cs: "Zahajte pravidelný průzkum potřeb uživatelů a místních obyvatel", en: "Start a regular survey of the needs of users and local residents"},
       description:
-        "Pravidelně provádějte průzkumy a dotazníky mezi uživateli a místními obyvateli, abyste lépe porozuměli jejich potřebám a přání. Můžete využít nástroje jako Google Forms nebo SurveyMonkey.",
+        {cs: "Pravidelně provádějte průzkumy a dotazníky mezi uživateli a místními obyvateli, abyste lépe porozuměli jejich potřebám a přání. Můžete využít nástroje jako Google Forms nebo SurveyMonkey.", en: "Conduct regular surveys and questionnaires among users and local residents to better understand their needs and wants. You can use tools such as Google Forms or SurveyMonkey."},
       link: "https://www.google.com/forms",
     },
   },
   {
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
-    questionText: "Navrhujete nebo zlepšujete služby pomocí AI nástrojů?",
-    examples: "pro personalizaci služeb nebo doporučování dokumentů",
+    questionText: {cs: "Navrhujete nebo zlepšujete služby pomocí AI nástrojů?", en: "Do you design or improve services using AI tools?"},
+    examples: {cs: "pro personalizaci služeb nebo doporučování dokumentů", en: "for personalising services or recommending documents"},
     recommendation: {
-      name: "Zvažte využití AI pro návrh a zlepšování služeb",
+      name: {cs: "Zvažte využití AI pro návrh a zlepšování služeb", en: "Consider using AI for service design and improvement"},
       description:
-        "Využití AI pro návrh a zlepšování služeb může zvýšit efektivitu a uživatelskou spokojenost. Zkuste nástroje jako Adobe Sensei nebo Salesforce Einstein pro personalizaci služeb a doporučování dokumentů.",
+        {cs: "Využití AI pro návrh a zlepšování služeb může zvýšit efektivitu a uživatelskou spokojenost. Zkuste nástroje jako Adobe Sensei nebo Salesforce Einstein pro personalizaci služeb a doporučování dokumentů.", en: "Using AI to design and improve services can increase efficiency and user satisfaction. Try tools like Adobe Sensei or Salesforce Einstein for service personalization and document recommendation."},
       link: "https://www.adobe.com/sensei.html",
     },
   },
@@ -114,37 +114,37 @@ export const questions = <TrueFalse[]>[
     category: Category["Knihovní služby"],
     type: "TrueFalse",
     questionText:
-      "Využíváte pro komunikaci s uživateli chatbota nebo jinou formu virtuálního asistenta?",
-    info: "Komunikací se myslí řešení 80 % dotazů, které se běžně opakují a nevyžadují speciální znalosti či dovednosti.",
+      {cs: "Využíváte pro komunikaci s uživateli chatbota nebo jinou formu virtuálního asistenta?", en: "Do you use a chatbot or other form of virtual assistant to communicate with users?"},
+    info: {cs: "Komunikací se myslí řešení 80 % dotazů, které se běžně opakují a nevyžadují speciální znalosti či dovednosti.", en: "By communication, we mean solving 80% of queries that are routinely repeated and do not require special knowledge or skills."},
     recommendation: {
-      name: "Zvažte nasazení chatbota nebo virtuálního asistenta pro komunikaci s uživateli",
+      name: {cs: "Zvažte nasazení chatbota nebo virtuálního asistenta pro komunikaci s uživateli", en: "Consider deploying a chatbot or virtual assistant to communicate with users"},
       description:
-        "Pro zlepšení komunikace s uživateli můžete zvážit nasazení chatbota nebo jiné formy virtuálního asistenta. Tyto nástroje mohou pomoci rychleji a efektivněji odpovídat na běžné dotazy uživatelů.",
+        {cs: "Pro zlepšení komunikace s uživateli můžete zvážit nasazení chatbota nebo jiné formy virtuálního asistenta. Tyto nástroje mohou pomoci rychleji a efektivněji odpovídat na běžné dotazy uživatelů.", en: "To improve communication with users, you may consider deploying a chatbot or other form of virtual assistant. These tools can help answer common user questions more quickly and efficiently."},
       link: "https://chatbotsmagazine.com/top-ai-chatbot-platforms-52d75bb89c56",
     },
   },
   {
     category: Category["Knihovní služby"],
     type: "TrueFalse",
-    questionText: "Nabízíte samoobslužné služby?",
+    questionText: {cs: "Nabízíte samoobslužné služby?", en: "Do you offer self-service?"},
     examples:
-      "výpůjčky, vracení knih, či přístup ke studovnám a pracováním prostorům",
-    info: "Chatbot může čerpat i z informací na webu (knihovny, obce) a jiných zdrojů, ke kterým mu dáme přístup.",
+      {cs: "výpůjčky, vracení knih, či přístup ke studovnám a pracováním prostorům", en: "borrowing, returning books, or access to study and work spaces"},
+    info: {cs: "Chatbot může čerpat i z informací na webu (knihovny, obce) a jiných zdrojů, ke kterým mu dáme přístup.", en: "The chatbot can also draw on information on the web (libraries, municipalities) and other sources that we give it access to."},
     recommendation: {
-      name: "Rozšiřte nabídku samoobslužných služeb",
+      name: {cs: "Rozšiřte nabídku samoobslužných služeb", en: "Expand your self-service offer"},
       description:
-        "Zvýšení dostupnosti samoobslužných služeb může zlepšit uživatelskou spokojenost a efektivitu knihovny. Zvažte možnosti výpůjček, vrácení knih a přístupu ke studovnám a pracovním prostranstvím bez nutnosti interakce s knihovníkem.",
+        {cs: "Zvýšení dostupnosti samoobslužných služeb může zlepšit uživatelskou spokojenost a efektivitu knihovny. Zvažte možnosti výpůjček, vrácení knih a přístupu ke studovnám a pracovním prostranstvím bez nutnosti interakce s knihovníkem.", en: "Increasing the availability of self-service can improve user satisfaction and library efficiency. Consider options for borrowing, returning books, and accessing study and work areas without having to interact with a librarian."},
     },
   },
   {
     category: Category["Knihovní služby"],
     type: "TrueFalse",
     questionText:
-      "Nabízí váš knihovní systém doporučování dokumentů a služeb (na základě historie výpůjček, dotazů, profilu uživatele)?",
+      {cs: "Nabízí váš knihovní systém doporučování dokumentů a služeb (na základě historie výpůjček, dotazů, profilu uživatele)?", en: "Does your library system offer document and service recommendation (based on borrowing history, queries, user profile)?"},
     recommendation: {
-      name: "Zkuste implementovat doporučovací systém",
+      name: {cs: "Zkuste implementovat doporučovací systém", en: "Try to implement a recommendation system"},
       description:
-        "Využití knihovního systému pro doporučování dokumentů a služeb může zlepšit uživatelskou zkušenost a zvýšit využívání knihovny. Existuje mnoho nástrojů a knihovních systémů, které nabízejí funkce doporučování.",
+        {cs: "Využití knihovního systému pro doporučování dokumentů a služeb může zlepšit uživatelskou zkušenost a zvýšit využívání knihovny. Existuje mnoho nástrojů a knihovních systémů, které nabízejí funkce doporučování.", en: "Using a library system to recommend documents and services can improve the user experience and increase library usage. There are many tools and library systems that offer recommendation features."},
       link: "https://en.wikipedia.org/wiki/Library_catalog#Library_discovery_services",
     },
   },
