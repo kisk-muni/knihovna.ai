@@ -70,7 +70,7 @@ export const questions = <TrueFalse[]>[
     recommendation: {
       name: {cs: "Implementujte webovou analytiku pro detailnější sběr dat", en: "Implement web analytics for more detailed data collection"},
       description:
-        {cs: "Zaměřte se na implementaci pokročilé webové analytiky, která vám umožní získávat detailní informace o interakcích uživatelů na vašem webu. Můžete vyzkoušet Google Analytics nebo Matomo Analytics.", en: ""},
+        {cs: "Zaměřte se na implementaci pokročilé webové analytiky, která vám umožní získávat detailní informace o interakcích uživatelů na vašem webu. Můžete vyzkoušet Google Analytics nebo Matomo Analytics.", en: "Focus on implementing advanced web analytics that allow you to gain detailed information about user interactions on your website. You can try Google Analytics or Matomo Analytics."},
       link: "https://analytics.google.com/",
     },
   },
@@ -78,12 +78,12 @@ export const questions = <TrueFalse[]>[
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText:
-      "Monitorujete potřeby uživatelů ale i místních obyvatel pro zlepšení vašich služeb?",
+      {cs: "Monitorujete potřeby uživatelů ale i místních obyvatel pro zlepšení vašich služeb?", en: "Do you monitor the needs of users and local residents to improve your services?"},
     notes: "",
     recommendation: {
-      name: "Zahajte pravidelný průzkum potřeb uživatelů a místních obyvatel",
+      name: {cs: "Zahajte pravidelný průzkum potřeb uživatelů a místních obyvatel", en: "Start a regular survey of the needs of users and local residents"},
       description:
-        "Pravidelně provádějte průzkumy a dotazníky mezi uživateli a místními obyvateli, abyste lépe porozuměli jejich potřebám a přání. Můžete využít nástroje jako Google Forms nebo SurveyMonkey.",
+        {cs: "Pravidelně provádějte průzkumy a dotazníky mezi uživateli a místními obyvateli, abyste lépe porozuměli jejich potřebám a přání. Můžete využít nástroje jako Google Forms nebo SurveyMonkey.", en: "Conduct regular surveys and questionnaires among users and local residents to better understand their needs and wants. You can use tools such as Google Forms or SurveyMonkey."},
       link: "https://www.google.com/forms",
     },
   },
