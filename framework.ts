@@ -51,12 +51,12 @@ export const questions = <TrueFalse[]>[
   {
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
-    questionText: {cs: "Analyzujete svá data pomocí AI nástrojů?", en: ""},
-    examples: "knihovní fond, uživatelská data, výpůjčky, akvizice",
+    questionText: {cs: "Analyzujete svá data pomocí AI nástrojů?", en: "Are you analyzing your data with AI tools?"},
+    examples: {cs: "knihovní fond, uživatelská data, výpůjčky, akvizice", en: "library collection, user data, loans, acquisitions"},
     recommendation: {
-      name: "Začněte analyzovat data pomocí AI nástrojů",
+      name: {cs: "Začněte analyzovat data pomocí AI nástrojů", en: "Start analysing data with AI tools"},
       description:
-        "Zvažte využití AI nástrojů pro analýzu dat, jako je knihovní fond, uživatelská data, výpůjčky a akvizice. Například můžete použít platformy jako IBM Watson nebo Google Cloud AI.",
+        {cs: "Zvažte využití AI nástrojů pro analýzu dat, jako je knihovní fond, uživatelská data, výpůjčky a akvizice. Například můžete použít platformy jako IBM Watson nebo Google Cloud AI.", en: "Consider using AI tools to analyze data such as library holdings, user data, borrowing and acquisitions. For example, you can use platforms like IBM Watson or Google Cloud AI."},
       link: "https://www.ibm.com/watson",
     },
   },
@@ -64,13 +64,13 @@ export const questions = <TrueFalse[]>[
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText:
-      "Používáte webovou analytiku pro sběr dat o využívání vašich služeb nad rámec povinných statistik?",
+      {cs: "Používáte webovou analytiku pro sběr dat o využívání vašich služeb nad rámec povinných statistik?", en: "Do you use web analytics to collect data about the use of your services beyond the mandatory statistics?"},
     examples:
-      "uživatelské interakce na webu, typy rezervace, návštěvnost webu, sociální sítě, newsletter",
+      {cs: "uživatelské interakce na webu, typy rezervace, návštěvnost webu, sociální sítě, newsletter", en: "user interaction on the website, booking types, website traffic, social networks, newsletter"},
     recommendation: {
-      name: "Implementujte webovou analytiku pro detailnější sběr dat",
+      name: {cs: "Implementujte webovou analytiku pro detailnější sběr dat", en: "Implement web analytics for more detailed data collection"},
       description:
-        "Zaměřte se na implementaci pokročilé webové analytiky, která vám umožní získávat detailní informace o interakcích uživatelů na vašem webu. Můžete vyzkoušet Google Analytics nebo Matomo Analytics.",
+        {cs: "Zaměřte se na implementaci pokročilé webové analytiky, která vám umožní získávat detailní informace o interakcích uživatelů na vašem webu. Můžete vyzkoušet Google Analytics nebo Matomo Analytics.", en: ""},
       link: "https://analytics.google.com/",
     },
   },
