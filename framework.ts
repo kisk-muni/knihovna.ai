@@ -90,12 +90,12 @@ export const questions = <TrueFalse[]>[
   {
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
-    questionText: "Navrhujete nebo zlepšujete služby pomocí AI nástrojů?",
-    examples: "pro personalizaci služeb nebo doporučování dokumentů",
+    questionText: {cs: "Navrhujete nebo zlepšujete služby pomocí AI nástrojů?", en: "Do you design or improve services using AI tools?"},
+    examples: {cs: "pro personalizaci služeb nebo doporučování dokumentů", en: "for personalising services or recommending documents"},
     recommendation: {
-      name: "Zvažte využití AI pro návrh a zlepšování služeb",
+      name: {cs: "Zvažte využití AI pro návrh a zlepšování služeb", en: "Consider using AI for service design and improvement"},
       description:
-        "Využití AI pro návrh a zlepšování služeb může zvýšit efektivitu a uživatelskou spokojenost. Zkuste nástroje jako Adobe Sensei nebo Salesforce Einstein pro personalizaci služeb a doporučování dokumentů.",
+        {cs: "Využití AI pro návrh a zlepšování služeb může zvýšit efektivitu a uživatelskou spokojenost. Zkuste nástroje jako Adobe Sensei nebo Salesforce Einstein pro personalizaci služeb a doporučování dokumentů.", en: "Using AI to design and improve services can increase efficiency and user satisfaction. Try tools like Adobe Sensei or Salesforce Einstein for service personalization and document recommendation."},
       link: "https://www.adobe.com/sensei.html",
     },
   },
@@ -103,7 +103,7 @@ export const questions = <TrueFalse[]>[
     category: Category["Knihovní služby"],
     type: "TrueFalse",
     questionText:
-      "Využíváte pro komunikaci s uživateli chatbota nebo jinou formu virtuálního asistenta?",
+      {cs: "Využíváte pro komunikaci s uživateli chatbota nebo jinou formu virtuálního asistenta?", en: "Do you use a chatbot or other form of virtual assistant to communicate with users?"},
     info: "Komunikací se myslí řešení 80 % dotazů, které se běžně opakují a nevyžadují speciální znalosti či dovednosti.",
     recommendation: {
       name: "Zvažte nasazení chatbota nebo virtuálního asistenta pro komunikaci s uživateli",
