@@ -221,12 +221,12 @@ export const questions = <TrueFalse[]>[
   {
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
-    questionText: "Vytváříte vzdělávací materiály pomocí AI?",
-    examples: "generování prezentací, grafiky, výukových her",
+    questionText: {cs: "Vytváříte vzdělávací materiály pomocí AI?", en: "Are you creating educational materials using AI?"},
+    examples: {cs: "generování prezentací, grafiky, výukových her", en: "generation of presentations, graphics, educational games"},
     recommendation: {
-      name: "Zvažte využití AI pro tvorbu vzdělávacích materiálů",
+      name: {cs: "Zvažte využití AI pro tvorbu vzdělávacích materiálů", en: "Consider using AI to create educational materials"},
       description:
-        "Využití AI pro generování vzdělávacích materiálů, jako jsou prezentace, grafiky nebo výukové hry, může šetřit čas a zdroje knihovny. Zkuste nástroje jako Canva nebo Storyboard That pro tvorbu grafiky.",
+        {cs: "Využití AI pro generování vzdělávacích materiálů, jako jsou prezentace, grafiky nebo výukové hry, může šetřit čas a zdroje knihovny. Zkuste nástroje jako Canva nebo Storyboard That pro tvorbu grafiky.", en: "Using AI to generate educational materials such as presentations, graphics or learning games can save time and library resources. Try tools like Canva or Storyboard That for creating graphics."},
       link: "https://www.canva.com/",
     },
   },
@@ -234,96 +234,96 @@ export const questions = <TrueFalse[]>[
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText:
-      "Poskytujete uživatelům praktické workshopy s AI nástroji a digitálními aplikacemi vzužívající AI?",
+      {cs: "Poskytujete uživatelům praktické workshopy s AI nástroji a digitálními aplikacemi vzužívající AI?", en: "Do you provide users with hands-on workshops with AI tools and AI-enabled digital applications?"},
     examples: "ChatGPT, Canva, Scratch",
     recommendation: {
-      name: "Zvažte poskytování praktických workshopů s online nástroji a AI",
+      name: {cs: "Zvažte poskytování praktických workshopů s online nástroji a AI", en: "Consider providing hands-on workshops with online tools and AI"},
       description:
-        "Vytvářejte a poskytujte praktické workshopy, které zahrnují online nástroje a AI, jako je ChatGPT, Canva a Scratch. Tím poskytnete uživatelům příležitost naučit se pracovat s moderními technologiemi a zlepšit jejich digitální dovednosti.",
+        {cs: "Vytvářejte a poskytujte praktické workshopy, které zahrnují online nástroje a AI, jako je ChatGPT, Canva a Scratch. Tím poskytnete uživatelům příležitost naučit se pracovat s moderními technologiemi a zlepšit jejich digitální dovednosti.", en: "Create and deliver hands-on workshops that incorporate online tools and AI such as ChatGPT, Canva and Scratch. This will give users the opportunity to learn how to work with modern technology and improve their digital skills."},
     },
   },
   {
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText:
-      "Je vzdělávání v základech AI součástí vaší vzdělávací nabídky?",
+      {cs: "Je vzdělávání v základech AI součástí vaší vzdělávací nabídky?", en: "Is training in AI fundamentals part of your educational offer?"},
     recommendation: {
-      name: "Zahrňte vzdělávání v základech AI do vaší nabídky",
+      name: {cs: "Zahrňte vzdělávání v základech AI do vaší nabídky", en: "Include AI training in your offer"},
       description:
-        "Zajistěte, aby vzdělávání v základech AI bylo součástí vaší vzdělávací nabídky. To pomůže uživatelům lépe porozumět této stále důležitější technologii a zlepšit jejich digitální gramotnost.",
+        {cs: "Zajistěte, aby vzdělávání v základech AI bylo součástí vaší vzdělávací nabídky. To pomůže uživatelům lépe porozumět této stále důležitější technologii a zlepšit jejich digitální gramotnost.", en: "Ensure that AI training is part of your educational offer. This will help users better understand this increasingly important technology and improve their digital literacy."},
     },
   },
   {
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText:
-      "Vytváříte vzdělávací obsah pro dospělé v produktivním věku v závislosti na jejich potřebách?",
-    info: "Podpora rozvoje kompetencí a flexibility dospělých je klíčová v kontextu technologických změn, co pronikají na trh práce. Dospělým můžeme mj. nabízet příležitosti k upskillingu (navýšení kompetencí) či reskillingu (osvojení si nových kompetencí).",
+      {cs: "Vytváříte vzdělávací obsah pro dospělé v produktivním věku v závislosti na jejich potřebách?", en: "Do you create educational content for working-age adults based on their needs?"},
+    info: {cs: "Podpora rozvoje kompetencí a flexibility dospělých je klíčová v kontextu technologických změn, co pronikají na trh práce. Dospělým můžeme mj. nabízet příležitosti k upskillingu (navýšení kompetencí) či reskillingu (osvojení si nových kompetencí).", en: "Supporting the development of adult competences and flexibility is crucial in the context of technological changes that are penetrating the labour market. Among other things, we can offer adults opportunities for upskilling (increasing competences) or reskilling (learning new competences)."},
     recommendation: {
-      name: "Vytvářejte vzdělávací obsah pro dospělé v produktivním věku",
+      name: {cs: "Vytvářejte vzdělávací obsah pro dospělé v produktivním věku", en: "Create educational content for working-age adults"},
       description:
-        "Soustřeďte se na tvorbu vzdělávacího obsahu, který je zaměřen na potřeby dospělých v produktivním věku. Poskytujte informace a dovednosti, které jim pomohou v pracovním a osobním životě, a které jsou relevantní pro současnou dobu.",
+        {cs: "Soustřeďte se na tvorbu vzdělávacího obsahu, který je zaměřen na potřeby dospělých v produktivním věku. Poskytujte informace a dovednosti, které jim pomohou v pracovním a osobním životě, a které jsou relevantní pro současnou dobu.", en: "Focus on creating educational content that addresses the needs of working-age adults. Provide information and skills that will help them in their working and personal lives and that are relevant to today's times."},
     },
   },
   {
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText:
-      "Vystavujete certifikáty, osvědčení nebo mikrocertifikáty za účast ve vzdělávacích aktivitách?",
+      {cs: "Vystavujete certifikáty, osvědčení nebo mikrocertifikáty za účast ve vzdělávacích aktivitách?", en: "Do you issue certificates, certificates or micro-certificates for participation in educational activities?"},
     recommendation: {
-      name: "Zvažte možnost vystavení certifikátů a osvědčení za účast ve vzdělávacích aktivitách",
+      name: {cs: "Zvažte možnost vystavení certifikátů a osvědčení za účast ve vzdělávacích aktivitách", en: "Consider issuing certificates and testimonials for participation in training activities"},
       description:
-        "Vystavování certifikátů, osvědčení nebo mikrocertifikátů za účast ve vzdělávacích aktivitách může motivovat uživatele ke kontinuálnímu vzdělávání a zapojení do programů knihovny.",
+        {cs: "Vystavování certifikátů, osvědčení nebo mikrocertifikátů za účast ve vzdělávacích aktivitách může motivovat uživatele ke kontinuálnímu vzdělávání a zapojení do programů knihovny.", en: "Issuing certificates, certificates or micro-certificates for participation in educational activities can motivate users to continue learning and participating in library programs."},
     },
   },
   {
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText:
-      "Vzdělávají se zaměstnanci knihovny v digitálních dovednostech kontinuálně?",
-    info: "Kontinuální vzdělávání neznamená pouze účast na kurzech, ale dlouhodobé vzdělávání a rozvoj dovedností na základě předem daných cílů.",
+      {cs: "Vzdělávají se zaměstnanci knihovny v digitálních dovednostech kontinuálně?", en: "Do library staff receive continuous training in digital skills?"},
+    info: {cs: "Kontinuální vzdělávání neznamená pouze účast na kurzech, ale dlouhodobé vzdělávání a rozvoj dovedností na základě předem daných cílů.", en: "Continuing education is not just about attending courses, but about long-term learning and skills development based on predetermined goals."},
     recommendation: {
-      name: "Zajistěte kontinuální vzdělávání zaměstnanců v digitálních dovednostech",
+      name: {cs: "Zajistěte kontinuální vzdělávání zaměstnanců v digitálních dovednostech", en: "Ensure continuous training of employees in digital skills"},
       description:
-        "Zabezpečte, aby se zaměstnanci knihovny neustále vzdělávali v oblasti digitálních dovedností a byli schopni poskytovat uživatelům aktuální a kvalitní podporu.",
+        {cs: "Zabezpečte, aby se zaměstnanci knihovny neustále vzdělávali v oblasti digitálních dovedností a byli schopni poskytovat uživatelům aktuální a kvalitní podporu.", en: "Ensure that library staff receive ongoing training in digital skills and are able to provide up-to-date and quality support to users."},
     },
   },
   {
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText:
-      "Nabízíte uživatelům prostor pro rozvoj digitálních kompetencí?",
+      {cs: "Nabízíte uživatelům prostor pro rozvoj digitálních kompetencí?", en: "Do you offer users space to develop digital competences?"},
     examples:
-      "skrze vzdělávací kurzy, workshopy, konzultace, nabídku licencí softwaru a zázemí k samostudiu?",
+      {cs: "skrze vzdělávací kurzy, workshopy, konzultace, nabídku licencí softwaru a zázemí k samostudiu?", en: "through training courses, workshops, consultations, software licenses and self-study facilities?"},
     recommendation: {
-      name: "Poskytněte uživatelům prostor pro rozvoj digitálních kompetencí",
+      name: {cs: "Poskytněte uživatelům prostor pro rozvoj digitálních kompetencí", en: "Provide space for users to develop digital competences"},
       description:
-        "Nabídněte uživatelům různé možnosti pro rozvoj digitálních kompetencí, jako jsou vzdělávací kurzy, workshopy a individuální konzultace s odborníky.",
+        {cs: "Nabídněte uživatelům různé možnosti pro rozvoj digitálních kompetencí, jako jsou vzdělávací kurzy, workshopy a individuální konzultace s odborníky.", en: "Offer users various opportunities to develop their digital competences, such as training courses, workshops and individual consultations with experts."},
     },
   },
   {
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText:
-      "Umožňujete uživatelům pracovat s moderními technologiemi nad rámec PC a čteček?",
+      {cs: "Umožňujete uživatelům pracovat s moderními technologiemi nad rámec PC a čteček?", en: "Do you enable users to work with modern technologies beyond PCs and readers?"},
     examples:
-      "3D tisk, virtuální realita, šicí stroj, práce s roboty, půjčování kamer, mikrofonů, zvukových zařízení",
+      {cs: "3D tisk, virtuální realita, šicí stroj, práce s roboty, půjčován}í kamer, mikrofonů, zvukových zařízení", en: "3D printing, virtual reality, sewing machine, working with robots, renting cameras, microphones, audio equipment"},
     recommendation: {
-      name: "Rozšiřte nabídku moderních technologií pro uživatele",
+      name: {cs: "Rozšiřte nabídku moderních technologií pro uživatele", en: "Expand the range of modern technologies for users"},
       description:
-        "Umožněte uživatelům pracovat s moderními technologiemi nad rámec PC a čteček, jako jsou 3D tisk, virtuální realita, šicí stroje, práce s roboty a půjčování audiovizuálního vybavení.",
+        {cs: "Umožněte uživatelům pracovat s moderními technologiemi nad rámec PC a čteček, jako jsou 3D tisk, virtuální realita, šicí stroje, práce s roboty a půjčování audiovizuálního vybavení.", en: "Allow users to work with modern technologies beyond PCs and readers, such as 3D printing, virtual reality, sewing machines, working with robots and renting audiovisual equipment."},
     },
   },
   {
     category: Category["Komunitní role"],
     type: "TrueFalse",
-    questionText: "Nabízíte prostory pro studium nebo co-working?",
-    info: "Samozřejmostí je rychlé připojení k internetu a dostatek zásuvek pro připojení k elektrické síti.",
-    examples: "zázemí pro práci, studovny",
+    questionText: {cs: "Nabízíte prostory pro studium nebo co-working?", en: "Do you offer study or co-working spaces?"},
+    info: {cs: "Samozřejmostí je rychlé připojení k internetu a dostatek zásuvek pro připojení k elektrické síti.", en:"Of course there is a fast internet connection and plenty of sockets to connect to the mains."},
+    examples: {cs: "zázemí pro práci, studovny", en: "work facilities, study rooms"},
     recommendation: {
-      name: "Zaměřte se na poskytování prostor pro studium a co-working",
+      name: {cs: "Zaměřte se na poskytování prostor pro studium a co-working", en: "Focus on providing study and co-working spaces"},
       description:
-        "Zvažte možnost poskytnutí prostorů pro studium a co-working, které umožní uživatelům pracovat a studovat v příjemném prostředí knihovny. Zajistěte rychlé připojení k internetu a dostatek zásuvek pro připojení k elektrické síti.",
+        {cs: "Zvažte možnost poskytnutí prostorů pro studium a co-working, které umožní uživatelům pracovat a studovat v příjemném prostředí knihovny. Zajistěte rychlé připojení k internetu a dostatek zásuvek pro připojení k elektrické síti.", en: "Consider providing study and co-working spaces that allow users to work and study in a comfortable library environment. Ensure fast internet access and sufficient power outlets."},
     },
   },
   {
