@@ -318,7 +318,7 @@ export const questions = <TrueFalse[]>[
     category: Category["Komunitní role"],
     type: "TrueFalse",
     questionText: {cs: "Nabízíte prostory pro studium nebo co-working?", en: "Do you offer study or co-working spaces?"},
-    info: {cs: "Samozřejmostí je rychlé připojení k internetu a dostatek zásuvek pro připojení k elektrické síti.", en:"Of course there is a fast internet connection and plenty of sockets to connect to the mains."},
+    info: {cs: "Samozřejmostí je rychlé připojení k internetu a dostatek zásuvek pro připojení k elektrické síti.", en:"Fast internet connection and plenty of sockets to connect to the mains are important."},
     examples: {cs: "zázemí pro práci, studovny", en: "work facilities, study rooms"},
     recommendation: {
       name: {cs: "Zaměřte se na poskytování prostor pro studium a co-working", en: "Focus on providing study and co-working spaces"},
