@@ -27,48 +27,31 @@ export const categories: {
 
 export type Question = TrueFalse;
 
+type Translated = string | {
+  cs: string;
+  en: string;
+}
+
 export type TrueFalse = {
   category: string;
-  questionText: string;
+  questionText: Translated;
   type: "TrueFalse";
   answer?: boolean;
-  info?: string;
-  examples?: string;
-  notes?: string;
+  info?: Translated;
+  examples?: Translated;
+  notes?: Translated;
   recommendation: {
-    name: string;
-    description: string;
-    link?: string;
+    name: Translated;
+    description: Translated;
+    link?: Translated;
   };
 };
 
-export type MultipleChoice = {
-  category: string;
-  type: "MultipleChoice";
-  questionText: string;
-  choices: string[];
-  answer?: string[];
-};
-
-export type SingleChoice = {
-  category: string;
-  type: "SingleChoice";
-  questionText: string;
-  choices: string[];
-  answer?: string;
-};
-
 export const questions = <TrueFalse[]>[
-  /* {
-    category: Category["O knihovně"],
-    type: "SingleChoice",
-    questionText: "Jaký typ knihovny nejlépe odpovídá vaší organizaci?",
-    oices: ["Krajská knihovna", "Obecní knihovna", "Městská knihovna"],
-  }, */
   {
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
-    questionText: "Analyzujete svá data pomocí AI nástrojů?",
+    questionText: {cs: "Analyzujete svá data pomocí AI nástrojů?", en: ""},
     examples: "knihovní fond, uživatelská data, výpůjčky, akvizice",
     recommendation: {
       name: "Začněte analyzovat data pomocí AI nástrojů",
@@ -142,17 +125,6 @@ export const questions = <TrueFalse[]>[
         "Zvýšení dostupnosti samoobslužných služeb může zlepšit uživatelskou spokojenost a efektivitu knihovny. Zvažte možnosti výpůjček, vrácení knih a přístupu ke studovnám a pracovním prostranstvím bez nutnosti interakce s knihovníkem.",
     },
   },
-  /* {
-    category: Category["Knihovní služby"],
-    type: "TrueFalse",
-    questionText:
-      "Profilujete uživatele na základě historických dat o výpůjčkách, interakcích s knihovnou a dat z ostatních zdrojů?",
-    recommendation: {
-      name: "Zaměřte se na profilování uživatelů",
-      description:
-        "Zvažte využití historických dat o výpůjčkách, interakcích s knihovnou a dalších dostupných informací pro lepší porozumění potřebám uživatelů. To vám umožní lépe cílit služby a nabídku knih.",
-    },
-  }, */
   {
     category: Category["Knihovní služby"],
     type: "TrueFalse",
