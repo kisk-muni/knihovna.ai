@@ -269,7 +269,7 @@ export const questions = <TrueFalse[]>[
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText:
-      {cs: "Vystavujete certifikáty, osvědčení nebo mikrocertifikáty za účast ve vzdělávacích aktivitách?", en: "Do you issue certificates, certificates or micro-certificates for participation in educational activities?"},
+      {cs: "Vystavujete certifikáty, osvědčení nebo mikrocertifikáty za účast ve vzdělávacích aktivitách?", en: "Do you issue certificates or micro-certificates for participation in educational activities?"},
     recommendation: {
       name: {cs: "Zvažte možnost vystavení certifikátů a osvědčení za účast ve vzdělávacích aktivitách", en: "Consider issuing certificates and testimonials for participation in training activities"},
       description:
