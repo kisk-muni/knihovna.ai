@@ -1,34 +1,27 @@
-import Logo from "@/components/logo";
 import { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
 import Step from "./step";
+import texts from "../texts";
 
 type Props = {
-  params: { step: string };
+  params: { step: string; lang: string };
   searchParams: URLSearchParams;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: Props): Promise<Metadata> {
+  const lang = (params?.lang || "cs") as "cs" | "en";
   return createMetadata({
-    title: `${params.step}. otázka | Evaluační framework`,
-    description: `
-        Zjistěte, jak je vaše knihovna připravena na rostoucí vliv AI. Získejte praktická doporučení, jak knihovnu zlepšovat.
-        `,
-    ogTitle: "Evaluační framework",
+    title:
+      params.step +
+      `. ${texts["question"][lang]} | ${texts["framework-name"][lang]}`,
+    description: texts["framework-seo-description"][lang],
+    ogTitle: texts["framework-name"][lang],
   });
 }
 
 export default function StepPage({ params: { step: stringifiedStep } }: Props) {
-  return (
-    <main className="flex flex-col grow h-full">
-      <div className="text-text-500 z-50 font-medium py-2 px-3 text-sm">
-        <div className="flex space-x-1 py-0.5">
-          <Logo />
-          <span>{" · "}</span>
-          <span>Evaluace knihovny</span>
-        </div>
-      </div>
-      <Step stringifiedStep={stringifiedStep} />
-    </main>
-  );
+  return <Step stringifiedStep={stringifiedStep} />;
 }

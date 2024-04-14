@@ -1,7 +1,7 @@
 "use client";
 import { useDiagnosisForm } from "../use-diagnosis-form";
-import { useRouter } from "next/navigation";
-import { Question, urlName } from "@/framework";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Category, Question, categories, urlName } from "@/framework";
 import MyRadarChart from "@/components/radar-chart";
 import { Dimension } from "@/components/radar-chart";
 import classNames from "classnames";
@@ -13,6 +13,7 @@ import {
   IconCheck,
   IconX,
 } from "@/components/ui/icons";
+import texts from "../texts";
 
 function calculateRadarChartSurfaceArea(dimensions: number[]): number {
   if (dimensions.length < 3) {
@@ -44,6 +45,8 @@ function calculateRadarChartSurfaceArea(dimensions: number[]): number {
 
 export default function Result() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const lang = (searchParams.get("lang") || "cs") as "cs" | "en";
   const { questions, started } = useDiagnosisForm();
   // wrap in useEffect
   useEffect(() => {
@@ -70,7 +73,7 @@ export default function Result() {
           question.answer
       ).length;
       return {
-        name: category,
+        name: categories[category].name[lang],
         value: answered,
         fullMark: total,
         normalizedValue: (answered / total) * 100,
@@ -89,39 +92,55 @@ export default function Result() {
   const getLibraryType = (score: number) => {
     if (score <= 20) {
       return {
-        type: "Základní knihovna",
-        description:
-          "Vaše knihovna je na začátku cesty k připravenosti na dopady AI a využití AI v knihovnách.",
+        type: { cs: "Základní knihovna", en: "a basic library" },
+        description: {
+          cs: "Vaše knihovna je na začátku cesty k připravenosti na dopady AI a využití AI v knihovnách.",
+          en: "Your library is at the beginning of the journey to AI readiness and AI use in libraries.",
+        },
       };
     }
     if (score <= 30) {
       return {
-        type: "Začínající knihovna",
-        description:
-          "Vaše knihovna se rozhoupává k řešení připravenosti na AI.",
+        type: { cs: "Začínající knihovna", en: "a starting library" },
+        description: {
+          cs: "Vaše knihovna se rozhoupává k řešení připravenosti na AI.",
+          en: "Your library is starting to address AI readiness.",
+        },
       };
     }
     if (score <= 40) {
       return {
-        type: "Rozvíjející se knihovna",
-        description: "Pracujete na tom. Vaše knihovna je na dobré cestě.",
+        type: { cs: "Rozvíjející se knihovna", en: "a developing library" },
+        description: {
+          cs: "Pracujete na tom. Vaše knihovna je na dobré cestě.",
+          en: "You are working on it. Your library is on the right track.",
+        },
       };
     }
     if (score <= 50) {
       return {
-        type: "Moderní knihovna",
-        description: "Jste průkopníci. Vaše knihovna jde příkladem ostatním.",
+        type: { cs: "Moderní knihovna", en: "a modern library" },
+        description: {
+          cs: "Jste průkopníci. Vaše knihovna jde příkladem ostatním.",
+          en: "You are pioneers. Your library sets an example for other libraries.",
+        },
       };
     }
     if (score <= 70) {
       return {
-        type: "Ultra moderní knihovna",
-        description: "Pohybujete se na hraně aktuálních trendů v knihovnictví.",
+        type: { cs: "Ultra moderní knihovna", en: "an ultra-modern library" },
+        description: {
+          cs: "Pohybujete se na hraně aktuálních trendů v knihovnictví.",
+          en: "You are on the cutting edge of current library trends.",
+        },
       };
     }
     return {
-      type: "Knihovna budoucnosti",
-      description: "Vaše knihovna je připravena čelit problémům budoucnosti.",
+      type: { cs: "Knihovna budoucnosti", en: "a library of the future" },
+      description: {
+        cs: "Vaše knihovna je připravena čelit problémům budoucnosti.",
+        en: "Your library is ready to face the challenges of the future.",
+      },
     };
   };
 
@@ -160,26 +179,31 @@ export default function Result() {
       <section className="relative pt-20 flex flex-col items-center bg-neutral-50">
         <div className="max-w-screen-lg w-full px-6 mb-6 flex flex-col items-center">
           <h1 className="text-text-400 uppercase text-center text-sm font-medium mb-4 mt-4">
-            Vyhodnocení
+            {texts.evaluation[lang]}
           </h1>
           <h1 className="text-text text-3xl max-w-2xl mb-6 mt-6 text-center font-bold">
-            {libraryType.description}
+            {libraryType.description[lang]}
           </h1>
-          <div className="text-lg text-text mb-12">Jste {libraryType.type}</div>
+          <div className="text-lg text-text mb-12">
+            {texts["you-are"][lang]} {libraryType.type[lang]}
+          </div>
           <div className="grid grid-cols-2 w-full bg-white border p-8 border-neutral-200 rounded-lg shadow-sm">
             <div className="w-auto h-auto min-h-[200px] border border-neutral-200 rounded-md shadow-xs py-6 px-3 ">
               <MyRadarChart data={radarData} />
             </div>
             <div className="pl-8 flex flex-col">
               <div className="mb-3">
-                <div className="text-text-500 text-sm mb-1">Váš výsledek</div>
-
+                <div className="text-text-500 text-sm mb-1">
+                  {texts["your-result"][lang]}
+                </div>
                 <div className="text-text font-medium text-lg mb-1.5">
                   {Math.round(score)}%
                 </div>
               </div>
               <div className="mb-3">
-                <div className="text-text-500 text-sm mb-1">Silné stránky</div>
+                <div className="text-text-500 text-sm mb-1">
+                  {texts["strengths"][lang]}
+                </div>
                 {
                   <ul className="text-text text-base mb-3">
                     {strong.map((dim, i) => {
@@ -189,7 +213,9 @@ export default function Result() {
                 }
               </div>
               <div className="mb-3">
-                <div className="text-text-500 text-sm mb-1">Slabé stránky</div>
+                <div className="text-text-500 text-sm mb-1">
+                  {texts["weaknesses"][lang]}
+                </div>
                 {
                   <ul className="text-text text-base">
                     {weak.sort().map((dim, i) => {
@@ -208,22 +234,32 @@ export default function Result() {
             {featuredRecommendation && (
               <div className="flex space-x-8">
                 <div>
-                  <p className="text-text-500 text-sm mb-2">Doporučení</p>
+                  <p className="text-text-500 text-sm mb-2">
+                    {texts["recommendations"][lang]}
+                  </p>
                   <p className="text-text font-medium text-lg mb-1.5">
-                    {featuredRecommendation.name}
+                    {typeof featuredRecommendation.name === "string"
+                      ? featuredRecommendation.name
+                      : featuredRecommendation.name[lang]}
                   </p>
                   <p className="text-text-500 text-base mb-3">
-                    {featuredRecommendation.description}
+                    {typeof featuredRecommendation.description === "string"
+                      ? featuredRecommendation.description
+                      : featuredRecommendation.description[lang]}
                   </p>
                 </div>
                 {featuredRecommendation.link && (
                   <div className="shrink-0 flex flex-col pb-3 justify-center">
                     <Link
-                      href={featuredRecommendation.link}
+                      href={
+                        typeof featuredRecommendation.link === "string"
+                          ? featuredRecommendation.link
+                          : featuredRecommendation.link[lang]
+                      }
                       target="_blank"
                       className="shrink-0 flex items-center px-6 py-2 text-base bg-white border border-neutral-200 text-text-900 justify-center rounded-md mt-3 hover:bg-neutral-100 hover:text-text transition-all ease-in-out duration-300"
                     >
-                      Přejít na doporučený nástroj{" "}
+                      {texts["proceed-to-recommended-tool"][lang]}{" "}
                       <IconArrowRight className="h-4 w-4 ml-1 shrink-0" />
                     </Link>
                   </div>
@@ -237,13 +273,17 @@ export default function Result() {
       <section className="bg-neutral-50 pb-12 border-t grow h-full border-neutral-200">
         <div className="max-w-screen-lg px-6 py-10 mx-auto">
           <h3 className="text-text font-semibold text-2xl mt-4 mb-8">
-            Vaše odpovědi
+            {texts["your-answers"][lang]}
           </h3>
           <div className="flex text-text flex-col bg-white border border-neutral-200 shadow-sm rounded-lg">
             {Object.keys(questionsByCategory).map((category, categoryIndex) => {
               const count = questionsByCategory[category].length;
               const questionsLabel =
-                count === 1 ? "otázka" : count < 5 ? "otázky" : "otázek";
+                count === 1
+                  ? texts["question"][lang]
+                  : count < 5
+                  ? texts["questions"][lang]
+                  : texts["questions-no"][lang];
               return (
                 <div key={categoryIndex} className="">
                   <Button
@@ -265,7 +305,7 @@ export default function Result() {
                           }
                         )}
                       />
-                      <span>{category}</span>
+                      <span>{categories[category].name[lang]}</span>
                     </div>
                     <span className="text-text-400 font-normal">
                       {questionsByCategory[category].length} {questionsLabel}
@@ -280,7 +320,11 @@ export default function Result() {
                               key={qi}
                               className="flex justify-between pr-4 pl-10 text-sm border-b last:border-b border-neutral-200 py-3"
                             >
-                              <div>{question.questionText}</div>
+                              <div>
+                                {typeof question.questionText === "string"
+                                  ? question.questionText
+                                  : question.questionText[lang]}
+                              </div>
                               {question.type == "TrueFalse" &&
                                 question.answer !== undefined && (
                                   <div
@@ -297,12 +341,12 @@ export default function Result() {
                                     {question.answer ? (
                                       <>
                                         <IconCheck className="h-3 w-3 mr-0.5 -ml-0.5" />{" "}
-                                        Ano
+                                        {texts["yes"][lang]}
                                       </>
                                     ) : (
                                       <>
                                         <IconX className="h-3 w-3 mr-0.5 -ml-0.5" />{" "}
-                                        Ne / nevím
+                                        {texts["no/dont-know"][lang]}
                                       </>
                                     )}
                                   </div>
