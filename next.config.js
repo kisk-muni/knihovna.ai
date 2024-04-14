@@ -4,6 +4,7 @@ const withMDX = require("@next/mdx")();
 const nextConfig = {
   pageExtensions: ["mdx", "ts", "tsx"],
   experimental: {
+    missingSuspenseWithCSRBailout: false,
     serverComponentsExternalPackages: [
       "@sparticuz/chromium-min",
       "playwright-core",
