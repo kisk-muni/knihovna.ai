@@ -330,11 +330,14 @@ export const questions = <TrueFalse[]>[
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText:
-      "Nabízíte uživatelům osobní konzultace a pomoc s technologiemi?",
+      {cs: "Nabízíte uživatelům osobní konzultace a pomoc s technologiemi?", 
+      en: "Do you offer users personal consultation and help with technology?"},
     recommendation: {
-      name: "Poskytujte osobní konzultace a pomoc s technologiemi",
+      name: {cs: "Poskytujte osobní konzultace a pomoc s technologiemi",
+      en: "Provide personal consultation and assistance with technology"},
       description:
-        "Nabídněte uživatelům možnost osobních konzultací a pomoci s technologiemi, aby se mohli lépe orientovat v digitálním prostředí a využívat moderní technologie.",
+        {cs: "Nabídněte uživatelům možnost osobních konzultací a pomoci s technologiemi, aby se mohli lépe orientovat v digitálním prostředí a využívat moderní technologie.",
+        en: "Offer users the opportunity for personal consultation and help with technology so they can better navigate the digital environment and use modern technologies."}
     },
   },
   {
