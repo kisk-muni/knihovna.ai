@@ -12,17 +12,28 @@ export enum Category {
 }
 
 export const categories: {
-  [key in Category]: {
-    name: string;
+  [key: string]: {
+    name: { cs: string; en: string };
   };
 } = {
-  "O knihovně": { name: "O knihovně" },
-  "Rozvoj (design) služeb": { name: "Rozvoj (design) služeb" },
-  "Knihovní služby": { name: "Knihovní služby" },
-  "Vzdělávání a podpora": { name: "Vzdělávání a podpora" },
-  "Komunitní role": { name: "Komunitní role" },
-  "Sociální role": { name: "Sociální role" },
-  "Knihovní procesy": { name: "Knihovní procesy" },
+  "O knihovně": { name: { cs: "O knihovně", en: "About the library" } },
+  "Rozvoj (design) služeb": {
+    name: {
+      cs: "Rozvoj (design) služeb",
+      en: "Service design and development",
+    },
+  },
+  "Knihovní služby": {
+    name: { cs: "Knihovní služby", en: "Library services" },
+  },
+  "Vzdělávání a podpora": {
+    name: { cs: "Vzdělávání a podpora", en: "Education and support" },
+  },
+  "Komunitní role": { name: { cs: "Komunitní role", en: "Community role" } },
+  "Sociální role": { name: { cs: "Sociální role", en: "Social role" } },
+  "Knihovní procesy": {
+    name: { cs: "Knihovní procesy", en: "Library processes" },
+  },
 };
 
 export type Question = TrueFalse;
