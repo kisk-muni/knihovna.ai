@@ -154,11 +154,13 @@ export default function Result() {
     (a, b) => b.normalizedValue - a.normalizedValue
   );
 
-  const strong = score == 100 ? sorted : sorted.slice(0, 2);
+  const full = sorted.filter((dim) => dim.normalizedValue == 100);
+
+  const strong = full.length >= 2 ? full : sorted.slice(0, 2);
   const weak =
     strong.length != radarData.length
       ? sorted
-          .slice(-strong.length)
+          .slice(-(radarData.length - strong.length))
           .sort((a, b) => b.normalizedValue - a.normalizedValue)
       : [];
 
