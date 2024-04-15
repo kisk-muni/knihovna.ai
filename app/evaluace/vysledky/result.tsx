@@ -1,7 +1,7 @@
 "use client";
 import { useDiagnosisForm } from "../use-diagnosis-form";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Category, Question, categories, urlName } from "@/framework";
+import { Question, categories, urlName } from "@/framework";
 import MyRadarChart from "@/components/radar-chart";
 import { Dimension } from "@/components/radar-chart";
 import classNames from "classnames";
@@ -87,7 +87,7 @@ export default function Result() {
   const maxSurfaceArea = calculateRadarChartSurfaceArea(
     radarData.map((_dim) => 100)
   );
-  const score = (surfaceArea / maxSurfaceArea) * 100;
+  const score = Math.round((surfaceArea / maxSurfaceArea) * 100);
 
   const getLibraryType = (score: number) => {
     if (score <= 20) {
@@ -153,26 +153,31 @@ export default function Result() {
   const sorted = radarData.sort(
     (a, b) => b.normalizedValue - a.normalizedValue
   );
-  const strong = sorted.slice(0, 2);
-  const weak = sorted
-    .slice(-2)
-    .sort((a, b) => b.normalizedValue - a.normalizedValue);
+
+  const strong = score == 100 ? sorted : sorted.slice(0, 2);
+  const weak =
+    strong.length != radarData.length
+      ? sorted
+          .slice(-strong.length)
+          .sort((a, b) => b.normalizedValue - a.normalizedValue)
+      : [];
+
+  console.log("weak", weak);
 
   const negativeQuestions = questions.filter(
     (question) =>
       question.answer != true &&
       question.recommendation != undefined &&
-      weak
-        .slice(1)
-        .map((dim) => dim.name)
-        .includes(question.category)
+      weak.map((dim) => dim.name).includes(question.category)
   );
 
-  console.log(negativeQuestions);
+  console.log("negative", negativeQuestions);
 
   const featuredRecommendation = negativeQuestions.length
     ? negativeQuestions[0].recommendation
     : null;
+
+  console.log("recommended", featuredRecommendation);
 
   return (
     <Fragment>
@@ -197,7 +202,7 @@ export default function Result() {
                   {texts["your-result"][lang]}
                 </div>
                 <div className="text-text font-medium text-lg mb-1.5">
-                  {Math.round(score)}%
+                  {score} %
                 </div>
               </div>
               <div className="mb-3">
@@ -212,26 +217,28 @@ export default function Result() {
                   </ul>
                 }
               </div>
-              <div className="mb-3">
-                <div className="text-text-500 text-sm mb-1">
-                  {texts["weaknesses"][lang]}
+              {weak.length && (
+                <div className="mb-3">
+                  <div className="text-text-500 text-sm mb-1">
+                    {texts["weaknesses"][lang]}
+                  </div>
+                  {
+                    <ul className="text-text text-base">
+                      {weak.sort().map((dim, i) => {
+                        return <li key={i}>{dim.name}</li>;
+                      })}
+                    </ul>
+                  }
                 </div>
-                {
-                  <ul className="text-text text-base">
-                    {weak.sort().map((dim, i) => {
-                      return <li key={i}>{dim.name}</li>;
-                    })}
-                  </ul>
-                }
-              </div>
+              )}
             </div>
           </div>
         </div>
       </section>
       <section className="bg-neutral-50">
         <div className="max-w-screen-lg px-6 mb-12 mx-auto">
-          <div className="px-8 py-6 bg-white border border-neutral-200 rounded-md ">
-            {featuredRecommendation && (
+          {featuredRecommendation && (
+            <div className="px-8 py-6 bg-white border border-neutral-200 rounded-md ">
               <div className="flex space-x-8">
                 <div>
                   <p className="text-text-500 text-sm mb-2">
@@ -265,8 +272,8 @@ export default function Result() {
                   </div>
                 )}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </section>
 
