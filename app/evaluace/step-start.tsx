@@ -69,7 +69,7 @@ export default function StepStart() {
   return (
     <main className="flex flex-col">
       <BackgroundGradient.Radial />
-      <section className="bg-white pt-12 lg:pt-20 pb-0">
+      <section className="bg-white pt-12 lg:pt-20 pb-12 lg:pb-20">
         <Container>
           <div className="flex flex-col gap-x-6">
             <div className="flex flex-col items-center mb-12">
