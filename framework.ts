@@ -163,8 +163,8 @@ export const questions = <TrueFalse[]>[
       en: "Do you use a chatbot or other form of virtual assistant to communicate with users?",
     },
     info: {
-      cs: "Komunikací se myslí řešení 80 % dotazů, které se běžně opakují a nevyžadují speciální znalosti či dovednosti.",
-      en: "By communication, we mean solving 80% of queries that are routinely repeated and do not require special knowledge or skills.",
+      cs: "Komunikací se myslí řešení 80 % dotazů, které se běžně opakují a nevyžadují speciální znalosti či dovednosti. Chatbot může čerpat i z informací na webu (knihovny, obce) a jiných zdrojů, ke kterým mu dáme přístup.",
+      en: "By communication, we mean solving 80% of queries that are routinely repeated and do not require special knowledge or skills. The chatbot can also draw on information on the web (libraries, municipalities) and other sources that we give it access to.",
     },
     recommendation: {
       priority: 1,
@@ -176,7 +176,7 @@ export const questions = <TrueFalse[]>[
         cs: "Pro zlepšení komunikace s uživateli můžete zvážit nasazení chatbota nebo jiné formy virtuálního asistenta. Tyto nástroje mohou pomoci rychleji a efektivněji odpovídat na běžné dotazy uživatelů.",
         en: "To improve communication with users, you may consider deploying a chatbot or other form of virtual assistant. These tools can help answer common user questions more quickly and efficiently.",
       },
-      link: "https://chatbotsmagazine.com/top-ai-chatbot-platforms-52d75bb89c56",
+      link: "https://www.databricks.com/solutions/accelerators/llms-customer-service-and-support",
     },
   },
   {
@@ -189,10 +189,6 @@ export const questions = <TrueFalse[]>[
     examples: {
       cs: "výpůjčky, vracení knih, či přístup ke studovnám a pracováním prostorům",
       en: "borrowing, returning books, or access to study and work spaces",
-    },
-    info: {
-      cs: "Chatbot může čerpat i z informací na webu (knihovny, obce) a jiných zdrojů, ke kterým mu dáme přístup.",
-      en: "The chatbot can also draw on information on the web (libraries, municipalities) and other sources that we give it access to.",
     },
     recommendation: {
       priority: 1,
@@ -223,7 +219,7 @@ export const questions = <TrueFalse[]>[
         cs: "Využití knihovního systému pro doporučování dokumentů a služeb může zlepšit uživatelskou zkušenost a zvýšit využívání knihovny. Existuje mnoho nástrojů a knihovních systémů, které nabízejí funkce doporučování.",
         en: "Using a library system to recommend documents and services can improve the user experience and increase library usage. There are many tools and library systems that offer recommendation features.",
       },
-      link: "https://en.wikipedia.org/wiki/Library_catalog#Library_discovery_services",
+      link: "https://towardsdatascience.com/building-a-book-recommendation-system-using-keras-1fba34180699",
     },
   },
   {
@@ -329,6 +325,7 @@ export const questions = <TrueFalse[]>[
         cs: "Vystavování certifikátů, osvědčení nebo mikrocertifikátů za účast ve vzdělávacích aktivitách může motivovat uživatele ke kontinuálnímu vzdělávání a zapojení do programů knihovny.",
         en: "Issuing certificates, certificates or micro-certificates for participation in educational activities can motivate users to continue learning and participating in library programs.",
       },
+      link: "https://www.etf.europa.eu/sites/default/files/2023-05/Micro-Credential%20Guidelines%20Final%20Delivery.pdf",
     },
   },
   {
@@ -425,6 +422,7 @@ export const questions = <TrueFalse[]>[
         cs: "Zvažte možnost poskytnutí prostorů pro studium a co-working, které umožní uživatelům pracovat a studovat v příjemném prostředí knihovny. Zajistěte rychlé připojení k internetu a dostatek zásuvek pro připojení k elektrické síti.",
         en: "Consider providing study and co-working spaces that allow users to work and study in a comfortable library environment. Ensure fast internet access and sufficient power outlets.",
       },
+      link: "https://www.researchgate.net/publication/263555983_Libraries_as_coworking_spaces_Understanding_user_motivations_and_perceived_barriers_to_social_learning",
     },
   },
   {
@@ -662,6 +660,7 @@ export const questions = <TrueFalse[]>[
         cs: "Zvažte využití RFID technologií pro automatizaci třídění knih, kontrolu řazení a revizi. RFID technologie mohou zvýšit efektivitu a přesnost knihovních procesů a usnadnit práci knihovníkům.",
         en: "Consider using RFID technologies for automating book sorting, sorting control, and inventory. RFID technologies can increase the efficiency and accuracy of library processes and make librarians' work easier.",
       },
+      link: "https://www.bibliotheca.com/rfid-in-libraries-technology-that-helps-extend-impact/",
     },
   },
   {
@@ -682,8 +681,8 @@ export const questions = <TrueFalse[]>[
         en: "Using tools for content analysis, subject description, and automatic classification can facilitate the organization and management of library content. We recommend exploring options such as OpenText Magellan or Microsoft Azure Cognitive Services.",
       },
       link: {
-        cs: "https://azure.microsoft.com/cs-cz/services/cognitive-services/",
-        en: "https://azure.microsoft.com/en-us/services/cognitive-services/",
+        cs: "https://www.langchain.com/",
+        en: "https://www.langchain.com/",
       },
     },
   },
@@ -704,7 +703,7 @@ export const questions = <TrueFalse[]>[
         cs: "Zvažte využití umělé inteligence pro analýzu statistik výpůjček, vyhledávacích dotazů v katalogu a dalších relevantních dat pro lepší plánování akvizice dokumentů. Můžete použít nástroje jako je TensorFlow nebo Scikit-learn pro tvorbu modelů a analýzu dat.",
         en: "Consider using AI to analyze borrowing statistics, catalog search queries, and other relevant data to better plan document acquisition. You can use tools like TensorFlow or Scikit-learn to build models and analyze data.",
       },
-      link: "https://www.tensorflow.org/",
+      link: "https://www.langchain.com/",
     },
   },
 ];
