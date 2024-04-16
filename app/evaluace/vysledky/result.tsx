@@ -165,9 +165,7 @@ export default function Result() {
 
   const negativeQuestions = questions.filter(
     (question) =>
-      question.answer != true &&
-      question.recommendation != undefined &&
-      weak.map((dim) => dim.name).includes(question.category)
+      question.answer != true && question.recommendation != undefined
   );
 
   console.log("negative", negativeQuestions);
