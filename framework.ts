@@ -155,25 +155,7 @@ export const questions = <TrueFalse[]>[
       link: "https://www.adobe.com/sensei.html",
     },
   },
-  {
-    category: Category["Knihovní služby"],
-    type: "TrueFalse",
-    questionText: {
-      cs: "Máte pocit, že máte dostatečnou moc a vliv pokud jde o technologie a prostředky v knihovně, abyste mohli rozvíjet knihovnu?",
-      en: "Do you feel you have a proper power and influence over the technologies and resources needed to advance your library?",
-    },
-    recommendation: {
-      priority: 1,
-      name: {
-        cs: "Spolupracujte s podobnými knihovnami za účelem sdílení zdrojů a zkušeností",
-        en: "Collaborate with similar libraries to share resources and experiences",
-      },
-      description: {
-        cs: "Technologický rozvoj knihovny často závisí na externích vlivech, jako jsou dodavatelé technologií nebo veřejné financování. Zejména menší knihovny nemusí mít potřebné prostředky, aby realizovaly žádoucí změny. Spolupráce více knihoven za účelem vytvoření společného plánu a sdílení zdrojů může v tomto problému značně pomoci.",
-        en: "The technological development of a library often depends on external influences such as technology suppliers or public funding. Smaller libraries in particular may not have the necessary resources to implement the desired changes. Collaboration of multiple libraries to develop a common plan and share resources can greatly help in this problem.",
-      },
-    },
-  },
+
   {
     category: Category["Knihovní služby"],
     type: "TrueFalse",
@@ -723,6 +705,25 @@ export const questions = <TrueFalse[]>[
         en: "Consider using AI to analyze borrowing statistics, catalog search queries, and other relevant data to better plan document acquisition. You can use tools like TensorFlow or Scikit-learn to build models and analyze data.",
       },
       link: "https://www.langchain.com/",
+    },
+  },
+  {
+    category: Category["Knihovní služby"],
+    type: "TrueFalse",
+    questionText: {
+      cs: "Máte pocit, že máte dostatečnou moc a vliv pokud jde o technologie a prostředky v knihovně, abyste mohli rozvíjet knihovnu?",
+      en: "Do you feel you have a proper power and influence over the technologies and resources needed to advance your library?",
+    },
+    recommendation: {
+      priority: 1,
+      name: {
+        cs: "Spolupracujte s podobnými knihovnami za účelem sdílení zdrojů a zkušeností",
+        en: "Collaborate with similar libraries to share resources and experiences",
+      },
+      description: {
+        cs: "Technologický rozvoj knihovny často závisí na externích vlivech, jako jsou dodavatelé technologií nebo veřejné financování. Zejména menší knihovny nemusí mít potřebné prostředky, aby realizovaly žádoucí změny. Spolupráce více knihoven za účelem vytvoření společného plánu a sdílení zdrojů může v tomto problému značně pomoci.",
+        en: "The technological development of a library often depends on external influences such as technology suppliers or public funding. Smaller libraries in particular may not have the necessary resources to implement the desired changes. Collaboration of multiple libraries to develop a common plan and share resources can greatly help in this problem.",
+      },
     },
   },
 ];
