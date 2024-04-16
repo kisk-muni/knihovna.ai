@@ -62,7 +62,7 @@ export type TrueFalse = {
 };
 
 export const questions = <TrueFalse[]>[
-  {
+  /* {
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText: {
@@ -83,9 +83,8 @@ export const questions = <TrueFalse[]>[
         cs: "Zvažte využití AI nástrojů pro analýzu dat, jako je knihovní fond, uživatelská data, výpůjčky a akvizice. Například můžete použít platformy jako IBM Watson nebo Google Cloud AI.",
         en: "Consider using AI tools to analyze data such as library holdings, user data, borrowing and acquisitions. For example, you can use platforms like IBM Watson or Google Cloud AI.",
       },
-      link: "https://www.ibm.com/watson",
     },
-  },
+  }, */
   {
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
@@ -708,7 +707,7 @@ export const questions = <TrueFalse[]>[
     },
   },
   {
-    category: Category["Knihovní služby"],
+    category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText: {
       cs: "Máte pocit, že máte dostatečnou moc a vliv pokud jde o technologie a prostředky v knihovně, abyste mohli rozvíjet knihovnu?",
