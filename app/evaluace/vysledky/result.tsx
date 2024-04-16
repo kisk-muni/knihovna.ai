@@ -74,10 +74,7 @@ export default function Result() {
       ).length;
       return {
         name: categories[category].name[lang],
-        value: answered,
-        fullMark: total,
         normalizedValue: (answered / total) * 100,
-        normalizedFullMark: 100,
       };
     })
     .sort((a, b) => a.name.localeCompare(b.name));

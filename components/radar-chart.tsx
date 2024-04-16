@@ -6,14 +6,12 @@ import {
   PolarAngleAxis,
   ResponsiveContainer,
   Tooltip,
+  PolarRadiusAxis,
 } from "recharts";
 
 export type Dimension = {
   name: string;
-  value: number;
-  fullMark: number;
   normalizedValue: number;
-  normalizedFullMark: number;
 };
 
 export default function MyRadarChart({ data }: { data: Dimension[] }) {
@@ -22,12 +20,16 @@ export default function MyRadarChart({ data }: { data: Dimension[] }) {
       <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
         <PolarGrid />
         <PolarAngleAxis dataKey="name" fontSize={15} className="text-text" />
+        <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} />
         <Radar
           type="monotone"
           name="Knihovna"
           dataKey="normalizedValue"
           className="stroke-emerald-600/60 fill-emerald-200/80"
         />
+        {/*           {data.map((entry, index) => (
+            <Cell domain={[0, entry.fullMark]} key={`cell-${index}`} />
+          ))} */}
         <Tooltip
           content={({ active, payload, label }) => {
             if (active && payload && payload.length) {
