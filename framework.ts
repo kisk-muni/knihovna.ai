@@ -1,3 +1,5 @@
+import { describe } from "node:test";
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export const urlName = "evaluace";
 
@@ -36,8 +38,6 @@ export const categories: {
   },
 };
 
-export type Question = TrueFalse;
-
 type Translated =
   | string
   | {
@@ -45,46 +45,37 @@ type Translated =
       en: string;
     };
 
-export type TrueFalse = {
+export type Resouce = {
+  title?: Translated;
+  link?: Translated;
+  description?: Translated;
+  buttonText?: Translated;
+  type: "tool" | "case-study" | "article" | "organisation" | "course";
+};
+
+export type Recommendation = {
+  name: Translated;
+  description: Translated;
+  link?: Translated;
+  driver?: Translated;
+  consequences?: Translated;
+  priority?: number;
+  difficulty?: "easy" | "moderate" | "difficult";
+  resources?: Resouce[];
+};
+
+export type Question = {
   category: string;
   questionText: Translated;
   type: "TrueFalse";
-  answer?: boolean;
+  answer?: boolean | null;
   info?: Translated;
   examples?: Translated;
   notes?: Translated;
-  recommendation: {
-    name: Translated;
-    description: Translated;
-    link?: Translated;
-    priority?: number;
-  };
+  recommendation: Recommendation;
 };
 
-export const questions = <TrueFalse[]>[
-  /* {
-    category: Category["Rozvoj (design) služeb"],
-    type: "TrueFalse",
-    questionText: {
-      cs: "Analyzujete svá data pomocí AI nástrojů?",
-      en: "Are you analyzing your data with AI tools?",
-    },
-    examples: {
-      cs: "knihovní fond, uživatelská data, výpůjčky, akvizice",
-      en: "library collection, user data, loans, acquisitions",
-    },
-    recommendation: {
-      priority: 1,
-      name: {
-        cs: "Začněte analyzovat data pomocí AI nástrojů",
-        en: "Start analysing data with AI tools",
-      },
-      description: {
-        cs: "Zvažte využití AI nástrojů pro analýzu dat, jako je knihovní fond, uživatelská data, výpůjčky a akvizice. Například můžete použít platformy jako IBM Watson nebo Google Cloud AI.",
-        en: "Consider using AI tools to analyze data such as library holdings, user data, borrowing and acquisitions. For example, you can use platforms like IBM Watson or Google Cloud AI.",
-      },
-    },
-  }, */
+export const questions = <Question[]>[
   {
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
@@ -98,6 +89,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
         cs: "Implementujte webovou analytiku pro detailnější sběr dat",
         en: "Implement web analytics for more detailed data collection",
@@ -106,7 +98,23 @@ export const questions = <TrueFalse[]>[
         cs: "Zaměřte se na implementaci pokročilé webové analytiky, která vám umožní získávat detailní informace o interakcích uživatelů na vašem webu. Můžete vyzkoušet Google Analytics nebo Matomo Analytics.",
         en: "Focus on implementing advanced web analytics that allow you to gain detailed information about user interactions on your website. You can try Google Analytics or Matomo Analytics.",
       },
-      link: "https://analytics.google.com/",
+      consequences:
+        "Knihovna nemusí být v prostředí internetu konkurenceschopná. ",
+      resources: [
+        {
+          type: "tool",
+          title: "Matomo",
+          description: "Nejaky popis",
+          link: "https://matomo.org/",
+          buttonText: "Klikni pro prozkoumani google analytics",
+        },
+        {
+          type: "tool",
+          title: "Plausible Analytics",
+          description: "Plausible Analytics je GDPR friendly alternativa.",
+          link: "https://plausible.com/",
+        },
+      ],
     },
   },
   {
@@ -116,18 +124,41 @@ export const questions = <TrueFalse[]>[
       cs: "Monitorujete potřeby uživatelů ale i místních obyvatel pro zlepšení vašich služeb?",
       en: "Do you monitor the needs of users and local residents to improve your services?",
     },
-    notes: "",
     recommendation: {
       priority: 1,
       name: {
         cs: "Zahajte pravidelný průzkum potřeb uživatelů a místních obyvatel",
         en: "Start a regular survey of the needs of users and local residents",
       },
+      difficulty: "easy",
       description: {
-        cs: "Pravidelně provádějte průzkumy a dotazníky mezi uživateli a místními obyvateli, abyste lépe porozuměli jejich potřebám a přání. Můžete využít nástroje jako Google Forms nebo SurveyMonkey.",
-        en: "Conduct regular surveys and questionnaires among users and local residents to better understand their needs and wants. You can use tools such as Google Forms or SurveyMonkey.",
+        cs: "Pravidelně provádějte průzkumy a dotazníky mezi uživateli a místními obyvateli, abyste lépe porozuměli jejich potřebám a přání.",
+        en: "Conduct regular surveys and questionnaires among users and local residents to better understand their needs and wants.",
       },
-      link: "https://www.google.com/forms",
+      resources: [
+        {
+          type: "case-study",
+          title:
+            "Moravksá zemská knihovna sdílí svou nástěnku pro podněty čtenářů",
+          description:
+            "MZK v příspěvku prezentuje nástěnku, kde mohou čtenáři vyjadřovat svoje přání, názory a podněty. Tento způsob získávání zpětné vazby může být inspirací pro vaši knihovnu. Umístěte podobnou nástěnku na vhodné místo, aby vám návštěvníci zanechali anonymní zpětnou vazbu.",
+          link: "https://duha.mzk.cz/blog/schranka-nastenky-pro-podnety-ctenaru",
+        },
+        {
+          type: "tool",
+          title: "100 metod",
+          description:
+            "Na webové stránce 100 metod najdete databázi metod pro průzkum potřeb uživatelů. U každé metody je uveden popis, postup a příklady využití a několik užitečných zdrojů.",
+          link: "https://kisk.phil.muni.cz/100metod/poznavani",
+        },
+        {
+          type: "tool",
+          title: "Google Formuláře",
+          description:
+            "Google Formuláře jsou snadno použitelným bezplatným nástrojem pro tvorbu dotazníků a průzkumů.",
+          link: "https://forms.google.com/",
+        },
+      ],
     },
   },
   {
@@ -147,6 +178,8 @@ export const questions = <TrueFalse[]>[
         cs: "Zvažte využití AI pro návrh a zlepšování služeb",
         en: "Consider using AI for service design and improvement",
       },
+      // todo
+      difficulty: "difficult",
       description: {
         cs: "Využití AI pro návrh a zlepšování služeb může zvýšit efektivitu a uživatelskou spokojenost. Zkuste nástroje jako Adobe Sensei nebo Salesforce Einstein pro personalizaci služeb a doporučování dokumentů.",
         en: "Using AI to design and improve services can increase efficiency and user satisfaction. Try tools like Adobe Sensei or Salesforce Einstein for service personalization and document recommendation.",
@@ -168,6 +201,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
         cs: "Zvažte nasazení chatbota nebo virtuálního asistenta pro komunikaci s uživateli",
         en: "Consider deploying a chatbot or virtual assistant to communicate with users",
@@ -192,6 +226,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "moderate",
       name: {
         cs: "Rozšiřte nabídku samoobslužných služeb",
         en: "Expand your self-service offer",
@@ -200,6 +235,13 @@ export const questions = <TrueFalse[]>[
         cs: "Zvýšení dostupnosti samoobslužných služeb může zlepšit uživatelskou spokojenost a efektivitu knihovny. Zvažte možnosti výpůjček, vrácení knih a přístupu ke studovnám a pracovním prostranstvím bez nutnosti interakce s knihovníkem.",
         en: "Increasing the availability of self-service can improve user satisfaction and library efficiency. Consider options for borrowing, returning books, and accessing study and work areas without having to interact with a librarian.",
       },
+      resources: [
+        {
+          type: "case-study",
+          title: "Self check",
+          description: "Popis self check",
+        },
+      ],
     },
   },
   {
@@ -211,6 +253,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "moderate",
       name: {
         cs: "Zkuste implementovat doporučovací systém",
         en: "Try to implement a recommendation system",
@@ -235,6 +278,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
         cs: "Zvažte využití AI pro tvorbu vzdělávacích materiálů",
         en: "Consider using AI to create educational materials",
@@ -256,6 +300,7 @@ export const questions = <TrueFalse[]>[
     examples: "ChatGPT, Canva, Scratch",
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
         cs: "Zvažte poskytování praktických workshopů s online nástroji a AI",
         en: "Consider providing hands-on workshops with online tools and AI",
@@ -275,6 +320,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
         cs: "Zahrňte vzdělávání v základech AI do vaší nabídky",
         en: "Include AI training in your offer",
@@ -283,6 +329,22 @@ export const questions = <TrueFalse[]>[
         cs: "Zajistěte, aby vzdělávání v základech AI bylo součástí vaší vzdělávací nabídky. To pomůže uživatelům lépe porozumět této stále důležitější technologii a zlepšit jejich digitální gramotnost.",
         en: "Ensure that AI training is part of your educational offer. This will help users better understand this increasingly important technology and improve their digital literacy.",
       },
+      resources: [
+        {
+          type: "organisation",
+          title: "prg.ai",
+          description:
+            "Spolek propojující organizace, výzkumné i vzdělávací instituce, které se zabývají umělou inteligencí. Webový portál spolku může být užitečným zdrojem informací o AI a kontaktů pro spolupráci ve vaší knihovně.",
+          link: "https://prg.ai/",
+        },
+        {
+          type: "course",
+          title: "Elements of AI",
+          description:
+            "A series of online courses showing off what be done with AI, and how to start creating AI methods. The courses combine theory with practical exercises and can be completed at your own pace.",
+          link: "https://www.elementsofai.com/",
+        },
+      ],
     },
   },
   {
@@ -298,6 +360,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
         cs: "Vytvářejte vzdělávací obsah pro dospělé v produktivním věku",
         en: "Create educational content for working-age adults",
@@ -317,6 +380,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
         cs: "Zvažte možnost vystavení certifikátů a osvědčení za účast ve vzdělávacích aktivitách",
         en: "Consider issuing certificates and testimonials for participation in training activities",
@@ -341,6 +405,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
         cs: "Zajistěte kontinuální vzdělávání zaměstnanců v digitálních dovednostech",
         en: "Ensure continuous training of employees in digital skills",
@@ -364,6 +429,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "moderate",
       name: {
         cs: "Poskytněte uživatelům prostor pro rozvoj digitálních kompetencí",
         en: "Provide space for users to develop digital competences",
@@ -387,6 +453,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "moderate",
       name: {
         cs: "Rozšiřte nabídku moderních technologií pro uživatele",
         en: "Expand the range of modern technologies for users",
@@ -414,6 +481,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "moderate",
       name: {
         cs: "Zaměřte se na poskytování prostor pro studium a co-working",
         en: "Focus on providing study and co-working spaces",
@@ -434,6 +502,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
         cs: "Poskytujte osobní konzultace a pomoc s technologiemi",
         en: "Provide personal consultation and assistance with technology",
@@ -442,6 +511,15 @@ export const questions = <TrueFalse[]>[
         cs: "Nabídněte uživatelům možnost osobních konzultací a pomoci s technologiemi, aby se mohli lépe orientovat v digitálním prostředí a využívat moderní technologie.",
         en: "Offer users the opportunity for personal consultation and help with technology so they can better navigate the digital environment and use modern technologies.",
       },
+      resources: [
+        {
+          type: "tool",
+          title: "Moudrá síť",
+          description:
+            "Moudrá síť je projekt zaměřený na pomoc v digitálním světě. Poskytuje informace, asistenci v ovládání digitálních technologií.",
+          link: "https://moudrasit.cz/",
+        },
+      ],
     },
   },
   {
@@ -453,6 +531,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "moderate",
       name: {
         cs: "Umožněte uživatelům rezervaci prostorů pro vlastní komunitní akce",
         en: "Allow users to reserve spaces for their own community events",
@@ -461,6 +540,15 @@ export const questions = <TrueFalse[]>[
         cs: "Zajistěte rezervační systém, který umožní uživatelům rezervovat prostory pro organizaci vlastních komunitních akcí. To podporuje zapojení komunity a posiluje roli knihovny jako centra pro setkávání a sdílení znalostí. Informujte o těchto možnostech také místní organizace a spolky.",
         en: "Provide a reservation system that allows users to book spaces for organizing their own community events. This promotes community involvement and strengthens the library's role as a center for meetings and knowledge sharing. Also, inform local organizations and associations about these opportunities.",
       },
+      resources: [
+        {
+          type: "tool",
+          title: "Cal.com",
+          description:
+            "Bezplatná platforma pro vytvoření rezervačního formuláře vám umožní snadno spravovat rezervace a komunikovat s uživateli.",
+          link: "https://cal.com/",
+        },
+      ],
     },
   },
   {
@@ -476,6 +564,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "moderate",
       name: {
         cs: "Zaměřte se na navrhování služeb pro marginalizované osoby a ohrožené skupiny",
         en: "Focus on designing services for marginalized individuals and at-risk groups",
@@ -499,13 +588,15 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
-        cs: "Poskytujte pomoc specifickým skupinám, které mohou být znevýhodněny novými technologiemi",
+        cs: "Cíleně oslovujte skupiny uživatelů, které mohou být znevýhodněny novými technologiemi",
         en: "Provide assistance to specific groups that may be disadvantaged by new technologies",
       },
       description: {
-        cs: "Vyviněte programy a služby, které specificky cílí na skupiny v populaci, které by mohly být ohroženy nebo znevýhodněny novými technologiemi. Poskytněte jim vzdělávání a podporu v používání moderních technologií.",
-        en: "Develop programs and services that specifically target groups in the population that may be threatened or disadvantaged by new technologies. Provide them with education and support in using modern technologies.",
+        // todo
+        cs: "Zajistěte, aby se s vaší nabídkou služeb seznámily skupiny v populaci, které mohou být ohroženy nebo znevýhodněny novými technologiemi. Účastněte se veřejného dění, akcí a festivalů, které nesouvisí s knihovnou a literaturou. Využijte znalosti vaší lokality abyste oslovili skupiny, které by jinak knihovnu nenavštívily.",
+        en: "Ensure that groups in the population that may be threatened or disadvantaged by new technologies are familiar with your service offerings. Participate in public events, activities, and festivals unrelated to the library and literature. Use your knowledge of the locality to reach out to groups that would not otherwise visit the library.",
       },
     },
   },
@@ -522,6 +613,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
         cs: "Zahrňte snižování sociálních nerovností do strategického záměru knihovny",
         en: "Incorporate the reduction of social inequalities into the library's strategic plan",
@@ -545,17 +637,15 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "moderate",
       name: {
-        cs: "Poskytování poradenství",
+        cs: "Poskytování poradenství a propojení s dalšími organizacemi pro uživatele v tíživé životní situaci",
         en: "Providing counseling",
       },
+      // todo
       description: {
-        cs: "Zvažte implementaci online chatu nebo systému rezervace konzultací, abyste mohli efektivně poskytovat poradenství uživatelům v tíživé situaci. Můžete využít platformy jako je LiveChat nebo Calendly.",
-        en: "Consider implementing an online chat or consultation booking system to efficiently provide counseling to users in distressing situations. You can use platforms like LiveChat or Calendly.",
-      },
-      link: {
-        cs: "https://cal.com/",
-        en: "https://cal.com/",
+        cs: "Uživatelé v tíživé situaci se mohou potýkat s různými problémy, jako jsou finanční obtíže, ztráta zaměstnání nebo sociální izolace. Řada uživatelů nemusí vědět, že mohou získat pomoc v knihovně, pokud jim to není na první pohled zřejmé. Nabízejte uživatelům pomoc s hledáním práce, rady ohledně sociální a právní podpory.",
+        en: "Users in distressing situations may face various problems, such as financial difficulties, loss of employment, or social isolation. Many users may not know that they can get help at the library if it is not immediately apparent to them. Offer users help with job search, advice on social and legal support.",
       },
     },
   },
@@ -568,9 +658,10 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
-        cs: "Spolupráce s městem a neziskovými organizacemi",
-        en: "Collaboration with the city and non-profit organizations",
+        cs: "Spolupracujte s městem a neziskovými organizacemi",
+        en: "Collaborate with the city and non-profit organizations",
       },
       description: {
         cs: "Navázání spolupráce s místními úřady, spolky a neziskovými organizacemi může zvýšit vaši dostupnost a poskytované služby. Zvažte vytvoření partnerství pro pořádání společných akcí nebo programů.",
@@ -587,18 +678,25 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
-        cs: "Zapojení do dobrovolnických aktivit",
-        en: "Involvement in volunteer activities",
+        cs: "Nabízejte možnost zapojení dobrovolníků do aktivit knihovny",
+        en: "Offer the opportunity to involve volunteers in library activities",
       },
       description: {
-        cs: "Vytvoření strukturovaného programu pro dobrovolníky může posílit komunitní pouto a zvýšit dostupnost vaší knihovny. Využijte platformy jako je VolunteerMatch pro propojení s potenciálními dobrovolníky.",
-        en: "Establishing a structured volunteer program can strengthen community bonds and increase the accessibility of your library. Utilize platforms like VolunteerMatch to connect with potential volunteers.",
+        cs: "Vytvoření programu pro dobrovolníky může posílit komunitní pouto a zvýšit dostupnost vaší knihovny. Využijte existující metodiky a platformy pro propojení s potenciálními dobrovolníky.",
+        en: "Creating a volunteer program can strengthen the community bond and increase the accessibility of your library. Use existing methodologies and platforms to connect with potential volunteers.",
       },
-      link: {
-        cs: "https://www.volunteermatch.org/",
-        en: "https://www.volunteermatch.org/",
-      },
+      resources: [
+        {
+          type: "case-study",
+          title:
+            "Knihovny s větší zkušeností s dobrovolníky, které jsou ochotny své zkušenosti sdílet",
+          description:
+            "Na webu naleznete příklady knihoven, které pracují s dobrovolníky. U každé knihovny naleznete informace o tom, jakým způsobem dobrovolníky zapojují do svého provozu a odkaz na podstránku věnující se dobrovolnictví na jejich webu.",
+          link: "https://ipk.nkp.cz/odborne-cinnosti/dobrovolnici-v-knihovnach/dobrovolnici_tabulka.htm",
+        },
+      ],
     },
   },
   {
@@ -610,8 +708,9 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "moderate",
       name: {
-        cs: "Vyhodnocení využití umělé inteligence a automatizace",
+        cs: "Vyhodnocení potenciálu využití umělé inteligence a automatizace",
         en: "Evaluation of artificial intelligence and automation usage",
       },
       description: {
@@ -629,6 +728,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
         cs: "Zvažte využití nástrojů na generování textů",
         en: "Consider using text generation tools",
@@ -637,10 +737,18 @@ export const questions = <TrueFalse[]>[
         cs: "Využití nástrojů na generování textů může zefektivnit tvorbu e-mailů, propagace a oficiálních dokumentů. Zkuste nástroje jako je OpenAI nebo GPT-3 pro generování obsahu.",
         en: "Using text generation tools can streamline the creation of emails, promotions, and official documents. Try tools like OpenAI or GPT-3 for content generation.",
       },
-      link: {
-        cs: "https://openai.com/",
-        en: "https://openai.com/",
-      },
+      resources: [
+        {
+          type: "tool",
+          name: "ChatGPT",
+          description:
+            "Populární nástroj pro generování textů formou dialogu s chatbotem od společnosti OpenAI.",
+          link: {
+            cs: "https://openai.com/",
+            en: "https://openai.com/",
+          },
+        },
+      ],
     },
   },
   {
@@ -652,6 +760,7 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "moderate",
       name: {
         cs: "Nasaďte RFID technologii v automatizaci knihovních procesů",
         en: "Implement RFID technology in library process automation",
@@ -672,9 +781,10 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "difficult",
       name: {
-        cs: "Nástroje pro analýzu obsahu a automatickou klasifikaci",
-        en: "Tools for content analysis and automatic classification",
+        cs: "Vuyžijte nástroje pro analýzu obsahu a automatickou klasifikaci",
+        en: "Utilize tools for content analysis and automatic classification",
       },
       description: {
         cs: "Používání nástrojů pro analýzu obsahu, věcný popis a automatickou klasifikaci může usnadnit organizaci a řízení knihovního obsahu. Doporučujeme zkoumat možnosti nástrojů jako je OpenText Magellan nebo Microsoft Azure Cognitive Services.",
@@ -695,9 +805,10 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "moderate",
       name: {
-        cs: "Využívání umělé inteligence pro akvizici dokumentů",
-        en: "Using Artificial Intelligence for Document Acquisition",
+        cs: "Využívání umělé inteligence při akvizici dokumentů",
+        en: "Using Artificial Intelligence in Document Acquisition",
       },
       description: {
         cs: "Zvažte využití umělé inteligence pro analýzu statistik výpůjček, vyhledávacích dotazů v katalogu a dalších relevantních dat pro lepší plánování akvizice dokumentů. Můžete použít nástroje jako je TensorFlow nebo Scikit-learn pro tvorbu modelů a analýzu dat.",
@@ -715,9 +826,10 @@ export const questions = <TrueFalse[]>[
     },
     recommendation: {
       priority: 1,
+      difficulty: "easy",
       name: {
-        cs: "Spolupracujte s podobnými knihovnami za účelem sdílení zdrojů a zkušeností",
-        en: "Collaborate with similar libraries to share resources and experiences",
+        cs: "Úzce spolupracujte s podobnými knihovnami za účelem sdílení zdrojů a zkušeností",
+        en: "Collaborate closely with similar libraries to share resources and experiences",
       },
       description: {
         cs: "Technologický rozvoj knihovny často závisí na externích vlivech, jako jsou dodavatelé technologií nebo veřejné financování. Zejména menší knihovny nemusí mít potřebné prostředky, aby realizovaly žádoucí změny. Spolupráce více knihoven za účelem vytvoření společného plánu a sdílení zdrojů může v tomto problému značně pomoci.",

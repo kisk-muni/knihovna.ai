@@ -7,6 +7,9 @@ import {
   ResponsiveContainer,
   Tooltip,
   PolarRadiusAxis,
+  Text,
+  Curve,
+  Polygon,
 } from "recharts";
 
 export type Dimension = {
@@ -14,16 +17,34 @@ export type Dimension = {
   normalizedValue: number;
 };
 
+function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }: any) {
+  return (
+    <Text
+      {...rest}
+      verticalAnchor="middle"
+      y={y + (y - cy) / 10}
+      x={x + (x - cx) / 10}
+    >
+      {payload.value}
+    </Text>
+  );
+}
+
 export default function MyRadarChart({ data }: { data: Dimension[] }) {
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
+    <ResponsiveContainer width="100%" height={300}>
+      <RadarChart cx="50%" cy="50%" outerRadius="60%" data={data}>
         <PolarGrid />
-        <PolarAngleAxis dataKey="name" fontSize={15} className="text-text" />
+        <PolarAngleAxis
+          dataKey="name"
+          fontSize={15}
+          className="text-text"
+          tick={renderPolarAngleAxis}
+        />
         <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} />
         <Radar
-          type="monotone"
           name="Knihovna"
+          isAnimationActive={true}
           dataKey="normalizedValue"
           className="stroke-emerald-600/60 fill-emerald-200/80"
         />
@@ -33,10 +54,16 @@ export default function MyRadarChart({ data }: { data: Dimension[] }) {
         <Tooltip
           content={({ active, payload, label }) => {
             if (active && payload && payload.length) {
+              const value = payload[0].value
+                ? (payload[0]?.value as unknown as number)
+                : undefined;
+              // make value max. 2 decimal places
               return (
                 <div className="bg-white p-2 rounded-md shadow-lg">
                   <h3 className="text-text text-base font-bold">{label}</h3>
-                  <p className="text-text text-sm">{payload[0].value} %</p>
+                  {value && (
+                    <p className="text-text text-sm">{value.toFixed(2)} %</p>
+                  )}
                 </div>
               );
             }

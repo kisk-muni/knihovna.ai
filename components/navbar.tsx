@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar as Nav,
   NavbarBrand,
@@ -13,13 +13,21 @@ import {
 import Link from "next/link";
 import Logo from "./logo";
 import siteConfig from "@/site-config";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import classNames from "classnames";
+import { useParams } from "next/navigation";
 
 export default function Navbar({ sticky = true }: { sticky?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathname = usePathname();
+  const [hide, setHide] = useState(false);
+  const params = useParams<{ step?: string }>();
+  useEffect(() => {
+    if (params.step) setHide(true);
+  }, [params, setHide]);
+
+  if (hide) return null;
   return (
     <Nav
       className={`px-0 flex justify-center items-center ${

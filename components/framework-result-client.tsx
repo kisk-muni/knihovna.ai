@@ -1,19 +1,26 @@
 "use client";
-import { useDiagnosisForm } from "../use-diagnosis-form";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useFramework } from "@/app/evaluace/use-framework";
+import { useRouter } from "next/navigation";
 import { Question, categories, urlName } from "@/framework";
 import MyRadarChart from "@/components/radar-chart";
 import { Dimension } from "@/components/radar-chart";
 import classNames from "classnames";
 import { Fragment, useEffect, useState } from "react";
-import { Button, Link } from "react-aria-components";
+import { Button } from "react-aria-components";
+import { Button as KButton } from "@/components/ui/button";
 import {
-  IconArrowRight,
   IconCaretRight,
   IconCheck,
+  IconLink,
   IconX,
 } from "@/components/ui/icons";
-import texts from "../texts";
+import texts from "@/app/evaluace/texts";
+import FrameworkRecommendation from "@/components/framework-recommendation";
+import Logo from "@/components/framework-logo";
+import Headline from "@/components/ui/headline";
+import { formattedDate } from "@/lib/date";
+import { Submission } from "@/app/evaluace/[id]/vysledky/page";
+import { FrameworkShareDialog } from "./framework-share-dialog";
 
 function calculateRadarChartSurfaceArea(dimensions: number[]): number {
   if (dimensions.length < 3) {
@@ -43,17 +50,22 @@ function calculateRadarChartSurfaceArea(dimensions: number[]): number {
   return totalArea;
 }
 
-export default function Result() {
+export default function FrameworkResultClient({
+  submission,
+}: {
+  submission: Submission;
+}) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const lang = (searchParams.get("lang") || "cs") as "cs" | "en";
-  const { questions, started } = useDiagnosisForm();
-  // wrap in useEffect
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
+  const { questions, started, id, loadSubmission, lang } = useFramework();
+
   useEffect(() => {
-    if (!started) {
-      router.push(`/${urlName}`);
+    if (submission) {
+      loadSubmission(submission.id, submission.answers);
+      console.log("loadSubmission", submission.id, submission.answers);
     }
-  }, [started, router]);
+  }, []);
+
   const questionsByCategory = questions.reduce((acc, question) => {
     if (!acc[question.category]) {
       acc[question.category] = [];
@@ -62,8 +74,8 @@ export default function Result() {
     return acc;
   }, {} as { [key: string]: Question[] });
 
-  const radarData: Dimension[] = Object.keys(questionsByCategory)
-    .map((category) => {
+  const radarData: Dimension[] = Object.keys(questionsByCategory).map(
+    (category) => {
       const questions = questionsByCategory[category];
       const total = questions.length;
       const answered = questions.filter(
@@ -76,8 +88,8 @@ export default function Result() {
         name: categories[category].name[lang],
         normalizedValue: (answered / total) * 100,
       };
-    })
-    .sort((a, b) => a.name.localeCompare(b.name));
+    }
+  );
 
   const dimensions: number[] = radarData.map((dim) => dim.normalizedValue);
   const surfaceArea = calculateRadarChartSurfaceArea(dimensions);
@@ -176,27 +188,83 @@ export default function Result() {
 
   console.log("recommended", featuredRecommendation);
 
+  const [currentDimension, setCurrentDimension] = useState(
+    texts["recommended"][lang]
+  );
+
+  const weakNames = weak.map((dim) => dim.name);
+
+  const recommended: { [key: string]: Question[] } = {
+    [texts["recommended"][lang]]: negativeQuestions
+      .filter((question) => weakNames.includes(question.category))
+      // sort by question.recommendation.difficulty for following order "easy", "moderate", "difficult"
+      .sort((a, b) => {
+        if (a.recommendation.difficulty === "easy") return -1;
+        if (b.recommendation.difficulty === "easy") return 1;
+        if (a.recommendation.difficulty === "moderate") return -1;
+        if (b.recommendation.difficulty === "moderate") return 1;
+        return 0;
+      })
+      .slice(0, 3),
+    //,
+  };
+
+  const questionsForRecommendation: {
+    [key: string]: Question[];
+  } = { ...questionsByCategory, ...recommended };
+
+  const dimensionNameList = [
+    ...[texts["recommended"][lang]],
+    ...sorted.map((dimension) => dimension.name),
+  ];
+
   return (
     <Fragment>
-      <section className="relative pt-20 flex flex-col items-center bg-neutral-50">
+      <div className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b border-neutral-200 shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
+        <Logo lang={lang} />
+        <div className="flex items-center space-x-4">
+          {submission?.dateLastEdited && (
+            <span className="text-text-500 text-sm">
+              Naposledy upraveno {formattedDate(submission?.dateLastEdited)}
+            </span>
+          )}
+          <KButton
+            onClick={() => setShareDialogOpen(true)}
+            size="small"
+            className="items-center"
+          >
+            Získat odkaz <IconLink className="w-4 h-4 ml-1" />
+          </KButton>
+          <FrameworkShareDialog
+            open={shareDialogOpen}
+            onOpenChange={setShareDialogOpen}
+            onCopy={() => setShareDialogOpen(false)}
+            submission={submission}
+          />
+        </div>
+      </div>
+      <section className="relative flex pt-6 flex-col items-center bg-neutral-50">
         <div className="max-w-screen-lg w-full px-6 mb-6 flex flex-col items-center">
           <h1 className="text-text-400 uppercase text-center text-sm font-medium mb-4 mt-4">
             {texts.evaluation[lang]}
           </h1>
-          <h1 className="text-text text-3xl max-w-2xl mb-6 mt-6 text-center font-bold">
+          <Headline
+            level="2"
+            as="h2"
+            className="text-center mx-auto max-w-screen-md"
+          >
             {libraryType.description[lang]}
-          </h1>
-          <div className="text-lg text-text mb-12">
-            {texts["you-are"][lang]} {libraryType.type[lang]}
-          </div>
-          <div className="grid grid-cols-2 w-full bg-white border p-8 border-neutral-200 rounded-lg shadow-sm">
-            <div className="w-auto h-auto min-h-[200px] border border-neutral-200 rounded-md shadow-xs py-6 px-3 ">
+          </Headline>
+          <div className="grid grid-cols-7 mt-6 w-full bg-white border p-8 border-neutral-200 rounded-lg shadow-sm">
+            <div className="w-auto h-auto min-h-[200px] col-span-4 border-neutral-200 rounded-md shadow-xs">
               <MyRadarChart data={radarData} />
             </div>
-            <div className="pl-8 flex flex-col">
+            <div className="pl-8 flex flex-col col-span-3">
               <div className="mb-3">
-                <div className="text-text-500 text-sm mb-1">
-                  {texts["your-result"][lang]}
+                <div className="flex items-center">
+                  <div className="text-text-500 text-sm mb-1">
+                    {texts["your-result"][lang]}
+                  </div>
                 </div>
                 <div className="text-text font-medium text-lg mb-1.5">
                   {score} %
@@ -232,53 +300,71 @@ export default function Result() {
           </div>
         </div>
       </section>
-      <section className="bg-neutral-50">
+
+      <section className="bg-white py-12 border-t grow h-full border-neutral-150">
         <div className="max-w-screen-lg px-6 mb-12 mx-auto">
-          {featuredRecommendation && (
-            <div className="px-8 py-6 bg-white border border-neutral-200 rounded-md ">
-              <div className="flex space-x-8">
-                <div>
-                  <p className="text-text-500 text-sm mb-2">
-                    {texts["recommendations"][lang]}
-                  </p>
-                  <p className="text-text font-medium text-lg mb-1.5">
-                    {typeof featuredRecommendation.name === "string"
-                      ? featuredRecommendation.name
-                      : featuredRecommendation.name[lang]}
-                  </p>
-                  <p className="text-text-500 text-base mb-3">
-                    {typeof featuredRecommendation.description === "string"
-                      ? featuredRecommendation.description
-                      : featuredRecommendation.description[lang]}
-                  </p>
-                </div>
-                {featuredRecommendation.link && (
-                  <div className="shrink-0 flex flex-col pb-3 justify-center">
-                    <Link
-                      href={
-                        typeof featuredRecommendation.link === "string"
-                          ? featuredRecommendation.link
-                          : featuredRecommendation.link[lang]
+          <h3 className="text-text font-semibold text-2xl mt-4 mb-4">
+            {texts["recommendations"][lang]}
+          </h3>
+          <div className="py-6 flex flex-wrap gap-2 text-text">
+            {dimensionNameList.map((name, i) => {
+              const relevant = questionsForRecommendation[name].filter(
+                (q) => !q.answer
+              ).length;
+              if (relevant == 0) return;
+              return (
+                <button
+                  key={i}
+                  onClick={() => setCurrentDimension(name)}
+                  className={classNames(
+                    "py-1 flex shrink-0 px-3 text-[15px] items-center rounded-full",
+                    {
+                      "bg-primary-400 text-white": name === currentDimension,
+                      "border border-neutral-200 text-text-700 hover:bg-white":
+                        name !== currentDimension,
+                    }
+                  )}
+                >
+                  {name}{" "}
+                  <span
+                    className={classNames(
+                      "rounded-full ml-1 text-sm -mr-1 px-1",
+                      {
+                        "text-white bg-primary-300": name === currentDimension,
+                        "text-text bg-neutral-200": name !== currentDimension,
                       }
-                      target="_blank"
-                      className="shrink-0 flex items-center px-6 py-2 text-base bg-white border border-neutral-200 text-text-900 justify-center rounded-md mt-3 hover:bg-neutral-100 hover:text-text transition-all ease-in-out duration-300"
-                    >
-                      {texts["proceed-to-recommended-tool"][lang]}{" "}
-                      <IconArrowRight className="h-4 w-4 ml-1 shrink-0" />
-                    </Link>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
+                    )}
+                  >{`${relevant}`}</span>
+                </button>
+              );
+            })}
+          </div>
+          {questionsForRecommendation[currentDimension]
+            ?.filter((question) => !question.answer)
+            ?.map(({ recommendation }, i) => (
+              <FrameworkRecommendation
+                key={i}
+                recommendation={recommendation}
+                lang={lang}
+              />
+            ))}
         </div>
       </section>
 
       <section className="bg-neutral-50 pb-12 border-t grow h-full border-neutral-200">
         <div className="max-w-screen-lg px-6 py-10 mx-auto">
-          <h3 className="text-text font-semibold text-2xl mt-4 mb-8">
-            {texts["your-answers"][lang]}
-          </h3>
+          <div className="flex items-baseline justify-between">
+            <h3 className="text-text font-semibold text-2xl mt-4 mb-8">
+              {texts["your-answers"][lang]}
+            </h3>
+            <KButton
+              size="small"
+              theme="dark-gray"
+              onClick={() => router.push(`/${urlName}/${id}/1`)}
+            >
+              Upravit
+            </KButton>
+          </div>
           <div className="flex text-text flex-col bg-white border border-neutral-200 shadow-sm rounded-lg">
             {Object.keys(questionsByCategory).map((category, categoryIndex) => {
               const count = questionsByCategory[category].length;
@@ -329,6 +415,15 @@ export default function Result() {
                                   ? question.questionText
                                   : question.questionText[lang]}
                               </div>
+                              {/* <SelectAnswer
+                                selectedKey={
+                                  question.answer === undefined
+                                    ? "skip"
+                                    : question.answer
+                                    ? "yes"
+                                    : "no"
+                                }
+                              /> */}
                               {question.type == "TrueFalse" &&
                                 question.answer !== undefined && (
                                   <div

@@ -3,8 +3,10 @@ export * from "./blog-posts";
 export * from "./categories";
 
 export * from "./epics";
+export * from "./events";
 
 export * from "./feedback";
+export * from "./framework-submissions";
 
 export * from "./sprints";
 

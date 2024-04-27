@@ -24,6 +24,10 @@ const texts: {
     cs: "Slabé stránky",
     en: "Weaknesses",
   },
+  recommended: {
+    cs: "Doporučeno",
+    en: "Recommended",
+  },
   recommendations: {
     cs: "Doporučení",
     en: "Recommendations",
@@ -56,9 +60,17 @@ const texts: {
     cs: "Ne / Nevím",
     en: "No / I don't know",
   },
+  no: {
+    cs: "Ne",
+    en: "No",
+  },
+  "dont-know": {
+    cs: "Nevím",
+    en: "I don't know",
+  },
   "framework-name": {
-    cs: "Evaluační framework",
-    en: "Evaluation framework",
+    cs: "Framework",
+    en: "Framework",
   },
   "framework-title": {
     cs: "Zjistěte, jak je vaše knihovna připravena na rostoucí vliv AI",
@@ -95,6 +107,18 @@ const texts: {
   of: {
     cs: "z",
     en: "of",
+  },
+  getmore: {
+    cs: "Zjistit více",
+    en: "Display more",
+  },
+  "recommended-tool": {
+    cs: "Doporučený nástroj",
+    en: "Tool",
+  },
+  "recommended-case-study": {
+    cs: "Případová studie",
+    en: "Case study",
   },
 };
 

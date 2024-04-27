@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
-import StepStart from "./step-start";
+import FrameworkStart from "@/components/framework-start";
 
 export const metadata: Metadata = createMetadata({
   title: "Evaluační framework",
@@ -10,5 +10,5 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default async function EvaluationPage() {
-  return <StepStart />;
+  return <FrameworkStart />;
 }

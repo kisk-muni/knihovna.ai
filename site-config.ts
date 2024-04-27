@@ -50,7 +50,7 @@ export interface SiteConfig {
 }
 
 const siteConfig: SiteConfig = {
-  title: "knihovna.ai",
+  title: "Knihovna.ai",
   description: "",
   siteUrl: "https://knihovna.ai",
   siteLanguage: "cs",

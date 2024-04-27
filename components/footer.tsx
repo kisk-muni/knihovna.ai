@@ -1,6 +1,7 @@
 import siteConfig from "@/site-config";
 import Link from "next/link";
 import Container from "./ui/container";
+import classNames from "classnames";
 
 function Item({ href, title }: { href: string; title: string }) {
   return (
@@ -15,13 +16,25 @@ function Item({ href, title }: { href: string; title: string }) {
   );
 }
 
-export default function Footer({ fullWidth = false }: { fullWidth?: boolean }) {
+export default function Footer({
+  fullWidth = false,
+  size = "base",
+}: {
+  fullWidth?: boolean;
+  size?: "base" | "small";
+}) {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="mt-auto z-40">
       <Container
         fullWidth={fullWidth}
-        className="py-12 grid md:flex md:items-center md:justify-between"
+        className={classNames(
+          "grid md:flex md:items-center md:justify-between",
+          {
+            "py-12": size === "base",
+            "py-6": size === "small",
+          }
+        )}
       >
         <span className="text-base text-text font-medium text-center md:text-left">
           ©{" "}
@@ -36,7 +49,7 @@ export default function Footer({ fullWidth = false }: { fullWidth?: boolean }) {
           </Link>
           . Všechna práva vyhrazena.
         </span>
-        <ul className="flex flex-wrap justify-center md:justify-start items-center mt-6 lg:mt-0 text-base font-medium text-text">
+        <ul className="flex flex-wrap justify-center md:justify-start items-center mt-6 lg:mt-0 text-base font-normal text-text">
           {siteConfig.footerNavigation.map((item, i) => (
             <Item key={i} href={item.href} title={item.title} />
           ))}

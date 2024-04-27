@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/db";
+import crypto from "crypto";
 import {
   State,
   Todo,
@@ -10,10 +11,13 @@ import {
   todos,
   Category,
   Epic,
+  frameworkSubmissions,
 } from "@/db/schema";
 import { isFuture, isPast, isWithinInterval } from "date-fns";
-import { and, desc } from "drizzle-orm";
+import { id } from "date-fns/locale";
+import { and, desc, eq } from "drizzle-orm";
 import { type Selection } from "react-aria-components";
+import { z } from "zod";
 
 export type EpicTodos = {
   doneTodosCount?: number;
@@ -407,4 +411,59 @@ export async function getTodo(id: string) {
 export async function getMembers() {
   const result = await db.query.users.findMany();
   return result;
+}
+
+export async function getFrameworkSubmission(id: string) {
+  return await db
+    .select()
+    .from(frameworkSubmissions)
+    .where(eq(frameworkSubmissions.id, id));
+}
+
+const answerSchema = z.object({
+  questionId: z.string(),
+  questionVersion: z.string(),
+  answer: z.boolean().nullable(),
+});
+
+export type Answer = z.infer<typeof answerSchema>;
+
+const submissionSchema = z.object({
+  id: z.string(),
+  answers: z.array(answerSchema),
+  // dateCreated: z.string().datetime(),
+  // dateLastEdited: z.string().datetime(),
+});
+
+type Submission = z.infer<typeof submissionSchema>;
+
+export async function upsertFrameworkSubmission(
+  data: Submission,
+  secret?: string
+) {
+  const submission = submissionSchema.parse(data);
+  /*   const newHash = crypto
+    .pbkdf2Sync(
+      secret,
+      process.env.FRAMEWORK_SALT as unknown as string,
+      1000,
+      64,
+      "sha512"
+    )
+    .toString("hex");
+
+  const result = await db
+    .select({ secretHash: frameworkSubmissions.secretHash })
+    .from(frameworkSubmissions)
+    .where(eq(frameworkSubmissions.id, submission.id));
+  const current = result.length ? result[0] : null;
+  if (!current) return Error("Submission not found");
+  if (current.secretHash !== newHash) return Error("Invalid secret"); */
+  await db
+    .insert(frameworkSubmissions)
+    .values(submission)
+    .onConflictDoUpdate({
+      target: frameworkSubmissions.id,
+      set: { answers: data.answers, dateLastEdited: new Date() },
+    });
 }

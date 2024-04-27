@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
-import Step from "./step";
-import texts from "../texts";
+import texts from "../../texts";
+import { FrameworkServerStep } from "@/components/framework-step-server";
 
 type Props = {
-  params: { step: string; lang: string };
+  params: { step: string; lang: string; id: string };
   searchParams: URLSearchParams;
 };
 
@@ -22,6 +22,6 @@ export async function generateMetadata({
   });
 }
 
-export default function StepPage({ params: { step: stringifiedStep } }: Props) {
-  return <Step stringifiedStep={stringifiedStep} />;
+export default async function StepPage({ params: { id } }: Props) {
+  return <FrameworkServerStep id={id} />;
 }

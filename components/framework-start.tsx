@@ -1,39 +1,31 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { urlName } from "@/framework";
-import { useDiagnosisForm } from "./use-diagnosis-form";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useFramework } from "../app/evaluace/use-framework";
+import Tracker from "@/tracker";
 import { IconArrowRight } from "@/components/ui/icons";
 import Container from "@/components/ui/container";
 /* eslint-disable react/no-unescaped-entities */
 import Headline from "@/components/ui/headline";
-import { Metadata } from "next";
-import { createMetadata } from "@/lib/metadata";
 import BackgroundGradient from "@/components/ui/background-gradient";
 import classNames from "classnames";
-import Logo from "@/components/logo";
 import Card from "@/components/ui/card";
 import { questions } from "@/framework";
-import texts from "./texts";
-
-export const metadata: Metadata = createMetadata({
-  title: "Evaluační framework",
-  description: `
-    Zjistěte, jak je vaše knihovna připravena na rostoucí vliv AI. Získejte praktická doporučení, jak knihovnu zlepšovat.
-    `,
-});
+import texts from "../app/evaluace/texts";
 
 const questionsLength = questions.length;
 
-export default function StepStart() {
-  const { setStarted, questions } = useDiagnosisForm();
-  const searchParams = useSearchParams();
-  const lang = (searchParams.get("lang") || "cs") as "cs" | "en";
-  const router = useRouter();
-  const start = () => {
-    setStarted(true);
-    router.push(`/${urlName}/1${lang !== "cs" ? `?lang=${lang}` : ""}`);
+export default function FrameworkStart() {
+  const { init, lang } = useFramework();
+
+  const onStart = () => {
+    init();
+    Tracker.send({
+      name: "click",
+      category: "evaluation",
+      method: "button",
+    });
   };
+
   const steps: {
     description: {
       cs: string;
@@ -74,14 +66,12 @@ export default function StepStart() {
           <div className="flex flex-col gap-x-6">
             <div className="flex flex-col items-center mb-12">
               <div className="mb-20 space-x-2 items-center justify-center flex">
-                <Logo />
-                <span className="text-text-600">·</span>
                 <span className="text-text text-sm uppercase font-medium">
                   {texts["framework-name"][lang]}
                 </span>
               </div>
               <Headline
-                level="1"
+                level="ultra"
                 as="h2"
                 className="text-center max-w-screen-md"
               >
@@ -109,7 +99,11 @@ export default function StepStart() {
                 ))}
               </div>
               <div className="mt-2 border-t border-neutral-200 w-full p-8 flex justify-center">
-                <Button onClick={start} className="flex items-center">
+                <Button
+                  size="large"
+                  onClick={onStart}
+                  className="flex items-center"
+                >
                   {texts["start-button"][lang]}{" "}
                   <IconArrowRight className="h-5 w-5 ml-1" />
                 </Button>

@@ -1,29 +1,43 @@
 "use client";
-import { useDiagnosisForm, ActionKind } from "../use-diagnosis-form";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useFramework } from "../app/evaluace/use-framework";
+import { useParams, useRouter } from "next/navigation";
 import { urlName } from "@/framework";
 import classNames from "classnames";
 import { Button } from "react-aria-components";
+import { upsertFrameworkSubmission } from "@/app/actions";
 import { useEffect } from "react";
-import { IconArrowRight, IconCheck, IconX } from "@/components/ui/icons";
-import Logo from "@/components/logo";
-import texts from "../texts";
+import {
+  IconArrowRight,
+  IconCheck,
+  IconQuestionMark,
+  IconX,
+} from "@/components/ui/icons";
+import Logo from "@/components/framework-logo";
+import texts from "../app/evaluace/texts";
+import { Submission } from "../app/evaluace/[id]/vysledky/page";
 
 function SelectTrueFalse({
   selected,
   lang,
 }: {
   lang: "cs" | "en";
-  selected: (value: boolean) => void;
+  selected: (value: boolean | null) => void;
 }) {
   return (
     <div className="flex justify-center h-16">
       <Button
-        className="grow h-full w-full py-3 px-4 text-lg rounded-bl-xl flex items-center justify-center font-medium border border-neutral-200 border-r-primary-200 hover:border-r-neutral-200 text-text-500 hover:text-white hover:bg-text-600"
+        className="grow h-full w-full py-3 px-4 text-lg rounded-bl-xl flex items-center justify-center font-medium border border-neutral-200 border-r-transparent hover:border-r-neutral-200 text-text-500 hover:text-white hover:bg-text-600"
         onPress={() => selected(false)}
       >
         <IconX className="w-5 h-5 mr-3 -ml-3" />
-        <span className="">{texts["no/dont-know"][lang]}</span>
+        <span className="">{texts["no"][lang]}</span>
+      </Button>
+      <Button
+        className="grow h-full w-full py-3 px-4 text-lg flex items-center justify-center font-medium border border-neutral-200 border-r-primary-200 hover:border-r-neutral-200 text-text-500 hover:text-white hover:bg-text-600"
+        onPress={() => selected(null)}
+      >
+        <IconQuestionMark className="w-5 h-5 mr-3 -ml-3" />
+        <span className="">{texts["dont-know"][lang]}</span>
       </Button>
       <Button
         className="grow h-full w-full py-3 px-4 text-lg rounded-br-xl flex items-center justify-center font-medium border border-primary-200 border-l-0 text-primary hover:text-white hover:bg-primary"
@@ -36,62 +50,63 @@ function SelectTrueFalse({
   );
 }
 
-export default function Step({ stringifiedStep }: { stringifiedStep: string }) {
-  const searchParams = useSearchParams();
-  const lang = (searchParams.get("lang") || "cs") as "cs" | "en";
+export default function Step({ submission }: { submission?: Submission }) {
   const router = useRouter();
-  const step = parseInt(stringifiedStep, 10);
-  const { started, questions, questionsDispatch } = useDiagnosisForm();
+  const params = useParams();
+  const id = !Array.isArray(params.id) ? params.id : null;
+
+  const step = Array.isArray(params.step) ? 1 : parseInt(params.step, 10);
+  const { started, questions, answer, lang, loadSubmission } = useFramework();
+
+  const location = `/${urlName}/${params.id}`;
+  const langUrl = lang !== "cs" ? `?lang=${lang}` : "";
+
   useEffect(() => {
-    if (!started || !step) {
-      router.push(`/${urlName}${lang !== "cs" ? `?lang=${lang}` : ""}`);
+    if (!started && submission) {
+      loadSubmission(submission.id, submission.answers);
+      console.log("loadSubmission", submission.id, submission.answers);
     }
-  }, [started, step, router, lang]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const currentQuestion = questions[step - 1];
 
   const navigate = (direction: "back" | "forward" | "results") => {
+    console.log("navigate", direction);
     if (direction === "back" && step === 1) {
-      router.push(`/${urlName}${lang !== "cs" ? `?lang=${lang}` : ""}`);
+      router.push(`${location}${langUrl}`);
       return;
     }
     if (
       direction === "results" ||
       (questions.length === step && direction === "forward")
     ) {
-      router.push(
-        `/${urlName}/vysledky${lang !== "cs" ? `?lang=${lang}` : ""}`
-      );
+      router.push(`${location}/vysledky${langUrl}`);
       return;
     }
     router.push(
-      `/${urlName}/${direction === "back" ? step - 1 : step + 1}${
-        lang !== "cs" ? `?lang=${lang}` : ""
-      }`
+      `${location}/${direction === "back" ? step - 1 : step + 1}${langUrl}`
     );
   };
 
-  const selectedTrueFalse = (value: boolean | null) => {
-    questionsDispatch({
-      type: ActionKind.TrueFalseAnswer,
-      payload: {
-        qi: step - 1,
-        answer: value,
-      },
-    });
+  const selectedTrueFalse = async (value: boolean | null) => {
+    answer(step - 1, value);
+    const answers = questions.map((q) => ({
+      questionId: "some",
+      questionVersion: "some",
+      answer: q.answer === null ? null : q.answer ? true : false,
+    }));
+    if (!id) return;
+    await upsertFrameworkSubmission({ id, answers });
     navigate("forward");
   };
 
   return (
     <main className="flex flex-col grow h-full">
-      <div className="text-text-500 z-50 font-medium py-2 px-3 text-sm">
-        <div className="flex space-x-1 py-0.5">
-          <Logo />
-          <span>{" · "}</span>
-          <span>{texts["framework-name"][lang]}</span>
-        </div>
+      <div className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b border-neutral-200 shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
+        <Logo lang={lang} />
       </div>
-      <section className="grow flex items-center px-6 justify-center relative z-50 h-full pb-40">
+      <section className="grow bg-neutral-150 flex items-center px-6 justify-center relative z-50 h-full pb-40">
         <div className="flex items-center mt-12">
           {step > 1 && (
             <Button
@@ -116,21 +131,21 @@ export default function Step({ stringifiedStep }: { stringifiedStep: string }) {
                   <div
                     key={index}
                     className={classNames("flex-1 last:rounded-r-full", {
-                      "bg-text-700 h-[8px] rounded-full": index == step - 1,
-                      "h-[3px]": index != step - 1,
-                      "bg-primary-400": !!_question.answer != false,
-                      "bg-text-900":
-                        _question.answer != undefined &&
-                        !!_question.answer == false,
-                      "bg-text-300": _question.answer == undefined,
-                      "rounded-l-full": index == 0,
+                      "bg-text-700 h-[8px] rounded-full": index === step - 1,
+                      "h-[3px]": index !== step - 1,
+                      "bg-primary-400": !!_question.answer === true,
+                      "bg-text-900": _question.answer === false,
+                      "bg-text-300":
+                        _question.answer === undefined ||
+                        _question.answer === null,
+                      "rounded-l-full": index === 0,
                     })}
                   ></div>
                 );
               })}
             </div>
           </div>
-          <div className="shadow-sm rounded-xl">
+          <div className="shadow-sm rounded-xl bg-white">
             <div>
               <div className="border-neutral-200 border-t border-x rounded-t-xl">
                 <div className="flex text-text p-8 flex-col gap-x-6">

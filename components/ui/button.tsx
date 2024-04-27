@@ -41,7 +41,7 @@ const button = cva(
       },
       size: {
         none: [],
-        small: ["text-base", "font-medium", "rounded-xl"],
+        small: ["text-base", "font-medium", "rounded-lg"],
         base: ["text-base", "font-semibold", "rounded-2xl"],
         large: ["text-lg", "font-bold", "rounded-2xl"],
       },
@@ -55,12 +55,12 @@ const button = cva(
       {
         theme: "primary",
         variant: "solid",
-        className: "text-white bg-primary hover:bg-primarydarker",
+        className: "text-white bg-primary hover:bg-primary-500",
       },
       {
         theme: "primary",
         variant: ["ghost", "link"],
-        className: "text-primary hover:text-primarydarker",
+        className: "text-primary hover:text-primary-500",
       },
       {
         theme: "gray",
@@ -78,9 +78,9 @@ const button = cva(
         size: "small",
         className: [
           "text-white",
-          "hover:text-white/80",
-          "bg-primary",
-          "hover:bg-text/80",
+          "hover:text-white",
+          "bg-neutral-600",
+          "hover:bg-neutral-700",
           "shadow-sm",
           "font-normal",
         ],

@@ -1,7 +1,7 @@
 import SiteConfig from "@/site-config";
 import Image from "next/image";
 
-export default function Logo() {
+export default function Logo({ title = true }: { title?: boolean }) {
   return (
     <div className="self-center whitespace-nowrap text-text flex font-semibold transition items-center ease-out delay-150">
       <div className="mr-1 shadow-sm rounded-[6px] block overflow-hidden h-5 w-5 relative">
@@ -13,7 +13,7 @@ export default function Logo() {
           objectPosition="center"
         />
       </div>
-      {SiteConfig.title}
+      {title && SiteConfig.title}
     </div>
   );
 }
