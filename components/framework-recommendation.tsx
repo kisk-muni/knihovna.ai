@@ -1,8 +1,9 @@
 import { Recommendation as MyRecommendation } from "@/framework";
 import { Link } from "react-aria-components";
 import texts from "../app/evaluace/texts";
-import { IconArrowRight } from "@/components/ui/icons";
+import { IconArrowRight, IconExternalLink } from "@/components/ui/icons";
 import classNames from "classnames";
+import { Button } from "./ui/dense-button";
 
 const types = {
   tool: { cs: "Doporučený nástroj", en: "Recommended tool" },
@@ -26,18 +27,18 @@ export default function FrameworkRecommendation({
   lang: "cs" | "en";
 }) {
   return (
-    <div className="bg-white border border-neutral-200 rounded-md overflow-hidden mb-8 shadow-sm">
+    <div className="bg-white border-b overflow-hidden">
       <div className="flex space-x-8">
         <div>
-          <div className="px-8 py-6">
+          <div className="px-4 py-3">
             {difficulty && (
               <span
                 className={classNames(
-                  "inline-block rounded-full px-2 py-0.5 mb-4 text-sm",
+                  "inline-block rounded-full px-2 py-0.5 mb-2 text-xs",
                   {
-                    "bg-emerald-400": difficulty === "easy",
-                    "bg-yellow-400": difficulty === "moderate",
-                    "bg-red-400": difficulty === "difficult",
+                    "bg-green-200": difficulty === "easy",
+                    "bg-yellow-200": difficulty === "moderate",
+                    "bg-red-200": difficulty === "difficult",
                   }
                 )}
               >
@@ -54,13 +55,13 @@ export default function FrameworkRecommendation({
             </p>
           </div>
           {resources && resources?.length > 0 && (
-            <div className="py-4 bg-neutral-50 border-t border-neutral-150">
+            <div className="py-4 bg-muted border-t border-neutral-100">
               {resources?.map((resource, i) => {
                 const { title } = resource;
                 return (
                   <div
                     key={i}
-                    className="text-text flex justify-between items-center mb-3 mx-8 border border-neutral-150 shadow-sm bg-white px-6 rounded-lg py-4"
+                    className="text-text flex justify-between items-center mb-3 mx-8 border border-neutral-100 shadow-sm bg-white px-6 rounded-lg py-4"
                   >
                     <div>
                       <p className="mb-1 text-text-400 text-sm">
@@ -81,22 +82,30 @@ export default function FrameworkRecommendation({
                     </div>
                     <div className="ml-6">
                       {resource.link && (
-                        <Link
-                          href={
-                            typeof resource.link === "string"
-                              ? resource.link
-                              : resource.link[lang]
-                          }
-                          target="_blank"
-                          className="shrink-0 whitespace-nowrap flex items-center px-6 py-2 text-[15px] bg-white border border-neutral-200 text-text-900 justify-center rounded-md  hover:bg-neutral-100 hover:text-text transition-all ease-in-out duration-300"
+                        <Button
+                          variant="ghost"
+                          asChild
+                          className="border shrink-0 whitespace-nowrap"
                         >
-                          {resource.buttonText
-                            ? typeof resource.buttonText === "string"
-                              ? resource.buttonText
-                              : resource.buttonText[lang]
-                            : texts["getmore"][lang]}{" "}
-                          <IconArrowRight className="h-4 w-4 ml-1 shrink-0" />
-                        </Link>
+                          <Link
+                            href={
+                              typeof resource.link === "string"
+                                ? resource.link
+                                : resource.link[lang]
+                            }
+                            target="_blank"
+                            // className="shrink-0 whitespace-nowrap flex items-center px-6 py-2 text-[15px] bg-white border border-neutral-200 text-text-900 justify-center rounded-md  hover:bg-neutral-100 hover:text-text transition-all ease-in-out duration-300"
+                          >
+                            <>
+                              {resource.buttonText
+                                ? typeof resource.buttonText === "string"
+                                  ? resource.buttonText
+                                  : resource.buttonText[lang]
+                                : texts["getmore"][lang]}{" "}
+                              <IconExternalLink className="h-4 w-4 ml-1 shrink-0" />
+                            </>
+                          </Link>
+                        </Button>
                       )}
                     </div>
                   </div>
@@ -104,6 +113,40 @@ export default function FrameworkRecommendation({
               })}
             </div>
           )}
+        </div>
+        {link && (
+          <div className="shrink-0 flex flex-col pb-3 pr-8 justify-center">
+            <Link
+              href={typeof link === "string" ? link : link[lang]}
+              target="_blank"
+              className="shrink-0 flex items-center px-6 py-2 text-[15px] bg-white border border-neutral-200 text-text-900 justify-center rounded-md mt-3 hover:bg-neutral-100 hover:text-text transition-all ease-in-out duration-300"
+            >
+              {texts["proceed-to-recommended-tool"][lang]}{" "}
+              <IconArrowRight className="h-4 w-4 ml-1 shrink-0" />
+            </Link>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function FrameworkOpportunity({
+  recommendation: { name, link, description, resources, difficulty },
+  lang,
+}: {
+  recommendation: MyRecommendation;
+  lang: "cs" | "en";
+}) {
+  return (
+    <div className="bg-white -mx-5 overflow-hidden">
+      <div className="flex space-x-8">
+        <div className="">
+          <div className="px-6 py-2">
+            <p className="text-text font-medium text-sm mb-1.5">
+              {typeof name === "string" ? name : name[lang]}
+            </p>
+          </div>
         </div>
         {link && (
           <div className="shrink-0 flex flex-col pb-3 pr-8 justify-center">

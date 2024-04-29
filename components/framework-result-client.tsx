@@ -1,26 +1,35 @@
 "use client";
-import { useFramework } from "@/app/evaluace/use-framework";
+import { useFramework } from "@/lib/hooks/use-framework";
 import { useRouter } from "next/navigation";
-import { Question, categories, urlName } from "@/framework";
+import {
+  Question,
+  categories,
+  getLibraryReadiness,
+  urlName,
+} from "@/framework";
 import MyRadarChart from "@/components/radar-chart";
 import { Dimension } from "@/components/radar-chart";
 import classNames from "classnames";
 import { Fragment, useEffect, useState } from "react";
 import { Button } from "react-aria-components";
-import { Button as KButton } from "@/components/ui/button";
+import { Button as DButton } from "@/components/ui/dense-button";
 import {
   IconCaretRight,
   IconCheck,
+  IconCheckCircleFilled,
+  IconCompas,
   IconLink,
+  IconWarningOctagon,
   IconX,
 } from "@/components/ui/icons";
 import texts from "@/app/evaluace/texts";
 import FrameworkRecommendation from "@/components/framework-recommendation";
 import Logo from "@/components/framework-logo";
-import Headline from "@/components/ui/headline";
 import { formattedDate } from "@/lib/date";
 import { Submission } from "@/app/evaluace/[id]/vysledky/page";
 import { FrameworkShareDialog } from "./framework-share-dialog";
+import Link from "next/link";
+import CircularProgressBar from "./framework-circular-progress";
 
 function calculateRadarChartSurfaceArea(dimensions: number[]): number {
   if (dimensions.length < 3) {
@@ -98,62 +107,7 @@ export default function FrameworkResultClient({
   );
   const score = Math.round((surfaceArea / maxSurfaceArea) * 100);
 
-  const getLibraryType = (score: number) => {
-    if (score <= 20) {
-      return {
-        type: { cs: "Základní knihovna", en: "a basic library" },
-        description: {
-          cs: "Vaše knihovna je na začátku cesty k připravenosti na dopady AI a využití AI v knihovnách.",
-          en: "Your library is at the beginning of the journey to AI readiness and AI use in libraries.",
-        },
-      };
-    }
-    if (score <= 30) {
-      return {
-        type: { cs: "Začínající knihovna", en: "a starting library" },
-        description: {
-          cs: "Vaše knihovna se rozhoupává k řešení připravenosti na AI.",
-          en: "Your library is starting to address AI readiness.",
-        },
-      };
-    }
-    if (score <= 40) {
-      return {
-        type: { cs: "Rozvíjející se knihovna", en: "a developing library" },
-        description: {
-          cs: "Pracujete na tom. Vaše knihovna je na dobré cestě.",
-          en: "You are working on it. Your library is on the right track.",
-        },
-      };
-    }
-    if (score <= 50) {
-      return {
-        type: { cs: "Moderní knihovna", en: "a modern library" },
-        description: {
-          cs: "Jste průkopníci. Vaše knihovna jde příkladem ostatním.",
-          en: "You are pioneers. Your library sets an example for other libraries.",
-        },
-      };
-    }
-    if (score <= 70) {
-      return {
-        type: { cs: "Ultra moderní knihovna", en: "an ultra-modern library" },
-        description: {
-          cs: "Pohybujete se na hraně aktuálních trendů v knihovnictví.",
-          en: "You are on the cutting edge of current library trends.",
-        },
-      };
-    }
-    return {
-      type: { cs: "Knihovna budoucnosti", en: "a library of the future" },
-      description: {
-        cs: "Vaše knihovna je připravena čelit problémům budoucnosti.",
-        en: "Your library is ready to face the challenges of the future.",
-      },
-    };
-  };
-
-  const libraryType = getLibraryType(score);
+  const libraryType = getLibraryReadiness(score);
 
   // push to next step if there is one, otherwise push to next theme if there is next one or to results
   const [expanded, setExpanded] = useState<boolean[]>(
@@ -224,17 +178,13 @@ export default function FrameworkResultClient({
         <Logo lang={lang} />
         <div className="flex items-center space-x-4">
           {submission?.dateLastEdited && (
-            <span className="text-text-500 text-sm">
+            <span className="text-text-500 text-xs">
               Naposledy upraveno {formattedDate(submission?.dateLastEdited)}
             </span>
           )}
-          <KButton
-            onClick={() => setShareDialogOpen(true)}
-            size="small"
-            className="items-center"
-          >
+          <DButton onClick={() => setShareDialogOpen(true)} size="sm">
             Získat odkaz <IconLink className="w-4 h-4 ml-1" />
-          </KButton>
+          </DButton>
           <FrameworkShareDialog
             open={shareDialogOpen}
             onOpenChange={setShareDialogOpen}
@@ -243,127 +193,175 @@ export default function FrameworkResultClient({
           />
         </div>
       </div>
-      <section className="relative flex pt-6 flex-col items-center bg-neutral-50">
-        <div className="max-w-screen-lg w-full px-6 mb-6 flex flex-col items-center">
-          <h1 className="text-text-400 uppercase text-center text-sm font-medium mb-4 mt-4">
+      <section className="relative flex pt-6 flex-col items-center bg-muted">
+        <div className="max-w-screen-lg w-full px-6 mb-6 flex flex-col">
+          <h1 className="text-text text-3xl font-semibold mb-4 mt-4">
             {texts.evaluation[lang]}
           </h1>
-          <Headline
-            level="2"
-            as="h2"
-            className="text-center mx-auto max-w-screen-md"
-          >
-            {libraryType.description[lang]}
-          </Headline>
-          <div className="grid grid-cols-7 mt-6 w-full bg-white border p-8 border-neutral-200 rounded-lg shadow-sm">
-            <div className="w-auto h-auto min-h-[200px] col-span-4 border-neutral-200 rounded-md shadow-xs">
-              <MyRadarChart data={radarData} />
-            </div>
-            <div className="pl-8 flex flex-col col-span-3">
-              <div className="mb-3">
-                <div className="flex items-center">
-                  <div className="text-text-500 text-sm mb-1">
-                    {texts["your-result"][lang]}
-                  </div>
+
+          <div className="mt-6 w-full  bg-white border border-neutral-200 rounded-lg shadow-sm">
+            <div className="grid grid-cols-7 border-b border-neutral-200">
+              <div className="flex-col col-span-3 py-6 pl-8">
+                <h2 className="text-text text-xl font-medium mt-4 mb-4">
+                  Celková připravenost knihovny
+                </h2>
+                <div className="mb-8">
+                  {" "}
+                  <CircularProgressBar
+                    value={score}
+                    condition={libraryType.signal}
+                  />
                 </div>
-                <div className="text-text font-medium text-lg mb-1.5">
-                  {score} %
+                <div className="mb-4">
+                  <p className="font-medium text-sm">
+                    {libraryType.condition[lang]}
+                  </p>
+                  <p className="text-xs text-text-500">
+                    {libraryType.range[lang]}
+                  </p>
                 </div>
+                <p className="text-text-500 text-base mt-0 mb-0">
+                  {libraryType.description[lang]}
+                </p>
               </div>
-              <div className="mb-3">
-                <div className="text-text-500 text-sm mb-1">
-                  {texts["strengths"][lang]}
+              <div className="flex-col col-span-4 py-2 pr-6">
+                <div className="w-auto h-auto col-span-4 border-neutral-200 rounded-md shadow-xs">
+                  <MyRadarChart data={radarData} />
                 </div>
-                {
-                  <ul className="text-text text-base mb-3">
-                    {strong.map((dim, i) => {
-                      return <li key={i}>{dim.name}</li>;
-                    })}
-                  </ul>
-                }
-              </div>
-              {weak.length && (
+                {/* <div className="pl-8 flex flex-col col-span-3">
                 <div className="mb-3">
                   <div className="text-text-500 text-sm mb-1">
-                    {texts["weaknesses"][lang]}
+                    {texts["strengths"][lang]}
                   </div>
                   {
-                    <ul className="text-text text-base">
-                      {weak.sort().map((dim, i) => {
+                    <ul className="text-text text-base mb-3">
+                      {strong.map((dim, i) => {
                         return <li key={i}>{dim.name}</li>;
                       })}
                     </ul>
                   }
                 </div>
-              )}
+                {weak.length && (
+                  <div className="mb-3">
+                    <div className="text-text-500 text-sm mb-1">
+                      {texts["weaknesses"][lang]}
+                    </div>
+                    {
+                      <ul className="text-text text-base">
+                        {weak.sort().map((dim, i) => {
+                          return <li key={i}>{dim.name}</li>;
+                        })}
+                      </ul>
+                    }
+                  </div>
+                )}
+              </div> */}
+              </div>
+            </div>
+            <div className="grid grid-cols-3">
+              <div className="flex-col px-5 py-4">
+                <p className="text-rose-700 font-medium mb-4 text-xs flex items-center">
+                  <IconWarningOctagon className="h-5 w-5 mr-1 text-rose-600" />
+                  Hrozby
+                </p>
+                <p className="text-sm text-text-400 text-center">
+                  Na této části zatím pracujeme.
+                </p>
+              </div>
+              <div className="flex-col px-5 py-4 border-l">
+                <p className="text-orange-700 font-medium mb-4 text-xs flex items-center">
+                  <IconCompas className="h-5 w-5 mr-1 text-orange-600" />
+                  Příležitosti
+                </p>
+                <p className="text-sm text-text-400 text-center">
+                  Na této části zatím pracujeme.
+                </p>
+              </div>
+
+              <div className="flex-col px-5 py-4 border-l">
+                <p className="text-green-700 font-medium mb-4 text-xs flex items-center">
+                  <IconCheckCircleFilled className="h-5 w-5 mr-1 text-green-600" />
+                  Silné stránky
+                </p>
+                {strong.length > 0 && (
+                  <p className="text-sm text-text-400 text-center">
+                    Na této části zatím pracujeme.
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-12 border-t grow h-full border-neutral-150">
-        <div className="max-w-screen-lg px-6 mb-12 mx-auto">
-          <h3 className="text-text font-semibold text-2xl mt-4 mb-4">
+      <section className="bg-muted grow h-full border-neutral-10">
+        <div className="max-w-screen-lg w-full px-6 mb-6 flex flex-col mx-auto">
+          <h3 className="text-text font-semibold text-2xl mt-4 mb-8">
             {texts["recommendations"][lang]}
           </h3>
-          <div className="py-6 flex flex-wrap gap-2 text-text">
-            {dimensionNameList.map((name, i) => {
-              const relevant = questionsForRecommendation[name].filter(
-                (q) => !q.answer
-              ).length;
-              if (relevant == 0) return;
-              return (
-                <button
-                  key={i}
-                  onClick={() => setCurrentDimension(name)}
-                  className={classNames(
-                    "py-1 flex shrink-0 px-3 text-[15px] items-center rounded-full",
-                    {
-                      "bg-primary-400 text-white": name === currentDimension,
-                      "border border-neutral-200 text-text-700 hover:bg-white":
-                        name !== currentDimension,
-                    }
-                  )}
-                >
-                  {name}{" "}
-                  <span
-                    className={classNames(
-                      "rounded-full ml-1 text-sm -mr-1 px-1",
-                      {
-                        "text-white bg-primary-300": name === currentDimension,
-                        "text-text bg-neutral-200": name !== currentDimension,
-                      }
-                    )}
-                  >{`${relevant}`}</span>
-                </button>
-              );
-            })}
+          <div className="flex bg-white border border-neutral-200 rounded-lg shadow-sm overflow-hidden">
+            <div className="w-[220px] shrink-0 border-r">
+              <div className="mb-4 px-3 mt-3 space-y-1 text-text">
+                {dimensionNameList.map((name, i) => {
+                  const relevant = questionsForRecommendation[name].filter(
+                    (q) => !q.answer
+                  ).length;
+                  if (relevant == 0) return;
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentDimension(name)}
+                      className={classNames(
+                        "h-8 flex justify-between w-full shrink-0 px-2 text-xs items-center rounded-lg",
+                        {
+                          "bg-neutral-100 hover:bg-neutral-200 text-text font-medium":
+                            name === currentDimension,
+                          "bg-white text-text-600 hover:bg-neutral-50 hover:text-text-700":
+                            name !== currentDimension,
+                        }
+                      )}
+                    >
+                      {name}{" "}
+                      <span
+                        className={classNames(
+                          "rounded-full ml-1 text-xs -mr-1 px-1",
+                          {
+                            "text-white bg-neutral-600":
+                              name === currentDimension,
+                            "text-text bg-neutral-100":
+                              name !== currentDimension,
+                          }
+                        )}
+                      >{`${relevant}`}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="bg-white">
+              {questionsForRecommendation[currentDimension]
+                ?.filter((question) => !question.answer)
+                ?.map(({ recommendation }, i) => (
+                  <FrameworkRecommendation
+                    key={i}
+                    recommendation={recommendation}
+                    lang={lang}
+                  />
+                ))}
+            </div>
           </div>
-          {questionsForRecommendation[currentDimension]
-            ?.filter((question) => !question.answer)
-            ?.map(({ recommendation }, i) => (
-              <FrameworkRecommendation
-                key={i}
-                recommendation={recommendation}
-                lang={lang}
-              />
-            ))}
         </div>
       </section>
 
-      <section className="bg-neutral-50 pb-12 border-t grow h-full border-neutral-200">
-        <div className="max-w-screen-lg px-6 py-10 mx-auto">
+      <section className="bg-muted pb-12 grow h-full border-neutral-100">
+        <div className="max-w-screen-lg px-6 py-6 mx-auto">
           <div className="flex items-baseline justify-between">
             <h3 className="text-text font-semibold text-2xl mt-4 mb-8">
               {texts["your-answers"][lang]}
             </h3>
-            <KButton
-              size="small"
-              theme="dark-gray"
-              onClick={() => router.push(`/${urlName}/${id}/1`)}
-            >
-              Upravit
-            </KButton>
+            <DButton size="sm" asChild>
+              <Link href={`/${urlName}/${id}/1`}>Upravit</Link>
+            </DButton>
           </div>
           <div className="flex text-text flex-col bg-white border border-neutral-200 shadow-sm rounded-lg">
             {Object.keys(questionsByCategory).map((category, categoryIndex) => {

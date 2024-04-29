@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useFramework } from "../app/evaluace/use-framework";
+import { useFramework } from "../lib/hooks/use-framework";
 import Tracker from "@/tracker";
 import { IconArrowRight } from "@/components/ui/icons";
 import Container from "@/components/ui/container";

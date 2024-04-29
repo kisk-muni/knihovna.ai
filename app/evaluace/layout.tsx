@@ -1,5 +1,5 @@
 "use client";
-import { DiagnosisFormProvider } from "@/app/evaluace/use-framework";
+import { FrameworkProvider } from "@/lib/hooks/use-framework";
 import DebugPanel from "@/components/framework-debug-panel";
 
 export default function DiagnostikaLayout({
@@ -8,9 +8,9 @@ export default function DiagnostikaLayout({
   children: React.ReactNode;
 }) {
   return (
-    <DiagnosisFormProvider>
+    <FrameworkProvider>
       {children}
       <DebugPanel />
-    </DiagnosisFormProvider>
+    </FrameworkProvider>
   );
 }

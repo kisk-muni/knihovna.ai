@@ -838,3 +838,87 @@ export const questions = <Question[]>[
     },
   },
 ];
+
+type FullyTranslated = {
+  cs: string;
+  en: string;
+};
+
+export function getLibraryReadiness(score: number): {
+  signal: "critical" | "healthy" | "warning";
+  range: FullyTranslated;
+  type: FullyTranslated;
+  condition: FullyTranslated;
+  description: FullyTranslated;
+} {
+  if (score <= 20) {
+    return {
+      signal: "critical",
+      range: {
+        cs: "Méně než 20",
+        en: "Below 20",
+      },
+      type: { cs: "Základní knihovna", en: "a basic library" },
+      condition: {
+        cs: "Nedostatečná",
+        en: "Insufficient",
+      },
+      description: {
+        cs: "Vaše knihovna je na začátku cesty k připravenosti na dopady AI a využití AI v knihovnách.",
+        en: "Your library is at the beginning of the journey to AI readiness and AI use in libraries.",
+      },
+    };
+  }
+  if (score >= 21 && score <= 49) {
+    return {
+      signal: "warning",
+      range: {
+        cs: "Mezi 21 a 49",
+        en: "Between 21 and 49",
+      },
+      condition: {
+        cs: "Nedostatečná",
+        en: "Insufficient",
+      },
+      type: { cs: "Rozvíjející se knihovna", en: "a developing library" },
+      description: {
+        cs: "Vaše knihovna se rozhoupává k řešení připravenosti na AI.",
+        en: "Your library is starting to address AI readiness.",
+      },
+    };
+  }
+  if (score >= 50 && score <= 75) {
+    return {
+      range: {
+        cs: "Mezi 50 a 75",
+        en: "Between 50 and 75",
+      },
+      signal: "healthy",
+      type: { cs: "Moderní knihovna", en: "a modern library" },
+      condition: {
+        cs: "Dobrá",
+        en: "Good",
+      },
+      description: {
+        cs: "Jste průkopníci. Vaše knihovna jde příkladem ostatním.",
+        en: "You are pioneers. Your library sets an example for other libraries.",
+      },
+    };
+  }
+  return {
+    signal: "healthy",
+    range: {
+      cs: "Více než 75",
+      en: "Above 75",
+    },
+    condition: {
+      cs: "Výborná",
+      en: "Excellent",
+    },
+    type: { cs: "Knihovna budoucnosti", en: "an ultra-modern library" },
+    description: {
+      cs: "Pohybujete se na hraně aktuálních trendů v knihovnictví.",
+      en: "You are on the cutting edge of current library trends.",
+    },
+  };
+}

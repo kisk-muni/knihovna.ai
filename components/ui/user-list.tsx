@@ -40,7 +40,7 @@ export default function UserList({
         <DialogTrigger>
           <Button
             className={
-              "block text-text rounded-full h-6 w-6 hover:bg-neutral-100 ring-white text-[13px] ml-0.5 -mr-1 outline-0"
+              "block text-text rounded-full h-6 w-6 hover:bg-neutral-50 ring-white text-[13px] ml-0.5 -mr-1 outline-0"
             }
           >
             +{remainingUsers.length}

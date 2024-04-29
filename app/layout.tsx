@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={`${inter.className}`}>
         <Toaster />
         <Providers>
-          <div className={`flex flex-col min-h-screen max-w-full`}>
+          <div className={`flex relative flex-col min-h-screen max-w-full`}>
             {children}
             <Analytics />
           </div>

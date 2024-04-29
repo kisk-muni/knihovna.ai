@@ -75,7 +75,7 @@ export const TodosKanban = ({ groups }: { groups: GroupedTodos }) => {
       orientation="horizontal"
       size={50}
       offset={10}
-      className="w-full bg-sheet overflow-x-scroll"
+      className="w-full bg-muted overflow-x-scroll"
     >
       <div className="px-6 pb-8 space-x-6 flex">
         {standardStates?.map((state) => {
@@ -83,7 +83,7 @@ export const TodosKanban = ({ groups }: { groups: GroupedTodos }) => {
           return (
             <div
               key={state}
-              className="bg-sheet min-w-[22rem] mr-2 flex-1 max-w-[28rem] rounded-lg"
+              className="bg-muted min-w-[22rem] mr-2 flex-1 max-w-[28rem] rounded-lg"
             >
               <div className="py-4">
                 <StateLabel
@@ -114,7 +114,7 @@ export const TodoListItem = ({
   return (
     <Link
       href={`/project/activities/${id}`}
-      className="block pl-8 pr-6 transition duration-150 ease-out bg-white hover:bg-neutral-100 py-2.5 border-b border-neutral-150"
+      className="block pl-8 pr-6 transition duration-150 ease-out bg-white hover:bg-neutral-50 py-2.5 border-b border-neutral-100"
     >
       <div className="flex items-center">
         <span className="text-text-700 grow mr-6 text-sm">{name}</span>
@@ -131,7 +131,7 @@ export const GroupedTodoList = ({ groups }: { groups: GroupedTodos }) => {
         if (!groups[state]) return null;
         return (
           <div key={state}>
-            <div className="py-3 px-8 border-b border-neutral-150 bg-neutral-100">
+            <div className="py-3 px-8 border-b border-neutral-100 bg-neutral-100">
               <StateLabel
                 state={state}
                 name={stateNames[state]}

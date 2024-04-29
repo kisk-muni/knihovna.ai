@@ -2,6 +2,7 @@
 
 import { db } from "@/db";
 import crypto from "crypto";
+import { cookies } from "next/headers";
 import {
   State,
   Todo,
@@ -12,6 +13,7 @@ import {
   Category,
   Epic,
   frameworkSubmissions,
+  feedback,
 } from "@/db/schema";
 import { isFuture, isPast, isWithinInterval } from "date-fns";
 import { id } from "date-fns/locale";
@@ -466,4 +468,22 @@ export async function upsertFrameworkSubmission(
       target: frameworkSubmissions.id,
       set: { answers: data.answers, dateLastEdited: new Date() },
     });
+}
+
+export async function submitFeedback(args: { message: string }) {
+  const userId = cookies().get("kaia-cid")?.value;
+
+  if (!userId) {
+    throw new Error("User not found");
+  }
+
+  const result = await db
+    .insert(feedback)
+    .values({
+      cid: userId,
+      message: args.message,
+    })
+    .returning();
+
+  return result[0];
 }

@@ -82,7 +82,7 @@ export default function OpenProjectLayout({
             </Link>
           ))}
         </div>
-        <div className="grow border-l bg-neutral-100 overflow-x-clip border-neutral-200">
+        <div className="grow border-l bg-muted overflow-x-clip border-neutral-200">
           <ErrorBoundary fallbackRender={Fallback}>{children}</ErrorBoundary>
         </div>
       </div>

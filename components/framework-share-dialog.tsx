@@ -4,7 +4,7 @@ import { useCallback, useTransition } from "react";
 import { type DialogProps } from "@radix-ui/react-dialog";
 import { toast } from "react-hot-toast";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/dense-button";
 import {
   Dialog,
   DialogContent,
@@ -16,7 +16,7 @@ import {
 import { IconEye, IconPencil, IconSpinner } from "@/components/ui/icons";
 import { Submission } from "@/app/evaluace/[id]/vysledky/page";
 import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard";
-import { useFramework } from "@/app/evaluace/use-framework";
+import { useFramework } from "@/lib/hooks/use-framework";
 
 interface SubmissionShareDialogProps extends DialogProps {
   submission: Submission;
@@ -69,7 +69,7 @@ export function FrameworkShareDialog({
             Kdokoli s URL si bude moci zobrazit výsledek vaší evaluace.
           </DialogDescription>
         </DialogHeader>
-        <div className="space-y-6 mt-2 text-sm border rounded-md">
+        <div className="space-y-6 mt-2 text-sm rounded-md">
           <div className="text-text flex-col space-y-1">
             <label className="font-medium text-sm text-text-700 flex items-center mb-2">
               <IconPencil className="w-[18px] h-[18px] mr-1 p-0.5 rounded-full text-white bg-neutral-400" />
@@ -82,8 +82,8 @@ export function FrameworkShareDialog({
                 value={url.toString() + `evaluace/${id}/1`}
               />
               <Button
-                size="small"
-                theme="dark-gray"
+                size="sm"
+                variant="outline"
                 disabled={isSharePending}
                 onClick={() =>
                   copyShareLink({ ref: `evaluace/${id}/1`, theme: "neutral" })
@@ -105,7 +105,7 @@ export function FrameworkShareDialog({
                 value={url.toString() + `evaluace/${id}/vysledky`}
               />
               <Button
-                size="small"
+                size="sm"
                 disabled={isSharePending}
                 onClick={() =>
                   copyShareLink({

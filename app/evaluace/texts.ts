@@ -5,8 +5,8 @@ const texts: {
   };
 } = {
   evaluation: {
-    cs: "Vyhodnocení",
-    en: "Evaluation",
+    cs: "Váš výsledek",
+    en: "Your result",
   },
   "you-are": {
     cs: "Jste",
@@ -69,8 +69,8 @@ const texts: {
     en: "I don't know",
   },
   "framework-name": {
-    cs: "Framework",
-    en: "Framework",
+    cs: "Evaluační framework",
+    en: "Evaluation Framework",
   },
   "framework-title": {
     cs: "Zjistěte, jak je vaše knihovna připravena na rostoucí vliv AI",

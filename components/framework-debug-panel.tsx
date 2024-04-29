@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "react-aria-components";
-import { useFramework } from "../app/evaluace/use-framework";
+import { useFramework } from "../lib/hooks/use-framework";
 import { urlName } from "@/framework";
 
 export default function DebugPanel() {
@@ -24,7 +24,7 @@ export default function DebugPanel() {
 
   if (mode === "dev")
     return (
-      <div className="sticky bottom-2 left-2 bg-text text-white text-base rounded-lg w-[600px] p-2 font-mono shadow-lg">
+      <div className="sticky bottom-2 left-2 bg-text text-white text-base rounded-lg w-[600px] p-2 font-mono shadow-lg z-100">
         <p className="mb-2 font-bold">{mode.toUpperCase()} panel</p>
         <div className="flex space-x-2">
           <Button

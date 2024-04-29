@@ -5,7 +5,6 @@ import {
   SetStateAction,
   useContext,
   useEffect,
-  useReducer,
   useState,
 } from "react";
 import { nanoid } from "nanoid";
@@ -14,7 +13,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 type Id = string | null;
 
-export type DiagnosisFormContextType = {
+export type FrameworkContextType = {
   started: boolean;
   id: Id;
   mode: "dev" | "prod";
@@ -27,22 +26,19 @@ export type DiagnosisFormContextType = {
   setStarted: Dispatch<SetStateAction<boolean>>;
 };
 
-export const DiagnosisFormContext =
-  createContext<DiagnosisFormContextType | null>(null);
+export const FrameworkContext = createContext<FrameworkContextType | null>(
+  null
+);
 
 export function useFramework() {
-  const result = useContext(DiagnosisFormContext);
+  const result = useContext(FrameworkContext);
   if (!result) {
     throw new Error();
   }
   return result;
 }
 
-export function DiagnosisFormProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function FrameworkProvider({ children }: { children: React.ReactNode }) {
   const [questions, setQuestions] = useState(defaultQuestions);
   const [mode, setMode] = useState<"prod" | "dev">("prod");
   const [id, setId] = useState<Id>(null);
@@ -99,7 +95,7 @@ export function DiagnosisFormProvider({
   };
 
   return (
-    <DiagnosisFormContext.Provider
+    <FrameworkContext.Provider
       value={{
         id,
         lang,
@@ -114,7 +110,7 @@ export function DiagnosisFormProvider({
       }}
     >
       {children}
-    </DiagnosisFormContext.Provider>
+    </FrameworkContext.Provider>
   );
 }
 
@@ -144,58 +140,5 @@ function getRandomAnswer(): boolean | null {
     return false;
   } else {
     return null;
-  }
-}
-
-function questionsReducer(questions: Question[], action: Action) {
-  switch (action.type) {
-    case "TrueFalseAnswer": {
-      if (Array.isArray(action.payload)) return questions;
-      return questions.map((q, qi) => {
-        if (
-          !Array.isArray(action.payload) &&
-          action.payload?.qi &&
-          qi === action.payload.qi
-        ) {
-          return {
-            ...q,
-            answer: action.payload.answer as boolean,
-          } as Question;
-        } else {
-          return q;
-        }
-      });
-    }
-    case "SetAll": {
-      if (Array.isArray(action.payload)) return questions;
-      return questions.map((q) => {
-        if (!Array.isArray(action.payload)) {
-          const isRandom = action.payload.answer === "random";
-          return {
-            ...q,
-            answer: !isRandom
-              ? (action.payload.answer as boolean)
-              : getRandomAnswer(),
-          } as Question;
-        } else {
-          return q;
-        }
-      });
-    }
-    case "Load": {
-      if (!Array.isArray(action.payload)) return questions;
-      return defaultQuestions.map((q, i) => {
-        if (Array.isArray(action.payload)) {
-          return {
-            ...q,
-            answer: action.payload[i].answer,
-          };
-        }
-        return q;
-      });
-    }
-    default: {
-      throw Error("Unknown action: " + action.type);
-    }
   }
 }

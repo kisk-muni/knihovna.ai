@@ -15,6 +15,9 @@ import {
 export type Dimension = {
   name: string;
   normalizedValue: number;
+  /*   warningValue: number;
+  healthyValue: number;
+  criticalValue: number; */
 };
 
 function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }: any) {

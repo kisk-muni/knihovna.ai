@@ -2,6 +2,7 @@ import { pgTable, text, uuid, timestamp, char } from "drizzle-orm/pg-core";
 
 export const feedback = pgTable("feedback", {
   id: uuid("id").defaultRandom().notNull().primaryKey(),
+  cid: text("cid"),
   email: text("email"),
   message: text("message"),
   emoji: char("emoji"),

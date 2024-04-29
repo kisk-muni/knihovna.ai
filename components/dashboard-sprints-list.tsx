@@ -21,7 +21,7 @@ export default async function DashboardSprintsList() {
           <div key={t} className="flex">
             <Link
               href={`/project/sprints/${sprint.id}`}
-              className="flex grow transition duration-150 ease-out hover:bg-neutral-100"
+              className="flex grow transition duration-150 ease-out hover:bg-neutral-50"
             >
               {" "}
               <div className="mr-6 pl-6 pr-3 w-[100px] flex justify-end text-right">

@@ -1,5 +1,5 @@
 "use client";
-import { useFramework } from "../app/evaluace/use-framework";
+import { useFramework } from "../lib/hooks/use-framework";
 import { useParams, useRouter } from "next/navigation";
 import { urlName } from "@/framework";
 import classNames from "classnames";
@@ -15,6 +15,8 @@ import {
 import Logo from "@/components/framework-logo";
 import texts from "../app/evaluace/texts";
 import { Submission } from "../app/evaluace/[id]/vysledky/page";
+import { HeaderActions } from "./ui/header-actions";
+import { submitFeedback } from "@/app/actions";
 
 function SelectTrueFalse({
   selected,
@@ -105,8 +107,9 @@ export default function Step({ submission }: { submission?: Submission }) {
     <main className="flex flex-col grow h-full">
       <div className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b border-neutral-200 shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
         <Logo lang={lang} />
+        <HeaderActions submitFeedback={submitFeedback} />
       </div>
-      <section className="grow bg-neutral-150 flex items-center px-6 justify-center relative z-50 h-full pb-40">
+      <section className="bg-[#F4F4F5] flex items-center px-6 justify-center flex-1">
         <div className="flex items-center mt-12">
           {step > 1 && (
             <Button

@@ -1,7 +1,7 @@
 "use client";
 import Step from "@/components/framework-step-client";
 import { Suspense } from "react";
-import { useFramework } from "@/app/evaluace/use-framework";
+import { useFramework } from "@/lib/hooks/use-framework";
 import { FrameworkServerStep } from "./framework-step-server";
 
 export default function FrameworkInit({
