@@ -1,5 +1,3 @@
-import { describe } from "node:test";
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export const urlName = "evaluace";
 
@@ -65,6 +63,7 @@ export type Recommendation = {
 };
 
 export type Question = {
+  id: string;
   category: string;
   questionText: Translated;
   type: "TrueFalse";
@@ -75,8 +74,9 @@ export type Question = {
   recommendation: Recommendation;
 };
 
-export const questions = <Question[]>[
+export const questions: Question[] = [
   {
+    id: "web-analytics",
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText: {
@@ -118,6 +118,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "user-needs-monitoring",
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText: {
@@ -162,6 +163,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "ai-service-design",
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText: {
@@ -189,6 +191,7 @@ export const questions = <Question[]>[
   },
 
   {
+    id: "chatbot-user-communication",
     category: Category["Knihovní služby"],
     type: "TrueFalse",
     questionText: {
@@ -214,6 +217,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "self-service",
     category: Category["Knihovní služby"],
     type: "TrueFalse",
     questionText: {
@@ -245,6 +249,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "unit-recommendation-engine",
     category: Category["Knihovní služby"],
     type: "TrueFalse",
     questionText: {
@@ -266,6 +271,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "educational-materials-ai",
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText: {
@@ -291,6 +297,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "ai-themed-workshops",
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText: {
@@ -312,6 +319,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "ai-fundamentals-education",
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText: {
@@ -348,6 +356,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "general-adult-education",
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText: {
@@ -372,6 +381,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "certificates-education",
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText: {
@@ -393,6 +403,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "internal-continuous-education",
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText: {
@@ -417,6 +428,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "digital-competences-development",
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText: {
@@ -441,6 +453,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "modern-technologies",
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText: {
@@ -465,6 +478,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "community-events",
     category: Category["Komunitní role"],
     type: "TrueFalse",
     questionText: {
@@ -494,6 +508,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "personal-tech-support",
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText: {
@@ -523,6 +538,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "userled-community-events",
     category: Category["Komunitní role"],
     type: "TrueFalse",
     questionText: {
@@ -552,6 +568,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "support-digitally-excluded",
     category: Category["Sociální role"],
     type: "TrueFalse",
     questionText: {
@@ -576,6 +593,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "support-disadvantaged-groups",
     category: Category["Sociální role"],
     type: "TrueFalse",
     questionText: {
@@ -601,6 +619,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "strategy-social-inequalities",
     category: Category["Sociální role"],
     type: "TrueFalse",
     questionText: {
@@ -625,6 +644,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "help-in-distressing-situations",
     category: Category["Sociální role"],
     type: "TrueFalse",
     questionText: {
@@ -650,6 +670,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "collaboration-local-authorities",
     category: Category["Sociální role"],
     type: "TrueFalse",
     questionText: {
@@ -670,6 +691,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "engage-volunteers-community-events",
     category: Category["Komunitní role"],
     type: "TrueFalse",
     questionText: {
@@ -700,6 +722,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "evaluate-ai-benefit",
     category: Category["Knihovní procesy"],
     type: "TrueFalse",
     questionText: {
@@ -720,6 +743,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "text-generation-tools-use",
     category: Category["Knihovní procesy"],
     type: "TrueFalse",
     questionText: {
@@ -740,7 +764,7 @@ export const questions = <Question[]>[
       resources: [
         {
           type: "tool",
-          name: "ChatGPT",
+          title: "ChatGPT",
           description:
             "Populární nástroj pro generování textů formou dialogu s chatbotem od společnosti OpenAI.",
           link: {
@@ -752,6 +776,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "rfid-technology-use",
     category: Category["Knihovní procesy"],
     type: "TrueFalse",
     questionText: {
@@ -773,6 +798,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "content-analysis-tools-use",
     category: Category["Knihovní procesy"],
     type: "TrueFalse",
     questionText: {
@@ -797,6 +823,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "document-acquisition-ai-use",
     category: Category["Knihovní procesy"],
     type: "TrueFalse",
     questionText: {
@@ -818,6 +845,7 @@ export const questions = <Question[]>[
     },
   },
   {
+    id: "user-behavior-analysis",
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText: {

@@ -1,12 +1,6 @@
 import { Metadata } from "next";
 import FrameworkResultServer from "@/components/framework-result-server";
 import { createMetadata } from "@/lib/metadata";
-import { Answer } from "@/app/actions";
-import { FrameworkSubmission } from "@/db/schema";
-
-export type Submission =
-  | (Omit<FrameworkSubmission, "answers"> & { answers: Answer[] })
-  | null;
 
 export const metadata: Metadata = createMetadata({
   title: "Výsledky | Evaluační framework",

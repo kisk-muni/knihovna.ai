@@ -19,6 +19,7 @@ export function HeaderActions({ submitFeedback }: HeaderActionsProps) {
       <TooltipTrigger>
         <Button
           size={"sm"}
+          variant={"outline"}
           className="hidden md:flex"
           disabled={isRemovePending}
           onClick={() => setFeedbackDialogOpen(true)}

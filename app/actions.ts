@@ -8,8 +8,6 @@ import {
   Todo,
   themes,
   User,
-  users,
-  todos,
   Category,
   Epic,
   frameworkSubmissions,
@@ -17,9 +15,16 @@ import {
 } from "@/db/schema";
 import { isFuture, isPast, isWithinInterval } from "date-fns";
 import { id } from "date-fns/locale";
-import { and, desc, eq } from "drizzle-orm";
+import { and, desc, eq, inArray } from "drizzle-orm";
 import { type Selection } from "react-aria-components";
 import { z } from "zod";
+import { Tsukimi_Rounded } from "next/font/google";
+import {
+  FrameworkSubmissionAnswer,
+  frameworkSubmissionsAnswers,
+} from "@/db/schema/framework-submission-answers";
+import { questions } from "@/framework";
+import { SubmissionOld } from "@/lib/types";
 
 export type EpicTodos = {
   doneTodosCount?: number;
@@ -415,24 +420,71 @@ export async function getMembers() {
   return result;
 }
 
-export async function getFrameworkSubmission(id: string) {
-  return await db
+type KnownJsonAnswer = Omit<FrameworkSubmissionAnswer, "data"> & {
+  data: { value: boolean | null };
+};
+
+export async function getFrameworkSubmission(
+  id: string
+): Promise<SubmissionOld> {
+  // given Id get submission
+  const submissions = await db
     .select()
     .from(frameworkSubmissions)
     .where(eq(frameworkSubmissions.id, id));
+  const submission = submissions.length ? submissions[0] : null;
+  if (!submission) return null;
+
+  // get answers for current questions in framework.ts
+  const requestedQuestions = questions.map((q) => q.id);
+  const answers = (await db
+    .select()
+    .from(frameworkSubmissionsAnswers)
+    .where(
+      and(
+        eq(frameworkSubmissionsAnswers.submissionId, id),
+        inArray(frameworkSubmissionsAnswers.questionId, requestedQuestions)
+      )
+    )) as KnownJsonAnswer[];
+
+  // get only latest answer for each unique question
+  const latestAnswerByQuestionId = answers.reduce((acc, answer) => {
+    const existing = acc[answer.questionId];
+    if (!existing || existing.dateCreated < answer.dateCreated) {
+      acc[answer.questionId] = answer;
+    }
+    return acc;
+  }, {} as Record<string, KnownJsonAnswer>);
+
+  const frameworkquestionsAnswers = questions.map((question) => {
+    const answer = latestAnswerByQuestionId[question.id];
+    return {
+      questionId: question.id,
+      answer: answer ? answer.data.value : null,
+    };
+  });
+
+  return { ...submission, answers: frameworkquestionsAnswers };
 }
 
 const answerSchema = z.object({
   questionId: z.string(),
-  questionVersion: z.string(),
-  answer: z.boolean().nullable(),
+  questionVersion: z.string().optional(),
+  value: z.boolean().nullable(),
 });
 
 export type Answer = z.infer<typeof answerSchema>;
 
+const answerOldSchema = z.object({
+  questionId: z.string(),
+  answer: z.boolean().nullable(),
+});
+
+export type AnswerOld = z.infer<typeof answerOldSchema>;
+
 const submissionSchema = z.object({
   id: z.string(),
-  answers: z.array(answerSchema),
+  answer: answerSchema,
   // dateCreated: z.string().datetime(),
   // dateLastEdited: z.string().datetime(),
 });
@@ -441,10 +493,17 @@ type Submission = z.infer<typeof submissionSchema>;
 
 export async function upsertFrameworkSubmission(
   data: Submission,
-  secret?: string
+  secret: string | null
 ) {
+  const userId = cookies().get("kaia-cid")?.value;
+
+  if (!userId) {
+    throw new Error("User not found");
+  }
+  if (!secret) return Error("Secret not provided");
   const submission = submissionSchema.parse(data);
-  /*   const newHash = crypto
+
+  const newHash = crypto
     .pbkdf2Sync(
       secret,
       process.env.FRAMEWORK_SALT as unknown as string,
@@ -454,20 +513,38 @@ export async function upsertFrameworkSubmission(
     )
     .toString("hex");
 
+  // check if submission exist
   const result = await db
     .select({ secretHash: frameworkSubmissions.secretHash })
     .from(frameworkSubmissions)
     .where(eq(frameworkSubmissions.id, submission.id));
-  const current = result.length ? result[0] : null;
-  if (!current) return Error("Submission not found");
-  if (current.secretHash !== newHash) return Error("Invalid secret"); */
-  await db
-    .insert(frameworkSubmissions)
-    .values(submission)
-    .onConflictDoUpdate({
-      target: frameworkSubmissions.id,
-      set: { answers: data.answers, dateLastEdited: new Date() },
+
+  const existing = (result.length ? result[0] : null) as {
+    secretHash: string;
+  } | null;
+
+  // if submission already exists, check
+  if (existing && existing.secretHash !== newHash)
+    return Error("Invalid secret");
+
+  // validate secret
+  if (!existing && secret.length < 32) return Error("Invalid secret");
+
+  await db.transaction(async (tx) => {
+    await tx
+      .insert(frameworkSubmissions)
+      .values({ id: submission.id, secretHash: newHash, cid: userId })
+      .onConflictDoUpdate({
+        target: frameworkSubmissions.id,
+        set: { dateLastEdited: new Date() },
+      });
+    await tx.insert(frameworkSubmissionsAnswers).values({
+      submissionId: submission.id,
+      cid: userId,
+      questionId: submission.answer.questionId,
+      data: { value: submission.answer.value },
     });
+  });
 }
 
 export async function submitFeedback(args: { message: string }) {

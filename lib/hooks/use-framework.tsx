@@ -12,13 +12,18 @@ import { questions as defaultQuestions, Question, urlName } from "@/framework";
 import { useRouter, useSearchParams } from "next/navigation";
 
 type Id = string | null;
+type Secret = string | null;
+type Destination = "landing" | "start" | number | "results";
 
 export type FrameworkContextType = {
   started: boolean;
   id: Id;
   mode: "dev" | "prod";
+  readonly: boolean;
+  secret: Secret;
   lang: "cs" | "en";
   init: () => void;
+  getURL: (to: Destination, options?: { includeSecret: boolean }) => URL;
   answer: (qi: number, answer: boolean | null) => void;
   answerAll: (alswer: boolean | null | "random") => void;
   loadSubmission: (id: string, answers: { answer: boolean | null }[]) => void;
@@ -42,6 +47,8 @@ export function FrameworkProvider({ children }: { children: React.ReactNode }) {
   const [questions, setQuestions] = useState(defaultQuestions);
   const [mode, setMode] = useState<"prod" | "dev">("prod");
   const [id, setId] = useState<Id>(null);
+  const [readonly, setReadonly] = useState<boolean>(true);
+  const [secret, setSecret] = useState<Secret>(null);
   const [started, setStarted] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -56,7 +63,10 @@ export function FrameworkProvider({ children }: { children: React.ReactNode }) {
 
   const init = (defaultId?: string) => {
     const id = defaultId || nanoid();
+    const secret = nanoid(32);
     setId(id);
+    setSecret(secret);
+    setReadonly(false);
     setStarted(true);
     router.push(`/${urlName}/${id}/1?lang=${lang}`);
   };
@@ -84,6 +94,9 @@ export function FrameworkProvider({ children }: { children: React.ReactNode }) {
     answers: { answer: boolean | null }[]
   ) => {
     setId(id);
+    const s = searchParams.get("s");
+    setSecret(s);
+    setReadonly(s === null);
     setQuestions((prev) => {
       const newQuestions = [...prev];
       newQuestions.forEach((q, i) => {
@@ -94,13 +107,38 @@ export function FrameworkProvider({ children }: { children: React.ReactNode }) {
     setStarted(true);
   };
 
+  const getURL = (
+    to: Destination,
+    options: {
+      includeSecret: boolean;
+    } = {
+      includeSecret: true,
+    }
+  ): URL => {
+    if (window) {
+      const baseurl = new URL(`/${urlName}/`, window.location.origin);
+      let url: URL | null = null;
+      if (to === "start") url = new URL(`${id}/1`, baseurl);
+      if (to === "results") url = new URL(`${id}/vysledky`, baseurl);
+      if (Number.isInteger(to)) url = new URL(`${id}/${to}`, baseurl);
+      if (!url) url = baseurl;
+      if (lang != "cs") url.searchParams.set("lang", lang);
+      if (options.includeSecret && secret) url.searchParams.set("s", secret);
+      return url;
+    }
+    return new URL("http://localhost:3000");
+  };
+
   return (
     <FrameworkContext.Provider
       value={{
         id,
         lang,
         mode,
+        readonly,
+        secret,
         init,
+        getURL,
         started,
         questions,
         answer,

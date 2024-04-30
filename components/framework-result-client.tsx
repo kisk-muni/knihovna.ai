@@ -1,12 +1,6 @@
 "use client";
 import { useFramework } from "@/lib/hooks/use-framework";
-import { useRouter } from "next/navigation";
-import {
-  Question,
-  categories,
-  getLibraryReadiness,
-  urlName,
-} from "@/framework";
+import { Question, categories, getLibraryReadiness } from "@/framework";
 import MyRadarChart from "@/components/radar-chart";
 import { Dimension } from "@/components/radar-chart";
 import classNames from "classnames";
@@ -19,6 +13,7 @@ import {
   IconCheckCircleFilled,
   IconCompas,
   IconLink,
+  IconSparkle,
   IconWarningOctagon,
   IconX,
 } from "@/components/ui/icons";
@@ -26,10 +21,10 @@ import texts from "@/app/evaluace/texts";
 import FrameworkRecommendation from "@/components/framework-recommendation";
 import Logo from "@/components/framework-logo";
 import { formattedDate } from "@/lib/date";
-import { Submission } from "@/app/evaluace/[id]/vysledky/page";
 import { FrameworkShareDialog } from "./framework-share-dialog";
 import Link from "next/link";
 import CircularProgressBar from "./framework-circular-progress";
+import { Submission, SubmissionOld } from "@/lib/types";
 
 function calculateRadarChartSurfaceArea(dimensions: number[]): number {
   if (dimensions.length < 3) {
@@ -62,16 +57,15 @@ function calculateRadarChartSurfaceArea(dimensions: number[]): number {
 export default function FrameworkResultClient({
   submission,
 }: {
-  submission: Submission;
+  submission: SubmissionOld;
 }) {
-  const router = useRouter();
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
-  const { questions, started, id, loadSubmission, lang } = useFramework();
+  const { questions, loadSubmission, lang, getURL, readonly } = useFramework();
 
   useEffect(() => {
     if (submission) {
       loadSubmission(submission.id, submission.answers);
-      console.log("loadSubmission", submission.id, submission.answers);
+      // console.log("loadSubmission", submission.id, submission.answers);
     }
   }, []);
 
@@ -193,7 +187,7 @@ export default function FrameworkResultClient({
           />
         </div>
       </div>
-      <section className="relative flex pt-6 flex-col items-center bg-muted">
+      <section className="relative flex py-6 flex-col items-center bg-muted">
         <div className="max-w-screen-lg w-full px-6 mb-6 flex flex-col">
           <h1 className="text-text text-3xl font-semibold mb-4 mt-4">
             {texts.evaluation[lang]}
@@ -299,20 +293,20 @@ export default function FrameworkResultClient({
           <h3 className="text-text font-semibold text-2xl mt-4 mb-8">
             {texts["recommendations"][lang]}
           </h3>
-          <div className="flex bg-white border border-neutral-200 rounded-lg shadow-sm overflow-hidden">
-            <div className="w-[220px] shrink-0 border-r">
-              <div className="mb-4 px-3 mt-3 space-y-1 text-text">
+          <div className="flex">
+            <div className="w-[220px] shrink-0 pr-4">
+              <div className="mb-4 w-full flex-col border shadow-sm rounded-lg overflow-hidden text-text md:sticky top-[83px]">
                 {dimensionNameList.map((name, i) => {
                   const relevant = questionsForRecommendation[name].filter(
                     (q) => !q.answer
                   ).length;
                   if (relevant == 0) return;
                   return (
-                    <button
+                    <Button
                       key={i}
-                      onClick={() => setCurrentDimension(name)}
+                      onPress={() => setCurrentDimension(name)}
                       className={classNames(
-                        "h-8 flex justify-between w-full shrink-0 px-2 text-xs items-center rounded-lg",
+                        "h-10 flex flex-1 w-full justify-between shrink-0 border-b last:border-0 px-4 text-xs items-center first:rounded-t-lg last:rounded-b-lg transition-all ease-in-out duration-150 focus:outline-none",
                         {
                           "bg-neutral-100 hover:bg-neutral-200 text-text font-medium":
                             name === currentDimension,
@@ -321,24 +315,30 @@ export default function FrameworkResultClient({
                         }
                       )}
                     >
-                      {name}{" "}
+                      <span className="flex items-center">
+                        {name === texts.recommended[lang] && (
+                          <IconSparkle className="w-4 h-4 mr-1" />
+                        )}
+                        {name}
+                      </span>
+
                       <span
                         className={classNames(
                           "rounded-full ml-1 text-xs -mr-1 px-1",
                           {
-                            "text-white bg-neutral-600":
+                            "text-white bg-neutral-500":
                               name === currentDimension,
                             "text-text bg-neutral-100":
                               name !== currentDimension,
                           }
                         )}
                       >{`${relevant}`}</span>
-                    </button>
+                    </Button>
                   );
                 })}
               </div>
             </div>
-            <div className="bg-white">
+            <div className="">
               {questionsForRecommendation[currentDimension]
                 ?.filter((question) => !question.answer)
                 ?.map(({ recommendation }, i) => (
@@ -359,9 +359,11 @@ export default function FrameworkResultClient({
             <h3 className="text-text font-semibold text-2xl mt-4 mb-8">
               {texts["your-answers"][lang]}
             </h3>
-            <DButton size="sm" asChild>
-              <Link href={`/${urlName}/${id}/1`}>Upravit</Link>
-            </DButton>
+            {!readonly && (
+              <DButton variant="white" size="sm" asChild>
+                <Link href={getURL("start")}>Upravit</Link>
+              </DButton>
+            )}
           </div>
           <div className="flex text-text flex-col bg-white border border-neutral-200 shadow-sm rounded-lg">
             {Object.keys(questionsByCategory).map((category, categoryIndex) => {
@@ -382,7 +384,7 @@ export default function FrameworkResultClient({
                         return next;
                       });
                     }}
-                    className="text-sm w-full text-left px-4 py-5 border-b border-neutral-200 flex justify-between text-text font-semibold"
+                    className="text-sm w-full text-left px-4 py-5 border-b border-neutral-200 flex justify-between text-text font-semibold focus:outline-none"
                   >
                     <div className="flex items-center">
                       <IconCaretRight
