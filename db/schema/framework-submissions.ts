@@ -6,7 +6,6 @@ export const frameworkSubmissions = pgTable("framework_submissions", {
   secretHash: text("secret_hash"),
   dateCreated: timestamp("date_created", { mode: "date" }).defaultNow(),
   dateLastEdited: timestamp("date_last_edited", { mode: "date" }).defaultNow(),
-  answers: json("answers"),
 });
 
 export type FrameworkSubmissionTable = typeof frameworkSubmissions;
