@@ -34,7 +34,7 @@ export function FrameworkShareDialog({
 
   const copyShareLink = useCallback(
     async ({ ref, theme }: { ref: string; theme: "primary" | "neutral" }) => {
-      if (window) {
+      if (typeof window !== "undefined") {
         const url = new URL(window.location.origin);
         // url.pathname = "/share/" + submission.id;
         copyToClipboard(url.toString() + ref);

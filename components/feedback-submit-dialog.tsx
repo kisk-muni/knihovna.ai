@@ -15,7 +15,37 @@ import {
 } from "@/components/ui/dialog";
 import { IconSpinner } from "@/components/ui/icons";
 import { Textarea } from "./ui/textarea";
+import { Tooltip, TooltipTrigger } from "@/components/ui/tooltip";
 import { Feedback } from "@/db/schema";
+import { submitFeedback } from "@/app/actions";
+
+export function FeedbackOpenButton({}: {}) {
+  const [feedbackDialogOpen, setFeedbackDialogOpen] = React.useState(false);
+  const [isRemovePending, startRemoveTransition] = React.useTransition();
+
+  return (
+    <>
+      <TooltipTrigger>
+        <Button
+          size={"sm"}
+          variant={"outline"}
+          className="hidden md:flex"
+          disabled={isRemovePending}
+          onClick={() => setFeedbackDialogOpen(true)}
+        >
+          <span className="hidden md:flex">Dejte nám zpětnou vazbu</span>
+        </Button>
+        <Tooltip>Dejte nám zpětnou vazbu</Tooltip>
+      </TooltipTrigger>
+      <FeedbackSubmitDialog
+        submitFeedback={submitFeedback}
+        open={feedbackDialogOpen}
+        onOpenChange={setFeedbackDialogOpen}
+        setOpen={setFeedbackDialogOpen}
+      />
+    </>
+  );
+}
 
 interface FeedbackSubmitDialogProps extends DialogProps {
   submitFeedback: (args: { message: string }) => ServerActionResult<Feedback>;

@@ -433,7 +433,17 @@ export async function getFrameworkSubmission(
     .from(frameworkSubmissions)
     .where(eq(frameworkSubmissions.id, id));
   const submission = submissions.length ? submissions[0] : null;
-  if (!submission) return null;
+  if (!submission) {
+    // return empty submission if not found to allow new submissions
+    return {
+      id,
+      cid: null,
+      secretHash: null,
+      dateCreated: null,
+      dateLastEdited: null,
+      answers: questions.map((q) => ({ questionId: q.id, answer: null })),
+    };
+  }
 
   // get answers for current questions in framework.ts
   const requestedQuestions = questions.map((q) => q.id);

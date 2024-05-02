@@ -59,7 +59,7 @@ export function FrameworkProvider({ children }: { children: React.ReactNode }) {
     if (envOption === "dev") {
       setMode("dev");
     }
-  }, [setMode]);
+  }, []);
 
   const init = (defaultId?: string) => {
     const id = defaultId || nanoid();
@@ -115,7 +115,7 @@ export function FrameworkProvider({ children }: { children: React.ReactNode }) {
       includeSecret: true,
     }
   ): URL => {
-    if (window) {
+    if (typeof window !== "undefined") {
       const baseurl = new URL(`/${urlName}/`, window.location.origin);
       let url: URL | null = null;
       if (to === "start") url = new URL(`${id}/1`, baseurl);

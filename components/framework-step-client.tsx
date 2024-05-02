@@ -1,4 +1,5 @@
 "use client";
+
 import { useFramework } from "../lib/hooks/use-framework";
 import { useParams, useRouter } from "next/navigation";
 import classNames from "classnames";
@@ -10,14 +11,16 @@ import {
   IconQuestionMark,
   IconX,
 } from "@/components/ui/icons";
-import Logo from "@/components/framework-logo";
-import texts from "../app/evaluace/texts";
-import { HeaderActions } from "./ui/header-actions";
-import { submitFeedback, upsertFrameworkSubmission } from "@/app/actions";
+import texts from "@/app/evaluace/texts";
+import { upsertFrameworkSubmission } from "@/app/actions";
 import Link from "next/link";
 import { SubmissionOld } from "@/lib/types";
 
-export default function Step({ submission }: { submission?: SubmissionOld }) {
+export default function Step({
+  submission,
+}: {
+  submission?: SubmissionOld | null;
+}) {
   const router = useRouter();
   const params = useParams();
   const id = !Array.isArray(params.id) ? params.id : null;
@@ -65,111 +68,107 @@ export default function Step({ submission }: { submission?: SubmissionOld }) {
   };
 
   return (
-    <main className="flex flex-col grow h-full">
-      <div className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b border-neutral-200 shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
-        <Logo lang={lang} />
-        <HeaderActions submitFeedback={submitFeedback} />
+    <section className="pt-10 flex px-6 justify-center">
+      <div className="flex flex-col pt-10 items-center justify-center">
+        {step > 1 && (
+          <Button
+            className="text-text-400 hover:text-text-600 mb-8 flex items-center transition-all ease-in-out duration-150"
+            onPress={() => navigate("back")}
+          >
+            <IconArrowRight className="h-4 w-4 shrink-0 rotate-180 mr-1" />
+            {texts["previous-question"][lang]}
+          </Button>
+        )}
       </div>
-      <section className="bg-[#F4F4F5] flex items-center px-6 justify-center flex-1">
-        <div className="flex items-center mt-12">
-          {step > 1 && (
-            <Button
-              className="text-text-400 hover:text-text-600 mb-8 flex items-center transition-all ease-in-out duration-150"
-              onPress={() => navigate("back")}
-            >
-              <IconArrowRight className="h-4 w-4 shrink-0 rotate-180 mr-1" />
-              {texts["previous-question"][lang]}
-            </Button>
-          )}
-        </div>
-        <div className="max-w-lg px-6">
-          <div className="mb-6">
-            <p className="text-text-500 font-medium text-sm mb-2">
-              {texts["question"][lang][0].toUpperCase() +
-                texts["question"][lang].slice(1)}{" "}
-              {step} {texts["of"][lang]} {questions.length}
-            </p>
-            <div className="flex justify-start items-center mb-2 z-50">
-              {questions.map((_question, index) => {
-                return (
-                  <Link
-                    href={getURL(index + 1)}
-                    key={index}
-                    className={classNames(
-                      "flex-1 last:rounded-r-full transition-all ease-in-out duration-150",
-                      {
-                        "h-[12px] rounded-full border-[2px] border-muted":
-                          index === step - 1,
-                        "h-[4px]": index !== step - 1,
-                        "border-l-[2px] border-muted first:border-l-0":
-                          index !== step - 1 && index !== step,
-                        "border-l-[0px]": index === step,
-                        "bg-emerald-500 hover:bg-emerald-700":
-                          !!_question.answer === true,
-                        "bg-rose-500 hover:bg-rose-700":
-                          _question.answer === false,
-                        "bg-text-300 hover:bg-text-500":
-                          _question.answer === undefined ||
-                          _question.answer === null,
-                        "rounded-l-full": index === 0,
-                      }
-                    )}
-                  />
-                );
-              })}
-            </div>
+      <div className="flex-col max-w-lg px-6">
+        <div className="mb-6">
+          <p className="text-text-500 font-medium text-sm mb-2">
+            {texts["question"][lang][0].toUpperCase() +
+              texts["question"][lang].slice(1)}{" "}
+            {step} {texts["of"][lang]} {questions.length}
+          </p>
+          <div className="flex justify-start items-center mb-2 z-50">
+            {questions.map((_question, index) => {
+              return (
+                <Link
+                  href={getURL(index + 1)}
+                  key={index}
+                  className={classNames(
+                    "flex-1 last:rounded-r-full transition-all ease-in-out duration-150",
+                    {
+                      "h-[12px] rounded-full border-[2px] border-muted":
+                        index === step - 1,
+                      "h-[4px]": index !== step - 1,
+                      "border-l-[2px] border-muted first:border-l-0":
+                        index !== step - 1 && index !== step,
+                      "border-l-[0px]": index === step,
+                      "bg-emerald-500 hover:bg-emerald-700":
+                        !!_question.answer === true,
+                      "bg-rose-500 hover:bg-rose-700":
+                        _question.answer === false,
+                      "bg-text-300 hover:bg-text-500":
+                        _question.answer === undefined ||
+                        _question.answer === null,
+                      "rounded-l-full": index === 0,
+                    }
+                  )}
+                />
+              );
+            })}
           </div>
-          <div className="shadow-sm rounded-xl bg-white">
-            <div>
-              <div className="border-neutral-200 border-t border-x rounded-t-xl">
-                <div className="flex text-text p-8 flex-col gap-x-6">
-                  <div className="space-y-4 pb-6">
-                    <h2 className="text-2xl font-medium">
-                      {typeof currentQuestion.questionText === "string"
-                        ? currentQuestion.questionText
-                        : currentQuestion.questionText[lang]}
-                    </h2>
-                    {currentQuestion.examples && (
-                      <p className="text-text-700">
-                        {texts["eg"][lang]}{" "}
-                        {typeof currentQuestion.examples === "string"
-                          ? currentQuestion.examples
-                          : currentQuestion.examples[lang]}
-                      </p>
-                    )}
-                  </div>
-                  {currentQuestion.info && (
-                    <p className="text-text-700 border-t pt-6 border-neutral-200">
-                      {typeof currentQuestion.info === "string"
-                        ? currentQuestion.info
-                        : currentQuestion.info[lang]}
+        </div>
+        <div className="shadow-sm rounded-xl bg-white">
+          <div>
+            <div className="border-neutral-200 border-t border-x rounded-t-xl">
+              <div className="flex text-text p-8 flex-col gap-x-6">
+                <div className="space-y-4 pb-6">
+                  <h2 className="text-2xl font-medium">
+                    {typeof currentQuestion.questionText === "string"
+                      ? currentQuestion.questionText
+                      : currentQuestion.questionText[lang]}
+                  </h2>
+                  {currentQuestion.examples && (
+                    <p className="text-text-700">
+                      {texts["eg"][lang]}{" "}
+                      {typeof currentQuestion.examples === "string"
+                        ? currentQuestion.examples
+                        : currentQuestion.examples[lang]}
                     </p>
                   )}
                 </div>
-              </div>
-              <div className="">
-                {currentQuestion.type === "TrueFalse" && (
-                  <SelectTrueFalse
-                    selected={selectedTrueFalse}
-                    lang={lang}
-                    questionId={currentQuestion.id}
-                  />
+                {currentQuestion.info && (
+                  <p className="text-text-700 border-t pt-6 border-neutral-200">
+                    {typeof currentQuestion.info === "string"
+                      ? currentQuestion.info
+                      : currentQuestion.info[lang]}
+                  </p>
                 )}
               </div>
             </div>
+            <div className="">
+              {currentQuestion.type === "TrueFalse" && (
+                <SelectTrueFalse
+                  selected={selectedTrueFalse}
+                  lang={lang}
+                  questionId={currentQuestion.id}
+                />
+              )}
+            </div>
           </div>
         </div>
-        <div className="flex items-center mt-12">
-          <Button
-            className="text-text-400 hover:text-text-600 mb-8 flex items-center transition-all ease-in-out duration-150"
-            onPress={() => navigate("forward")}
-          >
-            {texts["next-question"][lang]}
-            <IconArrowRight className="h-4 w-4 shrink-0 ml-1" />
-          </Button>
-        </div>
-      </section>
-    </main>
+      </div>
+      <div className="flex pt-10 flex-col items-center justify-center">
+        <Button
+          className="text-text-400 hover:text-text-600 mb-8 flex items-center transition-all ease-in-out duration-150"
+          onPress={() => navigate("forward")}
+        >
+          {step < questions.length
+            ? texts["next-question"][lang]
+            : "Pokračovat"}
+          <IconArrowRight className="h-4 w-4 shrink-0 ml-1" />
+        </Button>
+      </div>
+    </section>
   );
 }
 

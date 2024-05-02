@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
 import texts from "../../texts";
-import { FrameworkServerStep } from "@/components/framework-step-server";
+import Step from "@/components/framework-step-client";
+import { getSubmission } from "@/lib/get-submission";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: { step: string; lang: string; id: string };
@@ -22,6 +24,8 @@ export async function generateMetadata({
   });
 }
 
-export default async function StepPage({ params: { id } }: Props) {
-  return <FrameworkServerStep id={id} />;
+export default async function StepPage({ params: { id, step } }: Props) {
+  const submission = await getSubmission(id);
+  if (!submission) notFound();
+  return <Step submission={submission} />;
 }

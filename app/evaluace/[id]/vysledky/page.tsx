@@ -1,6 +1,7 @@
 import { Metadata } from "next";
-import FrameworkResultServer from "@/components/framework-result-server";
 import { createMetadata } from "@/lib/metadata";
+import FrameworkResultClient from "@/components/framework-result-client";
+import { getSubmission } from "@/lib/get-submission";
 
 export const metadata: Metadata = createMetadata({
   title: "Výsledky | Evaluační framework",
@@ -14,9 +15,7 @@ type Props = {
 };
 
 export default async function ResultsPage({ params: { id } }: Props) {
-  return (
-    <main className="flex flex-col min-h-screen">
-      <FrameworkResultServer id={id} />
-    </main>
-  );
+  const submission = await getSubmission(id);
+
+  return <FrameworkResultClient submission={submission} />;
 }

@@ -12,19 +12,15 @@ import {
   IconCheck,
   IconCheckCircleFilled,
   IconCompas,
-  IconLink,
   IconSparkle,
   IconWarningOctagon,
   IconX,
 } from "@/components/ui/icons";
 import texts from "@/app/evaluace/texts";
 import FrameworkRecommendation from "@/components/framework-recommendation";
-import Logo from "@/components/framework-logo";
-import { formattedDate } from "@/lib/date";
-import { FrameworkShareDialog } from "./framework-share-dialog";
 import Link from "next/link";
 import CircularProgressBar from "./framework-circular-progress";
-import { Submission, SubmissionOld } from "@/lib/types";
+import { SubmissionOld } from "@/lib/types";
 
 function calculateRadarChartSurfaceArea(dimensions: number[]): number {
   if (dimensions.length < 3) {
@@ -59,7 +55,6 @@ export default function FrameworkResultClient({
 }: {
   submission: SubmissionOld;
 }) {
-  const [shareDialogOpen, setShareDialogOpen] = useState(false);
   const { questions, loadSubmission, lang, getURL, readonly } = useFramework();
 
   useEffect(() => {
@@ -168,26 +163,7 @@ export default function FrameworkResultClient({
 
   return (
     <Fragment>
-      <div className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b border-neutral-200 shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
-        <Logo lang={lang} />
-        <div className="flex items-center space-x-4">
-          {submission?.dateLastEdited && (
-            <span className="text-text-500 text-xs">
-              Naposledy upraveno {formattedDate(submission?.dateLastEdited)}
-            </span>
-          )}
-          <DButton onClick={() => setShareDialogOpen(true)} size="sm">
-            Získat odkaz <IconLink className="w-4 h-4 ml-1" />
-          </DButton>
-          <FrameworkShareDialog
-            open={shareDialogOpen}
-            onOpenChange={setShareDialogOpen}
-            onCopy={() => setShareDialogOpen(false)}
-            submission={submission}
-          />
-        </div>
-      </div>
-      <section className="relative flex py-6 flex-col items-center bg-muted">
+      <section className="relative flex py-6 flex-col items-center">
         <div className="max-w-screen-lg w-full px-6 mb-6 flex flex-col">
           <h1 className="text-text text-3xl font-semibold mb-4 mt-4">
             {texts.evaluation[lang]}

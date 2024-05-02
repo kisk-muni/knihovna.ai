@@ -1,16 +1,10 @@
 "use client";
 import { FrameworkProvider } from "@/lib/hooks/use-framework";
-import DebugPanel from "@/components/framework-debug-panel";
 
-export default function DiagnostikaLayout({
+export default function FrameworkGlobalLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <FrameworkProvider>
-      {children}
-      <DebugPanel />
-    </FrameworkProvider>
-  );
+  return <FrameworkProvider>{children}</FrameworkProvider>;
 }

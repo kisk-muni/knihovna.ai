@@ -1,10 +1,13 @@
+"use client";
 import Logo from "@/components/logo";
 import { IconSeparator } from "./ui/icons";
 import texts from "@/app/evaluace/texts";
 import Link from "next/link";
 import { urlName } from "@/framework";
+import { useFramework } from "@/lib/hooks/use-framework";
 
-export default function FrameworkLogo({ lang }: { lang: "cs" | "en" }) {
+export default function FrameworkLogo() {
+  const { lang } = useFramework();
   return (
     <div className="flex text-text text-sm items-center">
       <Link href={`/`}>
