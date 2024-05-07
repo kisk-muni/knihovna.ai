@@ -3,7 +3,6 @@ import { Toaster } from "react-hot-toast";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import Head from "next/head";
-import { Providers } from "./providers";
 import TrackerComponent from "./tracker";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,12 +19,10 @@ export default function RootLayout({
       </Head>
       <body className={`${inter.className}`}>
         <Toaster />
-        <Providers>
-          <div className={`flex relative flex-col min-h-screen max-w-full`}>
-            {children}
-            <Analytics />
-          </div>
-        </Providers>
+        <div className={`flex relative flex-col min-h-screen max-w-full`}>
+          {children}
+          <Analytics />
+        </div>
       </body>
       <TrackerComponent />
     </html>

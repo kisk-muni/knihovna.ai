@@ -25,6 +25,7 @@
     "@notionhq/client": "^2.2.9",
     "@phosphor-icons/react": "^2.0.15",
     "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-navigation-menu": "^1.1.4",
     "@radix-ui/react-slot": "^1.0.2",
     "@sparticuz/chromium-min": "^116.0.0",
     "@typeform/embed-react": "^2.22.0",

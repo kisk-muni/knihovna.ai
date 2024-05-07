@@ -486,3 +486,42 @@ export function IconSpinner({
     </svg>
   );
 }
+
+export function IconFramework({ ...props }: React.ComponentProps<"svg">) {
+  let center = 16;
+  let strokeWidth = 3.5;
+  let r = 16 - strokeWidth;
+  let c = 2 * r * Math.PI;
+  const percentage = 75;
+
+  return (
+    <svg
+      aria-hidden
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+      fill="transparent"
+      strokeWidth={strokeWidth}
+    >
+      <circle
+        role="presentation"
+        cx={center}
+        cy={center}
+        r={r}
+        strokeDasharray={`${c} ${c}`}
+        className="stroke-neutral-400"
+      />
+      <circle
+        role="presentation"
+        cx={center}
+        cy={center}
+        r={r}
+        strokeDasharray={`${c} ${c}`}
+        strokeDashoffset={c - ((percentage || 0) / 100) * c}
+        strokeLinecap="round"
+        transform="rotate(-90 16 16)"
+        className="stroke-white"
+      />
+    </svg>
+  );
+}

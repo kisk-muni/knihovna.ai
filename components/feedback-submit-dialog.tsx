@@ -28,7 +28,7 @@ export function FeedbackOpenButton({}: {}) {
       <TooltipTrigger>
         <Button
           size={"sm"}
-          variant={"outline"}
+          variant={"white"}
           className="hidden md:flex"
           disabled={isRemovePending}
           onClick={() => setFeedbackDialogOpen(true)}

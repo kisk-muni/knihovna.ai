@@ -1,4 +1,3 @@
-import DebugPanel from "@/components/framework-debug-panel";
 import FrameworkHeader from "@/components/framework-header";
 
 export default function FrameworkSubmissionLayout({
