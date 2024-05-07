@@ -252,8 +252,10 @@ export const questions: Question[] = [
       resources: [
         {
           type: "case-study",
-          title: "Self check",
-          description: "Popis self check",
+          title: "Jak funguje samoobslužné půjčování v Jihlavě",
+          description:
+            "Seznamte se s projektem samoobslužného půjčování v Jihlavě.",
+          link: "https://www.jihlava.cz/v-jihlavske-knihovne-funguje-samoobsluzne-pujcovani/d-561985",
         },
       ],
     },
