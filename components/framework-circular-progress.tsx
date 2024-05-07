@@ -59,7 +59,7 @@ export default function CircularProgressBar({
               textAnchor="middle"
               className="fill-text font-medium"
             >
-              {percentage?.toFixed(0)}
+              {percentage?.toFixed(0) === "0" ? "" : percentage?.toFixed(0)}
             </text>
           </svg>
         </>

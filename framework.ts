@@ -80,8 +80,12 @@ export const questions: Question[] = [
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText: {
-      cs: "Používáte webovou analytiku pro sběr dat o využívání vašich služeb nad rámec povinných statistik?",
+      cs: "Používáte webovou analytiku pro sběr dat o využívání vašich služeb nad rámec povinných vykazovaných statistik?",
       en: "Do you use web analytics to collect data about the use of your services beyond the mandatory statistics?",
+    },
+    info: {
+      cs: "Povinnými statistikami se rozumí například výpůjčky, návštěvnost, které se běžně vykazují ve výročních zprávách za účelem monitoringu knihoven. Smyslem webové analytiky je získat detailnější informace o interakcích uživatelů a následně na základě získaných dat jednat pro další zlepšení služeb.",
+      en: "Mandatory statistics include, for example, loans, attendance, which are commonly reported in annual reports for library monitoring. The purpose of web analytics is to obtain more detailed information about user interactions and then act on the data obtained for further service improvement.",
     },
     examples: {
       cs: "uživatelské interakce na webu, typy rezervace, návštěvnost webu, sociální sítě, newsletter",
@@ -104,14 +108,16 @@ export const questions: Question[] = [
         {
           type: "tool",
           title: "Matomo",
-          description: "Nejaky popis",
+          description:
+            "Matomo je open-source nástroj pro webovou analytiku, který vám umožní sledovat návštěvnost vašeho webu a získávat detailní informace o uživatelských interakcích.",
           link: "https://matomo.org/",
-          buttonText: "Klikni pro prozkoumani google analytics",
+          buttonText: "Prozkoumat",
         },
         {
           type: "tool",
           title: "Plausible Analytics",
-          description: "Plausible Analytics je GDPR friendly alternativa.",
+          description:
+            "Plausible Analytics je jednoduchý a etický nástroj pro webovou analytiku, který umožní sledovat základní informace o návštěvnosti vašeho webu a pomůže s nastavením sledování pokročilejších interakcí na webu.",
           link: "https://plausible.com/",
         },
       ],
@@ -122,8 +128,12 @@ export const questions: Question[] = [
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText: {
-      cs: "Monitorujete potřeby uživatelů ale i místních obyvatel pro zlepšení vašich služeb?",
+      cs: "Monitorujete potřeby uživatelů i místních obyvatel pro zlepšení vašich služeb?",
       en: "Do you monitor the needs of users and local residents to improve your services?",
+    },
+    info: {
+      cs: "Uživatelem se myslí obecně návštěvníci knihoven ve fyzickém i digitálním prostředí. Místními obyvateli se rozumí obyvatelé obce, města nebo regionu, kde knihovna působí. Monitorování potřeb uživatelů může knihovně pomoci navrhnout takové služby, aby oslovila a zapojila obyvate, kteří dosud s knihovnou neinteragují.",
+      en: "By user, we mean generally library visitors in physical and digital environments. Local residents are residents of the municipality, city or region where the library operates. Monitoring user needs can help the library design services to reach and engage residents who have not yet interacted with the library.",
     },
     recommendation: {
       priority: 1,
@@ -301,7 +311,7 @@ export const questions: Question[] = [
     category: Category["Vzdělávání a podpora"],
     type: "TrueFalse",
     questionText: {
-      cs: "Poskytujete uživatelům praktické workshopy s AI nástroji a digitálními aplikacemi vzužívající AI?",
+      cs: "Poskytujete uživatelům praktické workshopy s AI nástroji a digitálními aplikacemi využívající AI?",
       en: "Do you provide users with hands-on workshops with AI tools and AI-enabled digital applications?",
     },
     examples: "ChatGPT, Canva, Scratch",
@@ -425,6 +435,15 @@ export const questions: Question[] = [
         cs: "Zabezpečte, aby se zaměstnanci knihovny neustále vzdělávali v oblasti digitálních dovedností a byli schopni poskytovat uživatelům aktuální a kvalitní podporu.",
         en: "Ensure that library staff receive ongoing training in digital skills and are able to provide up-to-date and quality support to users.",
       },
+      resources: [
+        {
+          type: "course",
+          title: "Nabídka vzdělávacích akcí pro knihovníky",
+          description:
+            "Na stránce SKIP ČR najdete aktuální nabídku vzdělávacích akcí pro knihovníky. Nabídka obsahuje také sadu doporučených kurzů vzdělávací sekcí organizace SKIP. Většina kurzů v nabídce je zdarma.",
+          link: "https://www.skipcr.cz/knihovnicke-akce",
+        },
+      ],
     },
   },
   {
@@ -475,6 +494,15 @@ export const questions: Question[] = [
         cs: "Umožněte uživatelům pracovat s moderními technologiemi nad rámec PC a čteček, jako jsou 3D tisk, virtuální realita, šicí stroje, práce s roboty a půjčování audiovizuálního vybavení.",
         en: "Allow users to work with modern technologies beyond PCs and readers, such as 3D printing, virtual reality, sewing machines, working with robots and renting audiovisual equipment.",
       },
+      resources: [
+        {
+          type: "article",
+          title: "Možnosti financování projektů knihoven",
+          description:
+            "Na speciální stránce Vědecké knihovny v Olomouci najdete zjednodušené informace o možnostech financování projektů knihoven z dotačních programů, projektů nebo grantů. Stránky obsahují také informace o aktuálních dotačních programech a grantech.",
+          link: "https://www.vkol.cz/dotacni-programy-projekty-granty",
+        },
+      ],
     },
   },
   {
@@ -486,8 +514,8 @@ export const questions: Question[] = [
       en: "Do you offer study or co-working spaces?",
     },
     info: {
-      cs: "Samozřejmostí je rychlé připojení k internetu a dostatek zásuvek pro připojení k elektrické síti.",
-      en: "Fast internet connection and plenty of sockets to connect to the mains are important.",
+      cs: "Mnoho potenciálních uživatelů knihoven potřebuje vykonávat digitální práci nebo studovat. Řada domácností však není vybavena dostatečným zázemím pro práci nebo studium z domova. Knihovnám se tak otevírá možnost oslovit nové uživatele. Aby se v knihovně cítili dobře, je potřeba zajistit jim pohodlná místa pro práci s vlastním i knihovním PC, snadné a rychlé připojení k internetu a elektrické síti, pohodlnou židli a prostor pro nerušenou práci.",
+      en: "Many potential library users need to do digital work or study. However, many households are not equipped with adequate facilities for working or studying from home. This opens up the opportunity for libraries to reach new users. To make them feel comfortable in the library, it is necessary to provide them with comfortable places to work with their own and library PCs, easy and fast internet and power connections, a comfortable chair and space for undisturbed work.",
     },
     examples: {
       cs: "zázemí pro práci, studovny",
@@ -504,7 +532,15 @@ export const questions: Question[] = [
         cs: "Zvažte možnost poskytnutí prostorů pro studium a co-working, které umožní uživatelům pracovat a studovat v příjemném prostředí knihovny. Zajistěte rychlé připojení k internetu a dostatek zásuvek pro připojení k elektrické síti.",
         en: "Consider providing study and co-working spaces that allow users to work and study in a comfortable library environment. Ensure fast internet access and sufficient power outlets.",
       },
-      link: "https://www.researchgate.net/publication/263555983_Libraries_as_coworking_spaces_Understanding_user_motivations_and_perceived_barriers_to_social_learning",
+      resources: [
+        {
+          type: "case-study",
+          title: "Jak fungují knihovny jako co-workingová centra?",
+          description:
+            "Přečtěte si článek o tom, jak fungují současná co-workingová centra a jakou příležitost zde mají právě knihovny. V článku najdete příklady současných knihoven v praze, které disponují dobrým zázemím pro studium či práci na vlastním počítači.",
+          link: "https://www.flowee.cz/floweecity/praha/7375-nejlevnejsi-coworking-v-praze-vse-potrebne-najdete-v-knihovne",
+        },
+      ],
     },
   },
   {
@@ -747,8 +783,12 @@ export const questions: Question[] = [
     category: Category["Knihovní procesy"],
     type: "TrueFalse",
     questionText: {
-      cs: "Využíváte nástroje na generování textů (e-maily, propagace, oficiální dokumenty)?",
+      cs: "Využíváte nástroje na generování textu?",
       en: "Do you use text generation tools (emails, promotions, official documents)?",
+    },
+    info: {
+      cs: `Nástroje na generování textu mohou zefektivnit tvorbu e-mailů, propagace a oficiálních dokumentů.`,
+      en: `Text generation tools can streamline the creation of emails, promotions, and official documents.`,
     },
     recommendation: {
       priority: 1,
@@ -783,6 +823,10 @@ export const questions: Question[] = [
       cs: "Využíváte RFID technologie pro automatické třídění knih, kontrolu řazení nebo revizi?",
       en: "Do you use RFID technologies for automatic book sorting, sorting control, or inventory?",
     },
+    info: {
+      cs: "RFID je technologie, která umožňuje automatické identifikování a sledování knih a dalších dokumentů v knihovně.",
+      en: "RFID is a technology that enables automatic identification and tracking of books and other documents in the library.",
+    },
     recommendation: {
       priority: 1,
       difficulty: "moderate",
@@ -802,8 +846,8 @@ export const questions: Question[] = [
     category: Category["Knihovní procesy"],
     type: "TrueFalse",
     questionText: {
-      cs: "Využíváte nástroje pro analýzu obsahu, věcný popis, automatickou klasifikaci nebo tvorbu klíčových slov (digitalizovaných nebo digitálních) dokumentů?",
-      en: "Do you use tools for content analysis, subject description, automatic classification, or keyword generation (digitized or digital) documents?",
+      cs: "Využíváte nástroje pro analýzu obsahu, věcný popis a automatickou klasifikaci?",
+      en: "Do you use tools for content analysis, subject description, and automatic classification?",
     },
     recommendation: {
       priority: 1,
@@ -827,8 +871,12 @@ export const questions: Question[] = [
     category: Category["Knihovní procesy"],
     type: "TrueFalse",
     questionText: {
-      cs: "Využíváte AI pro akvizici dokumentů (návrhy na nákup na základě statistik výpůjček, vyhledávacích dotazů v katalogu apod.)?",
-      en: "Do you use AI for document acquisition (suggestions for purchases based on borrowing statistics, catalog search queries, etc.)?",
+      cs: "Využíváte AI pro akvizici dokumentů?",
+      en: "Do you use AI for document acquisition?",
+    },
+    info: {
+      cs: "AI může pomoci s analýzou statistik výpůjček, vyhledávacích dotazů v katalogu, či s návrhem relevantnch jednotek k akvizici.",
+      en: "AI can help with analyzing borrowing statistics, catalog search queries, or suggesting relevant units for acquisition.",
     },
     recommendation: {
       priority: 1,
@@ -849,8 +897,8 @@ export const questions: Question[] = [
     category: Category["Rozvoj (design) služeb"],
     type: "TrueFalse",
     questionText: {
-      cs: "Máte pocit, že máte dostatečnou moc a vliv pokud jde o technologie a prostředky v knihovně, abyste mohli rozvíjet knihovnu?",
-      en: "Do you feel you have a proper power and influence over the technologies and resources needed to advance your library?",
+      cs: "Myslíte si, že máte dostatečnou moc a vliv na technologie a prostředky v knihovně, abyste mohli rozvíjet knihovnu?",
+      en: "Do you think you have enough power and influence over technologies and resources in the library to develop the library?",
     },
     recommendation: {
       priority: 1,

@@ -5,6 +5,7 @@ import { useState, useTransition } from "react";
 import { Button } from "./ui/dense-button";
 import { IconLink } from "./ui/icons";
 import { FrameworkShareDialog } from "./framework-share-dialog";
+import { useParams } from "next/navigation";
 
 export default function FrameworkSubmissionShare({
   submission,
@@ -12,6 +13,12 @@ export default function FrameworkSubmissionShare({
   submission: SubmissionOld;
 }) {
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
+  const params = useParams();
+  const step = !Array.isArray(params.step) ? params.step : null;
+
+  if (step) {
+    return null;
+  }
 
   return (
     <>

@@ -65,8 +65,8 @@ export default function FrameworkStart() {
         <Container>
           <div className="flex flex-col gap-x-6">
             <div className="flex flex-col items-center mb-12">
-              <div className="mb-20 space-x-2 items-center justify-center flex">
-                <span className="text-text text-sm uppercase font-medium">
+              <div className="mb-12 space-x-2 items-center justify-center flex">
+                <span className="text-text-500 text-sm uppercase font-medium">
                   {texts["framework-name"][lang]}
                 </span>
               </div>
@@ -100,7 +100,7 @@ export default function FrameworkStart() {
               </div>
               <div className="mt-2 border-t border-neutral-200 w-full p-8 flex justify-center">
                 <Button
-                  size="large"
+                  size="base"
                   onClick={onStart}
                   className="flex items-center"
                 >
