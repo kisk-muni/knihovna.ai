@@ -121,7 +121,7 @@ class Tracker {
     const url = `${this.apiURL}?${new URLSearchParams(params).toString()}`;
     request.open("GET", url);
     request.withCredentials = true;
-    if (!this.debug) {
+    if (this.debug && !this.sendWhenDebug) {
       console.log("[track-debug] Event request aborted:", url);
       request.abort();
     } else {
