@@ -67,10 +67,11 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
                   <li className="row-span-3 grid">
                     <NavigationMenu.Link asChild>
                       <a
-                        className="focus:shadow-neutral from-purple-700 to-emerald-400 flex
+                        className="relative focus:shadow-neutral from-purple-700 to-emerald-400 flex
                     h-full w-full select-none flex-col justify-end rounded-lg bg-gradient-to-b p-[25px] no-underline outline-none focus:shadow-[0_0_0_2px]"
                         href="/evaluace"
                       >
+                        <div className="opacity-0 hover:opacity-20 rounded-lg transition absolute inset-0 h-full w-full bg-gradient-to-br from-gray-900 to-gray-400"></div>
                         <IconFramework />
                         <div className="mt-4 mb-[7px] text-[18px] font-medium leading-[1.2] text-white">
                           Evaluační framework
