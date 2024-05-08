@@ -22,7 +22,7 @@ export const metadata: Metadata = createMetadata({
     `,
 });
 
-export default async function Home() {
+export default async function FacilitationScenariosPage() {
   return (
     <main className="flex flex-col">
       <BackgroundGradient.Radial />
@@ -74,7 +74,7 @@ export default async function Home() {
         <Callout>
           <p>
             <span className="uppercase font-light shrink-0 text-text-950">
-              TIP 2:
+              TIP 1:
             </span>{" "}
             Než se do toho pustíte, nezapomeňte se seznámit s principy
             facilitace - najdete je na začátku každého scénáře.
