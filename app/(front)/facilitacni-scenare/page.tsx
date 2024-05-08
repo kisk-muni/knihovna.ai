@@ -13,6 +13,7 @@ import {
   AccordionContent,
 } from "@/components/ui/accordion";
 import Link from "next/link";
+import { IconExternalLink } from "@/components/ui/icons";
 
 export const metadata: Metadata = createMetadata({
   title:
@@ -61,7 +62,7 @@ export default async function Home() {
         <p>
           Scénář si{" "}
           <strong>
-            stáhnete, projdete a případně upravíte pro vaše potřeby
+            otev5ete, projdete a případně upravíte pro vaše potřeby
           </strong>
           . Vždy je potřeba myslet na to, že pro efektivní schůzku nebo workshop
           potřebujete kromě připraveného scénáře také dostatek času, vhodné
@@ -97,7 +98,7 @@ export default async function Home() {
           Čeho chcete docílit?
         </Headline>
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-3 max-w-screen-xl mx-auto gap-6">
+        <div className="mt-10 mb-10 grid grid-cols-1 md:grid-cols-3 max-w-screen-xl mx-auto gap-6">
           {[
             {
               headline: "Nasdílet si obavy a bariéry ",
@@ -105,7 +106,8 @@ export default async function Home() {
                 "Víte nebo máte podezření, že v týmu se mohou objevovat obavy a bariéry z tématu AI?",
                 "Chcete ve vašem týmu otevřít první diskuzi na téma AI bezpečným způsobem a poskytnout prostor na vyjádření a odbavení pocitů z tématu?",
               ],
-              downloadLink: "/",
+              downloadLink:
+                "https://docs.google.com/document/d/1juIc5JU9zBQrqB7ZzC2sa1pemujjvQ8-NAaoKEBP0tg/edit?usp=drivesdk",
             },
             {
               headline: "Zmapovat znalosti a zkušenosti týmu",
@@ -114,7 +116,8 @@ export default async function Home() {
                 "Chcete zjistit, jakou s ním mají členové týmu individuální zkušenost?",
                 "Chcete se společně inspirovat a získat nové informace? ",
               ],
-              downloadLink: "/",
+              downloadLink:
+                "https://docs.google.com/document/d/1Co2XBvR2Wi91kyNiF-R0UBF4ILARulHWu8p7jumj2u0/edit?usp=drivesdk",
             },
             {
               headline: "Vymyslet společně nové aktivity",
@@ -123,7 +126,8 @@ export default async function Home() {
                 "Chce zjistit, na čem by se členové týmu chtěli podílet?",
                 "Chcete si ověřit, kde vůbec s AI začít?",
               ],
-              downloadLink: "/",
+              downloadLink:
+                "https://docs.google.com/document/d/1sZnZCGR_-955ENLq62NoMzwfEn5vIbSG2PcQOLIBBJs/edit?usp=drivesdk",
             },
           ].map(({ headline, listItems, downloadLink }, i) => (
             <div
@@ -140,14 +144,17 @@ export default async function Home() {
                 ))}
               </ul>
 
-              <Button theme="white" className="mt-auto">
-                Stáhnout scénář
-              </Button>
+              <Link href={downloadLink} target="_blank" className="mt-auto">
+                <Button theme="white" className="flex items-center">
+                  Otevřít scénář{" "}
+                  <IconExternalLink className="w-4 h-4 ml-1.5 -mt-[2px]" />
+                </Button>
+              </Link>
             </div>
           ))}
         </div>
 
-        <div className="max-w-screen-md mx-auto flex flex-col items-center mt-10 mb-10 text-lg text-center">
+        {/* <div className="max-w-screen-md mx-auto flex flex-col items-center mt-10 mb-10 text-lg text-center">
           <p>
             V případě, že se rozhodnete pokrýt{" "}
             <strong>všechny situace najednou</strong>
@@ -156,7 +163,7 @@ export default async function Home() {
             části.
           </p>
           <Button className="mt-8">Stáhnout scénář všech situací</Button>
-        </div>
+        </div> */}
       </Section>
 
       <Section className="pb-18 md:pb-24">

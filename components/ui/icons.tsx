@@ -509,7 +509,7 @@ export function IconFramework({ ...props }: React.ComponentProps<"svg">) {
         cy={center}
         r={r}
         strokeDasharray={`${c} ${c}`}
-        className="stroke-neutral-400"
+        className="stroke-neutral-300/50"
       />
       <circle
         role="presentation"
