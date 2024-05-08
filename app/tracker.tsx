@@ -8,7 +8,7 @@ export default function TrackerComponent() {
     // if localstorage has key "env" set to "dev", set dev mode
     const env = localStorage.getItem("env");
     console.log("env", env);
-    Tracker.init("knihovna-ai-site", env === "dev", true);
+    Tracker.init("knihovna-ai-site", env === "dev", false);
   }
 
   const pathname = usePathname();
