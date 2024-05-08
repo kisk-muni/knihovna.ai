@@ -16,11 +16,10 @@ import Link from "next/link";
 import { IconExternalLink } from "@/components/ui/icons";
 
 export const metadata: Metadata = createMetadata({
-  title:
-    "knihovna.ai od KISK MUNI - Mapujeme budoucnost knihoven v éře umělé inteligence",
-  description:
-    "Výzkumný projekt mapující potenciál knihoven v popularizaci umělé inteligence a pomoci ohroženým skupinám obyvatel.",
-  ogTitle: "Mapujeme budoucnost knihoven v éře AI",
+  title: "Facilitační scénáře",
+  description: `
+  Scénáře schůzek a workshopů, které vám pomohou pokrýt nejaktuálnější témata, o kterých může vaše knihovna v souvislosti s AI diskutovat.
+    `,
 });
 
 export default async function Home() {
@@ -39,7 +38,7 @@ export default async function Home() {
         <p>
           Ve spolupráci s profesionálním facilitátorem jsme pro vás navrhli
           scénáře schůzek a workshopů, které vám pomohou pokrýt nejaktuálnější
-          témata, o kterých může tým knihovníků v souvislosti s AI diskutovat.
+          témata, o kterých může vaše knihovna v souvislosti s AI diskutovat.
         </p>
       </Section>
 
