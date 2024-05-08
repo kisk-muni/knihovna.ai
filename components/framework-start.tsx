@@ -65,8 +65,8 @@ export default function FrameworkStart() {
         <Container>
           <div className="flex flex-col gap-x-6">
             <div className="flex flex-col items-center mb-12">
-              <div className="mb-12 space-x-2 items-center justify-center flex">
-                <span className="text-text-500 text-sm uppercase font-medium">
+              <div className="space-x-2 items-center justify-center flex">
+                <span className="uppercase mb-4 text-base text-primary font-bold tracking-wider rounded-full px-4 py-2">
                   {texts["framework-name"][lang]}
                 </span>
               </div>

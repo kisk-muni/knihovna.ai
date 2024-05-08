@@ -21,6 +21,11 @@ const tabs = [
     href: "/project/about",
   },
   {
+    label: "Plán",
+    icon: <IconMapTrifold className="w-4 h-4 relative" />,
+    href: "/project/plan",
+  },
+  {
     label: "Aktivity",
     icon: <IconSquare className="w-4 h-4 relative" />,
     href: "/project/activities",
@@ -29,11 +34,6 @@ const tabs = [
     label: "Sprinty",
     icon: <IconPlayCircle className="w-4 h-4 relative" />,
     href: "/project/sprints",
-  },
-  {
-    label: "Plán",
-    icon: <IconMapTrifold className="w-4 h-4 relative" />,
-    href: "/project/plan",
   },
   {
     label: "Tým",

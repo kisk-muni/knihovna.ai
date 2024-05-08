@@ -1,6 +1,6 @@
 "use client";
 
-import { RefObject, forwardRef, useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import NextLink from "next/link";
 import Logo from "./logo";
 import siteConfig from "@/site-config";
@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import classNames from "classnames";
 import { useParams } from "next/navigation";
-import { IconCaretRight, IconFramework } from "./ui/icons";
+import { IconCaretRight, IconExternalLink, IconFramework } from "./ui/icons";
 import { FeedbackOpenButton } from "./feedback-submit-dialog";
 
 export default function Navbar({ sticky = true }: { sticky?: boolean }) {
@@ -21,7 +21,7 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
 
   if (hide) return null;
   return (
-    <nav
+    <div
       className={classNames("justify-center items-center", {
         "backdrop-blur-xl bg-[#FCF2E8]/50 sticky z-40 top-0 px-6 lg:px-8":
           sticky,
@@ -53,7 +53,7 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
             <Logo />
           </NextLink>
         </div>
-        <NavigationMenu.Root className="relative z-[50] hidden sm:flex flex-1 justify-start">
+        <NavigationMenu.Root className="relative z-[50] hidden sm:flex flex-1 justify-start w-full">
           <NavigationMenu.List className="center m-0 flex list-none rounded-[6px] px-1 flex-1">
             <NavigationMenu.Item>
               <NavigationMenuLink href={siteConfig.navigation[0].href}>
@@ -61,9 +61,7 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
               </NavigationMenuLink>
             </NavigationMenu.Item>
             <NavigationMenu.Item>
-              <NavigationMenu.Trigger className="text-text hover:text-text-800 hover:bg-white focus:shadow-primary select-none rounded-lg px-2 py-2 text-[15px] leading-none no-underline outline-none focus:shadow-[0_0_0_2px] group flex items-center justify-between gap-0.5">
-                Nástroje <Carret />
-              </NavigationMenu.Trigger>
+              <NavigationMenuTrigger>Nástroje</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="one m-0 grid list-none gap-x-[10px] p-[22px] sm:w-[500px] sm:grid-cols-[0.75fr_1fr]">
                   <li className="row-span-3 grid">
@@ -85,17 +83,17 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
                   </li>
 
                   <ListItem
-                    disabled
-                    href="#"
-                    title="Facilitační kartičky (připravujeme)"
+                    href="/facilitacni-scenare"
+                    title="Facilitační scénáře"
                   >
-                    Karty pro facilitaci diskuze o AI v knihovnách
+                    Pomůcka k diskuzi o AI v knihovnách
                   </ListItem>
-                  <ListItem disabled href="#" title="Zážitkovka (připravujeme)">
-                    Motivační nástroj pro knihovny
-                  </ListItem>
-                  <ListItem disabled href="#" title="Stáže (připravujeme)">
-                    Exkurze do moderních organizací pro knihovníky
+                  <ListItem
+                    href="https://chat.knihovna.ai"
+                    title="AI Chatbot"
+                    external
+                  >
+                    Chatbot pro knihovníky{" "}
                   </ListItem>
                 </ul>
               </NavigationMenuContent>
@@ -106,46 +104,44 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
               </NavigationMenuLink>
             </NavigationMenu.Item>
             <NavigationMenu.Item>
-              <NavigationMenuLink href={siteConfig.navigation[2].href}>
-                {siteConfig.navigation[2].title}
+              <NavigationMenuLink href={"/prirucky/ai-pro-knihovniky"}>
+                Průvodce AI
               </NavigationMenuLink>
             </NavigationMenu.Item>
-            <NavigationMenu.Item>
-              <NavigationMenuLink href={siteConfig.navigation[3].href}>
-                {siteConfig.navigation[3].title}
-              </NavigationMenuLink>
-            </NavigationMenu.Item>
-            <NavigationMenu.Item>
-              <NavigationMenu.Trigger className="text-text hover:text-text-800 hover:bg-white focus:shadow-primary select-none rounded-lg px-2 py-2 text-[15px] leading-none no-underline outline-none focus:shadow-[0_0_0_2px] group flex items-center justify-between gap-0.5">
-                Projekt <Carret />
-              </NavigationMenu.Trigger>
+            <NavigationMenu.Item className="justify-self-end">
+              <NavigationMenuTrigger root="project">
+                O projektu
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="one m-0 grid list-none gap-x-[10px] p-[22px] sm:w-[500px] sm:grid-cols-[1fr_1fr]">
                   <ListItem href="/project/about" title="O projektu">
-                    Motivace, cíle a perspektiva projektu
+                    Obecné informace
                   </ListItem>
-                  <ListItem href="/project/plan" title="Plán a harmonogram">
-                    Plánované aktivity a jejich aktuální stav
+                  <ListItem href="/blog" title="Blog">
+                    Aktuality z projektu
+                  </ListItem>
+                  <ListItem href="/project/plan" title="Plán">
+                    Plánované aktivity a jejich aktuální stav
                   </ListItem>
                   <ListItem href="/project/activities" title="Aktivity">
-                    Sledujte konkrétní aktivity, které děláme
+                    Konkrétní aktivity, které děláme
                   </ListItem>
-                  <ListItem href="/project/sprints" title="Týdenní sprinty">
-                    Prohlídněte si naši práci podle jednotlivých týdnů
+                  <ListItem href="/project/sprints" title="Sprinty">
+                    Aktivita v projektu podle týdeních cyklů
                   </ListItem>
-                  <ListItem href="/project/team" title="Náš tým">
-                    Seznamte se s členy týmu a partnery
+                  <ListItem href="/project/members" title="Náš tým">
+                    Členové týmu a partneři
                   </ListItem>
                 </ul>
               </NavigationMenuContent>
             </NavigationMenu.Item>
 
-            <NavigationMenu.Indicator className="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut top-full z-[1] flex h-[10px] items-end justify-center overflow-hidden transition-[width,transform_250ms_ease]">
-              <div className="relative top-[70%] h-[10px] w-[10px] rotate-[45deg] rounded-tl-[2px] bg-white" />
+            <NavigationMenu.Indicator className="data-[state=visible]:animate-fadeIn data-[state=hidden]:animate-fadeOut -bottom-[9px] z-[100] overflow-hidden flex h-[8px] items-end justify-center transition-[width,transform_250ms_ease]">
+              <div className="relative top-[50%] h-[10px] w-[10px] rotate-[45deg] z-[100] rounded-tl-[2px] border-t border-l bg-white" />
             </NavigationMenu.Indicator>
           </NavigationMenu.List>
           <div className="perspective-[2000px] absolute top-full left-0 flex w-full justify-start">
-            <NavigationMenu.Viewport className="data-[state=open]:animate-scaleIn data-[state=closed]:animate-scaleOut relative mt-[10px] h-[var(--radix-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-lg bg-white shadow-xl transition-[width,_height] duration-300 sm:w-[var(--radix-navigation-menu-viewport-width)]" />
+            <NavigationMenu.Viewport className="data-[state=open]:animate-scaleIn z-[1] data-[state=closed]:animate-scaleOut relative mt-[8px] h-[var(--radix-navigation-menu-viewport-height)] w-full origin-[top_center] overflow-hidden rounded-lg bg-white shadow-xl border transition-[width,_height] duration-300 sm:w-[var(--radix-navigation-menu-viewport-width)]" />
           </div>
         </NavigationMenu.Root>
         <FeedbackOpenButton />
@@ -159,13 +155,14 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
           </span>
         ))}
       </div>
-    </nav>
+    </div>
   );
 }
 
 const ListItem = forwardRef(
   ({
     disabled,
+    external,
     className,
     href,
     children,
@@ -173,6 +170,7 @@ const ListItem = forwardRef(
     ...props
   }: {
     disabled?: boolean;
+    external?: boolean;
     className?: string;
     href: string;
     children: React.ReactNode;
@@ -194,8 +192,9 @@ const ListItem = forwardRef(
             )}
             {...props}
           >
-            <div className="text-text mb-0.5 font-medium leading-[1.2]">
+            <div className="text-text mb-0.5 font-medium leading-[1.2] flex items-center">
               {title}
+              {external && <IconExternalLink className="h-4 w-4 ml-1" />}
             </div>
             <p className="text-text-600 leading-[1.4]">{children}</p>
           </NextLink>
@@ -232,13 +231,6 @@ const NavigationMenuContent = forwardRef(
 );
 NavigationMenuContent.displayName = "NavigationContent";
 
-const Carret = () => (
-  <IconCaretRight
-    className="text-text h-3.5 w-3.5 rotate-90 relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-90"
-    aria-hidden
-  />
-);
-
 const NavigationMenuLink = forwardRef(
   ({
     disabled,
@@ -253,25 +245,63 @@ const NavigationMenuLink = forwardRef(
     const pathname = usePathname();
     const isActive = href === pathname;
     return (
-      <li>
-        <NavigationMenu.Link asChild active={isActive}>
-          <NextLink
-            href={href}
-            className={classNames(
-              "focus:shadow-primary block select-none rounded-lg px-2 py-2 text-[15px] leading-none no-underline outline-none focus:shadow-[0_0_0_2px]",
-              {
-                "text-primary-600": isActive,
-                "text-text hover:text-text-800": !isActive,
-                "cursor-not-allowed": disabled,
-              }
-            )}
-            {...props}
-          >
-            {children}
-          </NextLink>
-        </NavigationMenu.Link>
-      </li>
+      <NavigationMenu.Link asChild active={isActive}>
+        <NextLink
+          href={href}
+          className={classNames(
+            "hover:bg-white focus:shadow-primary block select-none rounded-lg px-2 py-2 text-[15px] leading-none no-underline outline-none focus:shadow-[0_0_0_2px]",
+            {
+              "text-primary-600": isActive,
+              "text-text hover:text-text-800": !isActive,
+              "cursor-not-allowed": disabled,
+            }
+          )}
+          {...props}
+        >
+          {children}
+        </NextLink>
+      </NavigationMenu.Link>
     );
   }
 );
 NavigationMenuLink.displayName = "NavigationMenuLink";
+
+const NavigationMenuTrigger = forwardRef(
+  ({
+    disabled,
+    root,
+    children,
+    ...props
+  }: {
+    disabled?: boolean;
+    root?: string;
+    children: React.ReactNode;
+  }) => {
+    const pathname = usePathname();
+    const isActive = root === pathname.split("/")[1];
+    return (
+      <NavigationMenu.Trigger
+        className={classNames(
+          "hover:bg-white focus:shadow-primary select-none rounded-lg px-2 py-2 text-[15px] leading-none no-underline outline-none focus:shadow-[0_0_0_2px] group flex items-center justify-between gap-0.5",
+          {
+            "text-primary-600": isActive,
+            "text-text hover:text-text-800": !isActive,
+            "cursor-not-allowed": disabled,
+          }
+        )}
+        {...props}
+      >
+        {children}
+        <Carret />
+      </NavigationMenu.Trigger>
+    );
+  }
+);
+NavigationMenuTrigger.displayName = "NavigationMenuTrigger";
+
+const Carret = () => (
+  <IconCaretRight
+    className="text-current -mr-[4px] h-3.5 w-3.5 rotate-90 relative top-[1px] transition-transform duration-[250] ease-in group-data-[state=open]:-rotate-90"
+    aria-hidden
+  />
+);

@@ -121,6 +121,14 @@ module.exports = {
             transform: "translateX(-100%)",
           },
         },
+        slideDown: {
+          from: { height: "0px" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        slideUp: {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0px" },
+        },
         // navigation
         enterFromRight: {
           from: { opacity: "0", transform: "translateX(200px)" },
@@ -162,6 +170,8 @@ module.exports = {
           "slide-to-left 0.25s cubic-bezier(0.82, 0.085, 0.395, 0.895)",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        slideDown: "slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)",
+        slideUp: "slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)",
         // navigation
         scaleIn: "scaleIn 200ms ease",
         scaleOut: "scaleOut 200ms ease",

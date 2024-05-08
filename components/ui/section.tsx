@@ -16,14 +16,6 @@ export default function Section({
 }) {
   return (
     <Fragment>
-      {hero && (
-        <div
-          className="absolute md:-inset-x-[calc(100%)] top-0 h-[600px] -z-10 transform-gpu"
-          aria-hidden="true"
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-[#FCF2E8] -z-10 to-[#ffffff]"></div>
-        </div>
-      )}
       <div
         className={classNames(
           "px-6 lg:px-8 relative z-10",
