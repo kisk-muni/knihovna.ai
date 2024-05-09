@@ -32,7 +32,7 @@ export default async function FacilitationScenariosPage() {
         className="mx-auto mt-16 pt-20 pb-18 md:pt-28 md:pb-24 text-center max-w-3xl flex flex-col justify-center items-center [&>p]:my-0 [&>p]:text-xl [&>p]:mb-4 [&>p]:text-text/80"
       >
         <Headline as="h1" level="ultra" className="text-center">
-          Rozpruďte <span className="text-primary-500">konverzaci o AI</span>{" "}
+          Nastartujte <span className="text-primary-500">konverzaci o AI</span>{" "}
           mezi vašimi kolegy
         </Headline>
         <p>
@@ -61,7 +61,7 @@ export default async function FacilitationScenariosPage() {
         <p>
           Scénář si{" "}
           <strong>
-            otev5ete, projdete a případně upravíte pro vaše potřeby
+            otevřete, projdete a případně upravíte pro vaše potřeby
           </strong>
           . Vždy je potřeba myslet na to, že pro efektivní schůzku nebo workshop
           potřebujete kromě připraveného scénáře také dostatek času, vhodné
@@ -85,8 +85,9 @@ export default async function FacilitationScenariosPage() {
             <span className="uppercase font-light shrink-0 text-text-950">
               TIP 2:
             </span>{" "}
-            Scénář ke zmapování znalostí a zkušeností týmu obsahuje také tipy na
-            úspěšnou praxi zavedení AI v knihovnách ;)
+            Scénář ke zmapování znalostí a zkušeností týmu obsahuje zakladní
+            materiály k tématice AI, scénář k vymýšlení aktivit zase tipy na
+            úspěšnou praxi zavedení AI v knihovnách.
           </p>
         </Callout>
         <p>Přejeme příjemné schůzkování!</p>
