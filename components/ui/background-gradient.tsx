@@ -14,6 +14,7 @@ BackgroundGradient.Radial = function Radial() {
     <div
       style={{
         position: "absolute",
+        zIndex: -20,
         width: "100vw",
         left: "0px",
         top: "0px",

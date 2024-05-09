@@ -19,7 +19,7 @@ import { Tooltip, TooltipTrigger } from "@/components/ui/tooltip";
 import { Feedback } from "@/db/schema";
 import { submitFeedback } from "@/app/actions";
 
-export function FeedbackOpenButton({}: {}) {
+export function FeedbackOpenButton() {
   const [feedbackDialogOpen, setFeedbackDialogOpen] = React.useState(false);
   const [isRemovePending, startRemoveTransition] = React.useTransition();
 
@@ -29,7 +29,7 @@ export function FeedbackOpenButton({}: {}) {
         <Button
           size={"sm"}
           variant={"white"}
-          className="hidden md:flex"
+          className="hidden lg:flex"
           disabled={isRemovePending}
           onClick={() => setFeedbackDialogOpen(true)}
         >

@@ -32,7 +32,6 @@ export interface SiteConfig {
   // team
   team: TeamMember[];
 
-  navigation: NavLink[];
   privateNavigation: NavLink[];
   footerNavigation: NavLink[];
 
@@ -130,13 +129,6 @@ const siteConfig: SiteConfig = {
       displayOnTeamPage: false,
       notionId: "069b2264-1acd-4634-8cb5-bd9748b3ebbc",
     },
-  ],
-  navigation: [
-    { title: "Domů", href: "/" },
-    { title: "Materiály", href: "/materialy" },
-    { title: "Aktuality", href: "/blog" },
-    { title: "Náš tým", href: "/tym" },
-    { title: "Projekt", href: "/project/about" },
   ],
   privateNavigation: [
     {
