@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 "use client";
 
-import { Fragment, forwardRef, useEffect, useState } from "react";
+import { forwardRef } from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import classNames from "classnames";
 import { Carret, Navigation } from "./navbar";
