@@ -328,6 +328,15 @@ export const questions: Question[] = [
         cs: "Vytvářejte a poskytujte praktické workshopy, které zahrnují online nástroje a AI, jako je ChatGPT, Canva a Scratch. Tím poskytnete uživatelům příležitost naučit se pracovat s moderními technologiemi a zlepšit jejich digitální dovednosti.",
         en: "Create and deliver hands-on workshops that incorporate online tools and AI such as ChatGPT, Canva and Scratch. This will give users the opportunity to learn how to work with modern technology and improve their digital skills.",
       },
+      resources: [
+        {
+          type: "article",
+          title: "Příprava vzdělávacích lekcí s pomocí AI",
+          description:
+            "Autoři Michaela Mrázová a Jakub Maruš sdílejí praktické tipy na efektivní zadávání promptů, upozorňují na výhody a omezení těchto technologií a poskytují přehled dalších užitečných AI nástrojů.",
+          link: "https://duha.mzk.cz/clanky/priprava-vzdelavacich-lekci-s-pomoci-ai",
+        },
+      ],
     },
   },
   {
@@ -542,6 +551,13 @@ export const questions: Question[] = [
             "Přečtěte si článek o tom, jak fungují současná co-workingová centra a jakou příležitost zde mají právě knihovny. V článku najdete příklady současných knihoven v praze, které disponují dobrým zázemím pro studium či práci na vlastním počítači.",
           link: "https://www.flowee.cz/floweecity/praha/7375-nejlevnejsi-coworking-v-praze-vse-potrebne-najdete-v-knihovne",
         },
+        {
+          type: "case-study",
+          title: "Metodické centrum pro výstavbu a rekonstrukci knihoven",
+          description:
+            "Metodické centrum nabízí konzultace a poradenství v různých oblastech spojených se stavbou, rekontrukcí nebo vybavením knihoven od plánování po realizaci.",
+          link: "https://mcvrk.mzk.cz/o-nas#",
+        },
       ],
     },
   },
@@ -610,7 +626,7 @@ export const questions: Question[] = [
     category: Category["Sociální role"],
     type: "TrueFalse",
     questionText: {
-      cs: "Nabízíte služby podporující osoby digitálně vyloučené a osoby v ohrožení digitálního vyloučení napříč celým věkovým spektrem?",
+      cs: "Nabízíte služby podporující osoby digitálně vyloučené napříč celým věkovým spektrem?",
       en: "Do you offer services supporting digitally excluded individuals and those at risk of digital exclusion across all age groups?",
     },
     info: {
@@ -628,6 +644,15 @@ export const questions: Question[] = [
         cs: "Identifikujte potřeby marginalizovaných osob, sociálně vyloučených a ohrožených skupin ve vaší komunitě a navrhněte služby, které jim poskytnou podporu a možnost zapojení do knihovních aktivit.",
         en: "Identify the needs of marginalized individuals, socially excluded, and at-risk groups in your community and design services that provide them with support and opportunities for involvement in library activities.",
       },
+      resources: [
+        {
+          type: "organisation",
+          title: "Charakteristika a potřeby digitálně vyloučených osob",
+          description:
+            "Projekt mapuje digitální návyky a kompetence lidí, kteří mají problémy s využitím digitálních služeb. Na webové stránce lze prozkoumat podrobnější charakteristiku dětí z vyloučených lokalit, socioekonomicky znevýhodněných dospělých, a seniorů.",
+          link: "http://inkluze.cesko.digital/",
+        },
+      ],
     },
   },
   {
@@ -800,8 +825,8 @@ export const questions: Question[] = [
         en: "Consider using text generation tools",
       },
       description: {
-        cs: "Využití nástrojů na generování textů může zefektivnit tvorbu e-mailů, propagace a oficiálních dokumentů. Zkuste nástroje jako je OpenAI nebo GPT-3 pro generování obsahu.",
-        en: "Using text generation tools can streamline the creation of emails, promotions, and official documents. Try tools like OpenAI or GPT-3 for content generation.",
+        cs: "Využití nástrojů na generování textů může zefektivnit tvorbu e-mailů, propagace a oficiálních dokumentů. Stačí zadat konkrétní příkaz (prompt) a nástroj vytvoří libovolnou formu textu podle potřeb. Zkuste nástroje jako je ChatGPT pro generování obsahu.",
+        en: "Using text generation tools can streamline the creation of emails, promotions, and official documents. Try tools like ChatGPT for content generation.",
       },
       resources: [
         {
@@ -891,7 +916,15 @@ export const questions: Question[] = [
         cs: "Zvažte využití umělé inteligence pro analýzu statistik výpůjček, vyhledávacích dotazů v katalogu a dalších relevantních dat pro lepší plánování akvizice dokumentů. Můžete použít nástroje jako je TensorFlow nebo Scikit-learn pro tvorbu modelů a analýzu dat.",
         en: "Consider using AI to analyze borrowing statistics, catalog search queries, and other relevant data to better plan document acquisition. You can use tools like TensorFlow or Scikit-learn to build models and analyze data.",
       },
-      link: "https://www.langchain.com/",
+      resources: [
+        {
+          type: "case-study",
+          title: "Zapojení umělé inteligence do procesů akvizice",
+          description:
+            "Ve videu Mgr. Antonín Pokorný z Knihovny Univerzity Palackého představuje způsoby, kterými lze AI zapojit do jednotlivých procesů souvisejících s akvizicí, a jakým způsobem mohou tyto technologie přispět k efektivnějšímu a rychlejšímu získávání nových informačních zdrojů. Nechybí možné výhledy do budoucna týkající se dalšího využití AI v akvizici knihovního fondu včetně možností a hrozeb pro další rozvoj této oblasti.",
+          link: "https://www.youtube.com/watch?v=R4m-MNhqOWg",
+        },
+      ],
     },
   },
   {
@@ -938,8 +971,8 @@ export function getLibraryReadiness(score: number): {
       },
       type: { cs: "Základní knihovna", en: "a basic library" },
       condition: {
-        cs: "Nedostatečná",
-        en: "Insufficient",
+        cs: "Nízká",
+        en: "Low",
       },
       description: {
         cs: "Vaše knihovna je na začátku cesty k připravenosti na dopady AI a využití AI v knihovnách.",
@@ -955,8 +988,8 @@ export function getLibraryReadiness(score: number): {
         en: "Between 21 and 49",
       },
       condition: {
-        cs: "Nedostatečná",
-        en: "Insufficient",
+        cs: "Nízká",
+        en: "Low",
       },
       type: { cs: "Rozvíjející se knihovna", en: "a developing library" },
       description: {

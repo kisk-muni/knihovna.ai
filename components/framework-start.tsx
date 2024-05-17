@@ -34,26 +34,20 @@ export default function FrameworkStart() {
   }[] = [
     {
       description: {
-        cs: "Evaluaci proveďte sami nebo s kolegy.",
-        en: "Conduct the evaluation alone or with colleagues.",
-      },
-    },
-    {
-      description: {
         cs: `Čeká vás ${questionsLength} otázek na 10 až 15 minut.`,
         en: `There will be ${questionsLength} questions for 10 to 15 minutes.`,
       },
     },
     {
       description: {
-        cs: `Otázky se týkají využívání AI v knihovnách, řešení sociálních dopadů AI i širších nároků na moderní a uživatelsky přívětivou knihovnu.`,
-        en: `The questions relate to the use of AI in libraries, addressing the social impact of AI, and the broader requirements for a modern and user-friendly library.`,
+        cs: `Cílem frameworku je pomoci vám vyhodnotit, jak je vaše knihovna připravena na sociální dopady umělé inteligence a  změny na trhu práce a zaměstnanost obyvatel.`,
+        en: `The goal of the framework is to help you evaluate how your library is prepared for the social impacts of artificial intelligence and changes in the labor market and employment of residents.`,
       },
     },
     {
       description: {
-        cs: `Výsledky získáte ihned po vyplnění.`,
-        en: `You will get the results immediately after completion.`,
+        cs: "Na základě odpovědí nabídne framework sadu konkrétních doporučení a příkladů, jak se na tyto změny adaptovat a rozvíjet nabídku svých služeb",
+        en: "Based on the answers, the framework will offer a set of specific recommendations and examples of how to adapt to these changes and develop the offer of your services",
       },
     },
   ];
