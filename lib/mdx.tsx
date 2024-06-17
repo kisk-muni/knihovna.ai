@@ -7,6 +7,7 @@ import Section from "@/components/ui/section";
 import ContactCard from "@/components/contact-card";
 import Card from "@/components/ui/card";
 import Bookmark from "@/components/ui/bookmark";
+import YouTubeVideo from "@/components/ui/youtube-video";
 import {
   Headline1,
   Headline2,
@@ -46,6 +47,7 @@ export const defaultComponents: any = {
     <a className="text-primary hover:underline" {...props} />
   ),
   Card: Card,
+  YouTubeVideo: YouTubeVideo,
 };
 
 export async function compile(source: string) {

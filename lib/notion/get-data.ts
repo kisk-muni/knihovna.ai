@@ -182,6 +182,7 @@ async function getItem<ItemProperties>(
       }
       const x = await n2m.blocksToMarkdown(results);
       n2m.setCustomTransformer("bookmark", transformBookmark);
+      n2m.setCustomTransformer("video", transformVideo);
       n2m.setCustomTransformer("child_database", transformChildDatabase);
       n2m.setCustomTransformer("image", transformImage);
       (
@@ -209,6 +210,24 @@ export function transformImage(block: any) {
   return "";
 }
 
+export function transformVideo(block: any) {
+  const { type } = block as any;
+  const video = block[type];
+  if (video.type == "external") {
+    const url = video?.external?.url;
+    if (url.includes("www.youtube.com")) {
+      const id = getYoutubeVideoId(url);
+      if (id) {
+        return `
+          <YouTubeVideo src="https://www.youtube.com/embed/${id}" />
+        `;
+      }
+    }
+  }
+
+  return "";
+}
+
 export function transformBookmark(block: any) {
   const { type, bookmark } = block as {
     type: any;
@@ -226,4 +245,12 @@ export function transformBookmark(block: any) {
   `;
   }
   return "";
+}
+
+// from https://stackoverflow.com/questions/3452546/how-do-i-get-the-youtube-video-id-from-a-url
+function getYoutubeVideoId(url: string) {
+  var regExp =
+    /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+  var match = url.match(regExp);
+  return match && match[7].length == 11 ? match[7] : false;
 }
