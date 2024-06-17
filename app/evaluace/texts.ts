@@ -28,6 +28,10 @@ const texts: {
     cs: "Doporučeno",
     en: "Recommended",
   },
+  opportunities: {
+    cs: "Příležitosti",
+    en: "Opportunities",
+  },
   recommendations: {
     cs: "Doporučení",
     en: "Recommendations",

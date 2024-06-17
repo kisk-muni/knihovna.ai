@@ -190,7 +190,7 @@ export default function FrameworkResultClient({
                     {libraryType.range[lang]}
                   </p>
                 </div>
-                <p className="text-text-500 text-base mt-0 mb-0">
+                <p className="text-text-500 text-base mt-0 mb-4">
                   {libraryType.description[lang]}
                 </p>
               </div>
@@ -198,66 +198,6 @@ export default function FrameworkResultClient({
                 <div className="w-auto h-auto col-span-4 border-neutral-200 rounded-md shadow-xs">
                   <MyRadarChart data={radarData} />
                 </div>
-                {/* <div className="pl-8 flex flex-col col-span-3">
-                <div className="mb-3">
-                  <div className="text-text-500 text-sm mb-1">
-                    {texts["strengths"][lang]}
-                  </div>
-                  {
-                    <ul className="text-text text-base mb-3">
-                      {strong.map((dim, i) => {
-                        return <li key={i}>{dim.name}</li>;
-                      })}
-                    </ul>
-                  }
-                </div>
-                {weak.length && (
-                  <div className="mb-3">
-                    <div className="text-text-500 text-sm mb-1">
-                      {texts["weaknesses"][lang]}
-                    </div>
-                    {
-                      <ul className="text-text text-base">
-                        {weak.sort().map((dim, i) => {
-                          return <li key={i}>{dim.name}</li>;
-                        })}
-                      </ul>
-                    }
-                  </div>
-                )}
-              </div> */}
-              </div>
-            </div>
-            <div className="grid grid-cols-3">
-              <div className="flex-col px-5 py-4">
-                <p className="text-rose-700 font-medium mb-4 text-xs flex items-center">
-                  <IconWarningOctagon className="h-5 w-5 mr-1 text-rose-600" />
-                  Hrozby
-                </p>
-                <p className="text-sm text-text-400 text-center">
-                  Na této části zatím pracujeme.
-                </p>
-              </div>
-              <div className="flex-col px-5 py-4 border-l">
-                <p className="text-orange-700 font-medium mb-4 text-xs flex items-center">
-                  <IconCompas className="h-5 w-5 mr-1 text-orange-600" />
-                  Příležitosti
-                </p>
-                <p className="text-sm text-text-400 text-center">
-                  Na této části zatím pracujeme.
-                </p>
-              </div>
-
-              <div className="flex-col px-5 py-4 border-l">
-                <p className="text-green-700 font-medium mb-4 text-xs flex items-center">
-                  <IconCheckCircleFilled className="h-5 w-5 mr-1 text-green-600" />
-                  Silné stránky
-                </p>
-                {strong.length > 0 && (
-                  <p className="text-sm text-text-400 text-center">
-                    Na této části zatím pracujeme.
-                  </p>
-                )}
               </div>
             </div>
           </div>
@@ -267,7 +207,7 @@ export default function FrameworkResultClient({
       <section className="bg-muted grow h-full border-neutral-10">
         <div className="max-w-screen-lg w-full px-6 mb-6 flex flex-col mx-auto">
           <h3 className="text-text font-semibold text-2xl mt-4 mb-8">
-            {texts["recommendations"][lang]}
+            {texts["opportunities"][lang]}
           </h3>
           <div className="flex">
             <div className="w-[220px] shrink-0 pr-4">
