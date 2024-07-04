@@ -86,7 +86,7 @@ const navigation: Navigation = [
     ],
   },
   { title: "Materiály", href: "/materialy" },
-  { title: "Průvodce AI", href: "/prirucky/ai-pro-knihovniky" },
+  // { title: "Průvodce AI", href: "/prirucky/ai-pro-knihovniky" },
   {
     title: "O projektu",
     gridClassName: "sm:grid-cols-[1fr_1fr]",
