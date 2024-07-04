@@ -1,3 +1,4 @@
+"use client";
 import classNames from "classnames";
 import type { ProgressBarProps } from "react-aria-components";
 import { ProgressBar } from "react-aria-components";

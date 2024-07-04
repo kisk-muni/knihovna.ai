@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Container from "./ui/container";
 import { Button } from "./ui/button";
+import TypeformButton from "./ui/typeform-button";
 
 export default function SectionHero() {
   return (
@@ -14,23 +15,23 @@ export default function SectionHero() {
               }
             >
               <h1>
-                Mapujeme budoucnost knihoven v éře{" "}
+                Služby pro adaptaci knihoven v éře{" "}
                 <span className="text-text">umělé inteligence</span>.
               </h1>
               <p>
-                Knihovny podle nás sehrají důležitou roli v popularizaci AI a
-                pomoci ohroženým skupinám obyvatel. AI pro společnost nemá být
-                ohrožením ale novou příležitostí.
+                Knihovna.ai pomáhá vyhodnotit vaši připravenost na
+                celospolečenské změny a dává vašemu týmu nástroje pro
+                smysluplnou adaptaci na AI.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-4">
-                <Link href="#zapojeni">
+                <TypeformButton id="ZkIhUqLK">
                   <Button theme="primary" size="base">
-                    Jak se zapojit?
+                    Odebírat novinky
                   </Button>
-                </Link>
+                </TypeformButton>
                 <Link href="/project/about">
                   <Button theme="gray" size="base" variant="ghost">
-                    Prozkoumat projekt
+                    Více o projektu
                   </Button>
                 </Link>
               </div>

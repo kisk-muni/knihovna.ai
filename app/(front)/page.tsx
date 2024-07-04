@@ -7,7 +7,8 @@ import SectionHero from "@/components/section-hero";
 import SectionPromises from "@/components/section-promises";
 import SectionEngage from "@/components/section-engage";
 import SectionAffiliation from "@/components/section-affiliation";
-import SectionExploreProject from "@/components/section-explore-project";
+// import SectionExploreProject from "@/components/section-explore-project";
+import SectionToolsPromo from "@/components/section-tools-promo";
 
 export const metadata: Metadata = createMetadata({
   title:
@@ -22,9 +23,10 @@ export default async function Home() {
     <main className="flex flex-col">
       <BackgroundGradient.Radial />
       <SectionHero />
+      <SectionToolsPromo />
       <SectionNews />
       <SectionVision />
-      <SectionPromises />
+      {/*       <SectionPromises /> */}
       {/*       <SectionExploreProject /> */}
       <SectionEngage />
       <SectionAffiliation />
