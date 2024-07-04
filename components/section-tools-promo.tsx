@@ -31,7 +31,7 @@ import { StateLabel } from "./ui/state-label";
 
 export default function SectionToolsPromo() {
   return (
-    <section className="bg-white pt-24">
+    <section className="bg-white pt-12">
       <Container>
         <div className="flex flex-col gap-x-6">
           <div className="grid gap-4 grid-cols-1 md:grid-cols-[1fr,1fr]">
