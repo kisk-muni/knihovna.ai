@@ -19,10 +19,10 @@ export default async function SectionNews() {
               {recentPosts.map((post, i) => (
                 <PostCard primary post={post} key={i} />
               ))}
-              {recentPosts.length > 1 && (
+              {posts.length > 1 && (
                 <Link
                   href="/blog"
-                  className="block flex items-stretch text-text/80 hover:text-text"
+                  className="flex items-stretch text-text/80 hover:text-text"
                 >
                   <Button
                     theme="gray"
