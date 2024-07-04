@@ -3,7 +3,7 @@ import { createMetadata } from "@/lib/metadata";
 import FrameworkStart from "@/components/framework-start";
 
 export const metadata: Metadata = createMetadata({
-  title: "Evaluační framework",
+  title: "Sebe-hodnocení knihovny",
   description: `
     Zjistěte, jak je vaše knihovna připravena na rostoucí vliv AI. Získejte praktická doporučení, jak knihovnu zlepšovat.
     `,

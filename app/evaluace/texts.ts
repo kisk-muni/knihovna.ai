@@ -73,8 +73,8 @@ const texts: {
     en: "I don't know",
   },
   "framework-name": {
-    cs: "Evaluační framework",
-    en: "Evaluation Framework",
+    cs: "Sebe-hodnocení knihovny",
+    en: "Library self-assessment",
   },
   "framework-title": {
     cs: "Zjistěte, jak je vaše knihovna připravena na rostoucí vliv AI",

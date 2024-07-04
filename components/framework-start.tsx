@@ -40,7 +40,7 @@ export default function FrameworkStart() {
     },
     {
       description: {
-        cs: `Cílem frameworku je pomoci vám vyhodnotit, jak je vaše knihovna připravena na sociální dopady umělé inteligence a  změny na trhu práce a zaměstnanost obyvatel.`,
+        cs: `Cílem sebe-hodnocení je pomoci vám vyhodnotit, jak je vaše knihovna připravena na sociální dopady umělé inteligence a  změny na trhu práce a zaměstnanost obyvatel.`,
         en: `The goal of the framework is to help you evaluate how your library is prepared for the social impacts of artificial intelligence and changes in the labor market and employment of residents.`,
       },
     },

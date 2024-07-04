@@ -48,7 +48,7 @@ const navigation: Navigation = [
     gridClassName: "sm:grid-cols-[0.75fr_1fr]",
     items: [
       {
-        title: "Evaluační framework",
+        title: "Sebe-hodnocení knihovny",
         description: "Vyhodnoťte připravenost vaší knihovny na budoucnost",
         href: "/evaluace",
         component: ({ href, title, description }) => (
@@ -61,7 +61,7 @@ const navigation: Navigation = [
               >
                 <div className="opacity-0 hover:opacity-20 rounded-lg transition absolute inset-0 h-full w-full bg-gradient-to-br from-gray-900 to-gray-400"></div>
                 <IconFramework />
-                <div className="mt-4 mb-[7px] text-[18px] font-medium leading-[1.2] text-white">
+                <div className="mt-4 mb-[7px] text-[17px] font-semibold leading-[1.2] text-white">
                   {title}
                 </div>
                 <p className="text-text-50 text-[14px] leading-[1.3]">
