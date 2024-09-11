@@ -67,9 +67,9 @@ const button = cva(
         variant: "solid",
         className: [
           "text-text",
-          "hover:text-black",
           "bg-text/20",
           "hover:bg-text/50",
+          "hover:text-text-50",
         ],
       },
       {

@@ -6,6 +6,8 @@ export interface TeamMember {
   displayOnTeamPage?: boolean;
   avatar?: string;
   twitter?: string;
+  email?: string;
+  academicPrefix?: string;
 }
 
 interface Link {
@@ -64,6 +66,8 @@ const siteConfig: SiteConfig = {
       avatar: "/avatars/natalie-kacova.jpg",
       displayOnTeamPage: true,
       notionId: "1773415b-2754-4fb3-86e7-98b34cd6dc75",
+      email: "nkacova@mail.muni.cz",
+      academicPrefix: "Mgr.",
     },
     {
       id: "skyrik",

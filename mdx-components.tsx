@@ -13,6 +13,7 @@ import Headline from "@/components/ui/headline";
 import BackgroundGradient from "@/components/ui/background-gradient";
 import { Callout } from "@/components/ui/callout";
 import { Button } from "./components/ui/button";
+import Affiliation from "./components/affiliation";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -29,6 +30,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Headline: Headline,
     BackgroundGradient: BackgroundGradient,
     BackgroundGradientRadial: BackgroundGradient.Radial,
+    Affiliation: Affiliation,
     Callout: Callout,
     Button: Button,
   };

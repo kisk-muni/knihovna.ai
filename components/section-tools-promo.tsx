@@ -18,16 +18,11 @@ import experientialProgramme from "@/public/tools/zazitkovka.png";
 import framework from "@/public/tools/framework.png";
 import {
   IconChatCircle,
-  IconCheck,
   IconChecks,
-  IconCompas,
   IconLight,
-  IconSealCheck,
   IconSquaresFour,
   IconUsersThree,
 } from "./ui/icons";
-import CircularProgressBar from "./framework-circular-progress";
-import { StateLabel } from "./ui/state-label";
 
 export default function SectionToolsPromo() {
   return (

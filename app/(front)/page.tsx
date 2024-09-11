@@ -28,8 +28,8 @@ export default async function Home() {
       <SectionVision />
       {/*       <SectionPromises /> */}
       {/*       <SectionExploreProject /> */}
-      <SectionEngage />
       <SectionAffiliation />
+      <SectionEngage />
     </main>
   );
 }
