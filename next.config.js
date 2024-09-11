@@ -10,6 +10,30 @@ const nextConfig = {
       "playwright-core",
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/zprava",
+        destination: "/reports/report.pdf",
+        permanent: false,
+      },
+      {
+        source: "/manual",
+        destination: "/reports/manual.pdf",
+        permanent: false,
+      },
+      {
+        source: "/poznatky",
+        destination: "/reports/learnings.pdf",
+        permanent: false,
+      },
+      {
+        source: "/shrnuti",
+        destination: "/reports/summary.png",
+        permanent: false,
+      },
+    ];
+  },
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [
