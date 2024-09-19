@@ -18,9 +18,10 @@ import Image from "next/image";
 import classNames from "classnames";
 
 export const metadata: Metadata = createMetadata({
-  title: "Facilitační scénáře",
+  title: "Zážitková hra",
   description: `
-  Scénáře schůzek a workshopů, které vám pomohou pokrýt nejaktuálnější témata, o kterých může vaše knihovna v souvislosti s AI diskutovat.
+  Hra pro knihovníky otevírá téma sociálních dopadů nových technologií a umožňuje
+          knihovníkům setkat se s veřejností v bezpečném a hravém prostředí. 
     `,
 });
 
