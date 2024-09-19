@@ -25,7 +25,10 @@ export const metadata: Metadata = createMetadata({
 });
 
 const GameButton = () => (
-  <Link href="https://drive.google.com/drive/folders/1KCiY53Kfy03HphSDmx5U9TcTpj_s5TUw">
+  <Link
+    href="https://drive.google.com/drive/folders/1KCiY53Kfy03HphSDmx5U9TcTpj_s5TUw"
+    target={`_blank`}
+  >
     <Button>
       K zážitkové hře <IconExternalLink className="h-4 w-4 ml-2 mt-1" />
     </Button>
@@ -54,13 +57,18 @@ export default async function FacilitationScenariosPage() {
           Přesuňte se do městečka, kde v důsledku krize zavřeli místní knihovnu.
           Podaří se jí společenství spoluobčanů znovu otevřít?
         </p>
-        <Image
-          alt="Zážitková hra"
-          src="/tools/zazitkovka.png"
-          width={508}
-          height={286}
-          className="mt-10 mb-6"
-        />
+        <Link
+          href="https://drive.google.com/drive/folders/1KCiY53Kfy03HphSDmx5U9TcTpj_s5TUw"
+          target={`_blank`}
+        >
+          <Image
+            alt="Zážitková hra"
+            src="/tools/zazitkovka.png"
+            width={508}
+            height={286}
+            className="mt-10 mb-6"
+          />
+        </Link>
         <GameButton />
       </Section>
 
@@ -163,7 +171,8 @@ export default async function FacilitationScenariosPage() {
               ],
             },
             {
-              headline: "Sociálně vyloučení",
+              headline:
+                "Sociálně znevýhodnění ovlivněni nástupem robotizace a automatizace",
               listItems: [
                 "Dospělí, které v životě znevýhodňují nerovné příležitosti z důvodu diskriminace a slabé socioekonomické zázemí.",
                 "Mohou mít nižší vzdělání a negativní vztah k dalšímu učení z důvodu špatných zkušeností se vzdělávacím systémem, příp. s veřejnými institucemi obecně.",
@@ -288,12 +297,6 @@ export default async function FacilitationScenariosPage() {
           ))}
         </div>
       </Section>
-
-      <div className="mt-6 mb-6 px-6 lg:px-8">
-        <div className="w-full max-w-screen-md mx-auto">
-          <ContactCard className="mt-10" />
-        </div>
-      </div>
     </main>
   );
 }

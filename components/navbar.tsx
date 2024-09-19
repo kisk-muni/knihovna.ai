@@ -256,7 +256,7 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
             )}
           </Button>
           <FeedbackOpenButton />
-          <Link href="/manual" className="hidden md:block">
+          <Link href="/manual" target={`_blank`} className="hidden md:block">
             <DenseButton variant="brand" size="sm" className="">
               Stáhnout manuál <IconDownload className="w-5 h-5 mt-0.5 ml-2" />
             </DenseButton>
