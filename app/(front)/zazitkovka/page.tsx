@@ -48,10 +48,10 @@ export default async function FacilitationScenariosPage() {
           <span className="text-primary-500">Zachráníme</span> knihovnu?
         </Headline>
         <p>
-          Hra otevírá téma sociálních dopadů nových technologií a umožňuje
-          knihovníkům setkat se s veřejností v bezpečném a hravém prostředí.
-          Patří mezi takzvané vážné hry - cílem totiž není pouze hra, ale změna
-          hráčů samotných. 
+          Hra pro knihovníky i veřejnost otevírá téma sociálních dopadů nových
+          technologií a umožňuje knihovníkům setkat se s veřejností v bezpečném
+          a hravém prostředí. Patří mezi takzvané vážné hry - cílem totiž není
+          pouze hra, ale změna hráčů samotných. 
         </p>
         <p className="font-bold pt-6">
           Přesuňte se do městečka, kde v důsledku krize zavřeli místní knihovnu.
