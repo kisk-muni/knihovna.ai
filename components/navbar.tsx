@@ -10,6 +10,7 @@ import classNames from "classnames";
 import { useParams } from "next/navigation";
 import {
   IconCaretRight,
+  IconDownload,
   IconExternalLink,
   IconFramework,
   IconList,
@@ -17,8 +18,10 @@ import {
 } from "./ui/icons";
 import { FeedbackOpenButton } from "./feedback-submit-dialog";
 import { Button } from "react-aria-components";
+import { Button as DenseButton } from "@/components/ui/dense-button";
 import { useApp } from "@/lib/hooks/use-app";
 import NavbarMobileNavigation from "./navbar-mobile-navigation";
+import Link from "next/link";
 
 type NavigationItem = {
   title: string;
@@ -253,6 +256,11 @@ export default function Navbar({ sticky = true }: { sticky?: boolean }) {
             )}
           </Button>
           <FeedbackOpenButton />
+          <Link href="/manual" className="hidden md:block">
+            <DenseButton variant="brand" size="sm" className="">
+              Stáhnout manuál <IconDownload className="w-5 h-5 mt-0.5 ml-2" />
+            </DenseButton>
+          </Link>
         </div>
         <NavbarMobileNavigation
           navigation={navigation}

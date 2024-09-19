@@ -2,6 +2,7 @@ import Link from "next/link";
 import Container from "./ui/container";
 import { Button } from "./ui/button";
 import TypeformButton from "./ui/typeform-button";
+import { IconDownload } from "./ui/icons";
 
 export default function SectionHero() {
   return (
@@ -24,16 +25,17 @@ export default function SectionHero() {
                 smysluplnou adaptaci na AI.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-4">
-                <TypeformButton id="ZkIhUqLK">
+                <Link href="/manual" target="_blank">
                   <Button theme="primary" size="base">
+                    Stáhnout manuál pro knihovny{" "}
+                    <IconDownload className="w-5 h-5 mt-0.5 ml-2" />
+                  </Button>
+                </Link>
+                <TypeformButton id="ZkIhUqLK">
+                  <Button theme="gray" size="base">
                     Odebírat novinky
                   </Button>
                 </TypeformButton>
-                <Link href="/project/about">
-                  <Button theme="gray" size="base" variant="ghost">
-                    Více o projektu
-                  </Button>
-                </Link>
               </div>
             </div>
           </div>
