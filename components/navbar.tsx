@@ -73,6 +73,11 @@ const navigation: Navigation = [
         ),
       },
       {
+        title: "Zážitková hra",
+        description: "Hra k pochopení nově vznikajících potřeb uživatelů",
+        href: "/facilitacni-scenare",
+      },
+      {
         title: "Facilitační scénáře",
         description: "Pomůcka k diskuzi o AI v knihovnách",
         href: "/facilitacni-scenare",

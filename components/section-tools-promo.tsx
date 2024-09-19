@@ -64,7 +64,10 @@ export default function SectionToolsPromo() {
                 </div>
               </Card>
             </Link>
-            <div className="group grow md:row-span-1 md:col-span-1">
+            <Link
+              href="/zazitkova-hra"
+              className="group grow md:row-span-1 md:col-span-1"
+            >
               <Card
                 size="md"
                 className="bg-slate-50 h-full border border-border flex flex-col justify-start"
@@ -76,8 +79,8 @@ export default function SectionToolsPromo() {
                   <p className="text-slate-500 mt-0 mb-0 text-base uppercase">
                     Pochopení potřeb uživatelů
                   </p>
-                  <span className="ml-auto self-center py-0.5 -mt-1 px-2 flex w-max grow-0 rounded-full text-sm font-medium bg-yellow-500 text-white">
-                    Připravujeme
+                  <span className="ml-auto self-center py-0.5 -mt-1 px-2 flex w-max grow-0 rounded-full text-sm font-medium bg-emerald-500 text-white">
+                    Nově přidáno
                   </span>
                 </div>
                 <div className="text-lg md:text-xl xl:text-2xl font-medium mb-4">
@@ -85,8 +88,8 @@ export default function SectionToolsPromo() {
                     Připravte se na celospolečenské změny.
                   </strong>{" "}
                   <p className="inline text-text-400">
-                    Zážitkový program pro knihovny i veřejnost vám pomůže na
-                    vlastní kůži pochopit nové potřeby vznikající v důsledku AI.
+                    Zážitková hra pro knihovny i veřejnost vám pomůže na vlastní
+                    kůži pochopit nové potřeby vznikající v důsledku AI.
                   </p>
                 </div>
                 <div className="grow flex items-center">
@@ -97,7 +100,7 @@ export default function SectionToolsPromo() {
                   />
                 </div>
               </Card>
-            </div>
+            </Link>
             <Link
               href="/evaluace"
               className="group grow md:row-span-1 md:col-span-2"
