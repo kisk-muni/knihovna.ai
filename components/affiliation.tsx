@@ -66,6 +66,18 @@ export default function Affiliation({ prose = false }: { prose?: boolean }) {
               <IconExternalLink className="h-5 w-5 mt-0.5 ml-1" />
             </Button>
           </Link>
+          <Link href="/zprava">
+            <Button theme="gray" size="small">
+              Zpráva
+              <IconExternalLink className="h-5 w-5 mt-0.5 ml-1" />
+            </Button>
+          </Link>
+          <Link href="/manual">
+            <Button theme="gray" size="small">
+              Manuál pro knihovny
+              <IconExternalLink className="h-5 w-5 mt-0.5 ml-1" />
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

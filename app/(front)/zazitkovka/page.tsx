@@ -3,7 +3,6 @@ import { createMetadata } from "@/lib/metadata";
 import BackgroundGradient from "@/components/ui/background-gradient";
 import Section from "@/components/ui/section";
 import Headline from "@/components/ui/headline";
-import { Callout } from "@/components/ui/callout";
 import { Button } from "@/components/ui/button";
 import ContactCard from "@/components/contact-card";
 import {

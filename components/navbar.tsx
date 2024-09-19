@@ -75,7 +75,7 @@ const navigation: Navigation = [
       {
         title: "Zážitková hra",
         description: "Hra k pochopení nově vznikajících potřeb uživatelů",
-        href: "/zazitkova-hra",
+        href: "/zazitkovka",
       },
       {
         title: "Facilitační scénáře",

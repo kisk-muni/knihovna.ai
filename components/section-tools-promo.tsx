@@ -65,7 +65,7 @@ export default function SectionToolsPromo() {
               </Card>
             </Link>
             <Link
-              href="/zazitkova-hra"
+              href="/zazitkovka"
               className="group grow md:row-span-1 md:col-span-1"
             >
               <Card
