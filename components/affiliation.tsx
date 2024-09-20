@@ -10,7 +10,7 @@ export default function Affiliation({ prose = false }: { prose?: boolean }) {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6">
         <div>
-          <div className="flex justify-start space-x-3 items-center w-max">
+          <div className="flex justify-start flex-wrap gap-3 items-center w-full">
             <div className="bg-[#0000DC] p-1 md:p-0 relative h-[72px] rounded-xl flex justify-center items-center border border-neutral-200 z-20">
               <Image
                 src="/backers/muni.png"
@@ -21,7 +21,6 @@ export default function Affiliation({ prose = false }: { prose?: boolean }) {
               />
             </div>
             <IconPlus className="h-6 w-8 text-text-200" />
-
             <div className="p-3 bg-text-900 md:p-0 relative h-[72px] rounded-xl flex justify-center items-center border border-neutral-200 z-10">
               <Image
                 src="/backers/kisk.svg"
@@ -53,29 +52,45 @@ export default function Affiliation({ prose = false }: { prose?: boolean }) {
           Evropskou unií v rámci Operačního programu Zaměstnanost plus
           (CZ.03.03.01/00/22_021/0001969).
         </p>
-        <div className="mt-6 flex space-x-4">
-          <Link href="/shrnuti">
-            <Button theme="gray" size="small">
+        <div className="mt-6 grid lg:flex lg:flex-row gap-4 grid-cols-1 md:grid-cols-[1fr,1fr] grid-rows-[repeat(2,1fr)]">
+          <Link href="/shrnuti" className="shrink-0">
+            <Button
+              theme="gray"
+              size="small"
+              className="items-center justify-between lg:justify-center w-full"
+            >
               Shrnutí projektu
-              <IconExternalLink className="h-5 w-5 mt-0.5 ml-1" />
+              <IconExternalLink className="h-5 w-5 shrink-0 ml-1" />
             </Button>
           </Link>
-          <Link href="/poznatky">
-            <Button theme="gray" size="small">
+          <Link href="/poznatky" className="shrink-0">
+            <Button
+              theme="gray"
+              size="small"
+              className="items-center justify-between lg:justify-center w-full"
+            >
               Co jsme zjistili a co jsme se naučili
-              <IconExternalLink className="h-5 w-5 mt-0.5 ml-1" />
+              <IconExternalLink className="h-5 w-5 shrink-0 ml-1" />
             </Button>
           </Link>
-          <Link href="/zprava">
-            <Button theme="gray" size="small">
+          <Link href="/zprava" className="shrink-0">
+            <Button
+              theme="gray"
+              size="small"
+              className="items-center justify-between lg:justify-center w-full"
+            >
               Zpráva
-              <IconExternalLink className="h-5 w-5 mt-0.5 ml-1" />
+              <IconExternalLink className="h-5 w-5 shrink-0 ml-1" />
             </Button>
           </Link>
-          <Link href="/manual">
-            <Button theme="gray" size="small">
+          <Link href="/manual" className="shrink-0">
+            <Button
+              theme="gray"
+              size="small"
+              className="items-center justify-between lg:justify-center w-full"
+            >
               Manuál pro knihovny
-              <IconExternalLink className="h-5 w-5 mt-0.5 ml-1" />
+              <IconExternalLink className="h-5 w-5 shrink-0 ml-1" />
             </Button>
           </Link>
         </div>

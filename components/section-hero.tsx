@@ -24,15 +24,15 @@ export default function SectionHero() {
                 celospolečenské změny a dává vašemu týmu nástroje pro
                 smysluplnou adaptaci na AI.
               </p>
-              <div className="mt-10 flex items-center justify-center gap-x-4">
+              <div className="mt-10 flex flex-col md:flex-row items-center md:justify-center gap-4">
                 <Link href="/manual" target="_blank">
-                  <Button theme="primary" size="base">
+                  <Button theme="primary" size="base" className="items-center">
                     Stáhnout manuál pro knihovny{" "}
-                    <IconDownload className="w-5 h-5 mt-0.5 ml-2" />
+                    <IconDownload className="w-5 shrink-0 h-5 mt-0.5 ml-2" />
                   </Button>
                 </Link>
                 <TypeformButton id="ZkIhUqLK">
-                  <Button theme="gray" size="base">
+                  <Button theme="white" variant="ghost" size="base">
                     Odebírat novinky
                   </Button>
                 </TypeformButton>

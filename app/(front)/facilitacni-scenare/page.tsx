@@ -29,7 +29,7 @@ export default async function FacilitationScenariosPage() {
       <Section
         hero
         title="Facilitační scénáře"
-        className="mx-auto mt-16 pt-20 pb-18 md:pt-28 md:pb-24 text-center max-w-3xl flex flex-col justify-center items-center [&>p]:my-0 [&>p]:text-xl [&>p]:mb-4 [&>p]:text-text/80"
+        className="mx-auto mt-16 pt-20 pb-16 md:pt-28 md:pb-24 text-center max-w-3xl flex flex-col justify-center items-center [&>p]:my-0 [&>p]:text-xl [&>p]:mb-4 [&>p]:text-text/80"
       >
         <Headline as="h1" level="ultra" className="text-center">
           Nastartujte <span className="text-primary-500">konverzaci o AI</span>{" "}
@@ -44,7 +44,7 @@ export default async function FacilitationScenariosPage() {
 
       <Section
         prose
-        className="pb-18 md:pb-24 [&>p]:mb-4 [&>p]:text-base pb-16 [&>p]:text-lg"
+        className="pb-16 md:pb-24 [&>p]:mb-4 [&>p]:text-base pb-16 [&>p]:text-lg"
       >
         <div className="mb-10">
           <Headline as="h2" level="2" className="text-center">
@@ -93,7 +93,7 @@ export default async function FacilitationScenariosPage() {
         <p>Přejeme příjemné schůzkování!</p>
       </Section>
 
-      <Section className="pb-18 md:pb-24">
+      <Section className="pb-16 md:pb-24">
         <Headline as="h2" level="2" className="text-center">
           Čeho chcete docílit?
         </Headline>
@@ -166,7 +166,7 @@ export default async function FacilitationScenariosPage() {
         </div> */}
       </Section>
 
-      <Section className="pb-18 md:pb-24">
+      <Section className="pb-16 md:pb-24">
         <Headline as="h2" level="2" className="text-center">
           Časté dotazy k facilitačním scénářům
         </Headline>

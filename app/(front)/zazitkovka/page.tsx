@@ -30,7 +30,8 @@ const GameButton = () => (
     target={`_blank`}
   >
     <Button>
-      K zážitkové hře <IconExternalLink className="h-4 w-4 ml-2 mt-1" />
+      K zážitkové hře{" "}
+      <IconExternalLink className="h-4 shrink-0 w-4 ml-2 mt-1" />
     </Button>
   </Link>
 );
@@ -42,7 +43,7 @@ export default async function FacilitationScenariosPage() {
       <Section
         hero
         title="Zážitková hra"
-        className="mx-auto mt-16 pt-20 pb-18 md:pt-28 md:pb-24 text-center max-w-3xl flex flex-col justify-center items-center [&>p]:my-0 [&>p]:text-xl [&>p]:mb-4 [&>p]:text-text/80"
+        className="mx-auto mt-16 pt-20 pb-16 md:pt-28 md:pb-24 text-center max-w-3xl flex flex-col justify-center items-center [&>p]:my-0 [&>p]:text-xl [&>p]:mb-4 [&>p]:text-text/80"
       >
         <Headline as="h1" level="ultra" className="text-center">
           <span className="text-primary-500">Zachráníme</span> knihovnu?
@@ -74,7 +75,7 @@ export default async function FacilitationScenariosPage() {
 
       <Section
         prose
-        className="pb-18 md:pb-24 [&>p]:mb-4 [&>p]:text-base pb-16 [&>p]:text-lg"
+        className="pb-16 md:pb-24 [&>p]:mb-4 [&>p]:text-base [&>p]:text-lg"
       >
         <div className="mb-10">
           <Headline as="h2" level="2" className="text-center">
@@ -145,7 +146,7 @@ export default async function FacilitationScenariosPage() {
         </div>
       </Section>
 
-      <Section className="pb-18 md:pb-24">
+      <Section className="pb-16 md:pb-24">
         <Headline as="h2" level="2" className="text-center">
           Cílové skupiny
         </Headline>
@@ -212,7 +213,7 @@ export default async function FacilitationScenariosPage() {
         </div> */}
       </Section>
 
-      <Section className="pb-18 md:pb-24">
+      <Section className="pb-16 md:pb-24">
         <Headline as="h2" level="2" className="text-center">
           Důležité informace
         </Headline>
@@ -250,7 +251,7 @@ export default async function FacilitationScenariosPage() {
           </AccordionItem>
         </AccordionRoot>
       </Section>
-      <Section className="pb-18 md:pb-24">
+      <Section className="pb-16 md:pb-24">
         <Headline as="h2" level="2" className="text-center">
           Jak vypadá průběh hry?
         </Headline>

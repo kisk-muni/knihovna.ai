@@ -72,15 +72,17 @@ export default function SectionToolsPromo() {
                 size="md"
                 className="bg-slate-50 h-full border border-border flex flex-col justify-start"
               >
-                <div className="flex gap-x-2 w-full items-center mb-3">
-                  <div className="rounded-full bg-white p-2 w-fit">
-                    <IconUsersThree className="w-5 h-5 text-slate-500" />
+                <div className="flex flex-col-reverse md:flex-row gap--2 w-full items-center mb-3">
+                  <div className="flex items-center gap-2 w-full md:w-auto">
+                    <div className="rounded-full bg-white p-2 w-fit">
+                      <IconUsersThree className="w-5 h-5 text-slate-500" />
+                    </div>
+                    <p className="text-slate-500 mt-0 mb-0 text-base uppercase">
+                      Pochopení potřeb uživatelů
+                    </p>
                   </div>
-                  <p className="text-slate-500 mt-0 mb-0 text-base uppercase">
-                    Pochopení potřeb uživatelů
-                  </p>
-                  <span className="ml-auto self-center py-0.5 -mt-1 px-2 flex w-max grow-0 rounded-full text-sm font-medium bg-emerald-500 text-white">
-                    Nově přidáno
+                  <span className="md:ml-auto self-start justify-self-start md:justify-self-end py-0.5 -mt-1 px-2 flex w-max grow-0 rounded-full text-sm font-medium bg-emerald-500 text-white">
+                    Nové
                   </span>
                 </div>
                 <div className="text-lg md:text-xl xl:text-2xl font-medium mb-4">
@@ -107,7 +109,7 @@ export default function SectionToolsPromo() {
             >
               <Card
                 size="md"
-                className="bg-primary-100 h-full min-h-[500px] xl:min-h-[400px] overflow-hidden relative group-hover:bg-primary-200 border border-border flex flex-col justify-start"
+                className="bg-primary-100 h-full min-h-[440px] xs:min-h[380px] sm:min-h-[470px] md:min-h-[500px] lg:min-h-[400px] overflow-hidden relative group-hover:bg-primary-200 border border-border flex flex-col justify-start"
               >
                 <div className="relative z-30">
                   <div className="flex gap-x-2 items-center mb-3">
@@ -118,7 +120,7 @@ export default function SectionToolsPromo() {
                       Sebe-hodnocení knihovny
                     </p>
                   </div>
-                  <div className="text-lg md:text-xl xl:text-2xl font-medium mb-4 max-w-xl">
+                  <div className="text-lg md:text-xl xl:text-2xl font-medium mb-4 lg:max-w-md xl:max-w-xl">
                     <strong className="text-text font-bold">
                       Vyhodnoťte připravenost knihovny na rostoucí vliv AI.
                     </strong>{" "}
@@ -129,13 +131,14 @@ export default function SectionToolsPromo() {
                     </p>
                   </div>
                 </div>
-                <div className="absolute xl:left-1/2 xl:right-0 xl:bottom-0 xl:top-10 z-20 xl:bg-gradient-to-br from-[#ffffff00] to-[#f7e8dd66] group-hover:to-[#edcfbb99] transition duration-150 ease-out"></div>
-                <div>
-                  <div className="absolute xs:left-10 xs:right-10 z-10 xl:-right-[45%] xl:-bottom-[15%] xl:top-10">
+                <div className="absolute h-[300px] lg:h-auto left-10 right-0 bottom-0 lg:left-1/2 lg:right-0 lg:bottom-0 lg:top-10 z-20 bg-gradient-to-br from-[#ffffff00] to-[#f7e8dd66] group-hover:to-[#edcfbb99] transition duration-150 ease-out"></div>
+                <div className="">
+                  <div className="absolute max-h-[400px] left-[5%] -right-[40%] -bottom-6 md:-right-[40%] md:-left-auto lg:left-auto z-10 lg:-right-[70%] xl:-right-[45%] lg:-bottom-[15%] lg:top-10">
                     <Image
                       src={framework}
                       draggable="false"
                       width={1150}
+                      objectFit="cover"
                       alt="Evaluační framework"
                     />
                   </div>
