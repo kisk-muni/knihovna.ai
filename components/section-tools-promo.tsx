@@ -131,7 +131,7 @@ export default function SectionToolsPromo() {
                     </p>
                   </div>
                 </div>
-                <div className="absolute h-[300px] lg:h-auto left-10 right-0 bottom-0 lg:left-1/2 lg:right-0 lg:bottom-0 lg:top-10 z-20 bg-gradient-to-br from-[#ffffff00] to-[#f7e8dd66] group-hover:to-[#edcfbb99] transition duration-150 ease-out"></div>
+                <div className="absolute h-[300px] lg:h-auto left-0 right-0 bottom-0 lg:left-1/2 lg:right-0 lg:bottom-0 lg:top-10 z-20 bg-gradient-to-br from-[#ffffff00] to-[#f7e8dd66] group-hover:to-[#edcfbb99] transition duration-150 ease-out"></div>
                 <div className="">
                   <div className="absolute max-h-[400px] left-[5%] -right-[40%] -bottom-6 md:-right-[40%] md:-left-auto lg:left-auto z-10 lg:-right-[70%] xl:-right-[45%] lg:-bottom-[15%] lg:top-10">
                     <Image
